@@ -13,7 +13,7 @@
 | path to your installation.
 |
 */
-$config['base_url'] = 'http://87.106.234.213/';
+$config['base_url'] = 'http://localhost/UKDEV/';
 
 
 /*

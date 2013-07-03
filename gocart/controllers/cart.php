@@ -46,34 +46,15 @@ class Cart extends Front_Controller {
 	}
 
     function   allcourses()
-
     {
 
          //DebugBreak();
-
-        $this->load->model(array('Banner_model', 'box_model'));
-
-        $this->load->helper('directory');
-
-
-
-        $data['gift_cards_enabled'] = $this->gift_cards_enabled;
-
-        $data['banners']            = $this->Banner_model->get_homepage_banners(5);
-
-        $data['boxes']                = $this->box_model->get_homepage_boxes(4);
-
-        $data['homepage']            = true;
-
-        $data['allProduct']         = $this->Product_model->get_products_catogery_wise();    
+		$this->load->helper('directory');       
+        $data['homepage']            	= true;
+        $data['allProduct']         	= $this->Product_model->get_products_catogery_wise();    
 
        // echo '<pre>';print_r($data['allProduct']);
-
-        //$this->load->view('homepage', $data);
-
-       //$this->load->view('index');  
-
-        $this->load->view('allCourses', $data);  
+	   $this->load->view('allCourses', $data);  
 
     }
 

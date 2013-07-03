@@ -103,8 +103,8 @@ Class Product_model extends CI_Model
     {
        //sort by alphabetically by default
        $this->db->join('category_products', 'category_products.product_id=products.id', 'right');
-
         $this->db->order_by('name', 'ASC');
+		$this->db->group_by('id');		
         $this->db->where('enabled', '1');
         $this->db->where('delete', '0');
         $result    = $this->db->get('products');
