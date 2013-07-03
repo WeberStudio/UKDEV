@@ -48,9 +48,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'ukDev_admin';
-$db['default']['password'] = 'UKcollege4#';
-$db['default']['database'] = 'ukDev_admin';
+$db['default']['username'] = 'root';
+$db['default']['password'] = 'root';
+$db['default']['database'] = 'ukopencollege';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = 'oc_';
 $db['default']['pconnect'] = TRUE;

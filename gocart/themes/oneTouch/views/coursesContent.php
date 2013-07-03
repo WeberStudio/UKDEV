@@ -1,4 +1,17 @@
 <!-- Fullscreen jQuery template -->
+<style>
+ul.menu1 li{
+    display:inline;
+     margin-right: 5px;
+}
+ul.menu1 li a{
+    font-size:17px;
+    padding-top: 15px;
+}
+</style>
+<?php $page_links    = $this->pagination->create_links(); 
+
+?> 
      <div class="row">
      <div id="aq-block-5" class="aq-block aq-block-aq_recent_block fifteen columns aq-first cf"> 
                     <h1 class="page-title">
@@ -94,6 +107,15 @@
                         </ul>
                         <div style="display: none;" id="show_empty_message"><p class="woocommerce_info">Currently there is no any product in this category.</p> </div>
                     </div> 
+                </div>
+                
+                <div align="center">
+                
+                 
+               <?php if($page_links != ''):?>
+        <?php echo $page_links;?>
+        <?php endif;?>
+                     
                 </div>
 
 

@@ -45,15 +45,49 @@ class Cart extends Front_Controller {
 
 	}
 
-    function   allcourses()
+    function   allcourses($page=0,$row=16)
     {
 
-         //DebugBreak();
-		$this->load->helper('directory');       
-        $data['homepage']            	= true;
-        $data['allProduct']         	= $this->Product_model->get_products_catogery_wise();    
+         
+		//$this->load->helper('directory');       
+        //$data['homepage']            	= true;
+        $count =   count($this->Product_model->count_all_published_products());
+         $data['allProduct']         	= $this->Product_model->get_products_catogery_wise($row,$page);
+         $this->load->library('pagination');
 
-       // echo '<pre>';print_r($data['allProduct']);
+        $config['base_url']             = base_url().'/cart/allcourses/';
+        $config['total_rows']           = $count;
+          
+        $config['per_page']             = $row;
+        $config['uri_segment']          = 3;
+        
+        $config['first_link']           = 'First';
+        $config['first_tag_open']       = '<li>';
+        $config['first_tag_close']      = '</li>';
+        $config['last_link']            = 'Last';
+        $config['last_tag_open']        = '<li>';
+        $config['last_tag_close']       = '</li>';
+
+        $config['full_tag_open']        = '<nav class="page-nav"><div class=""><ul class="menu1">';
+        $config['full_tag_close']       = '</ul></div></nav>';
+        $config['cur_tag_open']         = '<li class="active"><a href="#">';
+        $config['cur_tag_close']        = '</a></li>';
+        
+        $config['num_tag_open']         = '<li>';
+        $config['num_tag_close']        = '</li>';
+        
+        $config['prev_link']            = 'Prev';
+        $config['prev_tag_open']        = '<li>';
+        $config['prev_tag_close']       = '</li>';
+
+        $config['next_link']            = 'Next';
+        $config['next_tag_open']        = '<li>';
+        $config['next_tag_close']       = '</li>';
+        
+        $this->pagination->initialize($config); 
+   
+
+       
 	   $this->load->view('allCourses', $data);  
 
     }
