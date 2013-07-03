@@ -66,27 +66,75 @@
 			<th><?php //echo lang('name');?> Number</th>
 			<th><?php echo lang('price');?></th>
 			<th>Status</th>
+            <th>Tutor</th>
 			<th>Action</th>
 	    </tr>
 	</thead>
 
     <tbody>
 	<?php //echo (count($orders) < 1)?'<tr><td style="text-align:center;" colspan="8">'.lang('no_orders') .'</td></tr>':''
-	
-	
+	 // echo  $this->show->pe( $this->Tutor_model->get_tutor_requests_by_id('customer_id',3991));
+	   //$get_request =  $this->Tutor_model->get_tutor_requests_by_id('customer_id',3991,'subject_id',1);
+           // echo $get_request[0]['request_status']; 
+          //$this->show->pe($orderss); 
+          //$get_tutor =  $this->Tutor_model->get_tutor_attributes('tutors',30);
+          //echo $get_tutor[0]->lastname; 
+           //$this->show->pe($get_tutor);
+             
 	?>
+    
     <?php foreach($orderss as $order): 
 	//$this->show->pe(unserialize($order->contents));
 	$product_id = unserialize($order->contents);
 	?>
 	<tr>
+    
 		<!--<td><input type="checkbox" id="gc_check_all" /></td>-->
 		<td style="white-space:nowrap"><?php echo $order->order_number;?></td>
 		<td style="white-space:nowrap"><?php echo $order->total;?></td>
-		<td style="white-space:nowrap"><?php echo $order->status;?></td>
-		<td style="white-space:nowrap"><a class="button" href="<?=base_url().'dashboard/request_for_tutor/'.$order->customer_id.'/'.$product_id['id']?>" >Request Tutor</a></td>
+        <?php
+          $get_request =  $this->Tutor_model->get_tutor_requests_by_id('customer_id', $order->customer_id,'subject_id', $order->product_id);
+             //$this->show->pe($get_request); 
+         ?>
+          
+             
+              <?php if($get_request[0]['request_status'] =='Tutor Assigned'){  ?>
+            <td style="white-space:nowrap"><?php echo $get_request[0]['request_status'];?></td>  
+            <?php } elseif( $get_request[0]['request_status'] =='Requested'){ ?> 
+             <td style="white-space:nowrap"><?php echo $get_request[0]['request_status']?></td>
+              <?}else{?>
+                   <td style="white-space:nowrap"><?php echo $order->status;?></td>
+              <?php }?>
+              <td>
+                  <?php
+                  
+                    if(is_numeric($get_request[0]['tutor_id'])){  
+                   $get_tutor =  $this->Tutor_model->get_tutor_attributes('tutors',$get_request[0]['tutor_id']);
+                   if(!empty($get_tutor)){echo ucwords(strtolower($get_tutor[0]->lastname.' '.$get_tutor[0]->firstname));}
+                     
+                    }
+                    else{echo 'No Tutor Assigned';}
+                    
+                    ?>
+
+                  
+               </td>
+		<td style="white-space:nowrap" >
+        <a class="button"<?php if($get_request[0]['request_status']==""){echo ' href="'. base_url().'dashboard/request_for_tutor/'.$order->customer_id.'/'.$order->product_id.'"'; }else{echo 'href="javascript:void(0);"';}?>>
+        <?php 
+        if($get_request[0]['request_status']==""){echo 'Request Tutor';}
+        elseif($get_request[0]['request_status']=='Tutor Assigned'){echo 'Tutor Assigned';}
+         else{echo 'Wait for Approval';}
+        ?>
+         
+        </a>
+        </td>
+        
+        
 	</tr>
+     
     <?php endforeach; ?>
+    
     </tbody>
 </table>
 
