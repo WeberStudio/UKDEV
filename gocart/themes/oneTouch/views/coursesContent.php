@@ -110,12 +110,9 @@ ul.menu1 li a{
                 </div>
                 
                 <div align="center">
-                
-                 
-               <?php if($page_links != ''):?>
-        <?php echo $page_links;?>
-        <?php endif;?>
-                     
+                        <?php if($page_links != ''):?>
+                        <?php echo $page_links;?>
+                        <?php endif;?>
                 </div>
 
 

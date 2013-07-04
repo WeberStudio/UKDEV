@@ -85,9 +85,7 @@ class Cart extends Front_Controller {
         $config['next_tag_close']       = '</li>';
         
         $this->pagination->initialize($config); 
-   
 
-       
 	   $this->load->view('allCourses', $data);  
 
     }
@@ -332,7 +330,7 @@ class Cart extends Front_Controller {
 		//get the category		
 
 		$data['category'] = $this->Category_model->get_category($id);
-
+         // echo $this->show->pe($data['category']); 
 		
 
 		if (!$data['category'])
@@ -348,7 +346,7 @@ class Cart extends Front_Controller {
 		//set up pagination
 
 		$segments	= $this->uri->total_segments();
-
+         
 		$base_url	= $this->uri->segment_array();
 
 		
@@ -382,6 +380,7 @@ class Cart extends Front_Controller {
 		
 
 		$data['subcategories']		= $this->Category_model->get_categories($data['category']->id);
+        //$this->show->
 
 		$data['product_columns']	= $this->config->item('product_columns');
 
@@ -432,62 +431,42 @@ class Cart extends Front_Controller {
 		
 
 		//set up pagination
-
+        $row = 9;
+        $data['products']    = $this->Product_model->get_products($data['category']->id, $row, $page, $sort_by['by'], $sort_by['sort']);
 		$this->load->library('pagination');
 
 		$config['base_url']		= site_url($base_url);
 
 		$config['uri_segment']	= $segments;
 
-		$config['per_page']		= 24;
+		$config['per_page']		= $row;
 
 		$config['total_rows']	= $this->Product_model->count_products($data['category']->id);
 
 		
 
-		$config['first_link'] = 'First';
+		 $config['first_link']           = 'First';
+        $config['first_tag_open']       = '<li>';
+        $config['first_tag_close']      = '</li>';
+        $config['last_link']            = 'Last';
+        $config['last_tag_open']        = '<li>';
+        $config['last_tag_close']       = '</li>';
 
-		$config['first_tag_open'] = '<li>';
+        $config['full_tag_open']        = '<nav class="page-nav"><div class=""><ul class="menu1">';
+        $config['full_tag_close']       = '</ul></div></nav>';
+        $config['cur_tag_open']         = '<li class="active"><a href="#">';
+        $config['cur_tag_close']        = '</a></li>';
+        
+        $config['num_tag_open']         = '<li>';
+        $config['num_tag_close']        = '</li>';
+        
+        $config['prev_link']            = 'Prev';
+        $config['prev_tag_open']        = '<li>';
+        $config['prev_tag_close']       = '</li>';
 
-		$config['first_tag_close'] = '</li>';
-
-		$config['last_link'] = 'Last';
-
-		$config['last_tag_open'] = '<li>';
-
-		$config['last_tag_close'] = '</li>';
-
-
-
-		$config['full_tag_open'] = '<div class="pagination"><ul>';
-
-		$config['full_tag_close'] = '</ul></div>';
-
-		$config['cur_tag_open'] = '<li class="active"><a href="#">';
-
-		$config['cur_tag_close'] = '</a></li>';
-
-		
-
-		$config['num_tag_open'] = '<li>';
-
-		$config['num_tag_close'] = '</li>';
-
-		
-
-		$config['prev_link'] = '&laquo;';
-
-		$config['prev_tag_open'] = '<li>';
-
-		$config['prev_tag_close'] = '</li>';
-
-
-
-		$config['next_link'] = '&raquo;';
-
-		$config['next_tag_open'] = '<li>';
-
-		$config['next_tag_close'] = '</li>';
+        $config['next_link']            = 'Next';
+        $config['next_tag_open']        = '<li>';
+        $config['next_tag_close']       = '</li>';
 
 		
 
@@ -497,7 +476,7 @@ class Cart extends Front_Controller {
 
 		//grab the products using the pagination lib
 
-		$data['products']	= $this->Product_model->get_products($data['category']->id, $config['per_page'], $page, $sort_by['by'], $sort_by['sort']);
+		
 
 		foreach ($data['products'] as &$p)
 
@@ -508,8 +487,45 @@ class Cart extends Front_Controller {
 			$p->options	= $this->Option_model->get_product_options($p->id);
 
 		}
+        
+        /*$count =   count($this->Product_model->count_all_published_products());
+        $data['products']    = $this->Product_model->get_products($data['category']->id, $config['per_page'], $page, $sort_by['by'], $sort_by['sort']);
+         
+         $this->load->library('pagination');
+
+        $config['base_url']             = base_url();
+        $config['total_rows']           = $count;
+          
+       $config['per_page']             = $row;
+        $config['uri_segment']          = 2;
+        
+        $config['first_link']           = 'First';
+        $config['first_tag_open']       = '<li>';
+        $config['first_tag_close']      = '</li>';
+        $config['last_link']            = 'Last';
+        $config['last_tag_open']        = '<li>';
+        $config['last_tag_close']       = '</li>';
+
+        $config['full_tag_open']        = '<nav class="page-nav"><div class=""><ul class="menu1">';
+        $config['full_tag_close']       = '</ul></div></nav>';
+        $config['cur_tag_open']         = '<li class="active"><a href="#">';
+        $config['cur_tag_close']        = '</a></li>';
+        
+        $config['num_tag_open']         = '<li>';
+        $config['num_tag_close']        = '</li>';
+        
+        $config['prev_link']            = 'Prev';
+        $config['prev_tag_open']        = '<li>';
+        $config['prev_tag_close']       = '</li>';
+
+        $config['next_link']            = 'Next';
+        $config['next_tag_open']        = '<li>';
+        $config['next_tag_close']       = '</li>';
+        
+        $this->pagination->initialize($config); */
 
 		//$this->show->pe($data);
+
 
 		$this->load->view('category', $data);
 

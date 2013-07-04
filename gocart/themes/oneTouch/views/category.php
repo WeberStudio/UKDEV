@@ -11,6 +11,16 @@
 
 <? //Content Area Start ?>
 <?php //echo $category->google_follow; exit;?>
+<style>
+ul.menu1 li{
+    display:inline;
+     margin-right: 5px;
+}
+ul.menu1 li a{
+    font-size:17px;
+    padding-top: 15px;
+}
+</style>
 <div class="row">
 <div class="page-header">
 
@@ -50,6 +60,7 @@
             <?php if(isset($subcategories) && count($subcategories) > 0){ ?>
              <?php foreach($subcategories as $subcategory):?>
 
+                
                 <a class="all" href="<?php echo base_url().$subcategory->slug; //echo site_url(implode('/', $base_url).'/'.$subcategory->slug); ?>">
                             <li data-type="1" data-id="id-1" class="item">
                              
@@ -68,8 +79,8 @@
                                     </div>
                                 </div>
                              
-                            </li>                            
-                </a>                
+                            </li>                                      
+                </a>     
                <?php endforeach?>
                
                
@@ -104,12 +115,19 @@
             </ul>
             <div class="category-bottom-gap" ></div>
          </div>  
-     </div>  
+     </div> 
+     <?php $page_links    = $this->pagination->create_links(); ?> 
+    <div align="center" style="margin-top: 17px; margin-bottom: 24px;">
     
+     <?php if($page_links != ''):?>
+     <?php echo $page_links;?>
+     <?php endif;?>
+    </div>
     </div>
 
     <? //Content Area End ?>
-
+    
+    
   </div>
 
 </div>

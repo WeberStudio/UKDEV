@@ -187,14 +187,14 @@ Class Product_model extends CI_Model
         
 		//apply group discount
 		$return = $result->result();
-        echo'<pre>'; print_r($return);echo'<br/>' ;
+       // echo'<pre>'; print_r($return);echo'<br/>' ;
 		if($this->group_discount_formula) 
 		{
 			foreach($return as &$product) {
 				eval('$product->price=$product->price'.$this->group_discount_formula.';');
 			}
 		}
-         echo'<pre>'; print_r($return);exit; 
+         //echo'<pre>'; print_r($return);exit; 
 		return $return;
 	}
 	
@@ -216,7 +216,7 @@ Class Product_model extends CI_Model
 				$contents[$count]	= $this->get_product($product->product_id);
 				$count++;
 			}
-
+              //echo $this->db->last_query(); exit; 
 			return $contents;
 		}
 		else
@@ -224,6 +224,7 @@ Class Product_model extends CI_Model
 			//sort by alphabetically by default
 			$this->db->order_by('name', 'ASC');
 			$result	= $this->db->get('products');
+            //echo $this->db->last_query(); exit;
 			//apply group discount
 			$return = $result->result();
 			if($this->group_discount_formula) 
