@@ -58,11 +58,11 @@ class dashboard extends Front_Controller {
 		    $this->load->view('dashboard_course',$data);
 		//print_r($data['orderss']);exit;
 		} 
-		/*else if(!empty($this->customer['tutor_id']))
+		else if(!empty($this->customer['tutor_id']))
 		{ 		
 		    $data['orderss']	= $this->Order_model->get_customer_orders($this->customer['tutor_id']);
             $this->load->view('dashboard_course',$data);
-		}*/
+		}
 		else
 		{
 		    redirect('cart/');
@@ -90,8 +90,10 @@ class dashboard extends Front_Controller {
         }
         else if($this->Customer_model->is_logged_in(false, false))
         {              
-            
-            $data['forums']       = $this->Forum_model->get_forum_customer($this->customer['id']);        
+          // echo "i am in the student check";exit;
+            $data['forums']       = $this->Forum_model->get_forum_customer($this->customer['id']); 
+            //$this->show->pe($data['forums']);       
+            //$this->show->pe($data['forums']);       
             $this->load->view('dashboard_fourm',$data);
         }
         else
@@ -150,11 +152,11 @@ class dashboard extends Front_Controller {
         
         if($this->Tutor_model->is_logged_in(false, false))
         {
-            $data['file_directory']        = $this->Tutor_model->get_tutor_requests_by_id('tutor_id', $this->customer['tutor_id']); 
+            $data['file_directory']        = $this->Tutor_model->get_tutor_requests_by_id('tutor_id', $this->customer['tutor_id'],'',''); 
             $this->load->view('dashboard_file_manager', $data);       
         }else if($this->Customer_model->is_logged_in(false, false))
         {
-            $data['file_directory']        = $this->Tutor_model->get_tutor_requests_by_id('customer_id', $this->customer['id']);
+            $data['file_directory']        = $this->Tutor_model->get_tutor_requests_by_id('customer_id', $this->customer['id'],'','');
             $this->load->view('dashboard_file_manager', $data);            
         }else
         {

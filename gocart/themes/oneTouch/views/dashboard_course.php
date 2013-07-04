@@ -98,33 +98,34 @@
          ?>
           
              
-              <?php if($get_request[0]['request_status'] =='Tutor Assigned'){  ?>
-            <td style="white-space:nowrap"><?php echo $get_request[0]['request_status'];?></td>  
-            <?php } elseif( $get_request[0]['request_status'] =='Requested'){ ?> 
-             <td style="white-space:nowrap"><?php echo $get_request[0]['request_status']?></td>
-              <?}else{?>
-                   <td style="white-space:nowrap"><?php echo $order->status;?></td>
-              <?php }?>
+              
+               <td style="white-space:nowrap"><?php echo $order->status;?></td>
+              
               <td>
                   <?php
-                  
+                     if(isset($get_request[0]['tutor_id'])){
                     if(is_numeric($get_request[0]['tutor_id'])){  
                    $get_tutor =  $this->Tutor_model->get_tutor_attributes('tutors',$get_request[0]['tutor_id']);
                    if(!empty($get_tutor)){echo ucwords(strtolower($get_tutor[0]->lastname.' '.$get_tutor[0]->firstname));}
-                     
-                    }
-                    else{echo 'No Tutor Assigned';}
-                    
+                    } 
+                     }
+                     else{echo 'No Tutor Assigned';}
                     ?>
 
                   
                </td>
 		<td style="white-space:nowrap" >
-        <a class="button"<?php if($get_request[0]['request_status']==""){echo ' href="'. base_url().'dashboard/request_for_tutor/'.$order->customer_id.'/'.$order->product_id.'"'; }else{echo 'href="javascript:void(0);"';}?>>
-        <?php 
+        <a class="button"<?php 
+         if($get_request[0]['request_status']==""){echo ' href="'. base_url().'dashboard/request_for_tutor/'.$order->customer_id.'/'.$order->product_id.'"'; }
+         else{echo 'href="javascript:void(0);"';}
+         ?>>
+        <?php
+        if(isset($get_request[0]['request_status'])){ 
         if($get_request[0]['request_status']==""){echo 'Request Tutor';}
         elseif($get_request[0]['request_status']=='Tutor Assigned'){echo 'Tutor Assigned';}
          else{echo 'Wait for Approval';}
+         }
+         else{echo 'Request Tutor';}
         ?>
          
         </a>

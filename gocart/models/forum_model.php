@@ -47,6 +47,7 @@ Class Forum_model extends CI_Model
 		ON oc_forums.product_id = oc_products.id  
 		AND oc_forums.customer_id =".$id." AND oc_forums.forum_status='1'");
 		//$result = $this->db->get_where('forums',array('customer_id'=>$id,'forum_status'=>'1'));
+        //echo $this->db->last_query(); exit;
 		return $result->result();
 	}
 	
