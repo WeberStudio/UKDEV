@@ -9,6 +9,7 @@ if($this->Tutor_model->is_logged_in(false, false)!=1 && $this->Customer_model->i
 	 redirect('cart');
 	
 	}
+    $this->customer = $this->go_cart->customer();
         remove_ssl();        
         $this->load->model(array('Customer_model', 'Product_model', 'Tutor_model', 'Forum_model', 'Topic_model', 'Message_Forum_model'));
         $this->load->library('email');
@@ -19,7 +20,7 @@ if($this->Tutor_model->is_logged_in(false, false)!=1 && $this->Customer_model->i
 		 $this->login_id             = $customer_details['tutor_id'];
 		 $this->first_name           = $customer_details['firstname'];   
 		}
-		else{
+		if($this->Customer_model->is_logged_in(false, false)){
         $this->login_id             = $customer_details['id'];
         $this->first_name           = $customer_details['firstname']; 
 		}
@@ -169,12 +170,14 @@ if($this->Tutor_model->is_logged_in(false, false)!=1 && $this->Customer_model->i
         $data['messages']         = $this->Message_Forum_model->get_messages_by_topic_id($topic_id);
 		
 		if($this->Tutor_model->is_logged_in(false, false))
-		{   
+		{
+         $data['messages']         = $this->Message_Forum_model->get_messages_by_topic_id($topic_id);   
 			$tutor_details 		= $this->go_cart->customer();
 			$data['user_id']	= $tutor_details['tutor_id'];
 		}
 		if($this->Customer_model->is_logged_in(false, false))
 		{
+             $data['messages']         = $this->Message_Forum_model->get_messages_by_topic_id($topic_id);
 			 $customer_details 	= $this->go_cart->customer();
 			 $data['user_id']	= $customer_details['id'];
 		}
