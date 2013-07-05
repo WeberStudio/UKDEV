@@ -98,26 +98,52 @@ Class Product_model extends CI_Model
 			
 		}
 	}
-	
-    function get_products_catogery_wise()
+    function count_all_published_products()
     {
        //sort by alphabetically by default
-       $this->db->join('category_products', 'category_products.product_id=products.id', 'right');
+        $this->db->join('category_products', 'category_products.product_id=products.id', 'right');
         $this->db->order_by('name', 'ASC');
-		$this->db->group_by('id');		
+        $this->db->group_by('id');
         $this->db->where('enabled', '1');
         $this->db->where('delete', '0');
+          if($pag_form>0) {
+        $this->db->limit($pag_form , $pag_to);
+          }
         $result    = $this->db->get('products');
-        
         $return = $result->result_array();
         //echo $this->show->pe($return);
-        //echo $this->db->last_query();exit;
+       //echo $this->db->last_query();exit;
+        if(count($return))
+        {
+            return $return;
+        }
+        return false;
+    }
+	
+    function get_products_catogery_wise($pag_form=16 , $pag_to=0)
+    {
+       //sort by alphabetically by default
+       
+        $this->db->join('category_products', 'category_products.product_id=products.id', 'right');
+        $this->db->order_by('name', 'ASC');
+		$this->db->group_by('id');
+        $this->db->where('enabled', '1');
+        $this->db->where('delete', '0');
+          if($pag_form>0) {
+        $this->db->limit($pag_form , $pag_to);
+          }
+        $result    = $this->db->get('products');
+        $return = $result->result_array();
+        //echo $this->show->pe($return);
+       //echo $this->db->last_query();exit;
         if(count($return))
         {
             return $return;
         }
         return false; 
     }
+    
+    
 	function get_all_products_array()
 	{
 		//sort by alphabetically by default
@@ -161,14 +187,14 @@ Class Product_model extends CI_Model
         
 		//apply group discount
 		$return = $result->result();
-        echo'<pre>'; print_r($return);echo'<br/>' ;
+       // echo'<pre>'; print_r($return);echo'<br/>' ;
 		if($this->group_discount_formula) 
 		{
 			foreach($return as &$product) {
 				eval('$product->price=$product->price'.$this->group_discount_formula.';');
 			}
 		}
-         echo'<pre>'; print_r($return);exit; 
+         //echo'<pre>'; print_r($return);exit; 
 		return $return;
 	}
 	
@@ -190,7 +216,7 @@ Class Product_model extends CI_Model
 				$contents[$count]	= $this->get_product($product->product_id);
 				$count++;
 			}
-
+              //echo $this->db->last_query(); exit; 
 			return $contents;
 		}
 		else
@@ -198,6 +224,7 @@ Class Product_model extends CI_Model
 			//sort by alphabetically by default
 			$this->db->order_by('name', 'ASC');
 			$result	= $this->db->get('products');
+            //echo $this->db->last_query(); exit;
 			//apply group discount
 			$return = $result->result();
 			if($this->group_discount_formula) 
@@ -215,6 +242,7 @@ Class Product_model extends CI_Model
 		return $this->db->count_all_results('products');
 		
 	}
+    
 	
 	function count_products($id)
 	{

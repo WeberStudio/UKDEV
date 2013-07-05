@@ -328,10 +328,16 @@ Class Tutor_model extends CI_Model
 
     }
     
-    function get_tutor_requests_by_id($field, $id)
+    function get_tutor_requests_by_id($field1, $id1 ,$field2 , $id2)
     {
         
-        $result    = $this->db->get_where('for_tutor_request', array($field => $id));
+        //$result    = $this->db->get_where('for_tutor_request', array($field => $id));
+          $this->db->where($field1, $id1);
+          if($field2!="" && $id2!=""){
+          $this->db->where($field2, $id2);
+          }
+          $result = $this->db->get('for_tutor_request');
+        //echo $this->db->last_query();exit;
         return $result->result_array();
 
     }

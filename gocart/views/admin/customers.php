@@ -50,7 +50,7 @@ function areyousure()
 	
 	<tbody>
 		<?php
-		$page_links	= $this->pagination->create_links();
+		$page_links	= $this->pagination->create_links(); 
 		echo (count($customers) < 1)?'<tr><td style="text-align:center;" colspan="5">'.lang('no_customers').'</td></tr>':''?>
 <?php foreach ($customers as $customer):?>
 		<tr>

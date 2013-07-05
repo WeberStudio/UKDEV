@@ -3,7 +3,7 @@ class Topics extends Front_Controller {
              
     function __construct()
     {        
-        parent::__construct();
+        parent::__construct(); 
 if($this->Tutor_model->is_logged_in(false, false)!=1 && $this->Customer_model->is_logged_in(false, false)!=1)
 {
 	 redirect('cart');
@@ -169,7 +169,7 @@ if($this->Tutor_model->is_logged_in(false, false)!=1 && $this->Customer_model->i
         $data['messages']         = $this->Message_Forum_model->get_messages_by_topic_id($topic_id);
 		
 		if($this->Tutor_model->is_logged_in(false, false))
-		{
+		{   
 			$tutor_details 		= $this->go_cart->customer();
 			$data['user_id']	= $tutor_details['tutor_id'];
 		}
