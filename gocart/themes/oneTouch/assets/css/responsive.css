@@ -647,6 +647,17 @@
 
 }
 
+@media only screen and (max-width: 445px) {    
+    .works-list .filterable-grid {
+
+        width: 280px;
+
+        margin: 0 auto;
+
+    }
+	
+}
+
 
 
 @media (max-width: 380px){
@@ -773,14 +784,6 @@
 
 }
 
-@media only screen and (max-width: 445px) {    
-    .works-list .filterable-grid {
-
-        width: 280px;
-
-        margin: 0 auto;
-
-    }
-	
+@media (max-width: 240px) {
+.works-list .filterable-grid{ width:228px;}
 }
-
