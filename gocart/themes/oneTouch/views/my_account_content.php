@@ -102,7 +102,7 @@ $address_form_prefix ="";
                     </p>
                     <p class="form-row " id="billing_company_field">
 						<label for="billing_company" class="">About</label>
-						<textarea name="about"></textarea>
+						<textarea name="about"> <?php echo $customer['about'];?></textarea>
 					</p>
 					<div class="clear"></div>
 					<input type="submit" value="<?php echo lang('form_submit');?>" class="button"  style="height: 34px; width: 74px;" />
