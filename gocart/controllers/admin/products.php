@@ -282,6 +282,11 @@ class Products extends Admin_Controller {
 		$data['related_products']	= array();
 		$data['product_categories']	= array();
 		$data['images']				= '';
+		$data['img_title']			= '';
+		$data['img_alt']			= '';
+		$data['img_url']			= '';
+		$data['img_des']			= '';
+
 		$data['product_files']		= array();
 		$data['prelated']			= '';
 		$data['tab_title']			= '';
@@ -367,6 +372,10 @@ class Products extends Admin_Controller {
 			$data['enabled']			= $product->enabled;
             $data['google_follow']      = $product->google_follow;
 			$data['images']				= $product->images;
+			$data['img_title']			= $product->img_title;
+			$data['img_alt']			= $product->img_alt;
+			$data['img_url']			= $product->img_url;
+			$data['img_des']			= $product->img_des;
 			$data['publish_by_admin']	= $product->publish_by_admin;
 			$data['publish_by_super']	= $product->publish_by_super;
 			
@@ -405,6 +414,10 @@ class Products extends Admin_Controller {
 		$this->form_validation->set_rules('price', 'lang:price', 'trim|numeric|floatval|required');
 		$this->form_validation->set_rules('enabled', 'lang:enabled', 'trim');
 		$this->form_validation->set_rules('meta_key', 'meta_key', 'trim');
+		$this->form_validation->set_rules('img_title', 'Image Title', 'trim');
+		$this->form_validation->set_rules('img_alt', 'Image Alt', 'trim');
+		$this->form_validation->set_rules('img_url', 'Image URL', 'trim');
+		$this->form_validation->set_rules('img_des', 'Image Description', 'trim');
 		/*
 		if we've posted already, get the photo stuff and organize it
 		if validation comes back negative, we feed this info back into the system
@@ -520,8 +533,13 @@ class Products extends Admin_Controller {
             
             if($this->input->post('google_follow')==""){$google ='0';}
              else{$google = trim($this->input->post('google_follow'));}
+			 
 			$save['sku']				= $this->input->post('sku');
 			$save['name']				= $this->input->post('name');
+			$save['img_title']			= $this->input->post('img_title');
+			$save['img_alt']			= $this->input->post('img_alt');
+			$save['img_url']			= $this->input->post('img_url');
+			$save['img_des']			= $this->input->post('img_des');
 			$save['seo_title']			= $this->input->post('seo_title');
 			$save['meta']				= $this->input->post('meta');
 			$save['meta_key']			= $this->input->post('meta_key');

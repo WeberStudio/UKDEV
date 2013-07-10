@@ -203,6 +203,7 @@ class Invoices extends Admin_Controller {
 			$data['invoice_products'] 	= $this->order_model->get_admin_related_orders($data['invoice_data']->admin_id);
 			
 			//echo "<pre>";print_r($data['comm_rates'] );exit;
+			 //$this->show->pe($data);
 			$this->load->view($this->config->item('admin_folder').'/includes/header');
             $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
             $this->load->view($this->config->item('admin_folder').'/invoice/invoice_detail', $data); 

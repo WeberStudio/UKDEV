@@ -250,8 +250,28 @@ function remove_option(id)
                     <div style="text-align:center; padding:5px; border:1px solid #ddd;"><img src="<?php echo base_url('uploads/images/small/'.$images);?>" alt="current"/><br/><?php echo lang('current_file');?></div>
 
                     <?php endif;?>
-                 </div>               
-                </div>
+                    
+                    <label for="image title"> Image Title </label>
+                    <?php
+                    $data	= array('name'=>'img_title','value'=>set_value('img_title', $img_title), 'class'=>'span8');
+                    echo form_input($data);?>
+                    
+                    <label for="image title"> Image Alt </label>
+                    <?php
+                    $data	= array('name'=>'img_alt','value'=>set_value('img_alt', $img_alt), 'class'=>'span8');
+                    echo form_input($data);?>
+                    
+                     <label for="image title"> Image URL </label>
+                    <?php
+                    $data	= array('name'=>'img_url', 'value'=>set_value('img_url', $img_url), 'class'=>'span8');
+                    echo form_input($data);?>
+                    
+                     <label for="image title"> Image Description </label>
+                    <?php
+                    $data	= array('name'=>'img_des', 'value'=>set_value('img_des', $img_des), 'class'=>'span8');
+                    echo form_textarea($data);?> 
+                 </div> 
+     			</div>
                 <!-- TAB FIVE END-->
                 
                 <!-- TAB SIX START-->

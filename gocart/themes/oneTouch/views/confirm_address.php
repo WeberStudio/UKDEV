@@ -560,6 +560,18 @@ $con_password 	= array('id'=>'confirm','name'=>'confirm','class'=>'input-text','
 </div>
 </div>
 </div>
+<script type="text/javascript">
+  var j = jQuery.noConflict();
+	j(function(){
+		j('#country_id').change(function(){
+				j.post('<?php echo site_url('locations/get_zone_menu');?>',{id:j('#country_id').val()}, function(data) {
+				  j('#f_zone_id').html(data);
+				});
+				
+			});
+			
+	});
+</script>
 <?php include_once('footer.php'); ?>
 </body>
 </html>

@@ -156,7 +156,6 @@ class Categories extends Admin_Controller {
 	{
        //echo $this->input->post('google_follow'); exit;
 		
-		
 		/*$this->show->pe($_FILES);
         exit;  */
 		$config['upload_path']		= 'uploads/images/full';
@@ -188,6 +187,10 @@ class Categories extends Admin_Controller {
 		$data['excerpt']		        = '';
 		$data['sequence']		        = '';
 		$data['image']			        = '';
+		$data['img_title']			    = '';
+		$data['img_alt']			    = '';
+		$data['img_url']			    = '';
+		$data['img_des']			    = '';
 		$data['seo_title']		        = '';
 		$data['meta']			        = '';
 		$data['meta_key']		        = '';
@@ -244,6 +247,10 @@ class Categories extends Admin_Controller {
 			$data['sequence']		= $category->sequence;
 			$data['parent_id']		= $category->parent_id;
 			$data['image']			= $category->image;
+			$data['img_title']		= $category->img_title;
+			$data['img_alt']		= $category->img_alt;
+			$data['img_url']		= $category->img_url;
+			$data['img_des']		= $category->img_des;
 			$data['seo_title']		= $category->seo_title;
 			$data['meta']			= $category->meta;
 			$data['meta_key']		= $category->meta_key;
@@ -261,6 +268,10 @@ class Categories extends Admin_Controller {
 		$this->form_validation->set_rules('sequence', 'lang:sequence', 'trim|integer');
 		$this->form_validation->set_rules('parent_id', 'parent_id', 'trim');
 		$this->form_validation->set_rules('image', 'lang:image', 'trim');
+		$this->form_validation->set_rules('img_title', 'Image Title', 'trim');
+		$this->form_validation->set_rules('img_alt', 'Image Alt', 'trim');
+		$this->form_validation->set_rules('img_url', 'Image URL', 'trim');
+		$this->form_validation->set_rules('img_des', 'Image Description', 'trim');
 		$this->form_validation->set_rules('seo_title', 'lang:seo_title', 'trim');
 		$this->form_validation->set_rules('meta', 'lang:meta', 'trim');
 		$this->form_validation->set_rules('meta_key', 'meta_key', 'trim');
@@ -412,6 +423,10 @@ class Categories extends Admin_Controller {
 			$save['excerpt']		= $this->input->post('excerpt');
 			$save['parent_id']		= intval($this->input->post('parent_id'));
 			$save['sequence']		= intval($this->input->post('sequence'));
+			$save['img_title']		= $this->input->post('img_title');
+			$save['img_alt']		= $this->input->post('img_alt');
+			$save['img_url']		= $this->input->post('img_url');
+			$save['img_des']		= $this->input->post('img_des');
 			$save['seo_title']		= $this->input->post('seo_title');
 			$save['meta']			= $this->input->post('meta');
 			$save['meta_key']		= $this->input->post('meta_key');

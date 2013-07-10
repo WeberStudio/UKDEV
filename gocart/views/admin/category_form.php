@@ -22,8 +22,9 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#description_tab" data-toggle="tab"><?php echo lang('description');?></a></li>
                         <li><a href="#attributes_tab" data-toggle="tab"><?php echo lang('attributes');?></a></li>
+                        <li><a href="#image_tab" data-toggle="tab">Images</a></li>
                         <li><a href="#seo_tab" data-toggle="tab"><?php echo lang('seo');?></a></li>
-                    </ul>
+                   	</ul>
                 
                     <div class="tab-content">
                         <div class="tab-pane active" id="description_tab">
@@ -103,34 +104,64 @@
                                 $data	= array('name'=>'excerpt', 'value'=>set_value('excerpt', $excerpt), 'class'=>'span12', 'rows'=>3);
                                 echo form_textarea($data);
                                 ?>
-                				
-                                <label for="image">Upload <?php echo lang('image');?> </label>
-                                <div class="form-row control-group row-fluid">
-                                  <div class="controls span7">
-                                       <div class="input-append row-fluid">
-                                      <div class="uploader" id="uniform-search-input">
-                                        <div class="customfile">
-                                              <a class="various" class="spa1n6 fileinput customfile-input" data-fancybox-type="iframe" href="<?=base_url()?>admin/media/">
-                                              <div class="uneditable-input spa1n6 fileinput" aria-hidden="true"><span>choose a file...</span></div>
-                                              </a>  
-                                        </div>
-                                        <input type="hidden" name="media_image" id="media_image">
-                                        <input type="hidden" name="image_path" id="image_path">
-                                        <input type="file" class="spa1n6 fileinput customfile-input" disabled="disabled" value="" id="unique_image_id" />
-                                      </div>
-                                   </div>
-                                      
-                                   
-                                 </div>
-                               </div>
-                                <?php if($id && $image != ''):?>
+                               
                                 
-                                <div style="text-align:center; padding:5px; border:1px solid #ddd;"><img src="<?php echo base_url('uploads/images/small/'.$image);?>" alt="current"/><br/><?php echo lang('current_file');?></div>
-                                
-                                <?php endif;?>
+                                  
                                 
                             </fieldset>
                             
+                        </div>
+                        <div class="tab-pane fade"id="image_tab">
+                        <fieldset>
+                            <label for="image">Upload <?php echo lang('image');?> </label>
+                            <div class="form-row control-group row-fluid">
+                                      <div class="controls span7">
+                                           <div class="input-append row-fluid">
+                                          <div class="uploader" id="uniform-search-input">
+                                            <div class="customfile">
+                                                  <a class="various" class="spa1n6 fileinput customfile-input" data-fancybox-type="iframe" href="<?=base_url()?>admin/media/">
+                                                  <div class="uneditable-input spa1n6 fileinput" aria-hidden="true"><span>choose a file...</span></div>
+                                                  </a>  
+                                            </div>
+                                            <input type="hidden" name="media_image" id="media_image">
+                                            <input type="hidden" name="image_path" id="image_path">
+                                            <input type="file" class="spa1n6 fileinput customfile-input" disabled="disabled" value="" id="unique_image_id" />
+                                          </div>
+                                       </div>
+                                          
+                                       
+                                     </div>
+                                   </div>
+                                    <?php if($id && $image != ''):?>
+                                    
+                                    <div style="text-align:center; padding:5px; border:1px solid #ddd;">
+                                    <img src="<?php echo base_url('uploads/images/small/'.$image);?>" alt="current"/><br/>
+									<?php echo lang('current_file');?>
+                                    </div>
+                                    
+                                    <?php endif;?>
+                                    
+                                <label for="image title"> Image Title </label>
+                				<?php
+                                $data	= array('name'=>'img_title','value'=>set_value('img_title', $img_title), 'class'=>'span8');
+                                echo form_input($data);?>
+                                
+                                <label for="image title"> Image Alt </label>
+                				<?php
+                                $data	= array('name'=>'img_alt','value'=>set_value('img_alt', $img_alt), 'class'=>'span8');
+                                echo form_input($data);?>
+                                
+                                 <label for="image title"> Image URL </label>
+                				<?php
+                                $data	= array('name'=>'img_url', 'value'=>set_value('img_url', $img_url), 'class'=>'span8');
+                                echo form_input($data);?>
+                                
+                                 <label for="image title"> Image Description </label>
+                				<?php
+                                $data	= array('name'=>'img_des', 'value'=>set_value('img_des', $img_des), 'class'=>'span8');
+                                echo form_textarea($data);?>
+                                
+                         </fieldset>
                         </div>
                         
                         <div class="tab-pane" id="seo_tab">

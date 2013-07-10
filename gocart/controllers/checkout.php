@@ -61,6 +61,7 @@ class Checkout extends Front_Controller {
 	function step_1()
 	{
 		$data['customer']	= $this->go_cart->customer();
+		//$this->show->pe($data['customer']);
 
 		if(isset($data['customer']['id']))
 		{
@@ -103,6 +104,7 @@ class Checkout extends Front_Controller {
 		{
 			/*load any customer data to get their ID (if logged in)*/
 			$customer				= $this->go_cart->customer();
+			//$this->show->pe($customer);
 
 			$customer['bill_address']['company']		= $this->input->post('company');
 			$customer['bill_address']['firstname']	= $this->input->post('firstname');

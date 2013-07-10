@@ -106,9 +106,7 @@ Class Product_model extends CI_Model
         $this->db->group_by('id');
         $this->db->where('enabled', '1');
         $this->db->where('delete', '0');
-          if($pag_form>0) {
-        $this->db->limit($pag_form , $pag_to);
-          }
+          
         $result    = $this->db->get('products');
         $return = $result->result_array();
         //echo $this->show->pe($return);

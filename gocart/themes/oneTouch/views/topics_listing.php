@@ -27,7 +27,7 @@
                 <div id="content" class="fifteen columns">
                   <div class="col-1">
                     <h3>My Topics</h3>
-                    <a class="button"  href="<?php echo base_url().'Topics/topic_form/'.$form_id; ?>">Add New Topic </a>
+                    <a class="button"  href="<?php echo base_url().'topics/topic_form/'.$form_id; ?>">Add New Topic </a>
                     <table width="100%">
                       <thead>
                         <tr>
@@ -49,7 +49,7 @@
                         ?>
                             <tr>
             
-                            <td><a class="button"  href="<?php echo base_url().'Topics/message_converstion/'.$topic->topic_id; ?>" ><?=$topic->topic_title?></a></td>
+                            <td><a class="button"  href="<?php echo base_url().'topics/message_converstion/'.$topic->topic_id; ?>" ><?=$topic->topic_title?></a></td>
                             <td><?=substr($topic->topic_message, 0, 15).'...'?></td>
                             <td><?=$topic->topic_time?></td>
                             <td><?=$topic->topic_status?></td>
@@ -59,8 +59,8 @@
 							
 							 if($topic->topic_login_id == $user_id ){
 							 ?>                    
-                            <a class="button"  href="<?=base_url().'Topics/topic_form/'.$form_id.'/'.$topic->topic_id?>"> Edit </a>
-                            <a class="button" onClick="return confirm('If you delete this order you will not be able to recover it later. Are you sure you want to permanently delete this order?');"  href="<?=base_url().'Topics/topic_delete/'.$form_id.'/'.$topic->topic_id?>"> Remove </a>	
+                            <a class="button"  href="<?=base_url().'topics/topic_form/'.$form_id.'/'.$topic->topic_id?>"> Edit </a>
+                            <a class="button" onClick="return confirm('If you delete this order you will not be able to recover it later. Are you sure you want to permanently delete this order?');"  href="<?=base_url().'topics/topic_delete/'.$form_id.'/'.$topic->topic_id?>"> Remove </a>	
                             <?php }?>
                             </div>
                             </td>
