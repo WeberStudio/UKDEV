@@ -491,7 +491,7 @@ if ( ! function_exists('url_title'))
 
 		$trans = array(
 			'&.+?;'                 => '',
-			'[^a-z0-9 _-]'          => '',
+			'[^a-z0-9. _-]'          => '',
 			'\s+'                   => $separator,
 			'('.$q_separator.')+'   => $separator
 		);
