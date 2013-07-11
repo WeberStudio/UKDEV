@@ -154,7 +154,7 @@
 </textarea></td>
                         <td style="vertical-align: top;"><input type="text" class="input-mini" id="item_quantity" name="item_quantity[]" style="width: 90%;" value="<?=$invoice_item['item_quantity']?>"></td>
                         <td style="vertical-align: top;"><input type="text" class="input-mini" id="item_price" name="item_price[]" style="width: 90%;" value="<?=$invoice_item['item_price']?>"></td>
-                       <td><?php /*?><?=$invoice_item['comm_rate'].'-'.$invoice_item['comm_rate_mode']?>
+                       <td style="vertical-align: top;"><?php /*?><?=$invoice_item['comm_rate'].'-'.$invoice_item['comm_rate_mode']?>
 					   	  <input type="hidden"  name="comm_rate[]"  value="<?=$invoice_item['comm_rate']?>">
 						  <input type="hidden"  name="comm_rate_mode[]"  value="<?=$invoice_item['comm_rate_mode']?>"><?php */?>
 						  <? //echo "<pre>"; print_r($comm_rates); ?>
@@ -162,7 +162,7 @@
 							<?php foreach ($comm_rates as $comm_rate) { ?>
 							<option <?php if ($comm_rate->comm_id == $invoice_item['comm_id']) { ?>selected="selected"<?php } ?>  value="<?php echo $comm_rate->comm_id; ?>"><?php echo $comm_rate->comm_rate .' ('. $comm_rate->comm_rate_mode .') '. $comm_rate->comm_level; ?></option>
 							<?php } ?>
-						  </select>		
+						  </select>
 					   </td>
 					    <td style="vertical-align: top;"><select name="item_tax_rate_id[]" id="item_tax_rate_id" class="input-small">
                             <option value="0">
@@ -195,12 +195,62 @@
 		</textarea></td>
 								<td style="vertical-align: top;"><input type="text" class="input-mini" id="item_quantity" name="item_quantity[]" style="width: 90%;" value="<?=$invoice_item['q_sum']?>"></td>
 								<td style="vertical-align: top;"><input type="text" class="input-mini" id="item_price" name="item_price[]" style="width: 90%;" value="<?=$item_content['price']?>"></td>
-								<td>
-									<select name="comm_rate[]"  class="input-small">						  
+								<td style="vertical-align: top;">
+                                
+                               
+                                <?php if($invoice_item['comm_id']!=""){?>
+                                
+									<select name="comm_rate[]"  class="input-small">
+                                    <option> None</option>						  
 									<?php foreach ($comm_rates as $comm_rate) { ?>
-										<option <?php if ($comm_rate->comm_id == $invoice_item['comm_id']) { ?>selected="selected"<?php } ?>  value="<?php echo $comm_rate->comm_id; ?>"><?php echo $comm_rate->comm_rate .' ('. $comm_rate->comm_rate_mode .') '. $comm_rate->comm_level; ?></option>
+										<option <?php if ($comm_rate->comm_id == $invoice_item['comm_id']) { ?>selected="selected"<?php } ?>  value="<?php echo $comm_rate->comm_id; ?>">
+										<?php echo  $comm_rate->comm_rate .' ('. $comm_rate->comm_rate_mode .') '. $comm_rate->comm_level; ?></option>
+                                        
 									<?php } ?>
-									</select>				  			
+									</select>
+                                    <?php }?>
+                                    
+                                    <?php if($invoice_item['comm_id']==""){ ?>
+                                    <?php 
+									$get_pro_cat = $this->Product_model->get_product_categories($invoice_item['product_id']);
+									$cat_commission=  $this->order_model->get_cat_commission($get_pro_cat['0']->category_id);
+									?>
+                                    <?php if(!empty($cat_commission) && $cat_commission!=""){ ?>
+                                    <select name="comm_rate[]"  class="input-small">
+                                    <option> <?php echo $invoice_item['product_id'];?></option>						  
+									<?php foreach ($comm_rates as $comm_rate) { ?>
+										<option <?php if ($comm_rate->comm_id == $cat_commission['0']['comm_id']) { ?>selected="selected"<?php } ?>  value="<?php echo $comm_rate->comm_id; ?>">
+										<?php echo  $comm_rate->comm_rate .' ('. $comm_rate->comm_rate_mode .') '. $comm_rate->comm_level; ?></option>
+                                        
+									<?php } ?>
+									</select>
+                                    <?php }?>
+                                    <?php }?>
+                                    
+                                    <?php if($invoice_item['comm_id'] == "" && empty($cat_commission)){?>
+                                    <?php if($course_provider_commission['0']['comm_id']!=""){?>
+                                    <select name="comm_rate[]"  class="input-small">
+                                    <option> <?php echo $invoice_item['product_id'];?></option>						  
+									<?php foreach ($comm_rates as $comm_rate) { ?>
+										<option <?php if ($comm_rate->comm_id == $course_provider_commission['0']['comm_id']) { ?>selected="selected"<?php } ?>  value="<?php echo $comm_rate->comm_id; ?>">
+										<?php echo  $comm_rate->comm_rate .' ('. $comm_rate->comm_rate_mode .') '. $comm_rate->comm_level; ?></option>
+                                        
+									<?php } ?>
+									</select>
+                                    <?php }?>
+                                    <?php }?>
+                                    
+  <?php if($invoice_item['comm_id'] == "" && empty($cat_commission)&&$course_provider_commission['0']['comm_id']==""){ ?>
+ 								 <select name="comm_rate[]"  class="input-small">
+                                    <option> <?php echo $invoice_item['product_id'];?></option>						  
+									<?php foreach ($comm_rates as $comm_rate) { ?>
+										<option <?php if ($comm_rate->comm_id == $universal_commision['0']['comm_id']) { ?>selected="selected"<?php } ?>  value="<?php echo $comm_rate->comm_id; ?>">
+										<?php echo  $comm_rate->comm_rate .' ('. $comm_rate->comm_rate_mode .') '. $comm_rate->comm_level; ?></option>
+                                        
+									<?php } ?>
+								</select>
+ 									<?php }?>
+                                    				  			
 								</td>
 								<td style="vertical-align: top;"><select name="item_tax_rate_id[]" id="item_tax_rate_id" class="input-small">
 									<option value="0">

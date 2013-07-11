@@ -193,17 +193,25 @@ class Invoices extends Admin_Controller {
 	{
 		
 			//$data = array();
-			$data['invoice_data'] 		= $this->Invoice_model->get_invoice($invoice_id);
-			$data['user_info'] 			= $this->Invoice_model->get_all_admin($data['invoice_data']->admin_id);
-			$data['invoice_group'] 		= $this->Invoice_model->get_all_groups($data['invoice_data']->invoice_group_id);
-			$data['invoice_items'] 		= $this->Invoice_model->get_invoice_items_by_invoice_id($invoice_id);
-			$data['tax_rates'] 			= $this->Invoice_Tax_Model->get_taxes(); 
-			$data['comm_rates'] 		= $this->Commission_model->get_commissions_dropdown();
-			$data['invoice_totals'] 	= $this->Invoice_model->get_invoice_totals($invoice_id);			
-			$data['invoice_products'] 	= $this->order_model->get_admin_related_orders($data['invoice_data']->admin_id);
+			$data['invoice_data'] 				= $this->Invoice_model->get_invoice($invoice_id);
+			$data['user_info'] 					= $this->Invoice_model->get_all_admin($data['invoice_data']->admin_id);
+			$data['invoice_group'] 				= $this->Invoice_model->get_all_groups($data['invoice_data']->invoice_group_id);
+			$data['invoice_items'] 				= $this->Invoice_model->get_invoice_items_by_invoice_id($invoice_id);
+			$data['tax_rates'] 					= $this->Invoice_Tax_Model->get_taxes(); 
+			$data['comm_rates'] 				= $this->Commission_model->get_commissions_dropdown();
+			$data['invoice_totals'] 			= $this->Invoice_model->get_invoice_totals($invoice_id);			
+			$data['invoice_products'] 			= $this->order_model->get_admin_related_orders($data['invoice_data']->admin_id);
 			
-			//echo "<pre>";print_r($data['comm_rates'] );exit;
-			 //$this->show->pe($data);
+			$data['course_commission'] 			= $this->order_model->get_courses_commission($data['invoice_data']->admin_id);
+			//$data['cat_commission'] 			=  $this->order_model->get_cat_commission();
+			//$data['cat_commission'] 			=  $this->order_model->get_cat_commission($data['invoice_data']->admin_id);
+			$data['course_provider_commission'] =  $this->order_model->get_course_provider_commission($data['invoice_data']->admin_id);
+			//$this->show->pe($data['course_provider_commission']);
+			$data['universal_commision']		=  $this->order_model->get_universal_commission();
+			 
+			
+			
+			//$this->show->pe($data);
 			$this->load->view($this->config->item('admin_folder').'/includes/header');
             $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
             $this->load->view($this->config->item('admin_folder').'/invoice/invoice_detail', $data); 
