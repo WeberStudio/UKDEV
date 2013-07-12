@@ -1,4 +1,6 @@
+<div style="border-bottom: 5px solid #14166f;"></div>   
 <div id="darkf" >
+
     <section id="footer" role="contentinfo">
         <div class="row">
             <div class="five columns">
@@ -131,7 +133,8 @@
 
                             ?>
                             <article class="mini date">
-                                <time datetime="<?=$recent_blog_post[$i]->post_date_gmt?>"> <span class="day">20</span> <span class="mounth">May.</span> <span class="time">2013</span> </time>
+                               
+                                <time datetime="<?=$recent_blog_post[$i]->post_date_gmt?>"> <img src="<?php echo theme_img("icons/post.png");?>" alt="">  </time> 
                                 <div class="entry-content"> <a href='<?=$recent_blog_post[$i]->guid?>' class="title" target="_blank"><?=$recent_blog_post[$i]->post_title?></a>
                                     <p> <?=$post_content?> </p>
                                 </div>
@@ -160,61 +163,38 @@
             </div>
         </div>
 
-        <div class="row dop-row">
-            <div class="five columns">
-                <section class="footer-logo">
-                    <a  href="<?=base_url()?>cart/">
-                        <img src="<?php echo theme_img("footer-logo.png")?>" alt="OneTouch">
-                    </a>
-
-                </section>
-            </div>
-            <div class="five columns">
-                <section class="widget widget_info">
-                    <div class="info-widget">
-                        <div class="subtitle">IT IS REALLY INTERESTING</div>
-						<? $page_data = $this->Page_model->get_page('6'); 
-							//$this->show->pe($page_data);
-						?>
-                        <h3><a href="<?=base_url().$page_data->slug?>">About company</a></h3>                        
-						<? 
-							$footer_page = strip_tags($page_data->content);
-							echo word_limiter($footer_page, 30);
-						
-						?>
-						</p>						
-                    </div>
-                </section>
-            </div>
-            <div class="five columns">
-                <section class="adress-icon">
-                    <div data-picture data-alt="adress-icon" class="inline-icon">
-                        <div data-src="<?php echo theme_img("icons/map_w.png");?>"></div>
-                        <div data-src="<?php echo theme_img("icons/map_w@2x.png");?>" data-media="(min-width: 400px) and (min-device-pixel-ratio: 1.5)"></div>
-
-                        <noscript>
-                            <img src="<?php echo theme_img("custom-slider-img/map_w.png");?>" alt="adress-icon" class="adress-icon">
-                        </noscript>
-                    </div>
-                    <p>Address:   UK Open College Limited 4, Copthall House The Meridian Station Square Coventry West Midlands CV1 2FL
-                        <br>
-                        Phone:     (0121) 288-0181</p>
-                </section>
-            </div>
-        </div>
-
         <div class="row">
+            <div class="five columns"></div>
             <div class="five columns">
-                <a href="<?php echo site_url('tutor_login');?>"  style="color:#FFF; font-size:12px;"><?php echo "Tutor Login"; ?></a>
+            
+            <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?php echo theme_img("img/twiter-logo.png");?>" alt="">
+            <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?php echo theme_img("img/link-in.png");?>" alt="">
+            <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?php echo theme_img("img/youtube.png");?>" alt="">
+            <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?php echo theme_img("img/face-book.png");?>" alt="">
+          
+                   
             </div>
         </div>
-
-
+       
+       
     </section>
-
+ <div style="border-top : 5px solid #14166f;"></div>
+ <section style="padding: 30px 0 10px 0;margin: 0 auto 0 auto; background: #282a2b !important;">    
+ <div class="row">
+            <div class="five columns">
+            Copyrights @ 2013 & All Rights Reserved
+            </div>
+             <div class="five columns" style="text-align: right">
+                 <a href="<?php echo site_url('tutor_login');?>"  style="font-size:12px;"><?php echo "Tutor Login"; ?></a> / Privacy Policy / Terms of Service / FAQ's
+            </div>
+        </div> 
+ </section>      
 </div>
 
+
 <a href="#" id="linkTop" class="backtotop"> <span></span> </a> 
+
+
 <?php echo theme_css('farbtastic1.3.css', true); ?>
 <?php echo theme_css('grid.css', true); ?>
 <?php echo theme_js('js/jquery-plugins.min.js', true);?> 
