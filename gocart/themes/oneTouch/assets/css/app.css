@@ -288,21 +288,21 @@ a.back:hover {
 
 .wrap .item  .description {
 
-    background: rgba(87,186,232,.87) url("../images/icons/white-list@2x.png") 10px 10px no-repeat;
+    background: rgba(255, 255, 255, 0.6) url("../images/icons/slider-home-icon.png") 10px 10px no-repeat;
 
-    background-size: 32px 32px;
+    background-size: 27px 32px;
 
-    -webkit-background-size: 32px 32px;
+    -webkit-background-size: 27px 32px;
 
 }
 
 .wrap .item.even .description {
 
-    background: rgba(108,190,66,.87) url("../images/icons/white-list@2x.png") 10px 10px no-repeat;
+    background: rgba(255, 255, 255, 0.6) url("../images/icons/slider-home-icon.png") 10px 10px no-repeat;
 
-    background-size: 32px 32px;
+    background-size: 27px 32px;
 
-    -webkit-background-size: 32px 32px;
+    -webkit-background-size: 27px 32px;
 
 }
 
@@ -1993,7 +1993,7 @@ div.item, .item div{
 
     background: rgba(87,186,232,.87);
 
-    color: #fff;
+    color: #565759;
 
     -moz-transition: all .7s;
 
@@ -2141,7 +2141,9 @@ div.item, .item div{
 
 .item  .description h4 {
 
-    color: #fff;
+    color: #565759;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:18px;
 
 }
 
@@ -2153,7 +2155,7 @@ div.item, .item div{
 
 .item .description time {
 
-    color: #a1eeff;
+    color: #565759;
 
     font-size: 10px;
 
@@ -2167,7 +2169,7 @@ div.item, .item div{
 
 .item.even .description time {
 
-    color: #cfffbc;
+    color: #565759;
 
 }
 
@@ -5954,123 +5956,3 @@ p.readmore{ text-align: center;}
 	text-indent:-9999px;
 }
 /* top footer end*/
-/* bottom content start*/
-.bottom_content
-{
-	
-	display:block;
-	overflow:auto;
-}
-.qualfication
-{
-	
-	margin: 20px 20px 20px 0px;
-	padding:0px;
-	width:31%;
-	float:left;
-	
-}
-.tutor
-{
-	
-	margin:20px; padding:0px;
-	width:31%;
-	float:left;
-}
-.work
-{
-	
-	margin: 20px 0px 20px 20px;
-	padding:0px;
-	width:31%;
-	float:left;
-}
-.image_sec_1
-{
-	margin:0px; padding:0px;
-	background:url("../images/t_icons/video%20chat.png") center center no-repeat;
-	text-indent:-9999px;
-	
-	min-height:100px;
-}
-.image_sec_2
-{
-	margin:0px; padding:0px;
-	background:url("../images/t_icons/success%20stories.png") center center no-repeat;
-	text-indent:-9999px;
-	
-	min-height:100px;
-}
-.image_sec_3
-{
-	margin:0px; padding:0px;
-	background:url("../images/t_icons/why%20choose%20us.png") center center no-repeat;
-	text-indent:-9999px;
-	
-	min-height:100px;
-}
-.title_sec
-{
-	
-	overflow:auto;
-	text-align:center;
-	text-decoration:none;
-	
-	font-family:Verdana, sans-serif;
-	font-size:18px;
-	
-	
-	color:#464749;
-}
-.content_sec
-{
-	
-	
-	
-	margin:0px; padding:5px;
-	text-align:center;
-	color:#464749;
-}
-.qualfication:hover .image_sec_1
-{
-	background:url("../images/t_icons/video%20chat%20H.png") center center no-repeat; 
-}
-.qualfication:hover .title_sec
-{
-	color:#254AB8;
-}
-.qualfication:hover .content_sec
-{
-	background:#151670;
-	color:#FFFAF0;
-}
-.tutor:hover .image_sec_2
-{
-	background:url("../images/t_icons/success%20stories%20H.png") center center no-repeat; 
-}
-.tutor:hover .title_sec
-{
-	color:#254AB8;
-}
-.tutor:hover .content_sec
-{
-	background:#151670;
-	color:#FFFAF0;
-}
-.work:hover .image_sec_3
-{
-	background:url("../images/t_icons/why%20choose%20us%20H.png") center center no-repeat; 
-}
-.work:hover .title_sec
-{
-	color:#254AB8;
-}
-.work:hover .content_sec
-{
-	background:#151670;
-	color:#FFFAF0;
-}
-/* bottom content end*/
-
-
-
