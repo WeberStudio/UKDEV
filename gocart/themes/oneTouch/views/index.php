@@ -15,56 +15,23 @@
                 <?php include_once('content.php'); ?> 
             </div>
         </div>
-        <style>
-
-</style>
-		<div class="topfooter">
+        
+<div class="topfooter">
   <div class="t_footer_contect"> <br/>
     <div class="t_footer_title"> why choose us </div>
     <div class="t_footer_img">
       img
     </div>
     <div class="block_inside">
-    <a href="javascript:void(0);">
-      <div class="block_content"> <span><img class="icon" src="<?php echo theme_img("t_icons/Complants.png");?>"\> <b>1 customer text here</b></span>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </p>
+	<? //echo '<pre>';print_r($pages); exit; ?>
+	<?php foreach($pages as $menu_page):?>
+    <a href="<?php echo $menu_page->url;?>" <?php if($menu_page->new_window ==1){echo 'target="_blank"';} ?>>
+      <div class="block_content"> <span><img class="icon" src="<?php echo theme_img("t_icons/Complants.png");?>"\> <b><?php echo $menu_page->menu_title;?></b></span>
+        <p><?php echo word_limiter($menu_page->content,30);?></p>
       </div>
       </a>
-      <a href="javascript:void(0);">
-      <div class="block_content"> <span><img class="icon" src="<?php echo theme_img("t_icons/How it works.png");?>"\> <b>2 customer text here</b></span>
-        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-      </div>
-       </a>
-      <a href="javascript:void(0);">
-      <div class="block_content"> <span><img class="icon" src=" <?php echo theme_img("t_icons/Payments.png");?>"\> <b>3 customer text here</b></span>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </p>
-      </div>
-      </a>
-      <a href="javascript:void(0);">
-      <div class="block_content lastone"> <span><img class="icon" src="<?php echo theme_img("t_icons/Price prom.png");?>"\> <b>4 customer text here</b></span>
-        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-      </div>
-      </a>
-      <a href="javascript:void(0);">
-      <div class="block_content"> <span><img class="icon" src=" <?php echo theme_img("t_icons/Qualification.png");?>"\><b>5 customer text here</b></span>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </p>
-      </div>
-      </a>
-      <a href="javascript:void(0);">
-      <div class="block_content"> <span><img class="icon" src=" <?php echo theme_img("t_icons/NUS.png");?>"\> <b>6 customer text here</b></span>
-        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-      </div>
-      </a>
-      <a href="javascript:void(0);">
-      <div class="block_content"> <span><img class="icon" src="<?php echo theme_img("t_icons/Spe cnsidration.png");?>"\><b> 7customer text here</b></span>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </p>
-      </div>
-      </a>
-      <a href="javascript:void(0);">
-      <div class="block_content lastone"> <span><img class="icon" src="<?php echo theme_img("t_icons/UCAS points.png");?>"\><b>8 customer text here</b></span>
-        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-      </div>
-      </a>
+      <?  endforeach;?>    
+      
     </div>
   </div>
 </div>

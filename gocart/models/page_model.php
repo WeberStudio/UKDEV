@@ -36,6 +36,22 @@ Class Page_model extends CI_Model
 		return $return;
 	}
 	
+	function get_pages_by_position($position)
+	{
+		$this->db->order_by('id', 'ASC');
+		$this->db->where('position', $position);
+		$result = $this->db->get('pages')->result();
+		//echo $this->db->last_query();exit;
+		$return	= array();
+		foreach($result as $page)
+		{
+			$return[$page->id]				= $page;
+			$return[$page->id]->children	= $this->get_pages($page->id);
+		}
+		
+		return $return;
+	}
+	
 	function get_page($id)
 	{
 		$this->db->where('id', $id);
