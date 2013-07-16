@@ -1,5 +1,5 @@
-<div style="border-bottom: 5px solid #14166f;"></div>   
 <div id="darkf" >
+<div style="border-bottom: 5px solid #14166f;"></div>   
 
     <section id="footer" role="contentinfo">
         <div class="row">

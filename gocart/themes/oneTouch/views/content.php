@@ -140,8 +140,16 @@
       <?php $page_content =  $this->page_model->get_page_texts();
       //print_r($page_content); exit;
       ?>
+      <style>
+	  .boxx
+	  {
+		  margin-top:20px;
+		}
+      </style>
+      
+      
       <div class="fifteen columns" style="padding-left: 0px;">
-        <div class="text-block clearing-container">
+        <div class=" boxx clearing-container">
           <div class="row">
             <div id="aq-block-4" class="aq-block aq-block-aq_page_15_block fifteen aq-first cf">
               <div class="">
@@ -170,10 +178,7 @@
                       </div>
                       <div class="row-fluid">
                         <div class="wpb_content_element span12 text-item no-740 wpb_text_column">
-                          <!--<div class="wpb_wrapper">
-                            <h6>It was hard to make it so cool</h6>
-                            <h2><a>Greatest Theme Options</a></h2>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip. <img class="icon_post" title="check" alt="" src="<?php echo theme_img("icons/check.png")?>" width="32" height="32" /> </div>-->
+                          
                         </div>
                       </div>
                     </div>
@@ -206,7 +211,75 @@
           </div>
         </div>
       </div>
+      <!--<div class="fifteen columns" style="padding-left: 0px;">
+        <div class="text-block clearing-container">
+          <div class="row">
+            <div id="aq-block-4" class="aq-block aq-block-aq_page_15_block fifteen aq-first cf">
+              <div class="">
+                <div class="row-fluid">
+                  <div class="wpb_content_element span3 column_container">
+                    <div class="wpb_wrapper">
+                      <div class="row-fluid">
+                        <div class="wpb_content_element wpb_single_image span12">
+                          <div class="wpb_wrapper"><?php if(!empty($page_content)){?> <img src="<?php echo base_url('uploads/images/full/'.$page_content[0]->image); //echo theme_img("/director1.png")?>" width="335" height="367" /><?php }?>  </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                 
+                  <div class="wpb_content_element span4 column_container">
+                    <div class="wpb_wrapper">
+                      <div class="row-fluid">
+                        <div class="wpb_content_element span12 text-item wpb_text_column">
+                          <div class="wpb_wrapper">
+                         
+                            <h6></h6>
+                           <?php if(!empty($page_content)){?> <h2><a><?php echo $page_content[0]->title;?></a></h2>
+                             <?php echo $page_content[0]->content;?>
+                            <img class="icon_post" title="settings" alt=""  src="<?php echo theme_img("icons/check.png")?>" width="32" height="32" /><?php }?> </div>
+                        </div>
+                      </div>
+                      <div class="row-fluid">
+                        <div class="wpb_content_element span12 text-item no-740 wpb_text_column">
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="wpb_content_element span4 pad-r20 column_container">
+                    <div class="wpb_wrapper">
+                    <?php
+                     $page_url = $this->page_model->get_homepage_link();?>                     
+                      <div class='tile mini' style='background-color:#ffa531; padding-top:0px; padding-left:40px;'>
+                          <a href='<?php echo $page_url[0]->slug?>'></a>
+                        <div class='text-tile text-big-left' >FAQs</div>
+                      </div>
+                      <div class='tile mini' style='background-color:#57bae8'> <a href='<?php echo $page_url[1]->slug?>'></a>
+                          <div class='icon icon_center' > <img src="<?php echo theme_img("img/tile-icons/clock.png")?>" alt="OneTouch"> </div>
+                        <div  style=" padding-top:6px; padding-left:30px;" class='text-tile text-big-left'  > Payments </div>
+                      </div>
+                      <div class='tile mini' style='background-color:#57bae8'> <a href='<?php echo base_url().'about-us'?>'></a>
+                          <div class='icon icon_center' > <img src="<?php echo theme_img("img/tile-icons/comp.png")?>" alt="OneTouch"></div>
+                          <div class='text-tile text-big-left' style="padding-top:0px; padding-left:25px;" >About Us</div>
+                      </div>
+                      <div class='tile mini' style='background-color:#90a7b1'> <a href='<?php echo site_url('cart/allcourses/');?>'></a>
+                        
+                        <div class='text-tile text-big-left' style="padding-left:20px;" >All Courses</div>
+                      </div>                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>-->
       
     </div>
   </div>
 </div>
+
+
+
+
+

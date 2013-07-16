@@ -5891,3 +5891,68 @@ p.readmore{ text-align: center;}
 .works-list .filterable-grid{ width:228px !important; }
 #footer .row .five.columns:first-child{ display:none;}
 }
+/* top footer start*/
+.topfooter {
+	background: #E4E4E4;
+	position:relative;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+}
+.t_footer_contect {
+	margin: 0 auto;
+	width: 85%;
+}
+.t_footer_title {
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-family: Verdana, Verdana, sans-serif;
+	color: #464749;
+	margin-top: 20px;
+	margin-bottom: 20px
+}
+.block_inside {
+	display: block;
+	padding: 20px 0px;
+	overflow: auto;
+}
+.block_content {
+	display: block;
+	overflow: auto;
+	width: 20%;
+	padding: 10px 25px 10px 0px;
+	margin: 10px 75px 20px 0px;
+	float: left;
+}
+.lastone
+{
+	
+	margin-right:0px;	
+}
+.icon {
+	margin-bottom: -19px;
+}
+.block_content p {
+	margin: 20px -25px 0 0;
+	padding: 0px;
+	
+	overflow: auto;
+	text-decoration: none;
+	font-size: 12px;
+	color: #464749;
+	text-align: justify;
+}
+.block_content b {
+	
+	color: #464749;
+	
+	margin-top: 3px;
+}
+.t_footer_img
+{
+	
+	background:url("../images/t_icons/Serprator.png") center center repeat-x;
+	text-indent:-9999px;
+}
+/* top footer end*/
