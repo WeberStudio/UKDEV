@@ -26,12 +26,12 @@ jQuery(document).ready(function(){
 
     try{
         scrollWrapper.niceScroll({
-            cursorcolor:"#57bae8",
+            cursorcolor:"#595959",
             cursorwidth:"16px",
             cursorborder:"none",
             cursorborderradius:"0px",
             cursoropacitymin:"1",
-            background:"#f0f3f4",
+            background:"#bdbdbd",
             railpadding:{top:"20px"}
         }).rail.css({'height':'15px'});
     } catch(e){

@@ -65,9 +65,9 @@
 
               
                   <? if(isset($product->images)){ ?>
-                <div class="images"> <a itemprop="image" href="<?php echo base_url('uploads/images/full/'.$product->images);?>" class="zoom cboxElement" rel="thumbnails" title="<?=$product->name?>">
+                <div class="images"> <a itemprop="image" href="<?php echo base_url('uploads/images/full/'.$product->images);?>" class="zoom cboxElement" rel="thumbnails" alt="<?=$product->img_alt?>" title="<?=$product->img_title?>">
                 
-                <img src="<?php echo base_url('uploads/images/medium/'.$product->images);?>" alt="<?=$product->seo_title?>" >
+                <img  src="<?php echo base_url('uploads/images/medium/'.$product->images);?>" alt="<?=$product->img_alt?>" title="<?=$product->img_title?>" >
                 
                 </a> 
                 </div>

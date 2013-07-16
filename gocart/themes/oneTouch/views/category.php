@@ -65,7 +65,7 @@ ul.menu1 li a{
                             <li data-type="1" data-id="id-1" class="item">
                              
                                 <div class="half even">
-                                    <div class="pic"><img title="Watchers" alt="Watchers" src="<?=base_url('uploads/images/medium/'.$subcategory->image)?>"></div>
+                                    <div class="pic"><img alt="<?=$subcategory->img_alt?>" title="<?=$subcategory->img_title?>" src="<?=base_url('uploads/images/medium/'.$subcategory->image)?>"></div>
                                     <div class="description">
                                            <div class="title">
                                                     
@@ -93,7 +93,7 @@ ul.menu1 li a{
                             <li data-type="1" data-id="id-1" class="item">
                              
                                 <div class="half even">
-                                    <div class="pic"><img title="Watchers" alt="Watchers" src="<?=base_url('uploads/images/medium/'.$product->images)?>"></div>
+                                    <div class="pic"><img alt="<?=$product->img_alt?>" title="<?=$product->img_title?>" src="<?=base_url('uploads/images/medium/'.$product->images)?>"></div>
                                     <div class="description">
                                            <div class="title">
                                                     
