@@ -22,7 +22,7 @@
                   {
                   ?>
                       <div class="item half even"> 
-                        <img src="<?php echo catogery_img('images/small/'.$cat_info['category']->image); ?>" style="margin:0 0;" alt="The Clover Trail (Atom Z2760) Review: Acer&#8217;s W510 Tested" title="The Clover Trail (Atom Z2760) Review: Acer&#8217;s W510 Tested" >
+                        <img src="<?php echo catogery_img('images/small/'.$cat_info['category']->image); ?>" style="margin:0 0;" alt="<?=$cat_info['category']->img_alt?>" title="<?=$cat_info['category']->img_title?>"  >
                         <div class="description disp">
                           <time><? echo $cat_info['category']->publish_date?></time>
                           <h4><? echo $cat_info['category']->name?></h4>
@@ -39,7 +39,7 @@
                         </div>
                   <? } else { ?>
                        <div class="item half odd">
-                        <img src="<?php echo catogery_img('images/small/'.$cat_info['category']->image); ?>" style="margin:0 0;" alt="The Clover Trail (Atom Z2760) Review: Acer&#8217;s W510 Tested" title="The Clover Trail (Atom Z2760) Review: Acer&#8217;s W510 Tested" >
+                        <img src="<?php echo catogery_img('images/small/'.$cat_info['category']->image); ?>" style="margin:0 0;" alt="<?=$cat_info['category']->img_alt?>" title="<?=$cat_info['category']->img_title?>" >
                         <div class="description disp">
                           <time><? echo $cat_info['category']->publish_date?></time>
                           <h4><? echo $cat_info['category']->name?></h4>

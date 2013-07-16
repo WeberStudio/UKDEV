@@ -88,7 +88,14 @@ ul.menu1 li a{
                             <li class="item" style="height: 226px;"  data-id="id-1" data-type="<?php echo $course['category_id'];?>">
                              
                                 <div class="half <?=$class?>" style="height: 300px; width: 300px">
-                                    <div class="pic" style="height: 300px; width: 300px"><img  src="<?php echo catogery_img('images/medium/'.$course['images']); ?>" style="margin:0 0 0 0;" alt="Watchers" title="Watchers" ></div>
+                                    <div class="pic" style="height: 300px; width: 300px">
+									<? if(empty($course['img_url'])){ ?>
+									<img alt="<?=$course['img_alt']?>" title="<?=$course['img_title']?>"    src="<?php echo catogery_img('images/medium/'.$course['images']); ?>" style="margin:0 0 0 0;"  >
+									<? } else { ?>
+									<a href="<?=$course['img_url']?>" target="_blank" <img alt="<?=$course['img_alt']?>" title="<?=$course['img_title']?>"    src="<?php echo catogery_img('images/medium/'.$course['images']); ?>" style="margin:0 0 0 0;"  ></a>
+									<? } ?>			
+									</div>
+									
                                     <div class="description">
                                            <div class="title" >
                                                     
