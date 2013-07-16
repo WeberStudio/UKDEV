@@ -140,16 +140,20 @@
       <?php $page_content =  $this->page_model->get_page_texts();
       //print_r($page_content); exit;
       ?>
-      <style>
+      <!--<style>
 	  .boxx
 	  {
 		  margin-top:20px;
 		}
-      </style>
-      
+      </style>-->
+      <style>
+
+
+
+</style>
       
       <div class="fifteen columns" style="padding-left: 0px;">
-        <div class=" boxx clearing-container">
+        <!--<div class=" boxx clearing-container">
           <div class="row">
             <div id="aq-block-4" class="aq-block aq-block-aq_page_15_block fifteen aq-first cf">
               <div class="">
@@ -209,7 +213,45 @@
               </div>
             </div>
           </div>
+        </div>-->
+        <div class="bottom_content">
+
+    <div class="qualfication">
+    	<div class="image_sec_1">
+        	image
         </div>
+        <div class="title_sec">
+        	Qualfication
+        </div>
+        <div class="content_sec">
+        	
+        	<p class="slide_content">The font-family property should hold several font names as a "fallback" ... Start with the font you want, and end with a generic family, to let the browser</p>
+            
+        </div>
+    </div>
+    <div class="tutor">
+    	<div class="image_sec_2">
+        	image
+        </div>
+        <div class="title_sec">
+        	Tutor
+        </div>
+        <div class="content_sec">
+        	<p>The font-family property should hold several font names as a "fallback" ... Start with the font you want, and end with a generic family, to let the browser</p>
+        </div>
+    </div>
+    <div class="work">
+    	<div class="image_sec_3">
+        	image
+        </div>
+        <div class="title_sec">
+        	how it work
+        </div>
+        <div class="content_sec">
+        	<p>The font-family property should hold several font names as a "fallback" ... Start with the font you want, and end with a generic family, to let the browser</p>
+        </div>
+    </div>
+</div>
       </div>
       <!--<div class="fifteen columns" style="padding-left: 0px;">
         <div class="text-block clearing-container">
