@@ -167,10 +167,10 @@
             <div class="five columns"></div>
             <div class="five columns">
             
-            <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?php echo theme_img("img/twiter-logo.png");?>" alt="">
-            <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?php echo theme_img("img/link-in.png");?>" alt="">
-            <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?php echo theme_img("img/youtube.png");?>" alt="">
-            <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?php echo theme_img("img/face-book.png");?>" alt="">
+            <a target="_blank" href="" ><img align="right" style="margin-left: 10px; margin-top: 5px" src="<?php echo theme_img("img/twiter-logo.png");?>" alt=""></a>
+            <a target="_blank" href="http://www.linkedin.com/pub/uk-open-college-uoc/6a/5a0/2b7" ><img align="right" style="margin-left: 10px; margin-top: 5px" src="<?php echo theme_img("img/link-in.png");?>" alt=""></a>
+            <a target="_blank" href="https://www.youtube.com" ><img align="right" style="margin-left: 10px; margin-top: 5px" src="<?php echo theme_img("img/youtube.png");?>" alt=""></a>
+            <a target="_blank" href="https://www.facebook.com/pages/UK-Open-College/411574175557181" ><img align="right" style="margin-left: 10px; margin-top: 5px" src="<?php echo theme_img("img/face-book.png");?>" alt=""></a>
           
                    
             </div>
@@ -185,7 +185,7 @@
             Copyrights @ 2013 & All Rights Reserved
             </div>
              <div class="five columns" style="text-align: right">
-                 <a href="<?php echo site_url('tutor_login');?>"  style="font-size:12px;"><?php echo "Tutor Login"; ?></a> / Privacy Policy / Terms of Service / FAQ's
+                 <a href="<?php echo site_url('tutor_login');?>"  style="font-size:12px;"><?php echo "Tutor Login"; ?></a> / <a href="privacy-policy">Privacy Policy</a> / <a href="terms-of-service">Terms of Service</a> / <a href="faq">FAQ's</a>
             </div>
         </div> 
  </section>      
