@@ -28,12 +28,12 @@ experience this site.
      <div class="clear"> </div>
     </div>
     <div class="clear"></div>	
-    <ul id="menu-primary-navigation" class="tiled-menu" style="margin-left: 0px;">
+    <ul id="menu-primary-navigation" class="tiled-menu"  style="margin-left: 0px;">
         <li   class="menu-portfolio" >
             <span class="menu-item-wrap">
                 <a  href="<?=base_url()?>cart/allcourses/" style='background-color:#cecece; background-size:cover; background-image:none;' >
                     <span class="link-text">All Courses</span><span class="arrow">&nbsp;</span>                      
-                    <span class='tile-icon' style='background-image:url(<?php echo theme_img("icons/text_w@2x.png");?>)'></span>
+                    <!--<span class='tile-icon' style='background-image:url(<?php echo theme_img("icons/text_w@2x.png");?>)'></span>-->
                 </a>				
 			</span> 	
 			<ul class="ltrs" >
