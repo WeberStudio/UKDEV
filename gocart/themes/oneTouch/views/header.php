@@ -31,10 +31,10 @@ experience this site.
  
     <div class="top_menu">
    
-    <a href="<?=base_url()?>">
+    <a href="<?php echo site_url('cart/view_cart');?>">
 	<div class="cart">
     	<span class="cart_img"><img src=" <?php echo theme_img("t_icons/cart.png");?>"/></span>
-    	<p class="cart_text">There are (0) item in your cart</p>
+    	<p class="cart_text">There are (<?=$this->go_cart->total_items()?>) item in your cart</p>
         
     </div>
     </a>

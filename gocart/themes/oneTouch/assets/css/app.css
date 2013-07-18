@@ -148,11 +148,11 @@ h6, .section-block .subtitle, #page-title .subtitle, .widget .subtitle{
 
 
 
-a {
+/*a {
 
     color: white;
 
-}
+}*/
 
 
 
@@ -288,7 +288,7 @@ a.back:hover {
 
 .wrap .item  .description {
 
-    background: rgba(255, 255, 255, 0.6) url("../images/icons/slider-home-icon.png") 10px 10px no-repeat;
+    background: rgba(255, 255, 255, 0.9) url("../images/icons/slider-home-icon.png") 10px 10px no-repeat;
 
     background-size: 27px 32px;
 
@@ -298,7 +298,7 @@ a.back:hover {
 
 .wrap .item.even .description {
 
-    background: rgba(255, 255, 255, 0.6) url("../images/icons/slider-home-icon.png") 10px 10px no-repeat;
+    background: rgba(255, 255, 255, 0.9) url("../images/icons/slider-home-icon.png") 10px 10px no-repeat;
 
     background-size: 27px 32px;
 
@@ -1991,7 +1991,7 @@ div.item, .item div{
 
     height: 100% ;
 
-    background: rgba(87,186,232,.87);
+    background: url("../images/icons/slider-home-icon.png") no-repeat scroll 10px 10px / 27px 32px rgba(255, 255, 255, 0.9);
 
     color: #565759;
 
@@ -3334,7 +3334,7 @@ article .entry-thumb {
 
     height: 59px;
 
-    background: #57bae8;
+    background: #3d3d3d;
 
     color: #fff;
 
@@ -4054,7 +4054,7 @@ form  label {
 
     bottom: 20px;
 
-    background: url("../images/icons/white-list.png") 15px 9px no-repeat;
+    background: url("../images/icons/slider-home-icon.png") 15px 9px no-repeat;
 
     padding-bottom: 5px;
 
@@ -4082,7 +4082,7 @@ form  label {
 
 .masonry-items .description .title {
 
-    background: url("../images/icons/white-list.png") 15px 3px no-repeat;
+    background: url("../images/icons/slider-home-icon.png") 15px 3px no-repeat;
 
 }
 
@@ -5764,9 +5764,9 @@ width: 372px !important;
     border-right:10px solid #fff;
 }
 .works-list.boxstyle1 .half:hover{
-	border-top:10px solid #58bae9;
-    border-left:10px solid #58bae9;
-    border-right:10px solid #58bae9;
+	border-top:10px solid #888888;
+    border-left:10px solid #888888;
+    border-right:10px solid #888888;
 }
 
 
@@ -5775,7 +5775,7 @@ width: 372px !important;
 
 .works-list.boxstyle1 .item .description{ bottom: 0%; background: none; top:auto;}
 .works-list.boxstyle1 .item:hover .description{ bottom:-43%; left:0px; top:auto;
-background: #58bae9;
+background: #888888;
     -moz-transition: all 1.2s;
     -webkit-transition: all 1.2s;
     -o-transition: all 1.2s;
@@ -5784,7 +5784,7 @@ background: #58bae9;
 
 
 .works-list.boxstyle1 .item .description .title{
-    background: url("../images/img/mini-icons/pencil.png") no-repeat 15px 0px;
+    background: url("../images/icons/slider-home-icon.png") no-repeat 15px 0px;
     -moz-transition: all 1.2s;
     -webkit-transition: all 1.2s;
     -o-transition: all 1.2s;

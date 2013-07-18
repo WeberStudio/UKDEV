@@ -8,6 +8,19 @@ ul.menu1 li a{
     font-size:17px;
     padding-top: 15px;
 }
+.all_courses
+{
+	color: #565759 !important;
+   
+    font-size: 25px;
+	margin-left:10px;
+}
+.bread_trems
+{
+	color: #565759 !important;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 14px;
+}
 </style>
 <?php $page_links    = $this->pagination->create_links(); 
 
@@ -15,12 +28,15 @@ ul.menu1 li a{
      <div class="row">
      <div id="aq-block-5" class="aq-block aq-block-aq_recent_block fifteen columns aq-first cf"> 
                     <h1 class="page-title">
-                   All Courses
+                    <img src="<?php echo theme_img("icons/slider-home-icon.png");?>"/>
+                   <a class="all_courses" href="<?=base_url()?>cart/allcourses/">All Courses</a>
                    <span style="float: right;"> 
                     <div class="sort-panel">  
                    <ul class="filter clearfix">
                    <li>
-                   <a href="<?=base_url()?>cart/allcourses/" rel="nofollow" data-product_id="868" class="button" style=" width:180px;">  All Courses </a>
+                   <a class="bread_trems" href="<?=base_url()?>" rel="nofollow" data-product_id="868"> Home  </a>
+                   <span  class="bread_trems"> > </span>
+                   <a class="bread_trems" href="<?=base_url()?>cart/allcourses/"> All Courses</a>
                     </li>
                    </ul>
                    </div>
@@ -30,11 +46,11 @@ ul.menu1 li a{
                    <div class="line"> </div> 
                                         
                 <div id="recent" class="section-block clearing-container">
-                    <div class="sort-panel">
+                    <!--<div class="sort-panel">
                         <ul class="filter clearfix">
-                           <!-- <li class="active">
+                            <li class="active">
                                 <a href="javascript:void(0)" class="all">All /</a>
-                            </li>  -->
+                            </li>  
                             
                             <? 
                                 $last_cat =  end($this->categories);
@@ -50,7 +66,7 @@ ul.menu1 li a{
                               <?php  endforeach;?>
                            
                         </ul>
-                    </div>
+                    </div>-->
 					
 					<style>
 						  	.item{ width:267px;}

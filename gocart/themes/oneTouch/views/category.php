@@ -24,7 +24,30 @@ ul.menu1 li a{
 <div class="row">
 <div class="page-header">
 
-  <h1><?php echo $page_title; ?></h1>
+  <h1>
+ <style>
+  .bread_trems
+{
+	color: #565759 !important;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 14px;
+}
+</style>
+  <img src="<?php echo theme_img("icons/slider-home-icon.png");?>" style="margin-right:15px;"/><?php echo $page_title; ?>
+  <span style="float: right;"> 
+                    <div class="sort-panel">  
+                   <ul class="filter clearfix">
+                   <li>
+                   <a class="bread_trems" href="<?=base_url()?>" rel="nofollow" data-product_id="868"> Home  </a>
+                   <span  class="bread_trems"> > </span>
+                   <a class="bread_trems" href="<?=base_url()?>cart/allcourses/"> All Courses</a>
+                   <span  class="bread_trems"> > </span>
+                   <a class="bread_trems" href="<?=base_url()?><?php echo $category->slug; ?>"><?php echo $page_title; ?></a>
+                    </li>
+                   </ul>
+                   </div>
+                   </span>
+  </h1>
 
 </div>
 </div>
@@ -38,7 +61,7 @@ ul.menu1 li a{
     
     <?php if((!isset($subcategories) || count($subcategories)==0) && (count($products) == 0)):?>
         <div class="alert alert-info">
-            <a class="close" data-dismiss="alert">×</a>
+            <a class="close" data-dismiss="alert">Ã—</a>
             <?php echo lang('no_products');?>
         </div>
     <?php endif;?>
