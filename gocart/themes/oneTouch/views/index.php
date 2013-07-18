@@ -23,11 +23,24 @@
       img
     </div>
     <div class="block_inside">
-	<? //echo '<pre>';print_r($pages); exit; ?>
+	<? //echo '<pre>';print_r($pages); exit; 
+		$counter = 0;
+	?>
 	<?php foreach($pages as $menu_page):?>
-    <a href="<?php echo $menu_page->url;?>" <?php if($menu_page->new_window ==1){echo 'target="_blank"';} ?>>
-      <div class="block_content"> <span><img class="icon" src="<?php echo theme_img("t_icons/Complants.png");?>"\> <b><?php echo $menu_page->menu_title;?></b></span>
-        <p><?php echo word_limiter($menu_page->content,30);?></p>
+	<? $counter = $counter + 1; ?>
+    <a href="<?php echo $menu_page->slug;?>" <?php if($menu_page->new_window ==1){echo 'target="_blank"';} ?>>
+      
+	  <? if($counter%4==0){ ?>
+	  <div class="block_content lastone">
+	  <? }else{ ?>
+	  <div class="block_content">
+	  <? } 
+	 // echo $menu_page->image.'<br>';
+	  ?>
+	  	<span>
+			<img class="icon" src="<?php echo theme_img('t_icons/'.$menu_page->image);?>"\> <b><?php echo $menu_page->menu_title;?></b>
+		</span>
+        <p><?php //echo word_limiter(strip_tags($menu_page->content),4);?></p>
       </div>
       </a>
       <?  endforeach;?>    
