@@ -24,7 +24,7 @@
                       <div class="item half even"> 
                         <img src="<?php echo catogery_img('images/small/'.$cat_info['category']->image); ?>" style="margin:0 0;" alt="<?=$cat_info['category']->img_alt?>" title="<?=$cat_info['category']->img_title?>"  >
                         <div class="description disp">
-                          <time><? echo $cat_info['category']->publish_date?></time>
+                          <!--<time><? echo $cat_info['category']->publish_date?></time>-->
                           <h4><? echo $cat_info['category']->name?></h4>
                           <p><? //echo str_replace(substr(substr($cat_info['category']->description, 0,150), -6),"..." ,substr($cat_info['category']->description, 0,150));
 						  		if(isset($cat_info['category']->excerpt) && !empty($cat_info['category']->excerpt))
@@ -41,7 +41,7 @@
                        <div class="item half odd">
                         <img src="<?php echo catogery_img('images/small/'.$cat_info['category']->image); ?>" style="margin:0 0;" alt="<?=$cat_info['category']->img_alt?>" title="<?=$cat_info['category']->img_title?>" >
                         <div class="description disp">
-                          <time><? echo $cat_info['category']->publish_date?></time>
+                          <!--<time><? echo $cat_info['category']->publish_date?></time>-->
                           <h4><? echo $cat_info['category']->name?></h4>
                           <p><? //echo str_replace(substr(substr($cat_info['category']->description, 0,150), -6),"..." ,substr($cat_info['category']->description, 0,150));
 						  		if(isset($cat_info['category']->excerpt) && !empty($cat_info['category']->excerpt))

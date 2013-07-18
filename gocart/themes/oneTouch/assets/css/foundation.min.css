@@ -1001,7 +1001,7 @@ img {
 }
 .button {
 	width:auto;
-	background:#57bae8;
+	background:#9f9f9f;
 	border:1px solid #1d9bd5;
 	-webkit-box-shadow:0 1px 0 rgba(255,255,255,0.5) inset;
 	-moz-box-shadow:0 1px 0 rgba(255,255,255,0.5) inset;
@@ -1025,7 +1025,7 @@ img {
 }
 .button:hover, .button:focus {
 	color:#fff;
-	background-color:#2aa8e2
+	background-color:#9f9f9f;
 }
 .button:active {
 	-webkit-box-shadow:0 1px 0 rgba(0,0,0,0.2) inset;

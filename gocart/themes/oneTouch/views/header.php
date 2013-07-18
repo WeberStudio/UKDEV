@@ -31,10 +31,10 @@ experience this site.
  
     <div class="top_menu">
    
-    <a href="#">
+    <a href="<?php echo site_url('cart/view_cart');?>">
 	<div class="cart">
     	<span class="cart_img"><img src=" <?php echo theme_img("t_icons/cart.png");?>"/></span>
-    	<p class="cart_text">There are (0) item in your cart</p>
+    	<p class="cart_text">There are (<?=$this->go_cart->total_items()?>) item in your cart</p>
         
     </div>
     </a>
@@ -119,7 +119,7 @@ experience this site.
     </div>
 </div>
 	
-   <!--<ul id="menu-primary-navigation" class="tiled-menu" style="margin-left: 0px;">
+   <ul id="menu-primary-navigation" class="tiled-menu" style="margin-left: 0px;">
         <li   class="menu-portfolio" >All Courses
             <span class="menu-item-wrap">
                 <a  href="<?=base_url()?>cart/allcourses/" style='background-color:#cecece; background-size:cover; background-image:none;' >
@@ -194,7 +194,7 @@ experience this site.
 	 		
         </li>
       
-	</ul>-->
+	</ul>
 </nav>
   
   <script type="text/javascript">
