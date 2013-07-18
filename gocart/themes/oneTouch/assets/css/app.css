@@ -150,7 +150,7 @@ h6, .section-block .subtitle, #page-title .subtitle, .widget .subtitle{
 
 a {
 
-    color: white !important;
+    color: white;
 
 }
 
@@ -1000,7 +1000,7 @@ a.back:hover {
 
 }
 
-.tiled-menu>li>.menu-item-wrap {
+/*.tiled-menu>li>.menu-item-wrap {
 
     display: block;
 
@@ -1010,7 +1010,7 @@ a.back:hover {
 
     position: relative;
 
-}
+}*/
 
 
 
@@ -1062,7 +1062,7 @@ a.back:hover {
 
     width: 81.2%;
 
-    display: none;
+   display: none;
 
 	background-color:#58bae9;
 
@@ -5891,6 +5891,379 @@ p.readmore{ text-align: center;}
 .works-list .filterable-grid{ width:228px !important; }
 #footer .row .five.columns:first-child{ display:none;}
 }
+/* top menu start*/
+.menu_content
+{
+	
+	overflow:auto;
+	display:block;
+	color:#464749;
+	text-align:center;
+	font-family:Verdana, sans-serif;
+	font-size:12px;
+	position:relative;
+	
+	
+}
+.menu_content a
+{
+	color:#464749;
+	text-align:center;
+	font-family:Verdana, sans-serif;
+	font-size:12px;
+	
+}
+.left_div
+{
+	
+	float:right;
+}
+
+.page_1
+{
+	
+	margin:30px 40px 0 40px; padding:0px;
+	float:left;
+	
+}
+.page_2
+{
+	
+	margin:30px 40px 0 40px; padding:0px;
+	float:left;
+		
+}
+.page_3
+{
+	
+	margin:30px 40px 0 40px; padding:0px;
+	float:left;
+}
+.page_4
+{
+	
+	margin:30px 40px 0 40px; padding:0px;
+	float:left;
+}
+.page_5
+{
+	
+	margin:30px 40px 0 40px; padding:0px;
+	float:left;
+}
+.page_6
+{
+	
+	margin:30px 10px 30px 40px; padding:0px;
+	float:left;
+}
+.home_h , .all_couses_h , .blogs_h , .tutors_h , .faq_h , .contect_h
+{
+	display:none;
+}
+.img_div
+{
+	margin-bottom:5px
+}
+
+.page_1:hover .home_img
+{
+	display:none;	
+}
+.page_1:hover .home_h
+{
+	display:block;
+	
+}
+.page_1:hover .text_div
+{
+	font-size:13px;
+	font-weight:bold;
+	color:#00F;
+}
+.page_2:hover .all_couses
+{
+	display:none;	
+}
+.page_2:hover .all_couses_h
+{
+	display:block;
+	
+}
+.page_2:hover .text_div
+{
+	font-size:13px;
+	font-weight:bold;
+	color:#00F;
+}
+.page_3:hover .blogs
+{
+	display:none;	
+}
+.page_3:hover .blogs_h
+{
+	display:block;
+	
+}
+.page_3:hover .text_div
+{
+	font-size:13px;
+	font-weight:bold;
+	color:#00F;
+}
+.page_4:hover .tutors
+{
+	display:none;	
+}
+.page_4:hover .tutors_h
+{
+	display:block;
+	
+}
+.page_4:hover .text_div
+{
+	font-size:13px;
+	font-weight:bold;
+	color:#00F;
+}
+.page_5:hover .faq
+{
+	display:none;	
+}
+.page_5:hover .faq_h
+{
+	display:block;
+	
+}
+.page_5:hover .text_div
+{
+	font-size:13px;
+	font-weight:bold;
+	color:#00F;
+}
+.page_6:hover .contect
+{
+	display:none;	
+}
+.page_6:hover .contect_h
+{
+	display:block;
+	
+}
+.page_6:hover .text_div
+{
+	font-size:13px;
+	font-weight:bold;
+	color:#00F;
+}
+
+.cart
+{
+	
+	overflow:auto;
+	margin:0px; padding:0px;
+}
+.cart_text
+{
+	
+	margin:4px; padding:0px;
+	float:right;
+	color:#464749;
+	font-family:Verdana, sans-serif;
+	font-size:12px;
+}
+.cart_img
+{
+	
+	margin:6px; padding:0px;
+	float:right;
+ 
+}
+/* top menu end*/
+/* top content  start*/
+.top_content
+{
+	
+	display:block;
+	overflow:auto;
+	margin:0 17px 0 18px;;
+	
+}
+.call_us
+{
+	margin:0px; padding:0px;
+	float:left;
+	color:#464749;
+	font-size:19px;
+	
+}
+.register
+{
+	margin:0 15px 0 0; padding:0px;
+	float:left;
+	color:#464749;
+	font-size:19px;
+	
+	
+}
+.login
+{
+	margin:0 15px 0 0; padding:0px;
+	float:left;
+	color:#464749;
+	font-size:19px;
+	
+	
+}
+.live_chat
+{
+	margin:0px; padding:0px;
+	float:left;
+	color:#464749;
+	font-size:19px;
+	
+}
+.call_img
+{
+	margin:5px 15px 0 2px ; padding:0px;
+	float:left;
+}
+.chat_img
+{
+	margin:4px 15px 0 2px ; padding:0px;
+	float:left;
+}
+.reg_img
+{
+	margin:4px 15px 0 2px ; padding:0px;
+	float:left;
+}
+.login_img
+{
+	margin:4px 15px 0 2px ; padding:0px;
+	float:left;
+}
+.seprator
+{
+	margin:4px 15px 0 0px;
+	float:left;
+}
+.account_block
+{
+	overflow:auto;
+	float:right;
+}
+/* top content  end*/
+/* bottom content start*/
+.bottom_content
+{
+	
+	display:block;
+	overflow:auto;
+}
+.qualfication
+{
+	
+	margin: 20px 20px 20px 0px;
+	padding:0px;
+	width:31%;
+	float:left;
+	
+}
+.tutor
+{
+	
+	margin:20px; padding:0px;
+	width:31%;
+	float:left;
+}
+.work
+{
+	
+	margin: 20px 0px 20px 20px;
+	padding:0px;
+	width:31%;
+	float:left;
+}
+.image_sec_1
+{
+	margin:0px; padding:0px;
+	background:url("../images/t_icons/video%20chat.png") center center no-repeat;
+	text-indent:-9999px;
+	
+	min-height:100px;
+}
+.image_sec_2
+{
+	margin:0px; padding:0px;
+	background:url("../images/t_icons/success%20stories.png") center center no-repeat;
+	text-indent:-9999px;
+	
+	min-height:100px;
+}
+.image_sec_3
+{
+	margin:0px; padding:0px;
+	background:url("../images/t_icons/why%20choose%20us.png") center center no-repeat;
+	text-indent:-9999px;
+	
+	min-height:100px;
+}
+.title_sec
+{
+	overflow:auto;
+	text-align:center;
+	text-decoration:none;
+	font-family:Verdana, sans-serif;
+	font-size:18px;
+	color:#464749;
+}
+.content_sec
+{
+	margin:0px; padding:5px;
+	text-align:center;
+	color:#464749;
+}
+.qualfication:hover .image_sec_1
+{
+	background:url("../images/t_icons/video%20chat%20H.png") center center no-repeat; 
+}
+.qualfication:hover .title_sec
+{
+	color:#254AB8;
+}
+.qualfication:hover .content_sec
+{
+	background:#151670;
+	color:#FFFAF0;
+}
+.tutor:hover .image_sec_2
+{
+	background:url("../images/t_icons/success%20stories%20H.png") center center no-repeat; 
+}
+.tutor:hover .title_sec
+{
+	color:#254AB8;
+}
+.tutor:hover .content_sec
+{
+	background:#151670;
+	color:#FFFAF0;
+}
+.work:hover .image_sec_3
+{
+	background:url("../images/t_icons/why%20choose%20us%20H.png") center center no-repeat; 
+}
+.work:hover .title_sec
+{
+	color:#254AB8;
+}
+.work:hover .content_sec
+{
+	background:#151670;
+	color:#FFFAF0;
+}
+/* bottom content end*/
 /* top footer start*/
 .topfooter {
 	background: #E4E4E4;
@@ -5956,122 +6329,3 @@ p.readmore{ text-align: center;}
 	text-indent:-9999px;
 }
 /* top footer end*/
-
-
-/* bottom content start*/
-.bottom_content
-{
- 
- display:block;
- overflow:auto;
-}
-.qualfication
-{
- 
- margin: 20px 20px 20px 0px;
- padding:0px;
- width:31%;
- float:left;
- 
-}
-.tutor
-{
- 
- margin:20px; padding:0px;
- width:31%;
- float:left;
-}
-.work
-{
- 
- margin: 20px 0px 20px 20px;
- padding:0px;
- width:31%;
- float:left;
-}
-.image_sec_1
-{
- margin:0px; padding:0px;
- background:url("../images/t_icons/video%20chat.png") center center no-repeat;
- text-indent:-9999px;
- 
- min-height:100px;
-}
-.image_sec_2
-{
- margin:0px; padding:0px;
- background:url("../images/t_icons/success%20stories.png") center center no-repeat;
- text-indent:-9999px;
- 
- min-height:100px;
-}
-.image_sec_3
-{
- margin:0px; padding:0px;
- background:url("../images/t_icons/why%20choose%20us.png") center center no-repeat;
- text-indent:-9999px;
- 
- min-height:100px;
-}
-.title_sec
-{
- 
- overflow:auto;
- text-align:center;
- text-decoration:none;
- 
- font-family:Verdana, sans-serif;
- font-size:18px;
- 
- 
- color:#464749;
-}
-.content_sec
-{
- 
- 
- 
- margin:0px; padding:5px;
- text-align:center;
- color:#464749;
-}
-.qualfication:hover .image_sec_1
-{
- background:url("../images/t_icons/video%20chat%20H.png") center center no-repeat; 
-}
-.qualfication:hover .title_sec
-{
- color:#254AB8;
-}
-.qualfication:hover .content_sec
-{
- background:#151670;
- color:#FFFAF0;
-}
-.tutor:hover .image_sec_2
-{
- background:url("../images/t_icons/success%20stories%20H.png") center center no-repeat; 
-}
-.tutor:hover .title_sec
-{
- color:#254AB8;
-}
-.tutor:hover .content_sec
-{
- background:#151670;
- color:#FFFAF0;
-}
-.work:hover .image_sec_3
-{
- background:url("../images/t_icons/why%20choose%20us%20H.png") center center no-repeat; 
-}
-.work:hover .title_sec
-{
- color:#254AB8;
-}
-.work:hover .content_sec
-{
- background:#151670;
- color:#FFFAF0;
-}
-/* bottom content end*/

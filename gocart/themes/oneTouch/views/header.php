@@ -12,7 +12,7 @@ experience this site.
         <img src="<?php echo theme_img("custom-slider-img/logouk.png")?>" alt="OneTouch"></a>
 </div>
 <? $categories = $this->dropdown_menu->get_all_categories(); 
-
+//echo"<pre>";print_r($categories);
 
 ?>
 
@@ -27,15 +27,107 @@ experience this site.
    <div id="eyebrow">
      <div class="clear"> </div>
     </div>
-    <div class="clear"></div>	
-    <ul id="menu-primary-navigation" class="tiled-menu"  style="margin-left: 0px;">
-        <li   class="menu-portfolio" >
+    <div class="clear"></div>
+ 
+    <div class="top_menu">
+   
+    <a href="#">
+	<div class="cart">
+    	<span class="cart_img"><img src=" <?php echo theme_img("t_icons/cart.png");?>"/></span>
+    	<p class="cart_text">There are (0) item in your cart</p>
+        
+    </div>
+    </a>
+	<div class="menu_content">
+    <div class="left_div">
+    <a href="#">
+        <div class="page_1" align="center">
+            <div class="img_div">
+                <img class="home_img" src="<?php echo theme_img("t_icons/home.png");?>"/>
+                <img class="home_h" src="<?php echo theme_img("t_icons/home_h.png");?>"/>
+             </div>
+            <div class="text_div" >
+             Home
+             </div>
+        
+        </div>
+        </a>
+        <a href="#">
+        <div class="page_2" align="center">
+        
+            <div class="img_div">
+                <img class="all_couses"  src="<?php echo theme_img("t_icons/all_couses.png");?>"/>
+                <img class="all_couses_h"  src="<?php echo theme_img("t_icons/all_courses_h.png");?>"/>
+             </div>
+            <div class="text_div">
+            	All Courses
+             </div>
+             
+        
+        </div>
+        </a>
+        <a href="#">
+        <div class="page_3" align="center">
+            <div class="img_div">
+                <img class="blogs" src="<?php echo theme_img("t_icons/blogs.png");?>"/>
+                <img class="blogs_h" src="<?php echo theme_img("t_icons/blog_h.png");?>"/>
+             </div>
+            <div class="text_div">
+             	Blog
+             </div>
+        
+        </div>
+        </a>
+        <a href="#">
+        <div class="page_4" align="center">
+            <div class="img_div">
+                <img class="tutors" src="<?php echo theme_img("t_icons/tutors.png");?>"/>
+                <img class="tutors_h" src="<?php echo theme_img("t_icons/tutors_h.png");?>"/>
+             </div>
+            <div class="text_div">
+            	Tutor
+             </div>
+        
+        </div>
+        </a>
+        <a href="#">
+        <div class="page_5" align="center">
+            <div class="img_div">
+                <img class="faq" src="<?php echo theme_img("t_icons/faq.png");?>"/>
+                <img class="faq_h" src="<?php echo theme_img("t_icons/faq_h.png");?>"/>
+             </div>
+            <div class="text_div">
+             	FAQ's
+             </div>
+        
+        </div>
+        </a>
+        <a href="#">
+        <div class="page_6" align="center">
+            <div class="img_div">
+                <img class="contect" src="<?php echo theme_img("t_icons/contect.png");?>"/>
+                <img class="contect_h" src="<?php echo theme_img("t_icons/contect_h.png");?>"/>
+             </div>
+            <div class="text_div">
+             	Contact
+             </div>
+        
+        </div>
+        </a>
+        
+        </div>
+    </div>
+</div>
+	
+   <!--<ul id="menu-primary-navigation" class="tiled-menu" style="margin-left: 0px;">
+        <li   class="menu-portfolio" >All Courses
             <span class="menu-item-wrap">
                 <a  href="<?=base_url()?>cart/allcourses/" style='background-color:#cecece; background-size:cover; background-image:none;' >
                     <span class="link-text">All Courses</span><span class="arrow">&nbsp;</span>                      
-                    <!--<span class='tile-icon' style='background-image:url(<?php echo theme_img("icons/text_w@2x.png");?>)'></span>-->
-                </a>				
-			</span> 	
+                    
+                </a>
+                All Courses				
+			</span>	
 			<ul class="ltrs" >
 			  
 			  <li><a href="#" onClick="#">View all - by location - by author - by subject</a></li>
@@ -69,16 +161,13 @@ experience this site.
 							if(count($cat_info)>0)
 							{
 								foreach($cat_info as $cat)
-								{ ?>	
-                                	 <?php if($cat['publish_by_super'] ==1){?>  					  
-									<li><a href="<?=base_url().$cat['slug']?>"><?=$cat['name']?><span> (<?=$cat['count']?>)</span></a></li>	
-                                     	<? } ?> 					
+								{ ?>							  
+									<li><a href="<?=base_url().$cat['slug']?>"><?=$cat['name']?><span> (<?=$cat['count']?>)</span></a></li>									
 								<? } 
 							} 
 						}							
 					?>
 				  </ul>
-
 			  	<?php					  
 			   foreach($categories as $key => $cat_info)
 			   {
@@ -89,10 +178,8 @@ experience this site.
 			  ?>					  
 					  <ul class="sub-menu with-counts l<?=$key?>"  style="margin:0px !important; padding:10px 0 5px 10px !important; width:100%; display:none ;">
 					  <? foreach($cat_info as $cat)
-						{ ?>
-                        <?php if($cat['publish_by_super'] ==1){?>							  
-							<li><a href="<?=base_url().$cat['slug']?>"><?=$cat['name']?><span> (<?=$cat['count']?>)</span></a></li>
-                            <?}?>									
+						{ ?>							  
+							<li><a href="<?=base_url().$cat['slug']?>"><?=$cat['name']?><span> (<?=$cat['count']?>)</span></a></li>									
 						<? } ?>
 					  </ul>
 				<? } 
@@ -106,28 +193,10 @@ experience this site.
 			 		
 	 		
         </li>
-        <?php //print_r($this->top_page);exit;
-		$counter = 1;
-		?>
-		<?php foreach($this->menu_pages as $menu_page):?>
-        <li class="menu_over_color_<?=$counter?>">
-			<span class="menu-item-wrap">
-			<?php if(empty($menu_page->content)):?>
-					<a style='background-color:#cecece; background-size:cover; background-image:none;' href="<?php echo $menu_page->url;?>" <?php if($menu_page->new_window ==1){echo 'target="_blank"';} ?>>
-					<span class="link-text"><?php echo $menu_page->menu_title;?></span>
-					<span class="arrow">&nbsp;</span><span class='tile-icon' style='background-image:url(<?php echo theme_img("icons/!.png");?>);'></span>
-					</a>
-					<?php else:?>
-					<a style='background-color:#cecece; background-size:cover; background-image:none;' href="<?php echo site_url($menu_page->slug);?>"><?php echo $menu_page->menu_title;?>
-                    <?php //echo $menu_page->image;?>
-                    <span class='tile-icon' style='background-image:url(<?php echo theme_img('icons/'.$menu_page->image);?>)'></span>
-                    </a>
-					<?php endif;?>
-			</span>           
-        </li>
-		<?php $counter++; endforeach;?>
-	</ul> 
+      
+	</ul>-->
 </nav>
+  
   <script type="text/javascript">
 	jQuery(document).ready(function () {
 		toggleSubjectLetter('lhome');
@@ -170,50 +239,14 @@ experience this site.
 #sub-menu with-counts li {
 	float: left; }
 </style>
-<div class="row">
-    <div class="fifteen columns" id="top-social">
 
-        <a class="open-soc" id="show-social" href="#">
-            <div class="twit-open"></div>
-            <span>expand panel</span>
-            Social icons
-        </a>
-
-        <div class="soc-wrap">
-
-            <div class="soc-icons">
-
-
-                <a class="rss" href="#" data-original-title="RSS feed">RSS</a>
-
-                <a href="http://twitter.com" class="tw" data-original-title="Twitter">Twitter</a>
-                <a href="http://facebook.com" class="fb" data-original-title="Facebook">Facebook</a>
-                <a href="http://flickr.com" class="fl" data-original-title="Flickr">Flickr</a>
-                <a href="http://vimeo.com" class="vi" data-original-title="Vimeo">Vimeo</a>
-                <a href="http://dribble.com" class="dr" data-original-title="Dribble">Dribble</a>
-                <a href="http://lastfm.com" class="lf" data-original-title="Last FM">Last FM</a>
-                <a href="http://youtube.com" class="yt" data-original-title="YouTube">YouTube</a>
-                <a href="https://accountservices.passport.net/" class="ms" data-original-title="Microsoft ID">Microsoft ID</a>
-                <a href="http://linkedin.com" class="li" data-original-title="LinkedIN">LinkedIN</a>
-                <a href="https://accounts.google.com/" class="gp" data-original-title="Google +">Google +</a>
-                <a href="http://picasa.com" class="pi" data-original-title="Picasa">Picasa</a>
-                <a href="http://pinterest.com" class="pt" data-original-title="Pinterest">Pinterest</a>
-                <a href="http://wordpress.com" class="wp" data-original-title="Wordpress">Wordpress</a>
-                <a href="http://dropbox.com" class="db" data-original-title="Dropbox">Dropbox</a>
-
-            </div>
-
-        </div>
-    </div>
-
-</div>
-<div class="row">
+<!--<div class="row">
 <div align="right">
 
 
 <a href="<?php echo site_url('cart/view_cart');?>" style='background-image:url(<?php echo theme_img('icons/cart.png');?>); background-repeat:no-repeat; padding-bottom:15px;' ><strong style="padding-left:40px;">There are (<?=$this->go_cart->total_items()?>) items in your cart.</strong></a>
 </div>
-</div>
+</div>-->
 <!--<div><span style="padding 15 15 15 15; float : right; margin-right:15px;"><a href="<?php echo site_url('cart/view_cart');?>" class="add_to_cart_button button product_type_simple" rel="nofollow" data-product_id="868">
 								<?php
 								if ($this->go_cart->total_items()==0)
@@ -235,14 +268,35 @@ experience this site.
 								</a>
 </span></div>
                 -->
-<div class="row" style="">
+<div class="row">
+<div class="contect_div">
+    <div class="top_content">
+    	<div class="call_us"><div class="call_img"><img src="<?php echo theme_img("t_icons/phn.png");?>" alt="phone"/></div> Call us now 1221 288 0181</div>
+        <div class="account_block">
+         <a href="#">
+         <div class="register"><div class="reg_img"><img src="<?php echo theme_img("t_icons/rigester.png");?>"/></div> Register </div>
+         </a>
+         <b class="seprator">|</b>
+          <a href="#">
+         <div class="login"><div class="login_img"><img src="<?php echo theme_img("t_icons/log_in.png");?>"></div> login </div>
+         </a>
+       <a href="#">
+        <div class="live_chat"><div class="chat_img"> <img src="<?php echo theme_img("t_icons/live_chat.png");?>" alt="livechat"/> </div> Live chat</div>
+        </a>
+       </div>
+        
+    </div>
+</div>
+</div>
+
+<!--<div class="row" style="">
 <div class="promo" style="padding-bottom: 0px; padding-top: 0px;"><span class="icon info" style="color:red; top:-5px;"></span>
     <h1 class="page-title">Call us on 1221 288 0181 now to talk to course advisor - 
         <a href="<?=base_url()?>contact-us1" style="color:red;">Contact Us</a>
         <span>
         
         <?php if($this->Tutor_model->is_logged_in(false, false)):?>
-        <a href="<?php echo  site_url('dashboard/');?>" style="color:red;">Dashboard</a><!--<span style="color:red;">/</span>--> <!--<a href="<?php echo site_url('secure/logout');?>" style="color:red;"><?php echo lang('logout');?></a>--></span>
+        <a href="<?php echo  site_url('dashboard/');?>" style="color:red;">Dashboard</a></span>
         <?php elseif($this->Customer_model->is_logged_in(false, false)):?>
         <a href="<?php echo site_url('secure/logout');?>" style="color:red;"><?php echo lang('logout');?></a>
         <span style="color:red;">/</span>  
@@ -257,25 +311,25 @@ experience this site.
         </span></h1>
         <?php endif; ?>
           
-</div></div> 
+</div></div>--> 
 <!---------php validation----->
 <?php /*if ($this->session->flashdata('message')):?>
 			<div class="alert alert-info">
-				<a class="close" data-dismiss="alert">×</a>
+				<a class="close" data-dismiss="alert">Ã—</a>
 				<?php //echo $this->session->flashdata('message');?>
 			</div>
 		<?php endif;?>
 		
 		<?php if ($this->session->flashdata('error')):?>
 			<div class="alert alert-error">
-				<a class="close" data-dismiss="alert">×</a>
+				<a class="close" data-dismiss="alert">Ã—</a>
 				<?php //echo $this->session->flashdata('error');?>
 			</div>
 		<?php endif;?>
 		
 		<?php if (!empty($error)):?>
 			<div class="alert alert-error">
-				<a class="close" data-dismiss="alert">×</a>
+				<a class="close" data-dismiss="alert">Ã—</a>
 				<?php //echo $error;?>
 			</div>
 		<?php endif;*/?>
