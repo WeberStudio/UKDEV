@@ -119,7 +119,7 @@ experience this site.
     </div>
 </div>
 	
-   <ul id="menu-primary-navigation" class="tiled-menu" style="margin-left: 0px;">
+   <!--<ul id="menu-primary-navigation" class="tiled-menu" style="margin-left: 0px;">
         <li   class="menu-portfolio" >All Courses
             <span class="menu-item-wrap">
                 <a  href="<?=base_url()?>cart/allcourses/" style='background-color:#cecece; background-size:cover; background-image:none;' >
@@ -194,7 +194,7 @@ experience this site.
 	 		
         </li>
       
-	</ul>
+	</ul>-->
 </nav>
   
   <script type="text/javascript">
