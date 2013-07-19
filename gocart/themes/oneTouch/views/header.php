@@ -50,8 +50,8 @@ experience this site.
              Home
              </div>
         
-        </div>
-        </a>
+        </div>      
+        </a>  
         <a href="<?=base_url()?>cart/allcourses/">
         <div class="page_2" align="center">
         
@@ -75,7 +75,7 @@ experience this site.
              </div>
         
         </div>
-        </a>
+        </a> 
         <a href="<?=base_url()?>tutors">
         <div class="page_4" align="center">
             <div class="img_div">
@@ -87,7 +87,7 @@ experience this site.
              </div>
         
         </div>
-        </a>
+        </a> 
         <a href="<?=base_url()?>faq">
         <div class="page_5" align="center">
             <div class="img_div">
@@ -99,7 +99,7 @@ experience this site.
              </div>
         
         </div>
-        </a>
+        </a> 
         <a href="<?=base_url()?>contact-us1">
         <div class="page_6" align="center">
             <div class="img_div">
@@ -111,7 +111,7 @@ experience this site.
              </div>
         
         </div>
-        </a>
+        </a> 
         
         </div>
     </div>
@@ -295,7 +295,9 @@ experience this site.
         		<div class="login"><div class="login_img"><img src="<?php echo theme_img("t_icons/log_in.png");?>"></div><?php echo lang('login');?></div>
         	</a>
         <?php endif; ?>
-       <a href="#">
+       
+       
+       <a href="http://87.106.234.213/livechat/client.php?locale=en&amp;style=simplicity" target="_blank" onclick="if(navigator.userAgent.toLowerCase().indexOf('opera') != -1 &amp;&amp; window.event.preventDefault) window.event.preventDefault();this.newWindow = window.open('http://87.106.234.213/livechat/client.php?locale=en&amp;style=simplicity&amp;url='+escape(document.location.href.replace('http://','').replace('https://',''))+'&amp;referrer='+escape(document.referrer.replace('http://','').replace('https://','')), 'webim', 'toolbar=0,scrollbars=0,location=0,status=1,menubar=0,width=640,height=480,resizable=1');this.newWindow.focus();this.newWindow.opener=window;return false;">
         <div class="live_chat"><div class="chat_img"> <img src="<?php echo theme_img("t_icons/live_chat.png");?>" alt="livechat"/> </div> Live chat</div>
         </a>
        </div>

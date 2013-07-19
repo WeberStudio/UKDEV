@@ -6094,8 +6094,7 @@ p.readmore{ text-align: center;}
 	margin:0px; padding:0px;
 	float:left;
 	color:#464749;
-	font-size:19px;
-	
+	font-size:15.52px;
 }
 .register
 {
@@ -6125,7 +6124,8 @@ p.readmore{ text-align: center;}
 }
 .call_img
 {
-	margin:5px 15px 0 2px ; padding:0px;
+	margin: 2px 10px 0 2px; 
+    padding:0px;
 	float:left;
 }
 .chat_img
