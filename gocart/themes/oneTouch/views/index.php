@@ -11,12 +11,11 @@
                 browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to
                 experience this site.
                 </div><![endif]-->
-                 <?php include('header.php'); ?> 
-                <?php include_once('content.php'); ?> 
+                 <?php  include('header.php'); ?> 
+                <?php  include_once('content.php'); ?> 
             </div>
         </div>
-        
-<div class="topfooter">
+<!--<div class="topfooter">
   <div class="t_footer_contect"> <br/>
     <div class="t_footer_title"> why choose us </div>
     <div class="t_footer_img">
@@ -40,14 +39,15 @@
 	  	<span>
 			<img class="icon" src="<?php echo theme_img('t_icons/'.$menu_page->image);?>"\> <b><?php echo $menu_page->menu_title;?></b>
 		</span>
-        <p><?php //echo word_limiter(strip_tags($menu_page->content),4);?></p>
+        <p><?php echo word_limiter(strip_tags($menu_page->content),4);?></p>
+      </div>
       </div>
       </a>
       <?  endforeach;?>    
       
     </div>
   </div>
-</div>
+</div>-->
         <?php include_once('footer.php'); ?> 
         
        

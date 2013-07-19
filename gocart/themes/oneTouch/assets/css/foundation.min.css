@@ -691,7 +691,7 @@ float:left
 	width:6.66667%
 }
 .two, .row .two {
-	width:13.33333%
+	width:25%
 }
 .three, .row .three {
 	width:20%
@@ -706,7 +706,8 @@ float:left
 	width:40%
 }
 .seven, .row .seven {
-	width:46.66667%
+	/*width:46.66667%*/
+	width:106%
 }
 .eight, .row .eight {
 	width:53.33333%
