@@ -5919,143 +5919,7 @@ p.readmore{ text-align: center;}
 	float:right;
 }
 
-.page_1
-{
-	
-	margin:30px 40px 0 40px; padding:0px;
-	float:left;
-	
-}
-.page_2
-{
-	
-	margin:30px 40px 0 40px; padding:0px;
-	float:left;
-		
-}
-.page_3
-{
-	
-	margin:30px 40px 0 40px; padding:0px;
-	float:left;
-}
-.page_4
-{
-	
-	margin:30px 40px 0 40px; padding:0px;
-	float:left;
-}
-.page_5
-{
-	
-	margin:30px 40px 0 40px; padding:0px;
-	float:left;
-}
-.page_6
-{
-	
-	margin:30px 10px 30px 40px; padding:0px;
-	float:left;
-}
-.home_h , .all_couses_h , .blogs_h , .tutors_h , .faq_h , .contect_h
-{
-	display:none;
-}
-.img_div
-{
-	margin-bottom:5px
-}
 
-.page_1:hover .home_img
-{
-	display:none;	
-}
-.page_1:hover .home_h
-{
-	display:block;
-	
-}
-.page_1:hover .text_div
-{
-	font-size:13px;
-	font-weight:bold;
-	color:#00F;
-}
-.page_2:hover .all_couses
-{
-	display:none;	
-}
-.page_2:hover .all_couses_h
-{
-	display:block;
-	
-}
-.page_2:hover .text_div
-{
-	font-size:13px;
-	font-weight:bold;
-	color:#00F;
-}
-.page_3:hover .blogs
-{
-	display:none;	
-}
-.page_3:hover .blogs_h
-{
-	display:block;
-	
-}
-.page_3:hover .text_div
-{
-	font-size:13px;
-	font-weight:bold;
-	color:#00F;
-}
-.page_4:hover .tutors
-{
-	display:none;	
-}
-.page_4:hover .tutors_h
-{
-	display:block;
-	
-}
-.page_4:hover .text_div
-{
-	font-size:13px;
-	font-weight:bold;
-	color:#00F;
-}
-.page_5:hover .faq
-{
-	display:none;	
-}
-.page_5:hover .faq_h
-{
-	display:block;
-	
-}
-.page_5:hover .text_div
-{
-	font-size:13px;
-	font-weight:bold;
-	color:#00F;
-}
-.page_6:hover .contect
-{
-	display:none;	
-}
-.page_6:hover .contect_h
-{
-	display:block;
-	
-}
-.page_6:hover .text_div
-{
-	font-size:13px;
-	font-weight:bold;
-	color:#00F;
-}
 
 .cart
 {
@@ -6075,9 +5939,150 @@ p.readmore{ text-align: center;}
 .cart_img
 {
 	
-	margin:6px; padding:0px;
+	margin:6px 18px 6px 6px; padding:0px;
 	float:right;
  
+}
+.menu_block
+{
+	border:#F00 solid 2px;
+	overflow:hidden;
+}
+.menu_block li.first_block
+{
+	display:inline;
+}
+.main_menu
+{
+	
+	margin:0px; padding:0px;
+	float:right;
+
+}
+.main_menu li
+{
+	display:inline;
+	
+	float:left;
+	margin:10px 20px 10px 10px;
+}
+.home_h , .all_courses_h , .blogs_h , .tutors_h , .faq_h , .contect_h
+{
+	display:none;
+}
+.pages_1:hover .home
+{
+	
+	display:none;
+}
+.pages_1:hover .home_h
+{
+	display:block;
+	margin-bottom:5px;
+}
+.pages_1:hover .page_name
+{
+	color:#00F !important;
+	font-family:Verdana, Geneva, sans-serif;
+}
+.pages_1:hover
+{
+}
+.pages_2:hover .all_courses
+{
+	
+	display:none;
+}
+.pages_2:hover .all_courses_h
+{
+	display:block;
+	margin-bottom:5px;
+}
+.pages_2:hover .page_name
+{
+	color:#00F !important;
+	font-family:Verdana, Geneva, sans-serif;
+	
+	
+}
+.pages_3:hover .blog
+{
+	
+	display:none;
+}
+.pages_3:hover .blogs_h
+{
+	display:block;
+	margin-bottom:5px;
+}
+.pages_3:hover .page_name
+{
+	color:#00F !important;
+	font-family:Verdana, Geneva, sans-serif;
+	
+	
+}
+.pages_4:hover .tutors
+{
+	
+	display:none;
+}
+.pages_4:hover .tutors_h
+{
+	display:block;
+	margin-bottom:5px;
+}
+.pages_4:hover .page_name
+{
+	color:#00F !important;
+	font-family:Verdana, Geneva, sans-serif;
+	
+	
+}
+.pages_5:hover .faq
+{
+	
+	display:none;
+}
+.pages_5:hover .faq_h
+{
+	display:block;
+	margin-bottom:5px;
+}
+.pages_5:hover .page_name
+{
+	color:#00F !important;
+	font-family:Verdana, Geneva, sans-serif;
+	
+	
+}
+.pages_6:hover .contect
+{
+	
+	display:none;
+}
+.pages_6:hover .contect_h
+{
+	display:block;
+	margin-bottom:5px;
+}
+.pages_6:hover .page_name
+{
+	color:#00F !important;
+	font-family:Verdana, Geneva, sans-serif;
+	
+	
+}
+
+.page_name
+{
+	
+	color:#000 !important;
+	font-family:Verdana, Geneva, sans-serif;
+}
+.last_menu
+{
+	margin-right:0px;
 }
 /* top menu end*/
 /* top content  start*/
@@ -6093,8 +6098,9 @@ p.readmore{ text-align: center;}
 {
 	margin:0px; padding:0px;
 	float:left;
+	font-family:Verdana, Geneva, sans-serif;
 	color:#464749;
-	font-size:19px;
+	font-size:13px;
 	
 }
 .register
@@ -6102,7 +6108,7 @@ p.readmore{ text-align: center;}
 	margin:0 15px 0 0; padding:0px;
 	float:left;
 	color:#464749;
-	font-size:19px;
+	font-size:12px;
 	
 	
 }
@@ -6111,8 +6117,8 @@ p.readmore{ text-align: center;}
 	margin:0 15px 0 0; padding:0px;
 	float:left;
 	color:#464749;
-	font-size:19px;
-	
+	font-size:12px;
+	font-family:Verdana, Geneva, sans-serif;	
 	
 }
 .live_chat
@@ -6120,32 +6126,34 @@ p.readmore{ text-align: center;}
 	margin:0px; padding:0px;
 	float:left;
 	color:#464749;
-	font-size:19px;
+	font-size:12px;
+	font-family:Verdana, Geneva, sans-serif;
 	
 }
 .call_img
 {
-	margin:5px 15px 0 2px ; padding:0px;
+	margin:0px 15px 0 2px ; padding:0px;
 	float:left;
+	font-family:Verdana, Geneva, sans-serif;
 }
 .chat_img
 {
-	margin:4px 15px 0 2px ; padding:0px;
+	margin:0px 15px 0 2px ; padding:0px;
 	float:left;
 }
 .reg_img
 {
-	margin:4px 15px 0 2px ; padding:0px;
+	margin:0px 15px 0 2px ; padding:0px;
 	float:left;
 }
 .login_img
 {
-	margin:4px 15px 0 2px ; padding:0px;
+	margin:0px 15px 0 2px ; padding:0px;
 	float:left;
 }
 .seprator
 {
-	margin:4px 15px 0 0px;
+	margin:0px 15px 0 0px;
 	float:left;
 }
 .account_block
