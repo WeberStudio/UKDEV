@@ -112,7 +112,10 @@ ul.menu1 li a{
 									<? } ?>			
 									</div>
 									
-                                    <div class="description">
+                                    
+                                    
+                                    
+                                    <div class="description disp">
                                            <div class="title" >
                                                     
                                                     <h4><?php echo $course['name'];?></h4>
