@@ -244,8 +244,13 @@ ul.menu1 li a{
             });
         });
 
-
+	  $(".chzn-select").chosen({
+          disable_search_threshold: 10
+        });
+		
+		
     });
+	
 </script>
 
 

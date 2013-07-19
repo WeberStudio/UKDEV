@@ -54,6 +54,7 @@ class Front_Controller extends Base_Controller
 		//fill in our variables
         $this->admin_access = '';
 		$this->categories	= $this->Category_model->get_categories_tierd(0);
+		$this->courses 		= $this->Product_model->get_all_products_array();
         
         //$this->show->pe($this->categories);
 		$this->pages		= $this->Page_model->get_pages();
