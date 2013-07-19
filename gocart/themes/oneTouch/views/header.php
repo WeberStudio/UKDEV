@@ -28,16 +28,25 @@ experience this site.
      <div class="clear"> </div>
     </div>
     <div class="clear"></div>
- 
+ <link href="http://localhost/UKDEV/assets/opencollege/admin/js/plugins/chosen/chosen/chosen.css" rel="stylesheet">
+
+<script language="javascript" type="text/javascript" src="http://localhost/UKDEV/assets/opencollege/admin/js/plugins/chosen/chosen/chosen.jquery.min.js"></script>
+
     <div class="top_menu">
-   
-    <a href="<?php echo site_url('cart/view_cart');?>">
-	<div class="cart">
+	<select style=" display:block; " class="chzn-select" >
+   <?php foreach($this->courses as $course):?>    	
+		  <option value="<?=$course['id']?>"><?=$course['name']?></option>                            
+   <?php  endforeach;?>
+   	</select>		
+	
+
+	<div class="cart" >				
+		<a href="<?php echo site_url('cart/view_cart');?>">
     	<span class="cart_img"><img src=" <?php echo theme_img("t_icons/cart.png");?>"/></span>
     	<p class="cart_text">There are (<?=$this->go_cart->total_items()?>) item in your cart</p>
-        
+        </a>
     </div>
-    </a>
+    
 	<div class="menu_content">
     <div class="left_div">
     <a href="<?=base_url()?>">
