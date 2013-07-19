@@ -1,4 +1,74 @@
+<div id="darktf" >
+        <div class="row">
+<div class="topfooter">
+  <div class="t_footer_contect"> <br/>
+    <div class="t_footer_title"> want to know about us?</div>
+    <div class="t_footer_img">
+      img
+    </div>
+    <div class="block_content" >
+     	<div class="seven columns">
+         <div class="two columns firstt">
+        <span class=""><img class="icon" src="<?php echo theme_img('t_icons/Payments');?>"\> 
+        
+        </span>
+         <b  class="bottom_page_head">Payment</b>
+        <p class="bottom_page_content">we accept all type of dibit and credit card. All card can be processed using Sagepay is... <b class="read_more">Read More</b></p>
+        </div>
+        
+         <div class="two columns">
+        <span><img class="icon" src="<?php echo theme_img('t_icons/Payments');?>"\> </span>
+        <b  class="bottom_page_head">NUS Extra Card</b>
+        <p class="bottom_page_content">UK Open College is pleased to announce that we are now an NUS Union of)...<b class="read_more">Read More</b> </p>
+        </div>
+        
+         <div class="two columns">
+        <span><img class="icon" src="<?php echo theme_img('t_icons/Payments');?>"\></span>
+        <b  class="bottom_page_head">Payment</b>
+        <p class="bottom_page_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. been the... <b class="read_more">Read More</b></p>
+        </div>
+        
+         <div class="two columns lastone">
+        <span><img class="icon" src="<?php echo theme_img('t_icons/Payments');?>"\> </span>
+        <b  class="bottom_page_head">Payment</b>
+        <p class="bottom_page_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry.  been the...<b class="read_more">Read More</b></p>
+        </div>
+       
+       
+         <div class="two columns firstt">
+        <span><img class="icon" src="<?php echo theme_img('t_icons/Payments');?>"\> </span>
+        <b  class="bottom_page_head">Payment</b>
+        <p class="bottom_page_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry.  been the...<b class="read_more">Read More</b> </p>
+        </div>
+        
+         <div class="two columns">
+        <span><img class="icon" src="<?php echo theme_img('t_icons/Payments');?>"\> </span>
+        <b  class="bottom_page_head">Payment</b>
+        <p class="bottom_page_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry.  been the... <b class="read_more">Read More</b></p>
+        </div>
+        
+         <div class="two columns">
+        <span><img class="icon" src="<?php echo theme_img('t_icons/Payments');?>"\> </span>
+        <b  class="bottom_page_head">Payment</b>
+        <p class="bottom_page_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry.  been the...<b class="read_more">Read More</b>   </p>
+        </div>
+        
+         <div class="two columns lastone">
+        <span><img class="icon" src="<?php echo theme_img('t_icons/Payments');?>"\> </span>
+        <b  class="bottom_page_head">Qualification</b>
+        <p class="bottom_page_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry.  been the...<b class="read_more">Read More</b></p>
+        </div>
+         </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+ 
+
 <div id="darkf" >
+
+
 <div style="border-bottom: 5px solid #14166f;"></div>   
 
     <section id="footer" role="contentinfo">
