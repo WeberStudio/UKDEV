@@ -40,7 +40,7 @@ experience this site.
     </a>
 	<div class="menu_content">
     <div class="left_div">
-    <a href="#">
+    <a href="<?=base_url()?>">
         <div class="page_1" align="center">
             <div class="img_div">
                 <img class="home_img" src="<?php echo theme_img("t_icons/home.png");?>"/>
@@ -52,7 +52,7 @@ experience this site.
         
         </div>
         </a>
-        <a href="#">
+        <a href="<?=base_url()?>cart/allcourses/">
         <div class="page_2" align="center">
         
             <div class="img_div">
@@ -61,12 +61,10 @@ experience this site.
              </div>
             <div class="text_div">
             	All Courses
-             </div>
-             
-        
+             </div>   
         </div>
         </a>
-        <a href="#">
+        <a href="<?=base_url()?>blog">
         <div class="page_3" align="center">
             <div class="img_div">
                 <img class="blogs" src="<?php echo theme_img("t_icons/blogs.png");?>"/>
@@ -78,7 +76,7 @@ experience this site.
         
         </div>
         </a>
-        <a href="#">
+        <a href="<?=base_url()?>tutors">
         <div class="page_4" align="center">
             <div class="img_div">
                 <img class="tutors" src="<?php echo theme_img("t_icons/tutors.png");?>"/>
@@ -90,7 +88,7 @@ experience this site.
         
         </div>
         </a>
-        <a href="#">
+        <a href="<?=base_url()?>faq">
         <div class="page_5" align="center">
             <div class="img_div">
                 <img class="faq" src="<?php echo theme_img("t_icons/faq.png");?>"/>
@@ -102,7 +100,7 @@ experience this site.
         
         </div>
         </a>
-        <a href="#">
+        <a href="<?=base_url()?>contact-us1">
         <div class="page_6" align="center">
             <div class="img_div">
                 <img class="contect" src="<?php echo theme_img("t_icons/contect.png");?>"/>
@@ -273,13 +271,30 @@ experience this site.
     <div class="top_content">
     	<div class="call_us"><div class="call_img"><img src="<?php echo theme_img("t_icons/phn.png");?>" alt="phone"/></div> Call us now 1221 288 0181</div>
         <div class="account_block">
-         <a href="#">
-         <div class="register"><div class="reg_img"><img src="<?php echo theme_img("t_icons/rigester.png");?>"/></div> Register </div>
-         </a>
-         <b class="seprator">|</b>
-          <a href="#">
-         <div class="login"><div class="login_img"><img src="<?php echo theme_img("t_icons/log_in.png");?>"></div> login </div>
-         </a>
+		
+		<?php if($this->Tutor_model->is_logged_in(false, false)):?>
+			<a href="<?php echo  site_url('dashboard/');?>">
+         		<div class="register"><div class="reg_img"><img src="<?php echo theme_img("t_icons/rigester.png");?>"/></div> Dashboard </div>
+         	</a>      
+        <?php elseif($this->Customer_model->is_logged_in(false, false)):?>        
+		  	<a href="<?php echo site_url('secure/logout');?>">
+        		<div class="live_chat"><div class="chat_img"> <img src="<?php echo theme_img("t_icons/live_chat.png");?>" alt="livechat"/> </div>Logout</div>
+        	</a>
+			
+			<b class="seprator">&nbsp;&nbsp;&nbsp;|</b>		
+		<a href="<?php echo  site_url('dashboard/');?>">
+        	<div class="live_chat"><div class="chat_img"> <img src="<?php echo theme_img("t_icons/live_chat.png");?>" alt="livechat"/> </div>Dashboard</div>
+        </a>
+           
+		<?php else: ?>			
+			<a href="<?php echo site_url('secure/register'); ?>">
+         		<div class="register"><div class="reg_img"><img src="<?php echo theme_img("t_icons/rigester.png");?>"/></div> Register </div>
+         	</a>        	
+			<b class="seprator">|</b>
+       		<a href="<?php echo site_url('secure/login');?>">
+        		<div class="login"><div class="login_img"><img src="<?php echo theme_img("t_icons/log_in.png");?>"></div><?php echo lang('login');?></div>
+        	</a>
+        <?php endif; ?>
        <a href="#">
         <div class="live_chat"><div class="chat_img"> <img src="<?php echo theme_img("t_icons/live_chat.png");?>" alt="livechat"/> </div> Live chat</div>
         </a>

@@ -6150,7 +6150,7 @@ p.readmore{ text-align: center;}
 }
 .account_block
 {
-	overflow:auto;
+	overflow:hidden;
 	float:right;
 }
 /* top content  end*/
@@ -6211,7 +6211,7 @@ p.readmore{ text-align: center;}
 }
 .title_sec
 {
-	overflow:auto;
+	overflow:hidden;
 	text-align:center;
 	text-decoration:none;
 	font-family:Verdana, sans-serif;
