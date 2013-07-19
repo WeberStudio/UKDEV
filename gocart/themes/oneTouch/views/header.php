@@ -8,7 +8,7 @@ experience this site.
 </div><![endif]-->
 <section id="header" class="row" role="banner">
 <div class="four columns logo">
-    <a  href="<?=base_url()?>cart/">
+    <a  href="<?=base_url()?>cart/" style="margin:0px !important">
         <img src="<?php echo theme_img("custom-slider-img/logouk.png")?>" alt="OneTouch"></a>
 </div>
 <? $categories = $this->dropdown_menu->get_all_categories(); 

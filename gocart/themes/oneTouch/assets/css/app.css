@@ -5955,7 +5955,7 @@ p.readmore{ text-align: center;}
 .main_menu
 {
 	
-	margin:0px; padding:0px;
+	margin:25px 0 0 0; padding:0px;
 	float:right;
 
 }
@@ -5964,7 +5964,7 @@ p.readmore{ text-align: center;}
 	display:inline;
 	
 	float:left;
-	margin:10px 20px 10px 10px;
+	margin:10px 65px 10px 10px;
 }
 .home_h , .all_courses_h , .blogs_h , .tutors_h , .faq_h , .contect_h
 {
@@ -6082,7 +6082,7 @@ p.readmore{ text-align: center;}
 }
 .last_menu
 {
-	margin-right:0px;
+	margin-right:0px !important;
 }
 /* top menu end*/
 /* top content  start*/
