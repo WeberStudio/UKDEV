@@ -31,7 +31,7 @@ ul.simpleTabsNavigation li a { border:0px solid #E0E0E0; text-decoration:none; f
 
 ul.simpleTabsNavigation li a:hover { color:#808080; }
 
-ul.simpleTabsNavigation li a.current { background:none; border-bottom:0px solid #fff; font-weight:normal; 	border-top:3px solid #57bae8;
+ul.simpleTabsNavigation li a.current { background:#888888; color:white; border-bottom:0px solid #fff; font-weight:normal; 	border-top:3px solid #57bae8;
 	 	border-left:1px solid #e6e6e6;
 	border-right:1px solid #e6e6e6; }
 

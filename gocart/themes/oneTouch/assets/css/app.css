@@ -4288,7 +4288,7 @@ a.button:hover, button.button:hover, input.button:hover, #respond input#submit:h
 
     border: none;
 
-    background: #50A9D2;
+    background: #888888;
 
     color: white;
 
@@ -4526,7 +4526,7 @@ div.product .woocommerce_tabs ul.tabs li::before, div.product .woocommerce_tabs 
 
 div.product form.cart .button, #content div.product form.cart .button, a.button.checkout {
 
-    background: #6cbe42;
+    background: #888888;
 
 }
 
@@ -4540,7 +4540,7 @@ div.product form.cart .button, #content div.product form.cart .button, a.button.
 
 div.product form.cart .button:hover, #content div.product form.cart .button:hover, a.button.checkout:hover {
 
-    background: #5ca238;
+    background: #888888;
 
 }
 
@@ -4770,7 +4770,7 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 
     width: auto;
 
-    background: #57BAE8;
+    background: #888888;
 
     border: none;
 
@@ -6094,8 +6094,7 @@ p.readmore{ text-align: center;}
 	margin:0px; padding:0px;
 	float:left;
 	color:#464749;
-	font-size:19px;
-	
+	font-size:15.52px;
 }
 .register
 {
@@ -6125,7 +6124,8 @@ p.readmore{ text-align: center;}
 }
 .call_img
 {
-	margin:5px 15px 0 2px ; padding:0px;
+	margin: 2px 10px 0 2px; 
+    padding:0px;
 	float:left;
 }
 .chat_img
@@ -6270,62 +6270,78 @@ p.readmore{ text-align: center;}
 	position:relative;
 	top: 0px;
 	left: 0px;
-	width: 100%;
+	
 }
 .t_footer_contect {
 	margin: 0 auto;
-	width: 85%;
+	
 }
 .t_footer_title {
 	text-align: center;
 	text-decoration: none;
 	text-transform: uppercase;
-	font-family: Verdana, Verdana, sans-serif;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:30px;
 	color: #464749;
 	margin-top: 20px;
 	margin-bottom: 20px
 }
 .block_inside {
+	border:#F00 solid 2px;
 	display: block;
 	padding: 20px 0px;
 	overflow: auto;
 }
 .block_content {
-	display: block;
-	overflow: auto;
-	width: 20%;
-	padding: 10px 25px 10px 0px;
-	margin: 10px 75px 20px 0px;
-	float: left;
+	
+	
+	margin:50px 0;
+	overflow:hidden;
+
+}
+
+
+
+#darktf
+{
+	 background: none repeat scroll 0 0 #E4E4E4 !important;
+    
+    float: left;
+    width: 100%;
+}
+.bottom_page_head
+{
+
+	position:absolute;
+	margin:15px 0 0 10px;
+		
+}
+.bottom_page_content
+{
+	text-align:justify;
+	width:79%;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:15px;
+	
+}
+.firstt
+{
+	padding-left:0px;
+	
+
 }
 .lastone
 {
-	
-	margin-right:0px;	
+	padding-right:0px;
 }
-.icon {
-	margin-bottom: -19px;
+.read_more
+{
+	float:right;
 }
-.block_content p {
-	margin: 20px -25px 0 0;
-	padding: 0px;
-	
-	overflow: auto;
-	text-decoration: none;
-	font-size: 12px;
-	color: #464749;
-	text-align: justify;
-}
-.block_content b {
-	
-	color: #464749;
-	
-	margin-top: 3px;
-}
+
+/*top footer end*/
 .t_footer_img
 {
-	
-	background:url("../images/t_icons/Serprator.png") center center repeat-x;
-	text-indent:-9999px;
+	text-indent:-99999px;
+	background: url("../images/t_icons/Serprator.png") center center repeat-x;	
 }
-/* top footer end*/
