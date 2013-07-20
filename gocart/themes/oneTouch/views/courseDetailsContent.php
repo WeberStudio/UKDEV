@@ -23,12 +23,16 @@
 <div class="row">
     <div class="fifteen columns" id="page-title" style="padding-left: 0px;">
         <div class="breadcrumbs">
-              <h1 itemprop="name" class="product_title entry-title"><?=$product->name?></h1>
+              <h1 itemprop="name" class="product_title entry-title">
+              <img src="<?php echo theme_img("icons/slider-home-icon.png");?>"/>
+              <a class="all_courses" href="javascript:void(0)"><?=$product->name?></a>
+              
+              </h1>
             <span style="float: right; margin-top: -25px;"> 
                 <div class="sort-panel">  
                     <ul class="filter clearfix">
                         <li>
-                          <a href="<?=base_url()?>">All Courses</a> <span class="delim">></span><a href="<?=base_url().$product->categories[0]->slug?>"> <? echo $product->categories[0]->name;?></a><span class="delim">></span> <a href="<?=base_url().$product->slug?>"><?=$product->name?></a> 
+                          <a href="<?=base_url()?>">All Courses</a> <span class="delim">></span><a href="<?=base_url().$product->categories[0]->slug?>"> <? echo $product->categories[0]->name;?></a><span class="delim">></span> <a href="<?=base_url().$product->slug?>"><?php echo substr($product->name,0, 20)."...";?></a> 
                            
                         </li>
                     </ul>
