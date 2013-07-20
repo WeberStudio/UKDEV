@@ -2363,7 +2363,7 @@ div.item, .item div{
 
 .works-list .item .description {
 
-    bottom: -100%;
+    bottom: -70%;
 
     height: 100%;
 
@@ -4526,7 +4526,7 @@ div.product .woocommerce_tabs ul.tabs li::before, div.product .woocommerce_tabs 
 
 div.product form.cart .button, #content div.product form.cart .button, a.button.checkout {
 
-    background: #6cbe42;
+    background: #9F9F9F;
 
 }
 
@@ -4540,7 +4540,7 @@ div.product form.cart .button, #content div.product form.cart .button, a.button.
 
 div.product form.cart .button:hover, #content div.product form.cart .button:hover, a.button.checkout:hover {
 
-    background: #5ca238;
+    background: #9F9F9F;
 
 }
 
@@ -6109,7 +6109,7 @@ p.readmore{ text-align: center;}
 	float:left;
 	color:#000;
 	font-size:12px;
-	
+	font-family:Verdana, Geneva, sans-serif;
 	
 }
 .login
@@ -6360,5 +6360,12 @@ a.black
 	
 	line-height: inherit;
     text-decoration: none;
+}
+.all_courses
+{
+	color: #565759 !important;
+   font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 20px;
+	margin-left:10px;
 }
 /* black anchor end */

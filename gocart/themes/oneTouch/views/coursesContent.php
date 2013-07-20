@@ -8,13 +8,7 @@ ul.menu1 li a{
     font-size:17px;
     padding-top: 15px;
 }
-.all_courses
-{
-	color: #565759 !important;
-   
-    font-size: 25px;
-	margin-left:10px;
-}
+
 .bread_trems
 {
 	color: #565759 !important;
@@ -118,8 +112,8 @@ ul.menu1 li a{
                                     <div class="description disp">
                                            <div class="title" >
                                                     
-                                                    <h4><?php echo $course['name'];?></h4>
-                                                    <p><?php echo word_limiter($course['excerpt'],15);?></p> 
+                                                    <h4><b style="font-size:11px;"><?php echo $course['name'];?></b></h4>
+                                                    <p style="margin-top: 45px;"><?php echo word_limiter($course['excerpt'],15);?></p> 
                                                     
                                                 </div>
                                     </div>
