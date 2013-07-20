@@ -20,7 +20,7 @@ $last		= array('id'=>'billing_last_name','class'=>'input-text','placeholder'=>'L
 $email		= array('id'=>'bill_email', 'class'=>'input-text', 'placeholder'=>'E-Mail', 'name'=>'email', 'value'=>set_value('email'));
 $phone		= array('id'=>'bill_phone', 'class'=>'input-text', 'name'=>'phone', 'placeholder'=>'Phone', 'value'=> set_value('phone'));
 $f_city		= array('id'=>'f_city', 'class'=>'input-text', 'placeholder'=>'City', 'name'=>'city', 'value'=>set_value('city',$city));
-$f_zip		= array('id'=>'zip_code', 'maxlength'=>'10', 'class'=>'input-text', 'placeholder'=>'Zip', 'name'=>'zip_code', 'value'=> set_value('zip',$zip));
+$f_zip		= array('id'=>'zip_code', 'maxlength'=>'10', 'class'=>'input-text', 'placeholder'=>'Post Code', 'name'=>'zip_code', 'value'=> set_value('zip',$zip));
 $f_address1	= array('id'=>'street_address', 'placeholder'=>'Address', 'class'=>'input-text', 'name'=>'street_address', 'value'=>set_value('address1'));
 $f_address2	= array('id'=>'address_line_op','class'=>'input-text','placeholder'=>'Address  (optional)','name'=>'address_line_op', 'value'=> set_value('address2'));
 $password 	= array('id'=>'password','name'=>'password','class'=>'input-text','placeholder'=>'Password'); 

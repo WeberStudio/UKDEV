@@ -25,7 +25,7 @@ return false;
 	$email			= array('id'=>'bill_email', 'class'=>'input-text', 'placeholder'=>'E-Mail', 'name'=>'email', 'value'=>set_value('email'));
 	$phone			= array('id'=>'bill_phone', 'class'=>'input-text', 'name'=>'phone', 'placeholder'=>'Phone', 'value'=> set_value('phone'));
 	$f_city			= array('id'=>'f_city', 'class'=>'input-text', 'placeholder'=>'City', 'name'=>'city', 'value'=>set_value('city',$city));
-	$f_zip			= array('id'=>'f_zip', 'maxlength'=>'10', 'class'=>'input-text', 'placeholder'=>'Zip', 'name'=>'zip', 'value'=> set_value('zip',$zip));
+	$f_zip			= array('id'=>'f_zip', 'maxlength'=>'10', 'class'=>'input-text', 'placeholder'=>'Post Code', 'name'=>'zip', 'value'=> set_value('zip',$zip));
 	$f_address1		= array('id'=>'f_address1', 'placeholder'=>'Address', 'class'=>'input-text', 'name'=>'address1', 'value'=>set_value('address1',$address1));
 	$f_address2		= array('id'=>'f_address2','class'=>'input-text','placeholder'=>'Address  (optional)','name'=>'address2', 'value'=> set_value('address2',$address2));
 	$password 		= array('id'=>'password','name'=>'password','class'=>'input-text','placeholder'=>'Password'); 
@@ -36,7 +36,7 @@ return false;
 
 <div class="row">
     <h1 class="page-title" style="margin-left:20px;">
-	<a class="black" href="javascript:void(0)">you can login here</a>
+	<a class="black" href="javascript:void(0)">You can login here</a>
 	</h1>
 </div>
 

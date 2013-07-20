@@ -260,7 +260,7 @@ class Secure extends Front_Controller {
 		$this->form_validation->set_rules('lastname', 'Last Name', 'trim|required|max_length[32]');
 		$this->form_validation->set_rules('address1', 'Address', 'trim|required');
 		$this->form_validation->set_rules('city', 'City', 'trim|required');
-		$this->form_validation->set_rules('zip', 'Zip', 'trim|required|numeric|max_length[6]');
+		$this->form_validation->set_rules('zip', 'Post Code', 'trim|required|alpha_numeric|max_length[6]');
 		$this->form_validation->set_rules('country_id', 'Country', 'trim|required|numeric');
 		$this->form_validation->set_rules('zone_id', 'State', 'trim|required|numeric');
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[128]|callback_check_email');
