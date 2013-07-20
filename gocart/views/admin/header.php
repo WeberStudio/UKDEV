@@ -61,7 +61,7 @@ $(document).ready(function(){
 		focus: true,
 		plugins: ['fileBrowser']
 	});
-    var imagePath = "shahid" ;
+    var imagePath = "" ;
     
 });
 </script>
