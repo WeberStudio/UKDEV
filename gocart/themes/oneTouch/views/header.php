@@ -8,7 +8,7 @@ experience this site.
 </div><![endif]-->
 <section id="header" class="row" role="banner">
 <div class="four columns logo">
-    <a  href="<?=base_url()?>cart/">
+    <a  href="<?=base_url()?>cart/" style="margin:0px !important">
         <img src="<?php echo theme_img("custom-slider-img/logouk.png")?>" alt="OneTouch"></a>
 </div>
 <? $categories = $this->dropdown_menu->get_all_categories(); 
@@ -28,25 +28,143 @@ experience this site.
      <div class="clear"> </div>
     </div>
     <div class="clear"></div>
- <link href="http://localhost/UKDEV/assets/opencollege/admin/js/plugins/chosen/chosen/chosen.css" rel="stylesheet">
-
-<script language="javascript" type="text/javascript" src="http://localhost/UKDEV/assets/opencollege/admin/js/plugins/chosen/chosen/chosen.jquery.min.js"></script>
-
-    <div class="top_menu">
-	<select style=" display:block; " class="chzn-select" >
-   <?php foreach($this->courses as $course):?>    	
-		  <option value="<?=$course['id']?>"><?=$course['name']?></option>                            
-   <?php  endforeach;?>
-   	</select>		
-	
-
-	<div class="cart" >				
-		<a href="<?php echo site_url('cart/view_cart');?>">
-    	<span class="cart_img"><img src=" <?php echo theme_img("t_icons/cart.png");?>"/></span>
-    	<p class="cart_text">There are (<?=$this->go_cart->total_items()?>) item in your cart</p>
-        </a>
+   
+   <div class="top_menu">
+   
+    
+	<div class="cart">
+    	<a href="<?php echo site_url('cart/view_cart');?>">
+            <span class="cart_img"><img src=" <?php echo theme_img("t_icons/cart.png");?>"/></span>
+            <p class="cart_text">There are (<?=$this->go_cart->total_items()?>) item in your cart</p>
+       </a> 
     </div>
     
+    </div>
+   
+
+<ul class="main_menu">
+            <li class="pages_1">
+           		<a href="#">
+                	<div class="home" align="center">
+                    	<img class="home" src="<?php echo theme_img("pre_final/home.png");?>"/>
+                    </div>
+                    <div class="home_h" align="center">
+                    	<img class="home_h" src="<?php echo theme_img("pre_final/home_h.png");?>" />
+                    </div>
+                    
+                    <span class="page_name">Home</span>
+                </a>
+            </li>
+            <li class="pages_2">
+            	<a href="#">
+                	<div class="all_courses" align="center">
+                    	<img class="all_courses" src=" <?php echo theme_img("pre_final/all_courses.png");?>"/>
+                    </div>
+                    <div class="all_courses_h" align="center">
+                    	<img class="all_courses_h" src="<?php echo theme_img("pre_final/all_courses_h.png");?>" />
+                    </div>
+                    
+                    <span class="page_name">All courses</span>
+                </a>
+            </li>
+            <li class="pages_3">
+            	<a href="#">
+                	<div class="blog" align="center">
+                    	<img class="blog"  src="<?php echo theme_img("pre_final/blogs.png");?>"/>
+                    </div>
+                    <div class="blogs_h"  align="center">
+                    	<img class="blogs_h" src="<?php echo theme_img("pre_final/blogs_h.png");?>"/>
+                    </div>
+                    <span class="page_name">blog</span>
+                </a>
+            </li>
+            <li class="pages_4">
+            	<a href="#">
+                	<div class="tutors" align="center">
+                    	<img class="tutors" src="<?php echo theme_img("pre_final/tutors.png");?>"/>
+                    </div>
+                    <div  class="tutors_h" align="center">
+                    	<img class="tutors_h" src="<?php echo theme_img("pre_final/tutors_h.png");?>"/>
+                    </div>
+                    <span class="page_name">tutor</span>
+                </a>
+            </li>
+            <li class="pages_5">
+            	<a href="#">
+                	<div class="faq" align="center">
+                    	<img class="faq" src="<?php echo theme_img("pre_final/faq.png");?>"/>
+                    </div>
+                    <div class="faq_h" align="center">
+                    	<img class="faq_h" src="<?php echo theme_img("pre_final/faq_h.png");?>" />
+                    </div>
+                    <span class="page_name">faq's</span>
+                </a>
+            </li>
+            <li class="pages_6 last_menu">
+            	<a href="#">
+                	<div class="contect" align="center">
+                    	<img  class="contect" src="<?php echo theme_img("pre_final/contect.png");?>"/>
+                    </div>
+                    <div class="contect_h" align="center">
+                    	<img class="contect_h" src="<?php echo theme_img("pre_final/contect_h.png");?>"/ >
+                    </div>
+                    <span class="page_name">contact</span>
+                </a>
+            </li>
+            
+        </ul>
+    <!--<ul class="menu_block">
+	<li class="first_block">
+    	<ul class="main_menu">
+            <li>
+                 <a href="<?=base_url()?>">
+            <div class="page_1" align="center">
+                <div class="img_div">
+                    <img class="home_img" src="<?php echo theme_img("t_icons/home.png");?>"/>
+                    <img class="home_h" src="<?php echo theme_img("t_icons/home_h.png");?>" />
+                 </div>
+                <div class="text_div" >
+                 Home
+                 </div>
+            
+            </div>
+            </a>
+        </li>
+            <li>
+                <a href="<?=base_url()?>cart/allcourses/">
+            <div class="page_2" align="center">
+            
+                <div class="img_div">
+                    <img class="all_couses"  src="<?php echo theme_img("t_icons/all_couses.png");?>"/>
+                    <img class="all_couses_h"  src="<?php echo theme_img("t_icons/all_courses_h.png");?>"/>
+                 </div>
+                <div class="text_div">
+                    All Courses
+                 </div>   
+            </div>
+            	</a>
+            </li>
+            <li>
+                      <a href="<?=base_url()?>blog">
+                <div class="page_3" align="center">
+                    <div class="img_div">
+                        <img class="blogs" src="<?php echo theme_img("t_icons/blogs.png");?>"/>
+                        <img class="blogs_h" src="<?php echo theme_img("t_icons/blog_h.png");?>"/>
+                     </div>
+                    <div class="text_div">
+                        Blog
+                     </div>
+                
+                </div>
+                </a>
+            </li>
+            <li>home 4</li>
+            <li>home 5</li>
+        </ul>
+    </li>
+</ul>-->
+    <!--<div class="top_menu">
+ 
 	<div class="menu_content">
     <div class="left_div">
     <a href="<?=base_url()?>">
@@ -59,8 +177,8 @@ experience this site.
              Home
              </div>
         
-        </div>      
-        </a>  
+        </div>
+        </a>
         <a href="<?=base_url()?>cart/allcourses/">
         <div class="page_2" align="center">
         
@@ -84,7 +202,7 @@ experience this site.
              </div>
         
         </div>
-        </a> 
+        </a>
         <a href="<?=base_url()?>tutors">
         <div class="page_4" align="center">
             <div class="img_div">
@@ -96,7 +214,7 @@ experience this site.
              </div>
         
         </div>
-        </a> 
+        </a>
         <a href="<?=base_url()?>faq">
         <div class="page_5" align="center">
             <div class="img_div">
@@ -108,7 +226,7 @@ experience this site.
              </div>
         
         </div>
-        </a> 
+        </a>
         <a href="<?=base_url()?>contact-us1">
         <div class="page_6" align="center">
             <div class="img_div">
@@ -120,11 +238,11 @@ experience this site.
              </div>
         
         </div>
-        </a> 
+        </a>
         
         </div>
     </div>
-</div>
+</div>-->
 	
    <!--<ul id="menu-primary-navigation" class="tiled-menu" style="margin-left: 0px;">
         <li   class="menu-portfolio" >All Courses
@@ -278,7 +396,7 @@ experience this site.
 <div class="row">
 <div class="contect_div">
     <div class="top_content">
-    	<div class="call_us"><div class="call_img"><img src="<?php echo theme_img("t_icons/phn.png");?>" alt="phone"/></div> Call us now 1221 288 0181</div>
+    	<div class="call_us"><div class="call_img"><img src="<?php echo theme_img("t_icons/phn.png");?>" alt="phone"/></div> Call us now <b>1221 288 0181</b></div>
         <div class="account_block">
 		
 		<?php if($this->Tutor_model->is_logged_in(false, false)):?>
@@ -304,9 +422,7 @@ experience this site.
         		<div class="login"><div class="login_img"><img src="<?php echo theme_img("t_icons/log_in.png");?>"></div><?php echo lang('login');?></div>
         	</a>
         <?php endif; ?>
-       
-       
-       <a href="http://87.106.234.213/livechat/client.php?locale=en&amp;style=simplicity" target="_blank" onclick="if(navigator.userAgent.toLowerCase().indexOf('opera') != -1 &amp;&amp; window.event.preventDefault) window.event.preventDefault();this.newWindow = window.open('http://87.106.234.213/livechat/client.php?locale=en&amp;style=simplicity&amp;url='+escape(document.location.href.replace('http://','').replace('https://',''))+'&amp;referrer='+escape(document.referrer.replace('http://','').replace('https://','')), 'webim', 'toolbar=0,scrollbars=0,location=0,status=1,menubar=0,width=640,height=480,resizable=1');this.newWindow.focus();this.newWindow.opener=window;return false;">
+       <a href="#">
         <div class="live_chat"><div class="chat_img"> <img src="<?php echo theme_img("t_icons/live_chat.png");?>" alt="livechat"/> </div> Live chat</div>
         </a>
        </div>
