@@ -129,7 +129,7 @@ class Tutor_login extends Front_Controller {
 		$this->form_validation->set_rules('lastname', 'lang:lastname', 'trim|required|max_length[32]');
 		$this->form_validation->set_rules('street_address', 'Address', 'trim|required');
 		$this->form_validation->set_rules('city', 'City', 'trim|required');
-		$this->form_validation->set_rules('zip_code', 'zip_code', 'trim|required|numeric|max_length[6]');
+		$this->form_validation->set_rules('zip_code', 'Post Code', 'trim|required|alpha_numeric|max_length[6]');
 		$this->form_validation->set_rules('phone', 'Phone', 'trim|required|max_length[32]|numeric');
 		$this->form_validation->set_rules('email', 'lang:email', 'trim|required|valid_email|max_length[128]|callback_check_email');
 		if($id == "")

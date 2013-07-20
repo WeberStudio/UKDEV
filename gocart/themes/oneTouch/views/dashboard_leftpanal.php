@@ -45,7 +45,7 @@
 			<li><a href="<?= base_url();?>dashboard/"><i class="gicon-dashboard"></i>Dashboard</a></li>
               <li><a href="<?= base_url();?>dashboard/my_profile"><i class="gicon-user"></i>Profile</a></li>
               <li><a href="<?= base_url();?>dashboard/course"><i class="gicon-course"></i>My Course</a></li>
-              <li><a href="<?= base_url();?>dashboard/fourm"><i class="gicon-fourm"></i>Fourms</a></li>
+              <li><a href="<?= base_url();?>dashboard/fourm"><i class="gicon-fourm"></i>My Tutor(s)</a></li>
               <li><a href="<?= base_url();?>dashboard/file_manager"><i class="gicon-filemanager"></i>File Manasger</a></li>
               <li><a href="<?= base_url();?>tutor_login/logout"><i class="gicon-logout"></i>Log Out</a></li>
               <?php }?>
@@ -54,7 +54,7 @@
               <li><a href="<?= base_url();?>dashboard/"><i class="gicon-dashboard"></i>Dashboard</a></li>
               <li><a href="<?= base_url();?>dashboard/my_account"><i class="gicon-user"></i>Profile</a></li>
               <li><a href="<?= base_url();?>dashboard/course"><i class="gicon-course"></i>My Course</a></li>
-              <li><a href="<?= base_url();?>dashboard/fourm"><i class="gicon-fourm"></i>Fourms</a></li>
+              <li><a href="<?= base_url();?>dashboard/fourm"><i class="gicon-fourm"></i>My Tutor(s)</a></li>
               <li><a href="<?= base_url();?>dashboard/file_manager"><i class="gicon-filemanager"></i>File Manasger</a></li>
                <li><a href="<?= base_url();?>secure/logout"><i class="gicon-logout"></i>Log Out</a></li>
               <?php }?>
