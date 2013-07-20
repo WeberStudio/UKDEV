@@ -1,11 +1,9 @@
 <div class="row">
-    <h1 class="page-title" style="margin-left:85px;">
-	<a class="" href="javascript:void(0)">you can login here</a>
+    <h1 class="page-title" style="margin-left: 20px;">
+	<a class="black" href="javascript:void(0)">you can login here</a>
 	</h1>
 </div>
-<div class="row">
-    <div class="line"> </div>
-</div>
+
       <script type="text/javascript">
 function showStuff() {
     document.getElementById('closee').style.display = 'none';
@@ -57,7 +55,7 @@ function showStuff() {
           </p>
           <p>
             <input class="submitbutton" name="submitted" id="wp-submit" value="Login →" type="submit">
-            <a href="<?php echo site_url('secure/forgot_password')?>">Lost password?</a></p>
+            <a class="black" href="<?php echo site_url('secure/forgot_password')?>">Lost password?</a></p>
           <div>
             <input name="redirect_to" class="redirect_to" value="" type="hidden">
             <input name="testcookie" value="1" type="hidden">

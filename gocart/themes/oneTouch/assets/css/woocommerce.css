@@ -543,21 +543,21 @@ a.button:active, button.button:active, input.button:active, #respond input#submi
 	top:1px
 }
 a.button.alt, button.button.alt, input.button.alt, #respond input#submit.alt, #content input.button.alt {
-	background:#137aec;
-	background:-webkit-gradient(linear, left top, left bottom, from(#137aec), to(#0f62bd));
-	background:-webkit-linear-gradient(#137aec, #0f62bd);
-	background:-moz-linear-gradient(center top, #137aec 0%, #0f62bd 100%);
-	background:-moz-gradient(center top, #137aec 0%, #0f62bd 100%);
-	border-color:#0b498e;
+	background:#9F9F9F;
+	background:-webkit-gradient(linear, left top, left bottom, from(#9F9F9F), to(#9F9F9F));
+	background:-webkit-linear-gradient(#9F9F9F, #9F9F9F);
+	background:-moz-linear-gradient(center top, #9F9F9F 0%, #9F9F9F 100%);
+	background:-moz-gradient(center top, #9F9F9F 0%, #9F9F9F 100%);
+	border-color:#9F9F9F;
 	color:#ffffff;
 	text-shadow:0 0px 0 rgba(0,0,0,0.6)
 }
 a.button.alt:hover, button.button.alt:hover, input.button.alt:hover, #respond input#submit.alt:hover, #content input.button.alt:hover {
-	background:#137aec;
-	background:-webkit-gradient(linear, left top, left bottom, from(#137aec), to(#0d55a5));
-	background:-webkit-linear-gradient(#137aec, #0d55a5);
-	background:-moz-linear-gradient(center top, #137aec 0%, #0d55a5 100%);
-	background:-moz-gradient(center top, #137aec 0%, #0d55a5 100%);
+	background:#9F9F9F;
+	background:-webkit-gradient(linear, left top, left bottom, from(#9F9F9F), to(#9F9F9F));
+	background:-webkit-linear-gradient(#9F9F9F, #9F9F9F);
+	background:-moz-linear-gradient(center top, #9F9F9F 0%, #9F9F9F 100%);
+	background:-moz-gradient(center top, #9F9F9F 0%, #9F9F9F 100%);
 	color:#ffffff;
 	text-shadow:0 0px 0 rgba(0,0,0,0.6)
 }

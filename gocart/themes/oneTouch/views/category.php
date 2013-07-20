@@ -32,8 +32,10 @@ ul.menu1 li a{
     font-family: Verdana,Arial,Helvetica,sans-serif;
     font-size: 14px;
 }
+
 </style>
-  <img src="<?php echo theme_img("icons/slider-home-icon.png");?>" style="margin-right:15px;"/><?php echo $page_title; ?>
+  <img src="<?php echo theme_img("icons/slider-home-icon.png");?>" style="margin-right:15px;"/>
+  <a class="all_courses" href="javascript:void(0)"><?php echo $page_title; ?></a>
   <span style="float: right;"> 
                     <div class="sort-panel">  
                    <ul class="filter clearfix">
