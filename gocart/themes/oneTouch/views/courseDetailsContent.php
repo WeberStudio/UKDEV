@@ -100,7 +100,7 @@
                         <input type="hidden" name="slug" value="<?php if($this->uri->segment(2)==""){echo $this->uri->segment(1);}
                                 if($this->uri->segment(2)!=""){echo $this->uri->segment(1)."/".$this->uri->segment(2);}?>"/>
                         <div class="quantity buttons_added"><input type="button" value="-" class="minus"><input name="quantity" data-min="1" data-max="0" value="1" size="4" title="Qty" class="input-text qty text" maxlength="12"><input type="button" value="+" class="plus"></div>
-                        <button type="submit" class="single_add_to_cart_button button alt">Add to cart</button>
+                        <button type="submit" class="single_add_to_cart_button button alt">Enrol Now</button>
                         <br/>
 						<br/>
 						<br/>

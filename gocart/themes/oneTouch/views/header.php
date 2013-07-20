@@ -38,15 +38,9 @@ experience this site.
  
 
     <div class="top_menu">
-	  
-    
-     
-    
-    
-      
-	   <div style="margin-top: 5px; float: left;">
+	  	   <div style=" margin-left:100px; margin-top: 5px; float: left;">
 	  <select class="chosen" style="width:300px;" >
-         <option value="-1">Choose course</option>
+         <option value="-1">Select Course</option>
    <?php foreach($this->courses as $course):?>        
           <option value="<?=$course['slug']?>"><?=$course['name']?></option>                            
    <?php  endforeach;?>
@@ -78,20 +72,22 @@ experience this site.
             </li>
             <li class="pages_2">
             	<a  href="<?=base_url()?>cart/allcourses/">
-                	<div class="all_courses" align="center">
-                    	<img class="all_courses" src=" <?php echo theme_img("pre_final/all_courses.png");?>"/>
-                    </div>
-                    <div class="all_courses_h" align="center">
-                    	<img class="all_courses_h" src="<?php echo theme_img("pre_final/all_courses_h.png");?>" />
-                    </div>
+				
+                	
                     
                     <ul id="menu-primary-navigation" class="tiled-menu" style="margin-left: 0px;">
-        				<li   class="menu-portfolio" >
-							<span class="menu-item-wrap">
-                				<a  href="<?=base_url()?>cart/allcourses/" style='background-color:#cecece; background-size:cover; background-image:none;' >
-                   					<span class="page_name">All courses</span>
-                				</a>
-                				All Courses				
+        				<li   class="menu-portfolio"  style="margin:0px;">
+							<span class="menu-item-wrap">							
+							
+							<div class="all_courses" align="center">
+								<img class="all_courses" src=" <?php echo theme_img("pre_final/all_courses.png");?>"/>
+							</div>
+							<div class="all_courses_h" align="center">
+								<img class="all_courses_h" src="<?php echo theme_img("pre_final/all_courses_h.png");?>" />
+							</div>
+                   					<span class="page_name">All courses</span> 
+									<!--<span class="arrow">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</span>    -->           				
+							             							
 							</span>	
 						<ul class="ltrs" >		  
 						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">A</a></li>
@@ -128,10 +124,20 @@ experience this site.
 								   {
 										if(count($cat_info)>0)
 										{
+											
 											foreach($cat_info as $cat)
-											{ ?>							  
+											{ 
+											
+												if($cat['count'] != 0){
+											?>							  
+												
+												
 												<li><a href="<?=base_url().$cat['slug']?>"><?=$cat['name']?><span> (<?=$cat['count']?>)</span></a></li>									
-											<? } 
+												
+											
+											<?
+												} 
+											} 
 										} 
 									}							
 								?>
@@ -146,9 +152,14 @@ experience this site.
 						  ?>					  
 								  <ul class="sub-menu with-counts l<?=$key?>"  style="margin:0px !important; padding:10px 0 5px 10px !important; width:100%; display:none ;">
 								  <? foreach($cat_info as $cat)
-									{ ?>							  
+									{ 
+										if($cat['count'] != 0){
+									?>							  
 										<li><a href="<?=base_url().$cat['slug']?>"><?=$cat['name']?><span> (<?=$cat['count']?>)</span></a></li>									
-									<? } ?>
+									<?
+										} 
+									}
+									?> 
 								  </ul>
 							<? } 
 							}

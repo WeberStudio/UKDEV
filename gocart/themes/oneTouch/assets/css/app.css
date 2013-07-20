@@ -1050,21 +1050,21 @@ a.back:hover {
 
     position: absolute;
 
-    top: 100%;
+    top: 70%;
 
-    left: 4px;
+    left: -112px;
 
     padding: 10px 0 0 10px;
 
-    margin: 0px 0 0 0px;
+    margin: 15px 0 0 0px;
 
     z-index: 15000;
 
-    width: 81.2%;
+    width: 990%;
 
    display: none;
 
-	background-color:#58bae9;
+	background-color:#888888;
 
 }
 
@@ -1817,7 +1817,7 @@ Alternative dropdown style
 
 .scroll-box::-webkit-scrollbar-thumb {
 
-    background: #57bae8;
+    background: #4D4D4D;
 
 }
 
@@ -2301,7 +2301,7 @@ div.item, .item div{
 
 .sort-panel .current a, .sort-panel a:hover {
 
-    color: #1F9ED9;
+    color: #9599a2;
 
 }
 
