@@ -50,7 +50,7 @@ return false;
 </script>
 <div class="row">
     <h1 class="page-title" style="margin-left:20px;">
-	<a class="black" href="javascript:void(0)">you can login here</a>
+	<a class="black" href="javascript:void(0)">You can login here</a>
 	</h1>
 </div>
 

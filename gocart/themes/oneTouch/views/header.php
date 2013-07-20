@@ -79,7 +79,7 @@ experience this site.
         				<li   class="menu-portfolio"  style="margin:0px;">
 							<span class="menu-item-wrap">							
 							
-							<div class="all_courses" align="center">
+							<div class="all_courses" align="center" style="margin-left: -10px; margin-bottom:3px; margin-bottom: -2px;">
 								<img class="all_courses" src=" <?php echo theme_img("pre_final/all_courses.png");?>"/>
 							</div>
 							<div class="all_courses_h" align="center">
