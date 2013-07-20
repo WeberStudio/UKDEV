@@ -139,7 +139,7 @@ function showStuff() {
 							$categories_item = explode(',',$categories_item);
 					  	}*/
 					  ?>
-                        <select data-placeholder="Choose Multiple Categories" class="chzn-select" name="categories[]" multiple="true" tabindex="5">
+                        <select data-placeholder="Choose Multiple Categories" class="choose" name="categories[]" multiple="true" tabindex="5">
                         <? if(isset($all_categories)){  ?>
                         <?php  foreach ($all_categories as $file){
 							if(in_array($file['id'], $categories_item)){ 									
@@ -159,7 +159,7 @@ function showStuff() {
 			<p class="form-row form-row-last" id="billing_last_name_field">
 					<label for="billing_last_name" class=""><?php echo "Courses";?> <abbr class="required" title="required">*</abbr>
 					</label>
-					 <select data-placeholder="Choose Multiple Courses" class="chzn-select" name="courses[]" multiple="true" tabindex="5">
+					 <select data-placeholder="Choose Multiple Courses" class="choose" name="courses[]" multiple="true" tabindex="5">
                         <? if(isset($all_courses)){  ?>
                         <?php  foreach ($all_courses as $course){
 							if(in_array($course['id'], $courses_item)){ 									

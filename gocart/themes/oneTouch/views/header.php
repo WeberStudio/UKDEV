@@ -46,7 +46,7 @@ experience this site.
       
 	   <div style="margin-top: 5px; float: left;">
 	  <select class="chosen" style="width:300px;" >
-         <option value="-1">Choose course</option>
+         <option value="-1">Select Course</option>
    <?php foreach($this->courses as $course):?>        
           <option value="<?=$course['slug']?>"><?=$course['name']?></option>                            
    <?php  endforeach;?>
