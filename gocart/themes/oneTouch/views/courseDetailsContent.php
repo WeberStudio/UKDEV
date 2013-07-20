@@ -1,4 +1,8 @@
 <?php echo theme_css('simpletabs.css', true); ?>    
+
+<script type="text/javascript">var switchTo5x=false;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "39c7f6c5-ccfb-494c-b58a-2fd80efbe0c2", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 <script type="text/javascript">
     jQuery =    jQuery.noConflict();
     jQuery(document).ready(function() {
@@ -20,7 +24,7 @@
     <div class="fifteen columns" id="page-title" style="padding-left: 0px;">
         <div class="breadcrumbs">
               <h1 itemprop="name" class="product_title entry-title"><?=$product->name?></h1>
-            <span style="float: right; margin-top: -10px;"> 
+            <span style="float: right; margin-top: -25px;"> 
                 <div class="sort-panel">  
                     <ul class="filter clearfix">
                         <li>
@@ -94,6 +98,15 @@
                         <div class="quantity buttons_added"><input type="button" value="-" class="minus"><input name="quantity" data-min="1" data-max="0" value="1" size="4" title="Qty" class="input-text qty text" maxlength="12"><input type="button" value="+" class="plus"></div>
                         <button type="submit" class="single_add_to_cart_button button alt">Add to cart</button>
                         <br/>
+						<br/>
+						<br/>
+						<span class='st_sharethis_large' displayText='ShareThis'></span>
+						<span class='st_facebook_large' displayText='Facebook'></span>
+						<span class='st_googleplus_large' displayText='Google +'></span>
+						<span class='st_twitter_large' displayText='Tweet'></span>
+						<span class='st_linkedin_large' displayText='LinkedIn'></span>
+						<span class='st_pinterest_large' displayText='Pinterest'></span>
+						<span class='st_email_large' displayText='Email'></span>
                         <div>
                             <!--<fieldset>
                             <?php if(count($options) > 0): ?>
