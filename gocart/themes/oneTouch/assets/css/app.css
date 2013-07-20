@@ -1050,7 +1050,7 @@ a.back:hover {
 
     position: absolute;
 
-    top: 100%;
+    top: 70%;
 
     left: 4px;
 
@@ -1060,11 +1060,11 @@ a.back:hover {
 
     z-index: 15000;
 
-    width: 81.2%;
+    width: 325.2%;
 
    display: none;
 
-	background-color:#58bae9;
+	background-color:#888888;
 
 }
 
@@ -4526,7 +4526,7 @@ div.product .woocommerce_tabs ul.tabs li::before, div.product .woocommerce_tabs 
 
 div.product form.cart .button, #content div.product form.cart .button, a.button.checkout {
 
-    background: #6cbe42;
+    background: #888888;
 
 }
 
@@ -4540,7 +4540,7 @@ div.product form.cart .button, #content div.product form.cart .button, a.button.
 
 div.product form.cart .button:hover, #content div.product form.cart .button:hover, a.button.checkout:hover {
 
-    background: #5ca238;
+    background: #888888;
 
 }
 
@@ -4770,7 +4770,7 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 
     width: auto;
 
-    background: #57BAE8;
+    background: #888888;
 
     border: none;
 

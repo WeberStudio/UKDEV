@@ -44,7 +44,7 @@ experience this site.
 
 <ul class="main_menu">
             <li class="pages_1">
-           		<a href="#">
+           		<a href="<?=base_url()?>">
                 	<div class="home" align="center">
                     	<img class="home" src="<?php echo theme_img("pre_final/home.png");?>"/>
                     </div>
@@ -56,7 +56,7 @@ experience this site.
                 </a>
             </li>
             <li class="pages_2">
-            	<a href="#">
+            	<a  href="<?=base_url()?>cart/allcourses/">
                 	<div class="all_courses" align="center">
                     	<img class="all_courses" src=" <?php echo theme_img("pre_final/all_courses.png");?>"/>
                     </div>
@@ -64,11 +64,83 @@ experience this site.
                     	<img class="all_courses_h" src="<?php echo theme_img("pre_final/all_courses_h.png");?>" />
                     </div>
                     
-                    <span class="page_name">All courses</span>
+                    <ul id="menu-primary-navigation" class="tiled-menu" style="margin-left: 0px;">
+        				<li   class="menu-portfolio" >
+							<span class="menu-item-wrap">
+                				<a  href="<?=base_url()?>cart/allcourses/" style='background-color:#cecece; background-size:cover; background-image:none;' >
+                   					<span class="page_name">All courses</span>
+                				</a>
+                				All Courses				
+							</span>	
+						<ul class="ltrs" >		  
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">A</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">B</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">C</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">D</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">E</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">F</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">G</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">H</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">I</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">J</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">K</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">L</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">M</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">N</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">O</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">P</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">Q</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">R</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">S</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">T</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">U</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">V</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">W</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">X</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">Y</a></li>
+						  <li><a href="" onClick="toggleSubjectLetter(this.innerHTML);return false;">Z</a></li>			  		  
+						  <li>   
+							<div class="mm-data cols_2" id="subjectMenuItems" > 
+							  <ul class="sub-menu with-counts lhome" id="home" style="margin:0px !important; padding:10px 0 5px 10px !important; width:100%; display:block ;">
+								<?
+								foreach($categories as $key => $cat_info)
+								   {
+										if(count($cat_info)>0)
+										{
+											foreach($cat_info as $cat)
+											{ ?>							  
+												<li><a href="<?=base_url().$cat['slug']?>"><?=$cat['name']?><span> (<?=$cat['count']?>)</span></a></li>									
+											<? } 
+										} 
+									}							
+								?>
+							  </ul>
+							<?php					  
+						   foreach($categories as $key => $cat_info)
+						   {
+								if(count($cat_info)>0)
+								{
+									
+						  
+						  ?>					  
+								  <ul class="sub-menu with-counts l<?=$key?>"  style="margin:0px !important; padding:10px 0 5px 10px !important; width:100%; display:none ;">
+								  <? foreach($cat_info as $cat)
+									{ ?>							  
+										<li><a href="<?=base_url().$cat['slug']?>"><?=$cat['name']?><span> (<?=$cat['count']?>)</span></a></li>									
+									<? } ?>
+								  </ul>
+							<? } 
+							}
+							?>			
+						  </div>
+						  </li>
+						</ul>
+        			</li>
+				</ul>
                 </a>
             </li>
             <li class="pages_3">
-            	<a href="#">
+            	 <a href="<?=base_url()?>blog">
                 	<div class="blog" align="center">
                     	<img class="blog"  src="<?php echo theme_img("pre_final/blogs.png");?>"/>
                     </div>
@@ -79,7 +151,7 @@ experience this site.
                 </a>
             </li>
             <li class="pages_4">
-            	<a href="#">
+            	<a href="<?=base_url()?>tutors">
                 	<div class="tutors" align="center">
                     	<img class="tutors" src="<?php echo theme_img("pre_final/tutors.png");?>"/>
                     </div>
@@ -90,7 +162,7 @@ experience this site.
                 </a>
             </li>
             <li class="pages_5">
-            	<a href="#">
+            	 <a href="<?=base_url()?>faq">
                 	<div class="faq" align="center">
                     	<img class="faq" src="<?php echo theme_img("pre_final/faq.png");?>"/>
                     </div>
@@ -101,7 +173,7 @@ experience this site.
                 </a>
             </li>
             <li class="pages_6 last_menu">
-            	<a href="#">
+            	<a href="<?=base_url()?>contact-us1">
                 	<div class="contect" align="center">
                     	<img  class="contect" src="<?php echo theme_img("pre_final/contect.png");?>"/>
                     </div>
@@ -113,138 +185,9 @@ experience this site.
             </li>
             
         </ul>
-    <!--<ul class="menu_block">
-	<li class="first_block">
-    	<ul class="main_menu">
-            <li>
-                 <a href="<?=base_url()?>">
-            <div class="page_1" align="center">
-                <div class="img_div">
-                    <img class="home_img" src="<?php echo theme_img("t_icons/home.png");?>"/>
-                    <img class="home_h" src="<?php echo theme_img("t_icons/home_h.png");?>" />
-                 </div>
-                <div class="text_div" >
-                 Home
-                 </div>
-            
-            </div>
-            </a>
-        </li>
-            <li>
-                <a href="<?=base_url()?>cart/allcourses/">
-            <div class="page_2" align="center">
-            
-                <div class="img_div">
-                    <img class="all_couses"  src="<?php echo theme_img("t_icons/all_couses.png");?>"/>
-                    <img class="all_couses_h"  src="<?php echo theme_img("t_icons/all_courses_h.png");?>"/>
-                 </div>
-                <div class="text_div">
-                    All Courses
-                 </div>   
-            </div>
-            	</a>
-            </li>
-            <li>
-                      <a href="<?=base_url()?>blog">
-                <div class="page_3" align="center">
-                    <div class="img_div">
-                        <img class="blogs" src="<?php echo theme_img("t_icons/blogs.png");?>"/>
-                        <img class="blogs_h" src="<?php echo theme_img("t_icons/blog_h.png");?>"/>
-                     </div>
-                    <div class="text_div">
-                        Blog
-                     </div>
-                
-                </div>
-                </a>
-            </li>
-            <li>home 4</li>
-            <li>home 5</li>
-        </ul>
-    </li>
-</ul>-->
-    <!--<div class="top_menu">
- 
-	<div class="menu_content">
-    <div class="left_div">
-    <a href="<?=base_url()?>">
-        <div class="page_1" align="center">
-            <div class="img_div">
-                <img class="home_img" src="<?php echo theme_img("t_icons/home.png");?>"/>
-                <img class="home_h" src="<?php echo theme_img("t_icons/home_h.png");?>"/>
-             </div>
-            <div class="text_div" >
-             Home
-             </div>
-        
-        </div>
-        </a>
-        <a href="<?=base_url()?>cart/allcourses/">
-        <div class="page_2" align="center">
-        
-            <div class="img_div">
-                <img class="all_couses"  src="<?php echo theme_img("t_icons/all_couses.png");?>"/>
-                <img class="all_couses_h"  src="<?php echo theme_img("t_icons/all_courses_h.png");?>"/>
-             </div>
-            <div class="text_div">
-            	All Courses
-             </div>   
-        </div>
-        </a>
-        <a href="<?=base_url()?>blog">
-        <div class="page_3" align="center">
-            <div class="img_div">
-                <img class="blogs" src="<?php echo theme_img("t_icons/blogs.png");?>"/>
-                <img class="blogs_h" src="<?php echo theme_img("t_icons/blog_h.png");?>"/>
-             </div>
-            <div class="text_div">
-             	Blog
-             </div>
-        
-        </div>
-        </a>
-        <a href="<?=base_url()?>tutors">
-        <div class="page_4" align="center">
-            <div class="img_div">
-                <img class="tutors" src="<?php echo theme_img("t_icons/tutors.png");?>"/>
-                <img class="tutors_h" src="<?php echo theme_img("t_icons/tutors_h.png");?>"/>
-             </div>
-            <div class="text_div">
-            	Tutor
-             </div>
-        
-        </div>
-        </a>
-        <a href="<?=base_url()?>faq">
-        <div class="page_5" align="center">
-            <div class="img_div">
-                <img class="faq" src="<?php echo theme_img("t_icons/faq.png");?>"/>
-                <img class="faq_h" src="<?php echo theme_img("t_icons/faq_h.png");?>"/>
-             </div>
-            <div class="text_div">
-             	FAQ's
-             </div>
-        
-        </div>
-        </a>
-        <a href="<?=base_url()?>contact-us1">
-        <div class="page_6" align="center">
-            <div class="img_div">
-                <img class="contect" src="<?php echo theme_img("t_icons/contect.png");?>"/>
-                <img class="contect_h" src="<?php echo theme_img("t_icons/contect_h.png");?>"/>
-             </div>
-            <div class="text_div">
-             	Contact
-             </div>
-        
-        </div>
-        </a>
-        
-        </div>
-    </div>
-</div>-->
+
 	
-   <!--<ul id="menu-primary-navigation" class="tiled-menu" style="margin-left: 0px;">
+   <?php /*?><ul id="menu-primary-navigation" class="tiled-menu" style="margin-left: 0px;">
         <li   class="menu-portfolio" >All Courses
             <span class="menu-item-wrap">
                 <a  href="<?=base_url()?>cart/allcourses/" style='background-color:#cecece; background-size:cover; background-image:none;' >
@@ -319,7 +262,7 @@ experience this site.
 	 		
         </li>
       
-	</ul>-->
+	</ul><?php */?>
 </nav>
   
   <script type="text/javascript">
