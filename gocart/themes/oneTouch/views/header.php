@@ -23,24 +23,37 @@ experience this site.
 <div align="right" style="font-size:16px; color:#57BAE8;"> </div>
 
 	
-   
+     <script>
+        jQuery(document).ready(function(){
+            jQuery(".chosen").data("placeholder","Select Frameworks...").chosen();
+        });
+  </script>  
+
+  
+     
    <div id="eyebrow">
      <div class="clear"> </div>
     </div>
     <div class="clear"></div>
- <link href="http://localhost/UKDEV/assets/opencollege/admin/js/plugins/chosen/chosen/chosen.css" rel="stylesheet">
-
-<script language="javascript" type="text/javascript" src="http://localhost/UKDEV/assets/opencollege/admin/js/plugins/chosen/chosen/chosen.jquery.min.js"></script>
+ 
 
     <div class="top_menu">
-	<select style=" display:block; " class="chzn-select" >
-   <?php foreach($this->courses as $course):?>    	
-		  <option value="<?=$course['id']?>"><?=$course['name']?></option>                            
-   <?php  endforeach;?>
-   	</select>		
+	  
+    
+     
+    
+    
+      
+	
 	
 
-	<div class="cart" >				
+	<div class="cart" >		
+      <select class="chosen" style="width:300px;" >
+         <option value="-1">Choose course</option>
+   <?php foreach($this->courses as $course):?>        
+          <option value="<?=$course['slug']?>"><?=$course['name']?></option>                            
+   <?php  endforeach;?>
+       </select>        		
 		<a href="<?php echo site_url('cart/view_cart');?>">
     	<span class="cart_img"><img src=" <?php echo theme_img("t_icons/cart.png");?>"/></span>
     	<p class="cart_text">There are (<?=$this->go_cart->total_items()?>) item in your cart</p>
