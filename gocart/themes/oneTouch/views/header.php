@@ -6,7 +6,7 @@
 browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to
 experience this site.
 </div><![endif]-->
-<section id="header" class="row" role="banner">
+<section id="" class="row" role="banner">
 <div class="four columns logo">
     <a  href="<?=base_url()?>cart/" style="margin:0px !important">
         <img src="<?php echo theme_img("custom-slider-img/logouk.png")?>" alt="OneTouch"></a>

@@ -17,13 +17,11 @@
 
               
 <div class="row">
-    <h1 class="page-title" style="margin-left:85px;">
-	<a class="" href="javascript:void(0)">you can login here</a>
+    <h1 class="page-title" style="margin-left:20px;">
+	<a class="black" href="javascript:void(0)">you can login here</a>
 	</h1>
 </div>
-<div class="row">
-    <div class="line"> </div>
-</div>
+
     <div class="container">
     <script type="text/javascript">
 function showStuff() {
@@ -78,7 +76,7 @@ function showStuff() {
             <input class="submitbutton" name="submitted" id="wp-submit" value="Login →" type="submit">
             <input class="submitbutton" name="" id="wp-submit" value="Register" type="button" onClick="window.location='<?php echo site_url('tutor_login/register')?>'">
             
-            <a href="<?php echo site_url('tutor_login/forgot_password')?>">Lost password?</a></p>
+            <a class="black" href="<?php echo site_url('tutor_login/forgot_password')?>">Lost password?</a></p>
           <div>
             <input name="redirect_to" class="redirect_to" value="" type="hidden">
             <input name="testcookie" value="1" type="hidden">
