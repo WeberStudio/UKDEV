@@ -35,11 +35,13 @@ return false;
 ?>
 
 <div class="row">
-    <h1 class="page-title" style="margin-left:20px;">
-	<a class="black" href="javascript:void(0)">you can login here</a>
+    <h1 class="page-title" style="margin-left:85px;">
+	<a class="" href="javascript:void(0)">you can login here</a>
 	</h1>
 </div>
-
+<div class="row">
+<div class="line"> </div>
+</div>
  <script type="text/javascript">
 function showStuff() {
     document.getElementById('closee').style.display = 'none';
@@ -79,7 +81,7 @@ function showStuff() {
 <div class="row">
   <div id="content" class="fifteen columns">
   <!---=======hidden form start--->
-    <!--<p class="woocommerce_info">Already registered? <a href="" class="" onclick="return toggle()">Click here to login</a></p>
+    <p class="woocommerce_info">Already registered? <a href="" class="" onclick="return toggle()">Click here to login</a></p>
     <form style="display:none;" id="obj" method="post" class="login" action="<?=base_url()?>secure/login">
       <p>If you have shopped with us before, please enter your details in the
         boxes below. If you are a new customer please proceed to the Billing 
@@ -97,10 +99,10 @@ function showStuff() {
         <input id="_n" name="_n" value="" type="hidden">
         <input name="_wp_http_referer" value="" type="hidden">
         <input class="button" name="submitted" value="Login" type="submit">
-        
+        <!--<input name="redirect" value="" type="hidden">-->
         <a class="lost_password" href="<?php echo site_url('secure/forgot_password')?>">Lost Password?</a> </p>
       <div class="clear"></div>
-    </form>-->
+    </form>
    <!---=======hidden form end--->
     
     <?php echo form_open('secure/register'); ?>
@@ -168,7 +170,7 @@ function showStuff() {
             <?php echo lang('account_newsletter_subscribe');?> </label>
           </p>
         <p class="form-row " id="billing_company_field">
-        <input type="submit" value="<?php echo lang('form_register');?>" class="button" style="height: 34px; width: 74px;" />
+        <input type="submit" value="<?php echo lang('form_register');?>" class="btn btn-primary" style="height: 34px; width: 74px;" />
 		</p>  
             
       </div>
