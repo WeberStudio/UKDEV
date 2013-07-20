@@ -9,54 +9,54 @@
     <div class="block_content" >
      	<div class="seven columns">
          <div class="two columns firstt">
-        <span class=""><img class="icon" src="<?php echo theme_img('t_icons/Payments');?>"\> 
+        <span class=""><img class="icon" src="<?php echo theme_img('t_icons/Payments.png');?>"\> 
         
         </span>
          <b  class="bottom_page_head">Payment</b>
-        <p class="bottom_page_content">we accept all type of dibit and credit card. All card can be processed using Sagepay is... <b class="read_more">Read More</b></p>
+        <p class="bottom_page_content">We accept all types of debit and credit card. All cards can be processed using... <b class="read_more"><a href="<?=base_url()?>payment" >Read More</a></b></p>
         </div>
         
          <div class="two columns">
-        <span><img class="icon" src="<?php echo theme_img('t_icons/Payments');?>"\> </span>
+        <span><img class="icon" src="<?php echo theme_img('t_icons/index-page-02-Recovered_05.gif');?>"\> </span>
         <b  class="bottom_page_head">NUS Extra Card</b>
-        <p class="bottom_page_content">UK Open College is pleased to announce that we are now an NUS Union of)...<b class="read_more">Read More</b> </p>
+        <p class="bottom_page_content">UK Open College is pleased to announce that we are now an NUS...<b class="read_more"><a href="<?=base_url()?>nus-extra-card" >Read More</a></b> </p>
         </div>
         
          <div class="two columns">
-        <span><img class="icon" src="<?php echo theme_img('t_icons/Payments');?>"\></span>
-        <b  class="bottom_page_head">Payment</b>
-        <p class="bottom_page_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. been the... <b class="read_more">Read More</b></p>
+        <span><img class="icon" src="<?php echo theme_img('t_icons/index-page-02-Recovered_07.gif');?>"\></span>
+        <b  class="bottom_page_head">Complaints</b>
+        <p class="bottom_page_content">Our aim at UK Open College is to provide a professional yet...<b class="read_more"><a href="<?=base_url()?>complaints" >Read More</a></b></p>
         </div>
         
          <div class="two columns lastone">
-        <span><img class="icon" src="<?php echo theme_img('t_icons/Payments');?>"\> </span>
-        <b  class="bottom_page_head">Payment</b>
-        <p class="bottom_page_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry.  been the...<b class="read_more">Read More</b></p>
+        <span><img class="icon" src="<?php echo theme_img('t_icons/index-page-02-Recovered_09.gif');?>"\> </span>
+        <b  class="bottom_page_head">How It Works?</b>
+        <p class="bottom_page_content">Home study courses are now seen as the ideal way of learning...<b class="read_more"><a href="<?=base_url()?>how-it-works" >Read More</a></b></p>
         </div>
        
        
          <div class="two columns firstt">
-        <span><img class="icon" src="<?php echo theme_img('t_icons/Payments');?>"\> </span>
-        <b  class="bottom_page_head">Payment</b>
-        <p class="bottom_page_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry.  been the...<b class="read_more">Read More</b> </p>
+        <span><img class="icon" src="<?php echo theme_img('t_icons/index-page-02-Recovered_16.gif');?>"\> </span>
+        <b  class="bottom_page_head">Qualifications</b>
+        <p class="bottom_page_content">We have complied an overview below to try and help explain the...<b class="read_more"><a href="<?=base_url()?>qualification" >Read More</a></b> </p>
         </div>
         
          <div class="two columns">
-        <span><img class="icon" src="<?php echo theme_img('t_icons/Payments');?>"\> </span>
-        <b  class="bottom_page_head">Payment</b>
-        <p class="bottom_page_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry.  been the... <b class="read_more">Read More</b></p>
+        <span><img class="icon" src="<?php echo theme_img('t_icons/index-page-02-Recovered_17.gif');?>"\> </span>
+        <b  class="bottom_page_head">Price Promise</b>
+        <p class="bottom_page_content">We offer a price promise to beat any quote you have received from... <b class="read_more"><a href="<?=base_url()?>price-promise" >Read More</a></b></p>
         </div>
         
          <div class="two columns">
-        <span><img class="icon" src="<?php echo theme_img('t_icons/Payments');?>"\> </span>
-        <b  class="bottom_page_head">Payment</b>
-        <p class="bottom_page_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry.  been the...<b class="read_more">Read More</b>   </p>
+        <span><img class="icon" src="<?php echo theme_img('t_icons/index-page-02-Recovered_15.gif');?>"\> </span>
+        <b  class="bottom_page_head">Special Considerations</b>
+        <p class="bottom_page_content">Here at UK Open College we endeavour to make our courses...<b class="read_more"><a href="<?=base_url()?>special-considerations" >Read More</a></b>   </p>
         </div>
         
          <div class="two columns lastone">
-        <span><img class="icon" src="<?php echo theme_img('t_icons/Payments');?>"\> </span>
-        <b  class="bottom_page_head">Qualification</b>
-        <p class="bottom_page_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry.  been the...<b class="read_more">Read More</b></p>
+        <span><img class="icon" src="<?php echo theme_img('t_icons/index-page-02-Recovered_18.png');?>"\> </span>
+        <b  class="bottom_page_head">UCAS Points</b>
+        <p class="bottom_page_content">UCAS points or credits, what they are and what they are used for...<b class="read_more"><a href="<?=base_url()?>ucas-points" >Read More</a></b></p>
         </div>
          </div>
     </div>

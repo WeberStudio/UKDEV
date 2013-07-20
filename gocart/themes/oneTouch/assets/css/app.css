@@ -2301,7 +2301,7 @@ div.item, .item div{
 
 .sort-panel .current a, .sort-panel a:hover {
 
-    color: #1F9ED9;
+    color: #9599a2;
 
 }
 
@@ -2363,7 +2363,7 @@ div.item, .item div{
 
 .works-list .item .description {
 
-    bottom: -100%;
+    bottom: -70%;
 
     height: 100%;
 
@@ -4052,7 +4052,7 @@ form  label {
 
     position: absolute;
 
-    bottom: 20px;
+    /*bottom: 20px;*/
 
     background: url("../images/icons/slider-home-icon.png") 15px 9px no-repeat;
 
@@ -6338,6 +6338,16 @@ p.readmore{ text-align: center;}
 {
 	float:right;
 }
+
+.read_more a {
+	color:#000000;
+	text-decoration:none;
+	line-height:inherit
+}
+.read_more a:hover {
+	color:#000000
+}
+
 
 /*top footer end*/
 .t_footer_img
