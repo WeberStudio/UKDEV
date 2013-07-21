@@ -27,7 +27,7 @@ ul.simpleTabsNavigation li a { border:0px solid #E0E0E0; text-decoration:none; f
 	height:40px;
 	line-height:40px;
 	padding:0px 23.8px;
-	cursor:pointer;}
+	/*cursor:pointer;*/}
 
 ul.simpleTabsNavigation li a:hover { color:#808080; }
 

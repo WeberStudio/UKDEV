@@ -595,18 +595,21 @@
                                 <!-- <li class="reviews_tab"><a href="#tab-reviews">Reviews (0)</a></li>-->
 
                                 <? if(!empty($product_tabs)){
-
+										$count = 0;
                                         foreach($product_tabs as $tabs)
 
                                         {
 
                                         ?>
+											<?php if($count==0){?>
+                                            <li style="margin-bottom: 0px;" class="reviews_tab"><a class="current" href="#<?=str_replace(' ', '-', strtolower($tabs['tab_title']))?>"><?=$tabs['tab_title']?></a></li>
+                                            <?php } else{?>
+                                            
+                                        <li style="margin-bottom: 0px;" class="reviews_tab"><a class="" href="#<?=str_replace(' ', '-', strtolower($tabs['tab_title']))?>"><?=$tabs['tab_title']?></a></li>
+												<?php }?>
 
-                                        <li style="margin-bottom: 0px;" class="reviews_tab"><a href="#<?=str_replace(' ', '-', strtolower($tabs['tab_title']))?>"><?=$tabs['tab_title']?></a></li>
 
-
-
-                                        <?    }
+                                        <?   $count++; }
 
                                     } 
 
@@ -788,7 +791,7 @@
 
 
 
-                                <span class="quantity"><?=$qty?> × $<span class="amount"><?=$price?></span></span>
+                                <span class="quantity"><?=$qty?> × £<span class="amount"><?=$price?></span></span>
 
                             </li>
 
