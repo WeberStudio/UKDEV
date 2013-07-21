@@ -251,11 +251,11 @@
  <div style="border-top : 5px solid #14166f;"></div>
  <section style="padding: 30px 0 10px 0;margin: 0 auto 0 auto; background: #282a2b !important;">    
  <div class="row">
-            <div class="five columns">
+            <div style="float: left;">
             Copyrights @ 2013 & All Rights Reserved
             </div>
-             <div class="five columns" style="text-align: right">
-                 <a href="<?php echo site_url('tutor_login');?>"  style="font-size:12px;"><?php echo "Tutor Login"; ?></a> / <a href="privacy-policy">Privacy Policy</a> / <a href="terms-of-service">Terms of Service</a> / <a href="faq">FAQ's</a>
+             <div class="" style="text-align: right">
+                 <a href="<?php echo site_url('tutor_login');?>"  style="font-size:12px;"><?php echo "Tutor Login"; ?></a> / <a href="privacy-policy">Privacy Policy</a> / <a href="terms-of-service">Terms of Service</a> / <a href="faq">FAQ's</a> / <a href="about-us">About Us</a> / <a href="cancellation-returns">Cancellation Returns</a> / <a href="student-feedback">Student Feedback</a> / <a href="corporate-clients">Corporate Clients</a> / <a href="student-forum">Student Forum</a>
             </div>
         </div> 
  </section>      
