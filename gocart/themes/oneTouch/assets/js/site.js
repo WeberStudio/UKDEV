@@ -71,7 +71,7 @@ jQuery(function () {
         var el = jQuery(this);
         var link_text = el.text();
         if (jQuery(this).parent().parent().parent().parent().prop("tagName") == 'LI')
-            link_text = ' - ' + link_text;
+            link_text = '  ' + link_text;
         jQuery("<option />", {
             "value":el.parent().attr("href"),
             "text":link_text
