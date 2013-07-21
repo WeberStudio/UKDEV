@@ -36,7 +36,7 @@ experience this site.
     </div>
     <div class="clear"></div>
  
-<div style=" margin-left:100px; margin-top: 5px; float: left;">
+<div style=" margin-left:230px; margin-top: 5px; float: left;">
 	  <select class="chosen" style="width:300px;" >
          <option value="-1">Search Course</option>
    <?php foreach($this->courses as $course):?>        
