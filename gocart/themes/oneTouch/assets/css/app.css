@@ -3594,7 +3594,7 @@ article .entry-thumb {
 
 #respond p {
 
-    text-align: right;
+    /*text-align: right;*/
 
 }
 
@@ -5996,7 +5996,7 @@ p.readmore{ text-align: center;}
 .pages_2:hover .all_courses_h
 {
 	display:block;
-	margin-bottom:5px;
+	margin-bottom:6px;
 }
 .pages_2:hover .link-text
 {
