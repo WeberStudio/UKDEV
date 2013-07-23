@@ -523,6 +523,7 @@ class Cart extends Front_Controller {
 
 		//get the product
          // DebugBreak();
+		
 		$data['product']		= $this->Product_model->get_product($id);
 //$this->show->pe($data['product']);
 		
@@ -607,12 +608,18 @@ class Cart extends Front_Controller {
 		$quantity 		= $this->input->post('quantity');
 		$post_options 	= $this->input->post('option');
 		$slug 			= $this->input->post('slug');
-
+		$option_prices 	= $this->input->post('price_option');
+//echo $option_price; exit;
 		
 
 		// Get a cart-ready product array
 
 		$product = $this->Product_model->get_cart_ready_product($product_id, $quantity);
+		//unset($product['price']);
+		//$product['price'] = $option_prices;
+		//$replace = array_replace($product, $option_price);
+		
+		//$this->show->pe($product);
 
 		
 

@@ -250,6 +250,7 @@ Class Product_model extends CI_Model
 	function get_product($id, $related=true)
 	{
 		$result	= $this->db->get_where('products', array('id'=>$id))->row();
+		//echo"<pre>" ;print_r($result);
 		if(!$result)
 		{
 			return false;
@@ -279,6 +280,33 @@ Class Product_model extends CI_Model
 		else
 		{
 			$result->related_products	= array();
+		}
+		
+		$p_option	= json_decode($result->price_options);
+		 
+			if(!empty($p_option))
+		{
+			
+			//build the where
+			$where = false;
+			foreach($p_option as $r)
+			{
+				if(!$where)
+				{
+					$this->db->where('p_option_id', $r);
+				}
+				else
+				{
+					$this->db->or_where('p_option_id', $r);
+				}
+				$where = true;
+			}
+		
+			$result->price_options	= $this->db->get('product_price_options')->result();
+		}
+		else
+		{
+			$result->price_options	= array();
 		}
 		$result->categories			= $this->get_product_categories($result->id);
 	
