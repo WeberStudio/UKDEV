@@ -32,25 +32,27 @@ experience this site.
   
      
    <div id="eyebrow">
-		<div class="clear"> </div>
-	</div>
-	<div class="clear"></div>
-	
-	<div class="top_menu">
-	   <div style=" margin-left:230px; margin-top: 5px; float: left;">
-		<select class="chosen" style="width:300px;" >
-			 <option value="-1">Choose course</option>
-			<?php foreach($this->courses as $course):?>        
-			  <option value="<?=$course['slug']?>"><?=$course['name']?></option>                            
-			<?php  endforeach;?>
-		</select>                
-	</div>
-	<div class="cart" >
-	<a href="<?php echo site_url('cart/view_cart');?>">
-	<span class="cart_img"><img src=" <?php echo theme_img("t_icons/cart.png");?>"/></span>
-	<p class="cart_text">There are (<?=$this->go_cart->total_items()?>) item in your cart</p>
-	</a>
-	</div>
+     <div class="clear"> </div>
+    </div>
+    <div class="clear"></div>
+ 
+<div style=" margin-left:100px; margin-top: 5px; float: left;">
+	  <select class="chosen" style="width:300px;" >
+         <option value="-1">Select Course</option>
+   <?php foreach($this->courses as $course):?>        
+          <option value="<?=$course['slug']?>"><?=$course['name']?></option>                            
+   <?php  endforeach;?>
+       </select>                
+     </div>
+    <div class="top_menu">
+	  	   
+	<div class="cart" >		
+      
+		<a href="<?php echo site_url('cart/view_cart');?>">
+    	
+    	<p class="cart_text"><span class="cart_img"><img src=" <?php echo theme_img("t_icons/cart.png");?>"/></span>There are (<?=$this->go_cart->total_items()?>) item in your cart</p>
+        </a>
+    </div>
     
     </div>
    
@@ -65,7 +67,7 @@ experience this site.
                     	<img class="home_h" src="<?php echo theme_img("pre_final/home_h.png");?>" />
                     </div>
                     
-                    <span class="page_name">Home</span>
+                    <span class="page_name"><a href="<?=base_url()?>"><span class="link-text">Home</span></a></span>
                 </a>
             </li>
             <li class="pages_2">
@@ -77,13 +79,13 @@ experience this site.
         				<li   class="menu-portfolio"  style="margin:0px;">
 							<span class="menu-item-wrap">							
 							
-							<div class="all_courses" align="center">
+							<div class="all_courses" align="center" style="margin-left: -10px; margin-bottom:3px; margin-bottom: -2px;">
 								<img class="all_courses" src=" <?php echo theme_img("pre_final/all_courses.png");?>"/>
 							</div>
 							<div class="all_courses_h" align="center">
 								<img class="all_courses_h" src="<?php echo theme_img("pre_final/all_courses_h.png");?>" />
 							</div>
-                   					<span class="page_name">All courses</span> 
+                   					<span class="page_name"><a  href="<?=base_url()?>cart/allcourses/"><span class="link-text">All Courses</span></a></span> 
 									<!--<span class="arrow">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</span>    -->           				
 							             							
 							</span>	
@@ -177,7 +179,7 @@ experience this site.
                     <div class="blogs_h"  align="center">
                     	<img class="blogs_h" src="<?php echo theme_img("pre_final/blogs_h.png");?>"/>
                     </div>
-                    <span class="page_name">blog</span>
+                    <span class="page_name"><a href="<?=base_url()?>blog"><span class="link-text">blog</span></a></span>
                 </a>
             </li>
             <li class="pages_4">
@@ -188,7 +190,7 @@ experience this site.
                     <div  class="tutors_h" align="center">
                     	<img class="tutors_h" src="<?php echo theme_img("pre_final/tutors_h.png");?>"/>
                     </div>
-                    <span class="page_name">tutor</span>
+                    <span class="page_name"><a href="<?=base_url()?>tutors"> <span class="link-text">tutor</span></a></span>
                 </a>
             </li>
             <li class="pages_5">
@@ -199,7 +201,7 @@ experience this site.
                     <div class="faq_h" align="center">
                     	<img class="faq_h" src="<?php echo theme_img("pre_final/faq_h.png");?>" />
                     </div>
-                    <span class="page_name">faq's</span>
+                    <span class="page_name"><a href="<?=base_url()?>faq"><span class="link-text">faq's</span></a></span>
                 </a>
             </li>
             <li class="pages_6 last_menu">
@@ -210,7 +212,7 @@ experience this site.
                     <div class="contect_h" align="center">
                     	<img class="contect_h" src="<?php echo theme_img("pre_final/contect_h.png");?>"/ >
                     </div>
-                    <span class="page_name">contact</span>
+                    <span class="page_name"><a href="<?=base_url()?>contact-us1"> <span class="link-text">contact</span></a></span>
                 </a>
             </li>
             

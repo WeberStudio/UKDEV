@@ -112,7 +112,7 @@
                  
                		<li class="accordion-group color_7 <?php echo $active_catalog; ?>" onclick="set_module('catalog')" >
                     <a class="accordion-toggle widgets collapsed " data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse1">
-                        <img src="<?=base_url().ASSETS_PATH?>img/menu_icons/forms.png"><span>Catalog</span></a>
+                        <img src="<?=base_url().ASSETS_PATH?>img/menu_icons/forms.png"><span>Catalogue</span></a>
                     <ul id="collapse1" class="accordion-body collapse <?php echo $active_cat; ?>">
                         <li><a href="<?=base_url().ADMIN_PATH?>categories">Categories</a></li>
                         <li><a href="<?=base_url().ADMIN_PATH?>products">Courses</a></li>

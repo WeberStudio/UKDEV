@@ -12,14 +12,19 @@
                 
                   <?php
                   
-                  //$this->show->pe($this->categories);
+                // $this->show->pe($this->categories[6]);
+				 //$child_cat ="";
                   $count = 0;
                   foreach($this->categories as $cat_info){
                  //echo '<pre>' ;print_r($cat_info); exit;
+				 	
                     if($cat_info['category']->publish_by_super==1){
+						if($cat_info['category']->name!='Administration' && $cat_info['category']->name!='Nutrition Courses Online'){
                   $count = $count + 1; 
+				 
                   if($count%2==0)
                   {
+					  
                   ?>
                       <div class="item half even"> 
                         <img src="<?php echo catogery_img('images/small/'.$cat_info['category']->image); ?>" style="margin:0 0;" alt="<?=$cat_info['category']->img_alt?>" title="<?=$cat_info['category']->img_title?>"  >
@@ -60,7 +65,7 @@
                       }
                     }  
                      
-                  } ?>              
+                  }} ?>
               </div>
             </div>
           </div>

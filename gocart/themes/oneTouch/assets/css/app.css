@@ -1817,7 +1817,7 @@ Alternative dropdown style
 
 .scroll-box::-webkit-scrollbar-thumb {
 
-    background: #57bae8;
+    background: #4D4D4D;
 
 }
 
@@ -3594,7 +3594,7 @@ article .entry-thumb {
 
 #respond p {
 
-    text-align: right;
+    /*text-align: right;*/
 
 }
 
@@ -5924,8 +5924,8 @@ p.readmore{ text-align: center;}
 .cart
 {
 	
-	overflow:auto;
-	margin:23px 0 0 0; padding:0px;
+	
+
 }
 .cart_text
 {
@@ -5939,7 +5939,7 @@ p.readmore{ text-align: center;}
 .cart_img
 {
 	
-	margin:6px 18px 6px 6px; padding:0px;
+	margin:0px 18px 6px 6px; padding:0px;
 	float:right;
  
 }
@@ -5980,7 +5980,7 @@ p.readmore{ text-align: center;}
 	display:block;
 	margin-bottom:5px;
 }
-.pages_1:hover .page_name
+.pages_1:hover .link-text
 {
 	color:#00F !important;
 	font-family:Verdana, Geneva, sans-serif;
@@ -5996,11 +5996,12 @@ p.readmore{ text-align: center;}
 .pages_2:hover .all_courses_h
 {
 	display:block;
-	margin-bottom:5px;
+	margin-bottom:6px;
 }
-.pages_2:hover .page_name
+.pages_2:hover .link-text
 {
 	color:#00F !important;
+	
 	font-family:Verdana, Geneva, sans-serif;
 	
 	
@@ -6015,7 +6016,7 @@ p.readmore{ text-align: center;}
 	display:block;
 	margin-bottom:5px;
 }
-.pages_3:hover .page_name
+.pages_3:hover .link-text
 {
 	color:#00F !important;
 	font-family:Verdana, Geneva, sans-serif;
@@ -6032,7 +6033,7 @@ p.readmore{ text-align: center;}
 	display:block;
 	margin-bottom:5px;
 }
-.pages_4:hover .page_name
+.pages_4:hover .link-text
 {
 	color:#00F !important;
 	font-family:Verdana, Geneva, sans-serif;
@@ -6049,7 +6050,7 @@ p.readmore{ text-align: center;}
 	display:block;
 	margin-bottom:5px;
 }
-.pages_5:hover .page_name
+.pages_5:hover .link-text
 {
 	color:#00F !important;
 	font-family:Verdana, Geneva, sans-serif;
@@ -6066,7 +6067,7 @@ p.readmore{ text-align: center;}
 	display:block;
 	margin-bottom:5px;
 }
-.pages_6:hover .page_name
+.pages_6:hover .link-text
 {
 	color:#00F !important;
 	font-family:Verdana, Geneva, sans-serif;
@@ -6074,7 +6075,7 @@ p.readmore{ text-align: center;}
 	
 }
 
-.page_name
+.link-text
 {
 	
 	color:#000 !important;
@@ -6369,3 +6370,7 @@ a.black
 	margin-left:10px;
 }
 /* black anchor end */
+input.textField
+{
+	background:#F8ED9E;
+}

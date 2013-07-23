@@ -20,7 +20,7 @@ $last		= array('id'=>'billing_last_name','class'=>'input-text','placeholder'=>'L
 $email		= array('id'=>'bill_email', 'class'=>'input-text', 'placeholder'=>'E-Mail', 'name'=>'email', 'value'=>set_value('email'));
 $phone		= array('id'=>'bill_phone', 'class'=>'input-text', 'name'=>'phone', 'placeholder'=>'Phone', 'value'=> set_value('phone'));
 $f_city		= array('id'=>'f_city', 'class'=>'input-text', 'placeholder'=>'City', 'name'=>'city', 'value'=>set_value('city',$city));
-$f_zip		= array('id'=>'zip_code', 'maxlength'=>'10', 'class'=>'input-text', 'placeholder'=>'Zip', 'name'=>'zip_code', 'value'=> set_value('zip',$zip));
+$f_zip		= array('id'=>'zip_code', 'maxlength'=>'10', 'class'=>'input-text', 'placeholder'=>'Post Code', 'name'=>'zip_code', 'value'=> set_value('zip',$zip));
 $f_address1	= array('id'=>'street_address', 'placeholder'=>'Address', 'class'=>'input-text', 'name'=>'street_address', 'value'=>set_value('address1'));
 $f_address2	= array('id'=>'address_line_op','class'=>'input-text','placeholder'=>'Address  (optional)','name'=>'address_line_op', 'value'=> set_value('address2'));
 $password 	= array('id'=>'password','name'=>'password','class'=>'input-text','placeholder'=>'Password'); 
@@ -50,7 +50,7 @@ return false;
 </script>
 <div class="row">
     <h1 class="page-title" style="margin-left:20px;">
-	<a class="black" href="javascript:void(0)">you can login here</a>
+	<a class="black" href="javascript:void(0)">You can login here</a>
 	</h1>
 </div>
 
@@ -139,7 +139,7 @@ function showStuff() {
 							$categories_item = explode(',',$categories_item);
 					  	}*/
 					  ?>
-                        <select data-placeholder="Choose Multiple Categories" class="chzn-select" name="categories[]" multiple="true" tabindex="5">
+                        <select data-placeholder="Choose Multiple Categories" class="choose" name="categories[]" multiple="true" tabindex="5">
                         <? if(isset($all_categories)){  ?>
                         <?php  foreach ($all_categories as $file){
 							if(in_array($file['id'], $categories_item)){ 									
@@ -159,7 +159,7 @@ function showStuff() {
 			<p class="form-row form-row-last" id="billing_last_name_field">
 					<label for="billing_last_name" class=""><?php echo "Courses";?> <abbr class="required" title="required">*</abbr>
 					</label>
-					 <select data-placeholder="Choose Multiple Courses" class="chzn-select" name="courses[]" multiple="true" tabindex="5">
+					 <select data-placeholder="Choose Multiple Courses" class="choose" name="courses[]" multiple="true" tabindex="5">
                         <? if(isset($all_courses)){  ?>
                         <?php  foreach ($all_courses as $course){
 							if(in_array($course['id'], $courses_item)){ 									

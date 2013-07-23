@@ -100,7 +100,7 @@
                         <input type="hidden" name="slug" value="<?php if($this->uri->segment(2)==""){echo $this->uri->segment(1);}
                                 if($this->uri->segment(2)!=""){echo $this->uri->segment(1)."/".$this->uri->segment(2);}?>"/>
                         <div class="quantity buttons_added"><input type="button" value="-" class="minus"><input name="quantity" data-min="1" data-max="0" value="1" size="4" title="Qty" class="input-text qty text" maxlength="12"><input type="button" value="+" class="plus"></div>
-                        <button type="submit" class="single_add_to_cart_button button alt">Add to cart</button>
+                        <button type="submit" class="single_add_to_cart_button button alt">Enrol Now</button>
                         <br/>
 						<br/>
 						<br/>
@@ -595,18 +595,21 @@
                                 <!-- <li class="reviews_tab"><a href="#tab-reviews">Reviews (0)</a></li>-->
 
                                 <? if(!empty($product_tabs)){
-
+										$count = 0;
                                         foreach($product_tabs as $tabs)
 
                                         {
 
                                         ?>
+											<?php if($count==0){?>
+                                            <li style="margin-bottom: 0px;" class="reviews_tab"><a class="current" href="#<?=str_replace(' ', '-', strtolower($tabs['tab_title']))?>"><?=$tabs['tab_title']?></a></li>
+                                            <?php } else{?>
+                                            
+                                        <li style="margin-bottom: 0px;" class="reviews_tab"><a class="" href="#<?=str_replace(' ', '-', strtolower($tabs['tab_title']))?>"><?=$tabs['tab_title']?></a></li>
+												<?php }?>
 
-                                        <li style="margin-bottom: 0px;" class="reviews_tab"><a href="#<?=str_replace(' ', '-', strtolower($tabs['tab_title']))?>"><?=$tabs['tab_title']?></a></li>
 
-
-
-                                        <?    }
+                                        <?   $count++; }
 
                                     } 
 
@@ -788,7 +791,7 @@
 
 
 
-                                <span class="quantity"><?=$qty?> × $<span class="amount"><?=$price?></span></span>
+                                <span class="quantity"><?=$qty?> × £<span class="amount"><?=$price?></span></span>
 
                             </li>
 
