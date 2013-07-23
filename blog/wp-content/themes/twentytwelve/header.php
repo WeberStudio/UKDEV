@@ -215,31 +215,64 @@ rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-wid
       <div class="clear"> </div>
     </div>
     <div class="clear"></div>
-    <div class="top_menu">
-      <div class="menu_content">
-        <div class="left_div"> <a href="http://87.106.234.213/">
-          <div class="page_1" align="center">
-            <div class="img_div"> <img class="home_img" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/t_icons/home.png"/> <img class="home_h" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/t_icons/home_h.png"/> </div>
-            <div class="text_div" > Home </div>
-          </div>
-            <a href="http://87.106.234.213/tutors">
-          <div class="page_4" align="center">
-            <div class="img_div"> <img class="tutors" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/t_icons/tutors.png"/> <img class="tutors_h" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/t_icons/tutors_h.png"/> </div>
-            <div class="text_div"> Tutor </div>
-          </div>
-          </a> <a href="http://87.106.234.213/faq">
-          <div class="page_5" align="center">
-            <div class="img_div"> <img class="faq" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/t_icons/faq.png"/> <img class="faq_h" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/t_icons/faq_h.png"/> </div>
-            <div class="text_div"> FAQ's </div>
-          </div>
-          </a> <a href="http://87.106.234.213/contact-us1">
-          <div class="page_6" align="center">
-            <div class="img_div"> <img class="contect" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/t_icons/contect.png"/> <img class="contect_h" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/t_icons/contect_h.png"/> </div>
-            <div class="text_div"> Contact </div>
-          </div>
-          </a> </div>
-      </div>
-    </div>
+    <ul class="main_menu">
+            <li class="pages_1">
+           		<a href="http://87.106.234.213/">
+                	<div class="home" align="center">
+                    	<img class="home_img" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/pre_final/home.png"/> 
+                    </div>
+                    <div class="home_h" align="center">
+                    	<img class="home_h" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/pre_final/home_h.png"/> 
+					</div>
+                    <span class="page_name">Home</span>
+                </a>
+            </li>
+			<li class="pages_2">           		
+				<a href="http://87.106.234.213/cart/allcourses/">
+                	<div class="all_courses" align="center">
+                    	<img class="all_courses" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/pre_final/all_courses.png"/> 
+                    </div>
+                    <div class="all_courses_h" align="center">
+                    	<img class="all_courses_h" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/pre_final/all_courses.png"/> 
+					</div>
+                    <span class="page_name">All courses</span>
+                </a>
+            </li>			 
+            <li class="pages_4">
+            	<a href="http://87.106.234.213/tutors">
+                	<div class="tutors" align="center">
+                    	<img class="tutors" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/pre_final/tutors.png"/> 
+                    </div>
+                    <div  class="tutors_h" align="center">
+                    	<img class="tutors_h" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/pre_final/tutors_h.png"/>
+                    </div>
+                    <span class="page_name">tutor</span>
+                </a>
+            </li>
+            <li class="pages_5">
+            	 <a href="http://87.106.234.213/faq">
+                	<div class="faq" align="center">
+                    	 <img class="faq" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/pre_final/faq.png"/> 
+                    </div>
+                    <div class="faq_h" align="center">
+                    	<img class="faq_h" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/pre_final/faq_h.png"/>
+                    </div>
+                    <span class="page_name">faq's</span>
+                </a>
+            </li>
+            <li class="pages_6 last_menu">
+            	<a href="http://87.106.234.213/contact-us1">
+                	<div class="contect" align="center">
+                    	<img class="contect" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/pre_final/contect.png"/>
+                    </div>
+                    <div class="contect_h" align="center">
+                    	<img class="contect_h" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/pre_final/contect_h.png"/>
+                    </div>
+                    <span class="page_name">contact</span>
+                </a>
+            </li>
+            
+        </ul>
   </nav>
  
 </section>

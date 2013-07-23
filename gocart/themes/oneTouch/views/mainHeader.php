@@ -40,7 +40,8 @@
 	<?php echo theme_css('options.css', true); ?>
     <?php echo theme_css('menu.css', true); ?>
 	<?php echo theme_css('woocommerce.css', true); ?>
-    <?php echo theme_css('chosen.css', true); ?>    
+    <?php echo theme_css('chosen.css', true); ?> 
+	  <?php echo theme_css('stylesheet.css', true); ?>    
 	<?php echo theme_css('fancy_dropdown.css', true); ?>
      
     <!--add the serach classess-->

@@ -54,7 +54,32 @@ function remove_option(id)
                     <div class="form-row control-group row-fluid">                      
                      <div class="controls span8">
                         <label for="slug">Course Price </label>
-                        <input type="text" id="normal-field" value="<?=set_value('name', $price)?>" name="price" class="row-fluid" placeholder="Course Price">
+                        <?php /*?><input type="text" id="normal-field" value="<?=set_value('name', $price)?>" name="price" class="row-fluid" placeholder="Course Price"><?php */?>
+						
+						<select data-placeholder="Choose Multiple Price Options" class="chzn-select" name="price[]"  id="normal-field" multiple="true" tabindex="5">
+                        <? if(isset($all_price_options)){  ?>
+                        <?php  foreach ($all_price_options as $price_options){
+                                $flag = 0;
+                                //$this->show->pe($file);
+                                for($i = 0; $i<count($all_price_options); $i++){
+                                    if(isset($product_categories[$i]->category_id) && $product_categories[$i]->category_id==$price_options['id']){ 
+                                    $flag = 1;
+                        ?>
+                                      <option  selected="selected" value="<?=$price_options['p_option_id']?>"><?=$price_options['p_option_title'].' : '.$price_options['p_option_price']?></option>
+                            
+                         <?php //$i++;
+                                     break;
+                                    }
+                                    
+                                  }
+                                if($flag==0)
+                                {?>
+                                    <option  value="<?=$price_options['p_option_id']?>"><?=$price_options['p_option_title'].' : '.$price_options['p_option_price']?></option>
+                            <?    }
+                             }
+                        } 
+                         ?>
+                        </select>
                      </div>                      
                     </div>
                     <div class="form-row control-group row-fluid">
