@@ -80,17 +80,36 @@
                   <label class="control-label span1" for="default-select"><?php echo lang('country');?> </label>
                   <div class="controls span7">
                   <?php 
-				  echo form_dropdown('country',$countries_menu,set_value('country', $country),'class="chzn-select"','id="country_id"');
+				 // print_r($countries_menu as $key => $name);
+				 // $js = 'onchange="get_all_states();"';
+				  //echo form_dropdown('country',$countries_menu,set_value('country', $country), 'class="chzn-select"',$js);
 				   ?>
+				   <select data-placeholder="Choose Multiple Categories" class="chzn-select" name="country" id="country_id"  onchange="get_zones()" >
+				   <?  foreach($countries_menu as $key => $name){ ?>				   
+						<option <? if(match_string($name,  $country)){ echo 'selected';} ?> <? if($country == $key){ echo 'selected';}?> value="<?=$key?>"><?=$name?></option>				
+					<? } 
+							
+					?>
+				
+				  </select>
+				  	
                   </div>
                 </div>
             <div class="form-row control-group row-fluid">
               <label class="control-label span1" for="hint-field"><?php echo lang('state');?><span class="help-block"></span></label>
-              <div class="controls span7">
-                <?php
-				
-				echo form_dropdown('state',$zones_menu,set_value('state', $state),'class="chzn-select"','id="f_zone_id"');
+              <div class="controls span7" id="stat_div">
+                <?php				
+				//echo form_dropdown('state',$zones_menu,set_value('state', $state),'class="chzn-select"','id="f_zone_id"');
 				?>
+				<select data-placeholder="Choose Multiple Categories" class="chzn-select" name="state" id="f_zone_id"   >
+				   <?  foreach($zones_menu as $key => $name){ ?>				   
+						<option <? if(match_string($name,  $state)){ echo 'selected';} ?> <? if($state == $key){ echo 'selected';}?> value="<?=$key?>"><?=$name?></option>	
+									
+					<?
+				
+					 } ?>
+				</select>
+				
               </div>
             </div>
             <!--<div class="form-row control-group row-fluid">
@@ -156,14 +175,49 @@
   </div>
 </div>
 </div>
+<?
+	function match_string($string,  $key)
+	{
+		
+		$string 	= strtolower($string);
+		$key 		= strtolower($key);
+		if (strpos($string ,$key) !== false)
+		{ 
+			return true; 
+		}
+		else
+		{ 
+			return false; 
+		}
+			
+	}
+?>
 <script type="text/javascript">
   var j = jQuery.noConflict();
 j(function(){
 	j('#country_id').change(function(){
-			j.post('<?php echo site_url('locations/get_zone_menu');?>',{id:j('#country_id').val()}, function(data) {
+	alert('dfsfs');
+		/*	j.post('<?php echo site_url('locations/get_zone_menu');?>',{id:j('#country_id').val()}, function(data) {
 			  j('#f_zone_id').html(data);
-			});
+			});*/
 			
 		});
 });
+function get_zones()
+{
+		var level_value = $('#country_id').val();
+		var path =  "<?php echo site_url('locations/get_zone_full_menu');?>";		
+		var dataString = 'id='+level_value;
+		$.ajax({
+			url: path, 
+			data: dataString,
+			type:'POST', 
+			success: function(data){
+			$("#stat_div").html('');
+				$("#stat_div").html(data);			
+				//alert(data);
+			}
+		});
+		
+}
 </script>

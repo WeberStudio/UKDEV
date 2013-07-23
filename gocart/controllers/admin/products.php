@@ -249,6 +249,7 @@ class Products extends Admin_Controller {
 		
 		$data['all_categories']		= $this->Category_model->get_all_categories();
 		$data['all_products']		= $this->Product_model->get_all_products_array();
+		$data['all_price_options']	= $this->Product_model->get_price_options();
 		//echo "<pre>";print_r($data['all_categories']);exit;
 		//$data['file_list']		= $this->Digital_Product_model->get_list();
 
@@ -411,7 +412,7 @@ class Products extends Admin_Controller {
 		$this->form_validation->set_rules('slug', 'lang:slug', 'trim');
 		$this->form_validation->set_rules('description', 'lang:description', 'trim');
 		$this->form_validation->set_rules('excerpt', 'lang:excerpt', 'trim');
-		$this->form_validation->set_rules('price', 'lang:price', 'trim|numeric|floatval|required');
+		$this->form_validation->set_rules('price', 'lang:price', 'required');
 		$this->form_validation->set_rules('enabled', 'lang:enabled', 'trim');
 		$this->form_validation->set_rules('meta_key', 'meta_key', 'trim');
 		$this->form_validation->set_rules('img_title', 'Image Title', 'trim');
@@ -545,7 +546,7 @@ class Products extends Admin_Controller {
 			$save['meta_key']			= $this->input->post('meta_key');
 			$save['description']		= $this->input->post('description');
 			$save['excerpt']			= $this->input->post('excerpt');
-			$save['price']				= $this->input->post('price');
+			//$save['price']				= $this->input->post('price');
 			$save['saleprice']			= $this->input->post('saleprice');
 			$save['weight']				= $this->input->post('weight');
 			$save['track_stock']		= $this->input->post('track_stock');
@@ -574,6 +575,15 @@ class Products extends Admin_Controller {
 			else
 			{
 				$save['related_products'] = '';
+			}
+			
+			if($this->input->post('price'))
+			{
+				$save['price'] = json_encode($this->input->post('price'));
+			}
+			else
+			{
+				$save['price'] = '';
 			}
 			
 			//save categories
@@ -948,12 +958,95 @@ class Products extends Admin_Controller {
 			redirect($this->config->item('admin_folder').'/products');
 		}
 	}
+		
 	
 	function delete_tab($product_id, $tab_id)
 	{
 	
 		$this->Product_model->delete_product_tab($tab_id);
 		redirect($this->config->item('admin_folder').'/products/form/'.$product_id);
+	}
+	
+	
+	
+	function price_options_form($id = false)
+	{
+				
+			
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+		$data['all_price_options']	= $this->Product_model->get_price_options();
+		//print_r($data['all_price_options']);exit;
+		$data['id'] 				= $id;
+		$data['option_text'] 		= '';
+		$data['option_price'] 		= '';
+				
+		if($id)
+		{
+			
+			$price_options				= $this->Product_model->get_price_option($id);
+			//print_r($price_options);exit;
+			
+			if(!$price_options)
+			{
+				//forum does not exist
+				$this->session->set_flashdata('error', lang('error_forum_not_found'));
+				redirect($this->config->item('admin_folder').'/products/price_options_form/'.$id);
+			}
+			
+			
+			//set values to db values
+			$data['id'] 				= $id;
+			$data['option_text'] 		= $price_options->p_option_title;
+			$data['option_price'] 		= $price_options->p_option_price;
+			
+		}
+		//echo '--'.$message_mode;exit;
+		
+		
+		
+		$this->form_validation->set_rules('option_text', 'Option Text', 'required');
+		$this->form_validation->set_rules('option_price','Option Trice', 'required');
+		
+		if($this->form_validation->run() == false)
+		{
+				
+			$this->load->view($this->config->item('admin_folder').'/includes/header');
+			$this->load->view($this->config->item('admin_folder').'/includes/leftbar');
+			$this->load->view($this->config->item('admin_folder').'/price_options_form', $data);
+			$this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
+		}
+		else
+		{
+			$save['p_option_id']		= $data['id'];
+			$save['admin_id']			= $this->admin_id;
+			$save['p_option_title']		= $this->input->post('option_text');
+			$save['p_option_price'] 	= $this->input->post('option_price');
+			
+			
+			//save the forum
+			$price_options	= $this->Product_model->product_options_save($save);
+			$this->session->set_flashdata('message', lang('message_saved_forum'));
+			
+			//go back to the forum list
+			redirect($this->config->item('admin_folder').'/products/price_options_form/');
+		}
+	
+		
+	
+	}
+	
+	function delete_price_option($id)
+	{
+	
+		if ($id)
+		{			
+			$this->Product_model->delete_price_option($id);
+			$this->session->set_flashdata('message', 'Deleted Successfully!');
+			redirect($this->config->item('admin_folder').'/products/price_options_form/');
+		}
+			
 	}
 	
 	// HARD DELETE PRODUCT

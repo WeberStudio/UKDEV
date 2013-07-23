@@ -595,4 +595,54 @@ Class Product_model extends CI_Model
 		return $result->result();
 	}
 	
+	
+	function get_price_options()
+	{
+	
+		$result	= $this->db->get('oc_product_price_options');
+		$return = $result->result_array();
+		if(count($return))
+		{
+			return $return;
+		}
+		return false;
+		
+	}
+	
+	function get_price_option($id)
+	{
+		$result	= $this->db->get_where('oc_product_price_options', array('p_option_id'=>$id))->row();
+		
+		if(count($result))
+		{
+			return $result;
+		}
+		return false;
+		
+	}
+	
+	function delete_price_option($id)
+	{
+		// delete product 
+		$this->db->where('p_option_id', $id);
+		$this->db->delete('oc_product_price_options');
+		
+	}
+	
+	function product_options_save($product_price)
+	{
+		if ($product_price['p_option_id'])
+		{
+			$this->db->where('p_option_id', $product_price['p_option_id']);
+			$this->db->update('oc_product_price_options', $product_price);
+
+			$id	= $product_price['p_option_id'];
+		}
+		else
+		{
+			$this->db->insert('oc_product_price_options', $product_price);
+			$id	= $this->db->insert_id();
+		}
+	}
+	
 }

@@ -32,27 +32,25 @@ experience this site.
   
      
    <div id="eyebrow">
-     <div class="clear"> </div>
-    </div>
-    <div class="clear"></div>
- 
-
-    <div class="top_menu">
-	  	   <div style=" margin-left:100px; margin-top: 5px; float: left;">
-	  <select class="chosen" style="width:300px;" >
-         <option value="-1">Choose course</option>
-   <?php foreach($this->courses as $course):?>        
-          <option value="<?=$course['slug']?>"><?=$course['name']?></option>                            
-   <?php  endforeach;?>
-       </select>                
-     </div>
-	<div class="cart" >		
-      
-		<a href="<?php echo site_url('cart/view_cart');?>">
-    	<span class="cart_img"><img src=" <?php echo theme_img("t_icons/cart.png");?>"/></span>
-    	<p class="cart_text">There are (<?=$this->go_cart->total_items()?>) item in your cart</p>
-        </a>
-    </div>
+		<div class="clear"> </div>
+	</div>
+	<div class="clear"></div>
+	
+	<div class="top_menu">
+	   <div style=" margin-left:230px; margin-top: 5px; float: left;">
+		<select class="chosen" style="width:300px;" >
+			 <option value="-1">Choose course</option>
+			<?php foreach($this->courses as $course):?>        
+			  <option value="<?=$course['slug']?>"><?=$course['name']?></option>                            
+			<?php  endforeach;?>
+		</select>                
+	</div>
+	<div class="cart" >
+	<a href="<?php echo site_url('cart/view_cart');?>">
+	<span class="cart_img"><img src=" <?php echo theme_img("t_icons/cart.png");?>"/></span>
+	<p class="cart_text">There are (<?=$this->go_cart->total_items()?>) item in your cart</p>
+	</a>
+	</div>
     
     </div>
    

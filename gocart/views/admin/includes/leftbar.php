@@ -80,7 +80,7 @@
 									<?php }?>
 									<? if(isset($this->admin_access) && $this->admin_access=='Course Provider'){ ?>
                                    	<option value="<?=base_url().ADMIN_PATH?>categories">Categories</option>
-                                    <option value="<?=base_url().ADMIN_PATH?>products">Courses</option>
+                                    <option value="<?=base_url().ADMIN_PATH?>products">Courses</option>									
                                     <?php }?>
                                     <? if(isset($this->admin_access) && $this->admin_access=='Invoice Admin'){ ?>
                                     <option value="<?php echo site_url($this->config->item('admin_folder').'/invoice_templates'); ?>">Invoice Template</option>
@@ -116,7 +116,8 @@
                     <ul id="collapse1" class="accordion-body collapse <?php echo $active_cat; ?>">
                         <li><a href="<?=base_url().ADMIN_PATH?>categories">Categories</a></li>
                         <li><a href="<?=base_url().ADMIN_PATH?>products">Courses</a></li>
-                        <!--<li><a href="<?=base_url().ADMIN_PATH?>digital_products">Digital Products</a></li>-->
+                        <!--<li><a href="<?=base_url().ADMIN_PATH?>digital_products">Digital Products</a></li>-->						
+						<li><a href="<?=base_url().ADMIN_PATH?>products/price_options_form">Price Options</a></li>
                     </ul>
                 </li>
                 

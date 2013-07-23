@@ -37,6 +37,7 @@ class Cart extends Front_Controller {
         //$data['homepage']            	= true;
         $count =   count($this->Product_model->count_all_published_products());
          $data['allProduct']         	= $this->Product_model->get_products_catogery_wise($row,$page);
+		 
          $this->load->library('pagination');
 
         $config['base_url']             = base_url().'/cart/allcourses/';

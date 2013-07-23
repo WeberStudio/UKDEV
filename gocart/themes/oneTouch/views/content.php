@@ -60,9 +60,7 @@
                       }
                     }  
                      
-                  } ?>
-                
-                
+                  } ?>              
               </div>
             </div>
           </div>
@@ -215,42 +213,47 @@
           </div>
         </div>-->
         <div class="bottom_content">
-
+	<a href="<?=base_url()?>video-message-from-ceo">
     <div class="qualfication">
     	<div class="image_sec_1">
         	image
         </div>
         <div class="title_sec">
-        	Qualfication
+        	Video Message From CEO
         </div>
         <div class="content_sec">
         	
-        	<p class="slide_content">The font-family property should hold several font names as a "fallback" ... Start with the font you want, and end with a generic family, to let the browser</p>
+        	<p class="slide_content">Our mission is to be the providers of flexible education to everyone; students & professionals.</p>
             
         </div>
     </div>
+	</a>
+	<a href="<?=base_url()?>success-stories">
     <div class="tutor">
     	<div class="image_sec_2">
         	image
         </div>
         <div class="title_sec">
-        	Tutor
+        	Success Stories
         </div>
         <div class="content_sec">
-        	<p>The font-family property should hold several font names as a "fallback" ... Start with the font you want, and end with a generic family, to let the browser</p>
+        	<p>Hear the success stories of our alumni. How their journey was with UK Open College?</p>
         </div>
     </div>
+	</a>
+	<a href="<?=base_url()?>why-choose-us">
     <div class="work">
     	<div class="image_sec_3">
         	image
         </div>
         <div class="title_sec">
-        	how it work
+        	Why Choose Us
         </div>
         <div class="content_sec">
-        	<p>The font-family property should hold several font names as a "fallback" ... Start with the font you want, and end with a generic family, to let the browser</p>
+        	<p>We operate through a dedicated team of educational experts which ensure quality education to students.</p>
         </div>
     </div>
+	</a>
 </div>
       </div>
       <!--<div class="fifteen columns" style="padding-left: 0px;">
