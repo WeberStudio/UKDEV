@@ -56,7 +56,7 @@ function remove_option(id)
                         <label for="slug">Course Price </label>
                         <?php /*?><input type="text" id="normal-field" value="<?=set_value('name', $price)?>" name="price" class="row-fluid" placeholder="Course Price"><?php */?>
 						
-						<select data-placeholder="Choose Multiple Price Options" class="chzn-select" name="price[]"  id="normal-field" multiple="true" tabindex="5">
+						<select data-placeholder="Choose Multiple Price Options" class="chzn-select" name="price_options[]"  id="normal-field" multiple="true" tabindex="5">
                         <? if(isset($all_price_options)){  ?>
                         <?php  foreach ($all_price_options as $price_options){
                                 $flag = 0;

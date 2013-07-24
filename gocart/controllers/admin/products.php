@@ -412,7 +412,7 @@ class Products extends Admin_Controller {
 		$this->form_validation->set_rules('slug', 'lang:slug', 'trim');
 		$this->form_validation->set_rules('description', 'lang:description', 'trim');
 		$this->form_validation->set_rules('excerpt', 'lang:excerpt', 'trim');
-		$this->form_validation->set_rules('price', 'lang:price', 'required');
+		$this->form_validation->set_rules('price_options', 'lang:price', 'required');
 		$this->form_validation->set_rules('enabled', 'lang:enabled', 'trim');
 		$this->form_validation->set_rules('meta_key', 'meta_key', 'trim');
 		$this->form_validation->set_rules('img_title', 'Image Title', 'trim');
@@ -577,13 +577,13 @@ class Products extends Admin_Controller {
 				$save['related_products'] = '';
 			}
 			
-			if($this->input->post('price'))
+			if($this->input->post('price_options'))
 			{
-				$save['price'] = json_encode($this->input->post('price'));
+				$save['price_options'] = json_encode($this->input->post('price_options'));
 			}
 			else
 			{
-				$save['price'] = '';
+				$save['price_options'] = '';
 			}
 			
 			//save categories
