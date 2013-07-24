@@ -616,11 +616,14 @@ class Cart extends Front_Controller {
 		// Get a cart-ready product array
 
 		$product = $this->Product_model->get_cart_ready_product($product_id, $quantity);
-		//unset($product['price']);
-		//$product['price'] = $option_prices;
-		//$replace = array_replace($product, $option_price);
 		
-		//$this->show->pe($product);
+		if($product['price_options']!="" && !empty($product['price_options'])){
+		//$this->show->pe($product['price_options']);
+		unset($product['price']);
+		$product['price'] = $option_prices;
+		
+		}
+		
 
 		
 

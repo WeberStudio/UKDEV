@@ -104,7 +104,8 @@
                                 <?php }?>
                                 </select>
 								</span>
-						
+								<?php } else{?>
+                                <p itemprop="price" class="price"><span class="amount"><?=format_currency($product->id)?></span></p>
                                 <?php }?>
                              
                       </div>-->
@@ -112,7 +113,7 @@
 
 
                         <?php echo form_open('cart/add_to_cart', 'class="cart"');?>
-                         <div itemprop="offers" itemscope="" >
+								<div itemprop="offers" itemscope="" >
                         <?php if(!empty($product->price_options)){ ?>
                         	<span class="custom-dropdown custom-dropdown--white">
                                 <select class="custom-dropdown__select custom-dropdown__select--white" name="price_option">
@@ -122,11 +123,11 @@
                                 <?php }?>
                                 </select>
 								</span>
-						
+								<?php } else{?>
+                                <p itemprop="price" class="price"><span class="amount"><?=format_currency($product->price)?></span></p>
                                 <?php }?>
                              
                       </div>
-
                         <input type="hidden" name="cartkey" value="<?php echo $this->session->flashdata('cartkey');?>" />
 
                         <input type="hidden" name="id" value="<?php echo $product->id?>"/>
