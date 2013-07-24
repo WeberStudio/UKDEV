@@ -363,6 +363,7 @@ class Products extends Admin_Controller {
 			$data['description']		= $product->description;
 			$data['excerpt']			= $product->excerpt;
 			$data['price']				= $product->price;
+			$data['price_options']		= $product->json_price;
 			$data['saleprice']			= $product->saleprice;
 			$data['weight']				= $product->weight;
 			$data['track_stock'] 		= $product->track_stock;

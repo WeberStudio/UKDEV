@@ -55,26 +55,27 @@ function remove_option(id)
                      <div class="controls span8">
                         <label for="slug">Course Price </label>
                         <?php /*?><input type="text" id="normal-field" value="<?=set_value('name', $price)?>" name="price" class="row-fluid" placeholder="Course Price"><?php */?>
-						
+						 <?php
+						//echo '<pre>'; print_r($price_options);  
+						 $price_op = str_replace(array("[", "]",  '"'),'',$price_options);
+                     	 $price_op = explode(',',$price_op);
+						?>
 						<select data-placeholder="Choose Multiple Price Options" class="chzn-select" name="price_options[]"  id="normal-field" multiple="true" tabindex="5">
                         <? if(isset($all_price_options)){  ?>
-                        <?php  foreach ($all_price_options as $price_options){
-                                $flag = 0;
-                                //$this->show->pe($file);
-                                for($i = 0; $i<count($all_price_options); $i++){
-                                    if(isset($product_categories[$i]->category_id) && $product_categories[$i]->category_id==$price_options['id']){ 
-                                    $flag = 1;
+                        <?php  
+						
+						
+							foreach ($all_price_options as $price_options)
+							{                                   
+								if(in_array($price_options['p_option_id'], $price_op))
+								{ 				
+						
                         ?>
-                                      <option  selected="selected" value="<?=$price_options['p_option_id']?>"><?=$price_options['p_option_title'].' : '.$price_options['p_option_price']?></option>
-                            
-                         <?php //$i++;
-                                     break;
-                                    }
-                                    
-                                  }
-                                if($flag==0)
-                                {?>
-                                    <option  value="<?=$price_options['p_option_id']?>"><?=$price_options['p_option_title'].' : '.$price_options['p_option_price']?></option>
+                       <option  selected="selected" value="<?=$price_options['p_option_id']?>"><?=$price_options['p_option_title'].' : '.$price_options['p_option_price']?></option>
+                            <? }
+							   else                               
+								{?>
+                       <option  value="<?=$options['p_option_id']?>"><?=$options['p_option_title'].' : '.$options['p_option_price']?></option>
                             <?    }
                              }
                         } 

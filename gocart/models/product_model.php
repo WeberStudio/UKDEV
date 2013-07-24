@@ -282,8 +282,8 @@ Class Product_model extends CI_Model
 			$result->related_products	= array();
 		}
 		
-		$p_option	= json_decode($result->price_options);
-		 
+		$p_option			= json_decode($result->price_options);
+		$result->json_price = $result->price_options;
 			if(!empty($p_option))
 		{
 			
