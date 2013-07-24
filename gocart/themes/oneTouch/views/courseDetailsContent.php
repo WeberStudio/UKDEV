@@ -123,6 +123,8 @@
                                 </select>
 								</span>
 						
+                                <?php } else{?>
+                                <p itemprop="price" class="price"><span class="amount"><?=format_currency($product->price)?></span></p>
                                 <?php }?>
                              
                       </div>
