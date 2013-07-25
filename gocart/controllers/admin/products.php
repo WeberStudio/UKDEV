@@ -236,7 +236,8 @@ class Products extends Admin_Controller {
 	
 	function form($id = false, $duplicate = false, $tab_id = false)
 	{
-        //echo $this->input->post('google_follow'); exit; 
+		
+        //echo $this->input->post('delivery_price'); exit; 
 		$data['active_tabid'] = $tab_id; 
 		
 		//echo"<pre>";print_r($_POST);exit;
@@ -250,6 +251,8 @@ class Products extends Admin_Controller {
 		$data['all_categories']		= $this->Category_model->get_all_categories();
 		$data['all_products']		= $this->Product_model->get_all_products_array();
 		$data['all_price_options']	= $this->Product_model->get_price_options();
+		$data['all_delivery_option']= $this->Product_model->get_delivery_options();
+		
 		
 		//echo "<pre>";print_r($data['all_categories']);exit;
 		//$data['file_list']		= $this->Digital_Product_model->get_list();
@@ -269,6 +272,7 @@ class Products extends Admin_Controller {
 		$data['description']		= '';
 		$data['excerpt']			= '';
 		$data['price']				= '';
+		$data['delivery_price']		= '';
 		$data['saleprice']			= '';
 		$data['weight']				= '';
 		$data['track_stock'] 		= '';
@@ -365,6 +369,8 @@ class Products extends Admin_Controller {
 			$data['excerpt']			= $product->excerpt;
 			$data['price']				= $product->price;
 			$data['price_options']		= $product->json_price;
+			$data['delivery_price']		= $product->delivery_price;
+			 
 			$data['saleprice']			= $product->saleprice;
 			$data['weight']				= $product->weight;
 			$data['track_stock'] 		= $product->track_stock;
@@ -550,6 +556,7 @@ class Products extends Admin_Controller {
 			$save['excerpt']			= $this->input->post('excerpt');
 			//$save['price']				= $this->input->post('price');
 			$save['saleprice']			= $this->input->post('saleprice');
+			$save['delivery_price']		= $this->input->post('delivery_price');
 			$save['weight']				= $this->input->post('weight');
 			$save['track_stock']		= $this->input->post('track_stock');
 			$save['fixed_quantity']		= $this->input->post('fixed_quantity');
