@@ -272,7 +272,6 @@ class Products extends Admin_Controller {
 		$data['description']		= '';
 		$data['excerpt']			= '';
 		$data['price']				= '';
-		$data['price_options']		= '';
 		$data['delivery_p']			= '';
 		$data['saleprice']			= '';
 		$data['weight']				= '';
@@ -1071,7 +1070,7 @@ class Products extends Admin_Controller {
 	function product_delivery_form($id = false)
 	{
 				
-			
+		$this->session->set_userdata('active_module', 'price');
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');

@@ -87,12 +87,7 @@ function remove_option(id)
                     <div class="form-row control-group row-fluid">
                        <div class="controls span8">
                        <label for="slug">Select Delivery Charges </label>
-                       <?php foreach($all_delivery_option as $delivery_price){
-                      	/*print_r($delivery_price);
-					    echo $delivery_price['d_option_price'].'=='.$delivery_price;*/
-                       }
-					   
-					   ?>
+                       
                       
                        <select data-placeholder="" class="chzn-select" id="" name="delivery_price" >
                        <option value="">Select Delivery Charges</option>
