@@ -82,6 +82,17 @@ function remove_option(id)
                         </select>
                      </div>                      
                     </div>
+                    
+                    <div class="form-row control-group row-fluid">
+                       <div class="controls span8">
+                       <label for="slug">Select Delivery Charges</label>
+                       <select data-placeholder="" class="chzn-select" id="" >
+                                <option value="">Select Delivery Charges</option>
+                                                                
+                        </select>
+                        </div>
+                    </div>
+                    
                     <div class="form-row control-group row-fluid">
                       <div class="controls span14">
                           <label for="slug">Description </label>

@@ -972,7 +972,7 @@ class Products extends Admin_Controller {
 	function price_options_form($id = false)
 	{
 				
-			
+		$this->session->set_userdata('active_module', 'price');	
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
