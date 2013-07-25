@@ -79,7 +79,8 @@
                   <tr>
                     <th><?php echo lang('name');?></th>
 					<th><?php echo lang('description');?></th>
-					<th><?php echo lang('price');?></th>
+                    <th><?php echo "Tax";?></th> 
+					<th><?php echo lang('price')."(ex)";?></th>
 					<th><?php echo lang('quantity');?></th>
 					<th><?php echo lang('total');?></th>
                   </tr>
@@ -90,7 +91,6 @@
 					<td>
 						<?php echo $product['name'];?>
 						<?php echo (trim($product['sku']) != '')?'<br/><small>'.lang('sku').': '.$product['sku'].'</small>':'';?>
-						
 					</td>
 					<td>
 						<?php //echo $product['excerpt'];?>
@@ -122,6 +122,7 @@
 						if(isset($product['gc_status'])) echo $product['gc_status'];
 						?>
 					</td>
+                    <td><?php echo $order->tax.'%';?></td>
 					<td><?php echo format_currency($product['price']);?></td>
 					<td><?php echo $product['quantity'];?></td>
 					<td><?php echo format_currency($product['price']*$product['quantity']);?></td>
@@ -142,7 +143,16 @@
 					<td colspan="3"></td>
 					<td><?php echo format_currency($order->subtotal); ?></td>
 				</tr>
-				
+				 <tr>
+                    <td><strong><?php echo 'Zone Rates (Delivery to GB):';?></strong></td>
+                    <td colspan="3"></td>
+                    <td><?php  ?></td>
+                </tr>
+                 <tr>
+                    <td><strong><?php echo 'VAT + Export:';?></strong></td>
+                    <td colspan="3"></td>
+                    <td><?php  ?></td>
+                </tr>
 				<?php 
 				$charges = @$order->custom_charges;
 				if(!empty($charges))
