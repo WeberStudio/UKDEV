@@ -602,7 +602,6 @@ class Cart extends Front_Controller {
 	
 
 	function add_to_cart()
-
 	{
 
 		// Get our inputs

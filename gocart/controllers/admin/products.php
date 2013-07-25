@@ -250,6 +250,7 @@ class Products extends Admin_Controller {
 		$data['all_categories']		= $this->Category_model->get_all_categories();
 		$data['all_products']		= $this->Product_model->get_all_products_array();
 		$data['all_price_options']	= $this->Product_model->get_price_options();
+		
 		//echo "<pre>";print_r($data['all_categories']);exit;
 		//$data['file_list']		= $this->Digital_Product_model->get_list();
 
@@ -968,7 +969,10 @@ class Products extends Admin_Controller {
 		redirect($this->config->item('admin_folder').'/products/form/'.$product_id);
 	}
 	
-	
+	/*****************************************************
+	*	Product Price Options
+	*
+	*/
 	
 	function price_options_form($id = false)
 	{
@@ -1049,6 +1053,95 @@ class Products extends Admin_Controller {
 		}
 			
 	}
+	
+	
+	/*****************************************************
+	*	Product Delivery Options
+	*
+	*/
+	
+	function product_delivery_form($id = false)
+	{
+				
+			
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+		$data['all_product_delivery']	= $this->Product_model->get_product_delivery();
+		//print_r($data['all_product_delivery']);exit;
+		$data['id'] 				= $id;
+		$data['option_text'] 		= '';
+		$data['option_price'] 		= '';
+				
+		if($id)
+		{
+			
+			$product_delivery				= $this->Product_model->get_price_option($id);
+			//print_r($product_delivery);exit;
+			
+			if(!$product_delivery)
+			{
+				//forum does not exist
+				$this->session->set_flashdata('error', lang('error_forum_not_found'));
+				redirect($this->config->item('admin_folder').'/products/product_delivery_form/'.$id);
+			}
+			
+			
+			//set values to db values
+			$data['id'] 				= $id;
+			$data['option_text'] 		= $product_delivery->p_option_title;
+			$data['option_price'] 		= $product_delivery->p_option_price;
+			
+		}
+		//echo '--'.$message_mode;exit;
+		
+		
+		
+		$this->form_validation->set_rules('option_text', 'Option Text', 'required');
+		$this->form_validation->set_rules('option_price','Option Trice', 'required');
+		
+		if($this->form_validation->run() == false)
+		{
+				
+			$this->load->view($this->config->item('admin_folder').'/includes/header');
+			$this->load->view($this->config->item('admin_folder').'/includes/leftbar');
+			$this->load->view($this->config->item('admin_folder').'/product_delivery_form', $data);
+			$this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
+		}
+		else
+		{
+			$save['p_option_id']		= $data['id'];
+			$save['admin_id']			= $this->admin_id;
+			$save['p_option_title']		= $this->input->post('option_text');
+			$save['p_option_price'] 	= $this->input->post('option_price');
+			
+			
+			//save the forum
+			$product_delivery	= $this->Product_model->product_options_save($save);
+			$this->session->set_flashdata('message', lang('message_saved_forum'));
+			
+			//go back to the forum list
+			redirect($this->config->item('admin_folder').'/products/product_delivery_form/');
+		}
+	
+		
+	
+	}
+	
+	function delete_delivery_option($id)
+	{
+	
+		if ($id)
+		{			
+			$this->Product_model->delete_price_option($id);
+			$this->session->set_flashdata('message', 'Deleted Successfully!');
+			redirect($this->config->item('admin_folder').'/products/product_delivery_form/');
+		}
+			
+	}
+	
+	
+	
 	
 	// HARD DELETE PRODUCT
 	
