@@ -114,7 +114,7 @@ ul.menu1 li a{
              <?php } else if(isset($products) && count($products) > 0){ ?>
              <?php foreach($products as $product):?>
 
-                <a class="all" href="<?php echo site_url(implode('/', $base_url).'/'.$product->slug); ?>">
+                <a class="all" href="<?php echo site_url().$product->slug; ?>">
                             <li data-type="1" data-id="id-1" class="item">
                              
                                 <div class="half even">
