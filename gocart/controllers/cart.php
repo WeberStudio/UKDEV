@@ -1,4 +1,5 @@
 <?php 
+require_once('geoiploc.php');
 class Cart extends Front_Controller {
 
 
@@ -602,6 +603,7 @@ class Cart extends Front_Controller {
 	
 
 	function add_to_cart()
+
 	{
 
 		// Get our inputs
@@ -611,7 +613,19 @@ class Cart extends Front_Controller {
 		$post_options 	= $this->input->post('option');
 		$slug 			= $this->input->post('slug');
 		$option_prices 	= $this->input->post('price_option');
-
+		$ip = $_SERVER["REMOTE_ADDR"];
+ 
+   		$country_code = getCountryFromIP($ip);
+  
+		if(isset($country_code) && $country_code == 'US')
+		{
+			$option_prices = $this->input->post('price_option') + $this->input->post('price_option')*(0.3);
+		}
+		else if(isset($country_code) && $country_code == 'GB')
+		{
+			$option_prices = $this->input->post('price_option') + $this->input->post('price_option')*(0.2);
+		}
+		
 		
 
 		// Get a cart-ready product array
