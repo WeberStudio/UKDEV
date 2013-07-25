@@ -1077,13 +1077,13 @@ class Products extends Admin_Controller {
 		$data['all_product_delivery']	= $this->Product_model->get_delivery_options();
 		//print_r($data['all_product_delivery']);exit;
 		$data['id'] 				= $id;
-		$data['option_text'] 		= '';
-		$data['option_price'] 		= '';
+		$data['d_option_title'] 	= '';
+		$data['d_option_price'] 	= '';
 				
 		if($id)
 		{
 			
-			$product_delivery				= $this->Product_model->get_price_option($id);
+			$product_delivery				= $this->Product_model->get_delivery_option($id);
 			//print_r($product_delivery);exit;
 			
 			if(!$product_delivery)
@@ -1096,16 +1096,16 @@ class Products extends Admin_Controller {
 			
 			//set values to db values
 			$data['id'] 				= $id;
-			$data['option_text'] 		= $product_delivery->p_option_title;
-			$data['option_price'] 		= $product_delivery->p_option_price;
+			$data['d_option_title'] 	= $product_delivery->d_option_title;
+			$data['d_option_price'] 	= $product_delivery->d_option_price;
 			
 		}
 		//echo '--'.$message_mode;exit;
 		
 		
 		
-		$this->form_validation->set_rules('option_text', 'Option Text', 'required');
-		$this->form_validation->set_rules('option_price','Option Trice', 'required');
+		$this->form_validation->set_rules('d_option_title', 'Delivery Text',  'required');
+		$this->form_validation->set_rules('d_option_price', 'Delivery Price', 'required');
 		
 		if($this->form_validation->run() == false)
 		{
@@ -1117,14 +1117,14 @@ class Products extends Admin_Controller {
 		}
 		else
 		{
-			$save['p_option_id']		= $data['id'];
+			$save['d_option_id']		= $data['id'];
 			$save['admin_id']			= $this->admin_id;
-			$save['p_option_title']		= $this->input->post('option_text');
-			$save['p_option_price'] 	= $this->input->post('option_price');
+			$save['d_option_title']		= $this->input->post('d_option_title');
+			$save['d_option_price'] 	= $this->input->post('d_option_price');
 			
 			
 			//save the forum
-			$product_delivery	= $this->Product_model->product_options_save($save);
+			$product_delivery	= $this->Product_model->product_delivery_save($save);
 			$this->session->set_flashdata('message', lang('message_saved_forum'));
 			
 			//go back to the forum list
@@ -1140,7 +1140,7 @@ class Products extends Admin_Controller {
 	
 		if ($id)
 		{			
-			$this->Product_model->delete_price_option($id);
+			$this->Product_model->delete_delivery_option($id);
 			$this->session->set_flashdata('message', 'Deleted Successfully!');
 			redirect($this->config->item('admin_folder').'/products/product_delivery_form/');
 		}

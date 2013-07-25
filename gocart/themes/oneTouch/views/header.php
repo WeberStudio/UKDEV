@@ -36,9 +36,9 @@ experience this site.
     </div>
     <div class="clear"></div>
  
-<div style=" margin-left:100px; margin-top: 5px; float: left;">
+<div style=" margin-left:230px; margin-top: 5px; float: left;">
 	  <select class="chosen" style="width:300px;" >
-         <option value="-1">Select Course</option>
+         <option value="-1">Search Course</option>
    <?php foreach($this->courses as $course):?>        
           <option value="<?=$course['slug']?>"><?=$course['name']?></option>                            
    <?php  endforeach;?>
@@ -371,7 +371,7 @@ experience this site.
 <div class="row">
 <div class="contect_div">
     <div class="top_content">
-    	<div class="call_us"><div class="call_img"><img src="<?php echo theme_img("t_icons/phn.png");?>" alt="phone"/></div> Call us now <b>1221 288 0181</b></div>
+    	<div class="call_us"><div class="call_img"><img src="<?php echo theme_img("t_icons/phn.png");?>" alt="phone"/></div> Call us now <b>0121 288 0181</b></div>
         <div class="account_block">
 		
 		<?php if($this->Tutor_model->is_logged_in(false, false)):?>
@@ -397,7 +397,7 @@ experience this site.
         		<div class="login"><div class="login_img"><img src="<?php echo theme_img("t_icons/log_in.png");?>"></div><?php echo lang('login');?></div>
         	</a>
         <?php endif; ?>
-       <a href="#">
+     <a href="http://87.106.234.213/livechat/client.php?locale=en&amp;style=simplicity" target="_blank" onclick="if(navigator.userAgent.toLowerCase().indexOf('opera') != -1 &amp;&amp; window.event.preventDefault) window.event.preventDefault();this.newWindow = window.open('http://87.106.234.213/livechat/client.php?locale=en&amp;style=simplicity&amp;url='+escape(document.location.href.replace('http://','').replace('https://',''))+'&amp;referrer='+escape(document.referrer.replace('http://','').replace('https://','')), 'webim', 'toolbar=0,scrollbars=0,location=0,status=1,menubar=0,width=640,height=480,resizable=1');this.newWindow.focus();this.newWindow.opener=window;return false;">
         <div class="live_chat"><div class="chat_img"> <img src="<?php echo theme_img("t_icons/live_chat.png");?>" alt="livechat"/> </div> Live chat</div>
         </a>
        </div>

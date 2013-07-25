@@ -15,18 +15,18 @@
         <!-- End .title -->
         <div class="content">		
 		<div class="tab-pane fade in active" id="form">
-          <?php echo form_open($this->config->item('admin_folder').'/products/price_options_form/'.$id, array('class' => '', 'id' => 'validateForm')); ?>
+          <?php echo form_open($this->config->item('admin_folder').'/products/product_delivery_form/'.$id, array('class' => '', 'id' => 'validateForm')); ?>
  
           <div class="control-group row-fluid">
-            <label class="control-label span2">Price Option Text <?php echo lang('group');?><span class="help-block"></span></label>
+            <label class="control-label span2">Delivery Option Text <?php echo lang('group');?><span class="help-block"></span></label>
             <div class="controls span7">
-              e.g <input type="text" name="option_text" value="<?=set_value('option_text', $option_text)?>"  placeholder ="Course Price Only In UK"/>
+              e.g <input type="text" name="d_option_title" value="<?=set_value('d_option_title', $d_option_title)?>"  placeholder ="Course Price Only In UK"/>
             </div>
           </div>          
 		  <div class="control-group row-fluid">
-            <label class="control-label span2">Price Option Rate<?php echo lang('group');?><span class="help-block"></span></label>
+            <label class="control-label span2">Delivery Option Rate<?php echo lang('group');?><span class="help-block"></span></label>
             <div class="controls span7">
-             e.g <input type="text" name="option_price" value="<?=set_value('option_price', $option_price)?>" placeholder ="99"/>
+             e.g <input type="text" name="d_option_price" value="<?=set_value('d_option_price', $d_option_price)?>" placeholder ="99"/>
             </div>
           </div>
 		            
@@ -38,27 +38,34 @@
 		<table id="datatable_example" class="responsive table table-striped table-bordered" style="width:100%;margin-bottom:0; ">
 			<thead>
 				<tr>
-					<th>Option Name</th>
-					<th>Option Price</th>
+					<th>Delivery Name</th>
+					<th>Delivery Price</th>
 					<th align="right">Action</th>			
 				</tr>
 			</thead>	
 			<tbody>
-			<?php echo (count($all_price_options) < 1)?'<tr><td style="text-align:center;" colspan="3">'.lang('no_coupons').'</td></tr>':''?>
-		<?php foreach ($all_price_options as $all_price):?>
-				<tr>			
-					<td><?php echo  $all_price['p_option_title']; ?></td>
-					<td class="gc_cell_left"><?php echo  $all_price['p_option_price']; ?></td>
-					<td>
-						<div class="btn-group" align="right">
-							<a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/products/price_options_form/'.$all_price['p_option_id']); ?>"><i class="icon-pencil"></i> <?php echo lang('edit');?></a>
-							&nbsp;
-							<a class="btn btn-danger" href="<?php echo site_url($this->config->item('admin_folder').'/products/delete_price_option/'.$all_price['p_option_id']); ?>" onclick="return areyousure();"><i class="icon-trash"></i>   <?php echo lang('delete');?></a>
-						</div>
-					</td>
-				</tr>
-		<?php endforeach; ?>
-				
+			
+		<?php 
+		if(!empty($all_product_delivery))
+		{
+			foreach ($all_product_delivery as $all_price):?>
+					<tr>			
+						<td><?php echo  $all_price['d_option_title']; ?></td>
+						<td class="gc_cell_left"><?php echo  $all_price['d_option_price']; ?></td>
+						<td>
+							<div class="btn-group" align="right">
+								<a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/products/product_delivery_form/'.$all_price['d_option_id']); ?>"><i class="icon-pencil"></i> <?php echo lang('edit');?></a>
+								&nbsp;
+								<a class="btn btn-danger" href="<?php echo site_url($this->config->item('admin_folder').'/products/delete_delivery_option/'.$all_price['d_option_id']); ?>" onclick="return areyousure();"><i class="icon-trash"></i>   <?php echo lang('delete');?></a>
+							</div>
+						</td>
+					</tr>
+		<?php endforeach; 
+		
+		}
+		
+		?>
+					
 				
 			</tbody>
 		</table>
