@@ -75,7 +75,7 @@ function remove_option(id)
                             <? }
 							   else                               
 								{?>
-                       <option  value="<?=$options['p_option_id']?>"><?=$options['p_option_title'].' : '.$options['p_option_price']?></option>
+                       <option  value="<?=$price_options['p_option_id']?>"><?=$price_options['p_option_title'].' : '.$price_options['p_option_price']?></option>
                             <?    }
                              }
                         } 
@@ -88,15 +88,18 @@ function remove_option(id)
                        <div class="controls span8">
                        <label for="slug">Select Delivery Charges </label>
                        <?php foreach($all_delivery_option as $delivery_price){
-                       echo $delivery_price['d_option_price'].'=='.$delivery_price;
-                       }?>
+                      	/*print_r($delivery_price);
+					    echo $delivery_price['d_option_price'].'=='.$delivery_price;*/
+                       }
+					   
+					   ?>
                       
                        <select data-placeholder="" class="chzn-select" id="" name="delivery_price" >
                        <option value="">Select Delivery Charges</option>
 
                        <?php if($all_delivery_option!="" && !empty($all_delivery_option)){?>
                        <?php foreach($all_delivery_option as $delivery_price){?>
-                                <option <?php if($delivery_price['d_option_price'] == $delivery_price ){ echo 'selected';}?> value="<?php echo $delivery_price['d_option_price'];?>"><?php echo format_currency($delivery_price['d_option_price']);?></option>
+                                <option <?php if($delivery_price['d_option_price'] == $delivery_p ){ echo 'selected';}?> value="<?php echo $delivery_price['d_option_price'];?>"><?php echo format_currency($delivery_price['d_option_price']);?></option>
                        <?php }}?>                              
                         </select>
                         </div>

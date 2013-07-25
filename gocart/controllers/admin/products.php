@@ -272,7 +272,8 @@ class Products extends Admin_Controller {
 		$data['description']		= '';
 		$data['excerpt']			= '';
 		$data['price']				= '';
-		$data['delivery_price']		= '';
+		$data['price_options']		= '';
+		$data['delivery_p']			= '';
 		$data['saleprice']			= '';
 		$data['weight']				= '';
 		$data['track_stock'] 		= '';
@@ -369,7 +370,7 @@ class Products extends Admin_Controller {
 			$data['excerpt']			= $product->excerpt;
 			$data['price']				= $product->price;
 			$data['price_options']		= $product->json_price;
-			$data['delivery_price']		= $product->delivery_price;
+			$data['delivery_p']			= $product->delivery_price;
 			 
 			$data['saleprice']			= $product->saleprice;
 			$data['weight']				= $product->weight;
