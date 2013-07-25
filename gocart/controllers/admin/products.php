@@ -1067,7 +1067,7 @@ class Products extends Admin_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-		$data['all_product_delivery']	= $this->Product_model->get_product_delivery();
+		$data['all_product_delivery']	= $this->Product_model->get_delivery_options();
 		//print_r($data['all_product_delivery']);exit;
 		$data['id'] 				= $id;
 		$data['option_text'] 		= '';
