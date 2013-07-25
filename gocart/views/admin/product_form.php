@@ -54,9 +54,54 @@ function remove_option(id)
                     <div class="form-row control-group row-fluid">                      
                      <div class="controls span8">
                         <label for="slug">Course Price </label>
-                        <input type="text" id="normal-field" value="<?=set_value('name', $price)?>" name="price" class="row-fluid" placeholder="Course Price">
+                        <?php /*?><input type="text" id="normal-field" value="<?=set_value('name', $price)?>" name="price" class="row-fluid" placeholder="Course Price"><?php */?>
+						 <?php
+						//echo '<pre>'; print_r($price_options);  
+						 $price_op = str_replace(array("[", "]",  '"'),'',$price_options);
+                     	 $price_op = explode(',',$price_op);
+						?>
+						<select data-placeholder="Choose Multiple Price Options" class="chzn-select" name="price_options[]"  id="normal-field" multiple="true" tabindex="5">
+                        <? if(isset($all_price_options)){  ?>
+                        <?php  
+						
+						
+							foreach ($all_price_options as $price_options)
+							{                                   
+								if(in_array($price_options['p_option_id'], $price_op))
+								{ 				
+						
+                        ?>
+                       <option  selected="selected" value="<?=$price_options['p_option_id']?>"><?=$price_options['p_option_title'].' : '.$price_options['p_option_price']?></option>
+                            <? }
+							   else                               
+								{?>
+                       <option  value="<?=$options['p_option_id']?>"><?=$options['p_option_title'].' : '.$options['p_option_price']?></option>
+                            <?    }
+                             }
+                        } 
+                         ?>
+                        </select>
                      </div>                      
                     </div>
+                    
+                    <div class="form-row control-group row-fluid">
+                       <div class="controls span8">
+                       <label for="slug">Select Delivery Charges </label>
+                       <?php foreach($all_delivery_option as $delivery_price){
+                       echo $delivery_price['d_option_price'].'=='.$delivery_price;
+                       }?>
+                      
+                       <select data-placeholder="" class="chzn-select" id="" name="delivery_price" >
+                       <option value="">Select Delivery Charges</option>
+
+                       <?php if($all_delivery_option!="" && !empty($all_delivery_option)){?>
+                       <?php foreach($all_delivery_option as $delivery_price){?>
+                                <option <?php if($delivery_price['d_option_price'] == $delivery_price ){ echo 'selected';}?> value="<?php echo $delivery_price['d_option_price'];?>"><?php echo format_currency($delivery_price['d_option_price']);?></option>
+                       <?php }}?>                              
+                        </select>
+                        </div>
+                    </div>
+                    
                     <div class="form-row control-group row-fluid">
                       <div class="controls span14">
                           <label for="slug">Description </label>

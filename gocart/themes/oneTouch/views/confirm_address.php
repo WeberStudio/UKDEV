@@ -21,7 +21,7 @@ window.location="<?=base_url();?>secure/process_checkout";
 </div>
 <?php if (validation_errors()):?>
 	<div class="alert alert-error">
-		<a class="close" data-dismiss="alert">×</a>
+		<a class="close" data-dismiss="alert">Ã—</a>
 		<?php echo validation_errors();?>
 	</div>
 <?php endif;?>
@@ -268,7 +268,7 @@ $con_password 	= array('id'=>'confirm','name'=>'confirm','class'=>'input-text','
 						
 					</p>
 					<p class="form-row form-row-last update_totals_on_change" id="billing_postcode_field">
-						<label for="billing_postcode" class=""><?php echo lang('address_state');?><abbr class="required" title="required">*</abbr>
+						<label for="billing_postcode" class="">State/County<abbr class="required" title="required">*</abbr>
 						</label>
 						<?php echo form_dropdown('zone_id',$zone_menu, @$customer[$address_form_prefix.'_address']['zone_id'], 'id="zone_id" class="country_to_state form-row-first update_totals_on_change country_select chzn-done"');?>
 						
@@ -529,7 +529,7 @@ $con_password 	= array('id'=>'confirm','name'=>'confirm','class'=>'input-text','
 
 <div class="modal hide" id="address_manager">
 	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">×</button>
+		<button type="button" class="close" data-dismiss="modal">Ã—</button>
 		<h3><?php echo lang('your_addresses');?></h3>
 	</div>
 	<div class="modal-body">

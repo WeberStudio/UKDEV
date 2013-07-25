@@ -12,14 +12,19 @@
                 
                   <?php
                   
-                  //$this->show->pe($this->categories);
+                // $this->show->pe($this->categories[6]);
+				 //$child_cat ="";
                   $count = 0;
                   foreach($this->categories as $cat_info){
                  //echo '<pre>' ;print_r($cat_info); exit;
+				 	
                     if($cat_info['category']->publish_by_super==1){
+						if($cat_info['category']->name!='Administration' && $cat_info['category']->name!='Nutrition Courses Online'){
                   $count = $count + 1; 
+				 
                   if($count%2==0)
                   {
+					  
                   ?>
                       <div class="item half even"> 
                         <img src="<?php echo catogery_img('images/small/'.$cat_info['category']->image); ?>" style="margin:0 0;" alt="<?=$cat_info['category']->img_alt?>" title="<?=$cat_info['category']->img_title?>"  >
@@ -60,9 +65,7 @@
                       }
                     }  
                      
-                  } ?>
-                
-                
+                  }} ?>
               </div>
             </div>
           </div>
@@ -215,42 +218,47 @@
           </div>
         </div>-->
         <div class="bottom_content">
-
+	<a href="<?=base_url()?>video-message-from-ceo">
     <div class="qualfication">
     	<div class="image_sec_1">
         	image
         </div>
         <div class="title_sec">
-        	Qualfication
+        	Video Message From CEO
         </div>
         <div class="content_sec">
         	
-        	<p class="slide_content">The font-family property should hold several font names as a "fallback" ... Start with the font you want, and end with a generic family, to let the browser</p>
+        	<p class="slide_content">Our mission is to be the providers of flexible education to everyone; students & professionals.</p>
             
         </div>
     </div>
+	</a>
+	<a href="<?=base_url()?>success-stories">
     <div class="tutor">
     	<div class="image_sec_2">
         	image
         </div>
         <div class="title_sec">
-        	Tutor
+        	Success Stories
         </div>
         <div class="content_sec">
-        	<p>The font-family property should hold several font names as a "fallback" ... Start with the font you want, and end with a generic family, to let the browser</p>
+        	<p>Hear the success stories of our alumni. How their journey was with UK Open College?</p>
         </div>
     </div>
+	</a>
+	<a href="<?=base_url()?>why-choose-us">
     <div class="work">
     	<div class="image_sec_3">
         	image
         </div>
         <div class="title_sec">
-        	how it work
+        	Why Choose Us
         </div>
         <div class="content_sec">
-        	<p>The font-family property should hold several font names as a "fallback" ... Start with the font you want, and end with a generic family, to let the browser</p>
+        	<p>We operate through a dedicated team of educational experts which ensure quality education to students.</p>
         </div>
     </div>
+	</a>
 </div>
       </div>
       <!--<div class="fifteen columns" style="padding-left: 0px;">

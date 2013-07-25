@@ -4,10 +4,15 @@ class Cart extends Front_Controller {
 
 
 	function __construct()
+
 	{
 
 		parent::__construct();
+
+		
+
 		//make sure we're not always behind ssl
+
 		remove_ssl();
 
 	}
@@ -18,10 +23,9 @@ class Cart extends Front_Controller {
 
 	{
 
-        //DebugBreak();
-		$this->load->helper('directory');
+       	$this->load->helper('directory');
 		$data['homepage']			= true;
-        $data['allProduct']         = $this->Product_model->get_products_catogery_wise();	  
+        $data['allProduct']         = $this->Product_model->get_products_catogery_wise();
 		$data['pages']				= $this->Page_model->get_pages_by_position('grid-page');
 	   // echo '<pre>';print_r($data['allProduct']);
 
@@ -598,7 +602,6 @@ class Cart extends Front_Controller {
 	
 
 	function add_to_cart()
-
 	{
 
 		// Get our inputs
@@ -607,13 +610,19 @@ class Cart extends Front_Controller {
 		$quantity 		= $this->input->post('quantity');
 		$post_options 	= $this->input->post('option');
 		$slug 			= $this->input->post('slug');
+		$option_prices 	= $this->input->post('price_option');
 
 		
 
 		// Get a cart-ready product array
 
 		$product = $this->Product_model->get_cart_ready_product($product_id, $quantity);
-
+		if($product['price_options']!="" && !empty($product['price_options'])){
+		//$this->show->pe($product['price_options']);
+		unset($product['price']);
+		$product['price'] = $option_prices;
+		
+		}
 		
 
 		//if out of stock purchase is disabled, check to make sure there is inventory to support the cart.
@@ -676,48 +685,28 @@ class Cart extends Front_Controller {
 		// don't add the product if we are missing required option values
 
 		if( ! $status['validated'])
-
-		{
-			
+		{	
 
 			$this->session->set_flashdata('quantity', $quantity);
-
 			$this->session->set_flashdata('error', $status['message']);
-
 			$this->session->set_flashdata('option_values', $post_options);
+			redirect($this->Product_model->get_slug($product_id));	
 
-		
-
-			redirect($this->Product_model->get_slug($product_id));
-
-		
-
-		} else {
-
-		
+		} else {	
 
 			//Add the original option vars to the array so we can edit it later
-
 			$product['post_options']	= $post_options;
 
-			
-
 			//is giftcard
-
-			$product['is_gc']			= false;
-
-			
+			$product['is_gc']			= false;		
 
 			// Add the product item to the cart, also updates coupon discounts automatically
-
 			$this->go_cart->insert($product);
 			
 			
-			// this variable is to view the div of "view cart"
-			
+			// this variable is to view the div of "view cart"			
 			$show_things = array('quantitty'=>'1');
-			$this->session->set_userdata($show_things);
-		
+			$this->session->set_userdata($show_things);		
 			
 			// go go gadget cart!
 			//echo $this->uri->segment(1);

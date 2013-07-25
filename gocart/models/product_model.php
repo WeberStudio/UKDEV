@@ -250,6 +250,7 @@ Class Product_model extends CI_Model
 	function get_product($id, $related=true)
 	{
 		$result	= $this->db->get_where('products', array('id'=>$id))->row();
+		//echo"<pre>" ;print_r($result);
 		if(!$result)
 		{
 			return false;
@@ -279,6 +280,33 @@ Class Product_model extends CI_Model
 		else
 		{
 			$result->related_products	= array();
+		}
+		
+		$p_option			= json_decode($result->price_options);
+		$result->json_price = $result->price_options;
+			if(!empty($p_option))
+		{
+			
+			//build the where
+			$where = false;
+			foreach($p_option as $r)
+			{
+				if(!$where)
+				{
+					$this->db->where('p_option_id', $r);
+				}
+				else
+				{
+					$this->db->or_where('p_option_id', $r);
+				}
+				$where = true;
+			}
+		
+			$result->price_options	= $this->db->get('product_price_options')->result();
+		}
+		else
+		{
+			$result->price_options	= array();
 		}
 		$result->categories			= $this->get_product_categories($result->id);
 	
@@ -548,6 +576,12 @@ Class Product_model extends CI_Model
 		return (array)$product;
 	}
 	
+	
+	/*****************************************************
+	*	Product Tabs Part
+	*
+	*/
+	
 	function get_all_products_tabs($id)
 	{
 		return $product_tabs	= $this->db->get_where('product_tabs', array('product_id'=>$id))->result_array();
@@ -567,6 +601,13 @@ Class Product_model extends CI_Model
 		$this->db->delete('product_tabs');
 		return true;
 	}
+	
+	/*****************************************************
+	*	Product Rating F&Q Part
+	*
+	*/
+	
+	
 	function save_rating($data)
 	{
 		$this->db->insert('course_rating', $data);
@@ -593,6 +634,115 @@ Class Product_model extends CI_Model
 		$result		= $this->db->get('course_question');
 		
 		return $result->result();
+	}
+	
+	/*****************************************************
+	*	Product Price Options
+	*
+	*/
+	
+	
+	function get_price_options()
+	{
+	
+		$result	= $this->db->get('oc_product_price_options');
+		$return = $result->result_array();
+		if(count($return))
+		{
+			return $return;
+		}
+		return false;
+		
+	}
+	
+	function get_price_option($id)
+	{
+		$result	= $this->db->get_where('oc_product_price_options', array('p_option_id'=>$id))->row();
+		
+		if(count($result))
+		{
+			return $result;
+		}
+		return false;
+		
+	}
+	
+	function delete_price_option($id)
+	{
+		// delete product 
+		$this->db->where('p_option_id', $id);
+		$this->db->delete('oc_product_price_options');
+		
+	}
+	
+	function product_options_save($product_price)
+	{
+		if ($product_price['p_option_id'])
+		{
+			$this->db->where('p_option_id', $product_price['p_option_id']);
+			$this->db->update('oc_product_price_options', $product_price);
+
+			$id	= $product_price['p_option_id'];
+		}
+		else
+		{
+			$this->db->insert('oc_product_price_options', $product_price);
+			$id	= $this->db->insert_id();
+		}
+	}
+	
+	/*****************************************************
+	*	Product Delivery Options
+	*
+	*/
+	
+	function get_delivery_options()
+	{
+	
+		$result	= $this->db->get('oc_product_delivery_options');
+		$return = $result->result_array();
+		if(count($return))
+		{
+			return $return;
+		}
+		return false;
+		
+	}
+	
+	function get_delivery_option($id)
+	{
+		$result	= $this->db->get_where('oc_product_delivery_options', array('d_option_id'=>$id))->row();
+		
+		if(count($result))
+		{
+			return $result;
+		}
+		return false;
+		
+	}
+	
+	function delete_delivery_option($id)
+	{
+		// delete product 
+		$this->db->where('d_option_id', $id);
+		$this->db->delete('oc_product_delivery_options');
+		
+	}
+	
+	function product_delivery_save($product_price)
+	{
+		if ($product_price['d_option_id'])
+		{
+			$this->db->where('d_option_id', $product_price['d_option_id']);
+			$this->db->update('oc_product_delivery_options', $product_price);
+
+			$id	= $product_price['d_option_id'];
+		}
+		else
+		{
+			$this->db->insert('oc_product_delivery_options', $product_price);
+			$id	= $this->db->insert_id();
+		}
 	}
 	
 }

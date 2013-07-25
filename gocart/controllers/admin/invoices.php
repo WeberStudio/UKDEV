@@ -376,16 +376,20 @@ class Invoices extends Admin_Controller {
 		$invoice_header 	= '';
 		$html_output 		= '';	
 		$this->mpdf->SetHeader('{DATE d-m-Y}|{PAGENO}|Customer Invoice');
-		
-		$selected_template 	 = $this->Invoice_Template_model->get_templates_by_for_invoice($template_id);	
+		//echo $template_id; exit;
+		$selected_template 	 = $this->Invoice_Template_model->get_templates_by_for_invoice($template_id);
+		//$this->show->pe($selected_template);
 		$invoice_items 		 = $this->Invoice_model->get_invoice_items_by_invoice_id($invoice_id);
 		$invoice_totals		 = $this->Invoice_model->get_invoice_totals($invoice_id);
 		$customer_details	 = $this->Invoice_model->get_invoice_customer($invoice_id);
 		
 		//$this->show->pe($invoice_total);
-		$html_output 		.= $selected_template->invoice_template_header;
+		$r_tag_one = htmlspecialchars_decode($selected_template->invoice_template_header);
 		
-		$html_output 		.=' 
+		$html_output 		.= $r_tag_one;
+		
+		$html_output 		.='
+		 		
 				<div class="box paint color_24">
 				<div class="accordion" id="accordion4">
 				  <div class="accordion-group">
@@ -465,7 +469,8 @@ class Invoices extends Admin_Controller {
 				}
                  
         $html_output 		.= '<p><strong>'.lang('invoice_terms').'</strong></p><p>'.$invoice_data->invoice_terms.'</p>';
-		$html_output 		.= $selected_template->invoice_template_footer;
+		$r_tag_two			 = htmlspecialchars_decode($selected_template->invoice_template_footer); 
+		$html_output 		.= $r_tag_two;
 		
 		//echo $html_output;exit;
 		$this->mpdf->WriteHTML($html_output);

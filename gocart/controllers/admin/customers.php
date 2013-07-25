@@ -32,7 +32,7 @@ class Customers extends Admin_Controller {
 	
 	}
 	
-	function index($field='lastname', $by='ASC', $page=0, $row=5)
+	function index($field='lastname', $by='ASC', $page=0, $row=25)
 	{
 		//we're going to use flash data and redirect() after form submissions to stop people from refreshing and duplicating submissions
 		//$this->session->set_flashdata('message', 'this is our message');
@@ -100,8 +100,7 @@ class Customers extends Admin_Controller {
 		$this->load->library('form_validation');
 		
 		$data['page_title']		= lang('customer_form');
-		$data['zones_menu']	= $this->Location_model->get_zones_menu('223');
-		$data['countries_menu']	= $this->Location_model->get_countries_menu();
+		
 		
 		//default values are empty if the customer is new
 		$data['id']					= '';
@@ -122,6 +121,7 @@ class Customers extends Admin_Controller {
 		$data['telephone']			= '';	
 		$password					= '';
 		$password 					= $this->input->post('password');	
+		$data['countries_menu']		= $this->Location_model->get_countries_menu();
 		// get group list
 		$groups = $this->Customer_model->get_groups();
 		foreach($groups as $group)
@@ -143,6 +143,8 @@ class Customers extends Admin_Controller {
 				redirect($this->config->item('admin_folder').'/customers');
 			}
 			
+			
+			
 			//set values to db values
 			$data['id']					= $customer->id;
 			$data['group_id']			= $customer->group_id;
@@ -159,6 +161,26 @@ class Customers extends Admin_Controller {
 			$data['email_subscribe']	= $customer->email_subscribe;
 			$data['country']			= $customer->country;
 			$data['state']				= $customer->state;
+			
+		}
+		
+		if(empty($data['id']))
+		{
+			$data['zones_menu']	= $this->Location_model->get_zones_menu('223');
+			
+		}
+		else
+		{
+		
+			if(is_numeric($data['country']))
+			{
+			
+				$data['zones_menu']	= $this->Location_model->get_zones_menu($data['country']);
+			}
+			else
+			{
+				$data['zones_menu']	= $this->Location_model->get_zones_menu(222);
+			}
 			
 		}
 		

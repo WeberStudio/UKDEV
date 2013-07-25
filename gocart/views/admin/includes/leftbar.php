@@ -11,6 +11,8 @@
 	$content_links		= '';
 	$active_commisions	= '';
 	$commisioin_links	= '';
+	$active_price		= '';
+	$price_link			= '';
 	$active = $this->session->userdata('active_module');
 	//print_r($active);
     if($active=='dashboard')
@@ -45,6 +47,11 @@
             $active_commisions		= 'opened';
 			$commisioin_links		= 'in collapse';
     }
+	 else if($active == 'price')
+    {
+            $active_price		= 'opened';
+			$price_link			= 'in collapse';
+    }
 ?>
 <div id="sidebar" class="">
     <div class="scrollbar">
@@ -69,6 +76,8 @@
                                     <option value="<?=base_url().ADMIN_PATH?>dashboard">Dashboard</option>
                                     <option value="<?=base_url().ADMIN_PATH?>categories">Categories</option>
                                     <option value="<?=base_url().ADMIN_PATH?>products">Courses</option>
+                                    <option value="<?=base_url().ADMIN_PATH?>products/price_options_form">Price Options</option>
+                                    <option value="<?=base_url().ADMIN_PATH?>products/product_delivery_form">Delivery Charges</option>
                                     <option value="<?=base_url().ADMIN_PATH?>customers">Customer</option>
                                     <option value="<?=base_url().ADMIN_PATH?>admin">Course Provider</option>
                                     <option value="<?php echo site_url($this->config->item('admin_folder').'/invoice_templates'); ?>">Invoice Template</option>
@@ -80,7 +89,7 @@
 									<?php }?>
 									<? if(isset($this->admin_access) && $this->admin_access=='Course Provider'){ ?>
                                    	<option value="<?=base_url().ADMIN_PATH?>categories">Categories</option>
-                                    <option value="<?=base_url().ADMIN_PATH?>products">Courses</option>
+                                    <option value="<?=base_url().ADMIN_PATH?>products">Courses</option>									
                                     <?php }?>
                                     <? if(isset($this->admin_access) && $this->admin_access=='Invoice Admin'){ ?>
                                     <option value="<?php echo site_url($this->config->item('admin_folder').'/invoice_templates'); ?>">Invoice Template</option>
@@ -111,12 +120,22 @@
                 <? if(isset($this->admin_access) && $this->admin_access=='Superadmin'){ ?>
                  
                		<li class="accordion-group color_7 <?php echo $active_catalog; ?>" onclick="set_module('catalog')" >
-                    <a class="accordion-toggle widgets collapsed " data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse1">
+                    <a class="accordion-toggle widgets collapsed " data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse0">
                         <img src="<?=base_url().ASSETS_PATH?>img/menu_icons/forms.png"><span>Catalogue</span></a>
-                    <ul id="collapse1" class="accordion-body collapse <?php echo $active_cat; ?>">
+                    <ul id="collapse0" class="accordion-body collapse <?php echo $active_cat; ?>">
                         <li><a href="<?=base_url().ADMIN_PATH?>categories">Categories</a></li>
                         <li><a href="<?=base_url().ADMIN_PATH?>products">Courses</a></li>
-                        <!--<li><a href="<?=base_url().ADMIN_PATH?>digital_products">Digital Products</a></li>-->
+                        <!--<li><a href="<?=base_url().ADMIN_PATH?>digital_products">Digital Products</a></li>-->						
+						<!--<li><a href="<?=base_url().ADMIN_PATH?>products/price_options_form">Price Options</a></li>-->
+                    </ul>
+                </li>
+                
+                <li class="accordion-group color_9 <?php echo $active_price ; ?>" onclick="set_module('price')" >
+                    <a class="accordion-toggle widgets collapsed " data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse1">
+                        <img src="<?=base_url().ASSETS_PATH?>img/menu_icons/forms.png"><span>Attribute</span></a>
+                    <ul id="collapse1" class="accordion-body collapse <?php echo $price_link; ?>">
+                        <li><a href="<?=base_url().ADMIN_PATH?>products/price_options_form">Price Options</a></li>
+                        <li><a href="<?=base_url().ADMIN_PATH?>products/product_delivery_form">Delivery Charges</a></li>
                     </ul>
                 </li>
                 

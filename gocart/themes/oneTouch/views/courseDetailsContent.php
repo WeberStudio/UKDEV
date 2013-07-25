@@ -82,18 +82,52 @@
                         <? } ?>
                     <div class="summary">
 
-                       
 
-                        <div itemprop="offers" itemscope="" >
+<script>
+(function(){
+	var customSelects = document.querySelectorAll(".custom-dropdown__select");
+	for(var i=0; i<customSelects.length; i++){
+		if (customSelects[i].hasAttribute("disabled")){
+			customSelects[i].parentNode.className += " custom-dropdown--disabled";
+		}
+	}	
+})()
+</script>                       
 
-                            <p itemprop="price" class="price"><span class="amount"><?=format_currency($product->price)?></span></p>
-
-                        </div>
+                        <!--<div itemprop="offers" itemscope="" >
+                        <?php if(!empty($product->price_options)){ ?>
+                        	<span class="custom-dropdown custom-dropdown--white">
+                                <select class="custom-dropdown__select custom-dropdown__select--white" name="price_option">
+                                    <option>Price Options</option>
+                                     <?php foreach($product->price_options as $price){?>
+                                <option value="<?php echo $price->p_option_price?>"><?php echo $price->p_option_title." ".format_currency($price->p_option_price)?></option>
+                                <?php }?>
+                                </select>
+								</span>
+								<?php } else{?>
+                                <p itemprop="price" class="price"><span class="amount"><?=format_currency($product->id)?></span></p>
+                                <?php }?>
+                             
+                      </div>-->
 
 
 
                         <?php echo form_open('cart/add_to_cart', 'class="cart"');?>
-
+								<div itemprop="offers" itemscope="" >
+                        <?php if(!empty($product->price_options)){ ?>
+                        	<span class="custom-dropdown custom-dropdown--white">
+                                <select class="custom-dropdown__select custom-dropdown__select--white" name="price_option">
+                                    <option>Price Options</option>
+                                     <?php foreach($product->price_options as $price){?>
+                                <option value="<?php echo $price->p_option_price?>"><?php echo $price->p_option_title." ".format_currency($price->p_option_price)?></option>
+                                <?php }?>
+                                </select>
+								</span>
+								<?php } else{?>
+                                <p itemprop="price" class="price"><span class="amount"><?=format_currency($product->price)?></span></p>
+                                <?php }?>
+                             
+                      </div>
                         <input type="hidden" name="cartkey" value="<?php echo $this->session->flashdata('cartkey');?>" />
 
                         <input type="hidden" name="id" value="<?php echo $product->id?>"/>
@@ -595,18 +629,21 @@
                                 <!-- <li class="reviews_tab"><a href="#tab-reviews">Reviews (0)</a></li>-->
 
                                 <? if(!empty($product_tabs)){
-
+										$count = 0;
                                         foreach($product_tabs as $tabs)
 
                                         {
 
                                         ?>
+											<?php if($count==0){?>
+                                            <li style="margin-bottom: 0px;" class="reviews_tab"><a class="current" href="#<?=str_replace(' ', '-', strtolower($tabs['tab_title']))?>"><?=$tabs['tab_title']?></a></li>
+                                            <?php } else{?>
+                                            
+                                        <li style="margin-bottom: 0px;" class="reviews_tab"><a class="" href="#<?=str_replace(' ', '-', strtolower($tabs['tab_title']))?>"><?=$tabs['tab_title']?></a></li>
+												<?php }?>
 
-                                        <li style="margin-bottom: 0px;" class="reviews_tab"><a href="#<?=str_replace(' ', '-', strtolower($tabs['tab_title']))?>"><?=$tabs['tab_title']?></a></li>
 
-
-
-                                        <?    }
+                                        <?   $count++; }
 
                                     } 
 
@@ -788,7 +825,7 @@
 
 
 
-                                <span class="quantity"><?=$qty?> × $<span class="amount"><?=$price?></span></span>
+                                <span class="quantity"><?=$qty?> × <span class="amount"><?=format_currency($price)?></span></span>
 
                             </li>
 
@@ -800,7 +837,7 @@
 
                     </ul><!-- end product list -->
 
-                    <p class="total"><strong>Subtotal:</strong> <span class="amount"><?=$this->go_cart->subtotal()?></span></p>
+                    <p class="total"><strong>Subtotal:</strong> <span class="amount"><?=format_currency($this->go_cart->subtotal())?></span></p>
 
                     <p class="buttons">
 
