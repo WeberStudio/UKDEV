@@ -296,8 +296,11 @@
                         }
 
                     </script>
+                    <div class="simpleTabs">
+                    <p class="woocommerce_info">Click Here To → <a href="javascript:void(0)" class="" onClick="return toggle()"> Ask A Question</a></p>
+                    </div>
                     <div class="eleven columns" style="padding-left: 0px; width: 854px;">
-                        <p class="woocommerce_info">Click Here To → <a href="javascript:void(0)" class="" onClick="return toggle()"> Ask A Question</a></p>
+                        
                         <div <?php if($open==""){echo 'style="display:none;"';}?> id="obj" method="post" class="login">
                             <?php if($open!="")
                                 {    
