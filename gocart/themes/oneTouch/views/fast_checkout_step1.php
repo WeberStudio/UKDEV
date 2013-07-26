@@ -1,50 +1,47 @@
-<script>
-function toggle() {
+ <?php include('mainHeader.php'); ?>  
 
-	var el = document.getElementById('obj');
-
-	if ( el.style.display != 'none' ) {
-
-		el.style.display = 'none';
-
-	}
-
-	else {
-
-		el.style.display = '';
-
-	}
-return false;
-}
-
-</script>
+        <script> var customStyleImgUrl = "images/custom-slider-img";</script>
+          <?php //include('leftPanel.php'); ?>
+<!--        
+-->		
+        <div id="body-wrapper" >		
+            <div id="body-wrapper-padding">			
+                <!--[if lt IE 7]>
+                <div class="alert">Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different
+                browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to
+                experience this site.
+                </div><![endif]-->
+                 <?php  include('header.php'); ?> 
+                <!--===================main content start=======================-->
+ 
 <?php
-	$company		= array('id'=>'bill_company', 'class'=>'input-text', 'placeholder'=>'Company', 'name'=>'company', 'value'=> set_value('company'));
+	//$company		= array('id'=>'bill_company', 'class'=>'input-text', 'placeholder'=>'Company', 'name'=>'company', 'value'=> set_value('company'));
 	$first			= array('id'=>'billing_first_name','class'=>'input-text','placeholder'=>'First Name','name'=>'firstname','value'=> set_value('firstname'));
 	$last			= array('id'=>'billing_last_name','class'=>'input-text','placeholder'=>'Last Name','name'=>'lastname','value'=> set_value('lastname'));
 	$email			= array('id'=>'bill_email', 'class'=>'input-text', 'placeholder'=>'E-Mail', 'name'=>'email', 'value'=>set_value('email'));
 	$phone			= array('id'=>'bill_phone', 'class'=>'input-text', 'name'=>'phone', 'placeholder'=>'Phone', 'value'=> set_value('phone'));
 	$f_city			= array('id'=>'f_city', 'class'=>'input-text', 'placeholder'=>'City', 'name'=>'city', 'value'=>set_value('city',$city));
-	$f_zip			= array('id'=>'f_zip',  'class'=>'input-text', 'placeholder'=>'Post Code', 'name'=>'zip', 'value'=> set_value('zip',$zip));
-	$f_address1		= array('id'=>'f_address1', 'placeholder'=>'Address', 'class'=>'input-text', 'name'=>'address1', 'value'=>set_value('address1',$address1));
-	$f_address2		= array('id'=>'f_address2','class'=>'input-text','placeholder'=>'Address  (optional)','name'=>'address2', 'value'=> set_value('address2',$address2));
-	$password 		= array('id'=>'password','name'=>'password','class'=>'input-text','placeholder'=>'Password'); 
-	$con_password 	= array('id'=>'confirm','name'=>'confirm','class'=>'input-text','placeholder'=>'Confirm'); 
-	//$gender_m 	= array('id'=>'gender_m', 'class'=>'','name'=>'gender', 'value'=>'male' );
-	//$gender_f 	= array('id'=>'gender_f', 'class'=>'', 'name'=>'gender', 'value'=>'female' );
+	$f_zip			= array('id'=>'f_zip',  'class'=>'input-text', 'placeholder'=>'Post Code', 'name'=>'post_code', 'value'=> set_value('post_code',$post_code));
+	$f_address1		= array('id'=>'f_address1', 'placeholder'=>'Address', 'class'=>'input-text', 'name'=>'street_address', 'value'=>set_value('street_address',$street_address));
+	$f_address2		= array('id'=>'f_address2','class'=>'input-text','placeholder'=>'Address  (optional)','name'=>'address_line2', 'value'=> set_value('address_line2',$address_line2));
+	//$password 		= array('id'=>'password','name'=>'password','class'=>'input-text','placeholder'=>'Password'); 
+	//$con_password 	= array('id'=>'confirm','name'=>'confirm','class'=>'input-text','placeholder'=>'Confirm'); 
+	$gender_m 	= array('id'=>'gender_m', 'class'=>'','name'=>'gender', 'value'=>'male' );
+	$gender_f 	= array('id'=>'gender_f', 'class'=>'', 'name'=>'gender', 'value'=>'female' );
 ?>
 
 <div class="row">
     <h1 class="page-title" style="margin-left:20px;">
-	<a class="black" href="javascript:void(0)">You can login here</a>
+	<a class="black" href="javascript:void(0)">STEP 1 OF 4 - BILLING INFORMATION </a>
 	</h1>
+    <p style="margin:-10px 0 0 11px;">If you have an account with us, you may login at the <a class="black" href="<?php echo base_url()."secure/process_checkout";?>"><b>Login Page</b></a>.</p>
 </div>
 
- <script type="text/javascript">
+ <!--<script type="text/javascript">
 function showStuff() {
     document.getElementById('closee').style.display = 'none';
 }
-</script>
+</script>-->
        <?php 
 	if($this->session->flashdata('message'))
 	{
@@ -78,37 +75,16 @@ function showStuff() {
 <!----- main content section start---->
 <div class="row">
   <div id="content" class="fifteen columns">
-  <!---=======hidden form start--->
-    <!--<p class="woocommerce_info">Already registered? <a href="" class="" onclick="return toggle()">Click here to login</a></p>
-    <form style="display:none;" id="obj" method="post" class="login" action="<?=base_url()?>secure/login">
-      <p>If you have shopped with us before, please enter your details in the
-        boxes below. If you are a new customer please proceed to the Billing 
-        &amp; Shipping section.</p>
-      <p class="form-row form-row-first">
-        <label for="username">Username or email <span class="required">*</span></label>
-        <input class="input-text" name="email" id="username" type="text">
-      </p>
-      <p class="form-row form-row-last">
-        <label for="password">Password <span class="required">*</span></label>
-        <input class="input-text" name="password" id="password" type="password">
-      </p>
-      <div class="clear"></div>
-      <p class="form-row">
-        <input id="_n" name="_n" value="" type="hidden">
-        <input name="_wp_http_referer" value="" type="hidden">
-        <input class="button" name="submitted" value="Login" type="submit">
-        
-        <a class="lost_password" href="<?php echo site_url('secure/forgot_password')?>">Lost Password?</a> </p>
-      <div class="clear"></div>
-    </form>-->
-   <!---=======hidden form end--->
-    
-    <?php echo form_open('secure/register'); ?>
+
+    <?php echo form_open('Shipping_order/shiping_order_step1'); ?>
     <input type="hidden" name="submitted" value="submitted" />
-    <input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
+    <input type="hidden" name="redirect" value="<?php //echo $redirect; ?>" />
     <div class="col2-set" id="customer_details">
       <div class="col-1">
-        <h3><?php echo lang('form_register');?></h3>
+        <h3>Address Details</h3>
+        <p class="form-row " id="billing_company_field">
+          <label style="margin-bottom: -5px;" for="billing_company" class="">Mr. <input type="radio" name="gender" value="mr"/> Ms.<input type="radio" name="gender" value="ms"/></label>
+         </p>
         <p class="form-row form-row-first" id="billing_first_name_field">
           <label for="billing_first_name" class=""><?php echo lang('account_firstname');?><abbr class="required" title="required">*</abbr> </label>
           <?php echo form_input($first);?> </p>
@@ -117,58 +93,70 @@ function showStuff() {
           <?php echo form_input($last);?> </p>
         <div class="clear"></div>
         
-        <p class="form-row " id="billing_company_field">
+        <!--<p class="form-row " id="billing_company_field">
           <label for="billing_company" class=""><?php echo lang('account_company');?></label>
-          <?php echo form_input($company);?> </p>
+          <?php echo form_input($company);?> </p>-->
         <div class="clear"></div>
         
         <p class="form-row form-row-first" id="billing_address_1_field">
-          <label for="billing_address_1" class=""><?php echo lang('address');?><abbr class="required" title="required">*</abbr></label>
+          <label for="billing_address_1" class="">Street Address<abbr class="required" title="required">*</abbr></label>
           <?php echo form_input($f_address1);?> </p>
         <p class="form-row form-row-last" id="billing_address_2_field">
-          <label for="billing_address_2" class="hidden"><?php echo lang('address');?> 2</label>
+          <label for="billing_address_2" class="">Address Line 2</label>
           <?php echo form_input($f_address2);?> </p>
         <div class="clear"></div>
         
         <p class="form-row form-row-first" id="billing_city_field">
           <label for="billing_city" class=""><?php echo lang('address_city');?><abbr class="required" title="required">*</abbr> </label>
           <?php echo form_input($f_city);?> </p>
-        <p class="form-row form-row-last update_totals_on_change" id="billing_postcode_field">
+          <p class="form-row form-row-last update_totals_on_change" id="billing_postcode_field">
+          <label for="billing_postcode" class="">State/County<abbr class="required" title="required">*</abbr> </label>
+          <?php echo form_dropdown('zone_id', $zones_menu, set_value('zone_id', $zone_id), 'id="f_zone_id" class="country_to_state form-row-first update_totals_on_change country_select chzn-done"');?> </p>
+        <!--<p class="form-row form-row-last update_totals_on_change" id="billing_postcode_field">
+          <label for="billing_postcode" class=""><?php echo lang('address_postcode');?> <abbr class="required" title="required">*</abbr> </label>
+          <?php echo form_input($f_zip);?> </p>-->
+        <div class="clear"></div>
+        
+        <p class="form-row form-row-first update_totals_on_change" id="billing_postcode_field">
           <label for="billing_postcode" class=""><?php echo lang('address_postcode');?> <abbr class="required" title="required">*</abbr> </label>
           <?php echo form_input($f_zip);?> </p>
-        <div class="clear"></div>
-        
-        <p class="form-row form-row-first" id="billing_city_field">
+        <p class="form-row form-row-last" id="billing_city_field">
           <label for="billing_city" class=""><?php echo lang('address_country');?><abbr class="required" title="required">*</abbr> </label>
           <?php echo form_dropdown('country_id', $countries_menu, set_value('country_id', $country_id), 'id="country_id" class="country_to_state form-row-first update_totals_on_change country_select chzn-done"');?> </p>
-        <p class="form-row form-row-last update_totals_on_change" id="billing_postcode_field">
-          <label for="billing_postcode" class=""><?php echo lang('address_state');?><abbr class="required" title="required">*</abbr> </label>
-          <?php echo form_dropdown('zone_id', $zones_menu, set_value('zone_id', $zone_id), 'id="f_zone_id" class="country_to_state form-row-first update_totals_on_change country_select chzn-done"');?> </p>
         <div class="clear"></div>
+        <h3>Contact Details</h3>
         
-        <p class="form-row form-row-first" id="billing_city_field">
-          <label for="billing_city" class=""><?php echo lang('account_phone');?><abbr class="required" title="required">*</abbr> </label>
-          <?php echo form_input($phone);?> </p>
-        <p class="form-row form-row-last update_totals_on_change" id="billing_postcode_field">
+        <p class="form-row form-row-first update_totals_on_change" id="billing_postcode_field">
           <label for="billing_postcode" class=""><?php echo lang('account_email');?> <abbr class="required" title="required">*</abbr> </label>
           <?php echo form_input($email);?> </p>
+           <div class="clear"></div>
+          <p class="form-row " id="billing_company_field">
+          <label style="margin-bottom: -5px;" for="billing_company" class="">HTML <input type="radio" name="type" value="html"/> TEXT-Only<input type="radio" name="type" value="text_only" checked/></label>
+         </p>
+         <div class="clear"></div>
+          <p class="form-row form-row-first" id="billing_city_field">
+          <label for="billing_city" class="">Telephone<abbr class="required" title="required">*</abbr> </label>
+          <?php echo form_input($phone);?> </p>
         <div class="clear"></div>
         
-        <p class="form-row form-row-first" id="billing_city_field">
+        <!--<p class="form-row form-row-first" id="billing_city_field">
           <label for="billing_city" class=""><?php echo lang('account_password');?><abbr class="required" title="required">*</abbr> </label>
           <?php echo form_password($password);?> </p>
         <p class="form-row form-row-last update_totals_on_change" id="billing_postcode_field">
           <label for="billing_postcode" class=""><?php echo lang('account_confirm');?> <abbr class="required" title="required">*</abbr> </label>
-          <?php echo form_password($con_password);?> </p>
+          <?php echo form_password($con_password);?> </p>-->
         <div class="clear"></div>
-        
-        <p class="form-row " id="billing_company_field">
+        <p>
+        <b>Continue to Step 2</b> - provide delivery information.
+        </p>
+        <div class="clear"></div>
+        <!--<p class="form-row " id="billing_company_field">
             <label class="checkbox">
             <input type="checkbox" name="email_subscribe" value="1" <?php echo set_radio('email_subscribe', '1', TRUE); ?>/>
             <?php echo lang('account_newsletter_subscribe');?> </label>
-          </p>
+          </p>-->
         <p class="form-row " id="billing_company_field">
-        <input type="submit" value="<?php echo lang('form_register');?>" class="button" style="height: 34px; width: 74px;" />
+        <input type="submit" value="Continue " class="button" name="continue" style="height: 34px; width: 74px;" />
 		</p>  
             
       </div>
@@ -216,3 +204,13 @@ j(function(){
 		});
 }*/
 </script>
+
+                <!--===================main content start=======================-->
+            </div>
+        </div>
+        
+
+        <?php include_once('footer.php'); ?> 
+        
+       
+  
