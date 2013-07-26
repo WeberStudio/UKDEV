@@ -40,19 +40,11 @@ class Shipping_order extends Front_Controller {
 		
 		$data['zones_menu']			= $this->Location_model->get_zones_menu('223');
 		$data['countries_menu']		= $this->Location_model->get_countries_menu();
+		$get_user_info = $this->session->userdata('unregister_user');
+		$data['customer']	= $get_user_info;
 		
-/*echo	$gender						= $this->input->post('gender')."<br/>";
-	echo	$firstname					= $this->input->post('firstname')."<br/>";
-	echo	$lastname					= $this->input->post('lastname')."<br/>";
-	echo	$street_address				= $this->input->post('street_address')."<br/>";
-	echo	$address_line2				= $this->input->post('address_line2')."<br/>";
-	echo	$city						= $this->input->post('city')."<br/>";
-	echo	$state						= $this->input->post('zone_id')."<br/>";
-	echo	$post_code					= $this->input->post('post_code')."<br/>";
-	echo	$country_id					= $this->input->post('country_id')."<br/>";
-	echo	$email						= $this->input->post('email')."<br/>";
-	echo	$type						= $this->input->post('type')."<br/>";
-	echo	$telephone					= $this->input->post('phone')."<br/>"; */			
+	
+	if($this->input->post('continue')!=""){		
 	$unregister_array = array(
 								'gender'			=> $this->input->post('gender'),
 								'firstname'			=> $this->input->post('firstname'),
@@ -70,7 +62,7 @@ class Shipping_order extends Front_Controller {
 		$unregister_checkout = array('unregister_user' => $unregister_array);	
 		$unregister_info = $this->session->set_userdata($unregister_checkout);
 		
-		if($this->input->post('continue')!=""){
+		
 		redirect('Shipping_order/shiping_order_step2');
 		}
 									
@@ -79,9 +71,12 @@ class Shipping_order extends Front_Controller {
 	}
 	function shiping_order_step2()
 	{
+		//$this->show->pe($this->session->all_userdata(''));
 		//$this->show->pe($this->cart->contents());
 		//$this->show->pe($this->session->all_userdata());
-$datatt = $this->session->userdata('cart_contents');
+		$data['instraction'] = $this->session->userdata('instructions');
+		//echo $data['instraction']; exit;
+		$datatt = $this->session->userdata('cart_contents');
 		//$this->show->pe($datatt['items']);
 		$data['delivery_price'] = $datatt['items'];
 		$get_user_info = $this->session->userdata('unregister_user');
@@ -94,9 +89,66 @@ $datatt = $this->session->userdata('cart_contents');
 		$data['post_code']			= $get_user_info['post_code'];
 		$data['state'] 				= $get_user_info['state'];
 		$data['country_id'] 		= $get_user_info['country_id'];
-		
+		if($this->input->post('continue')!="")
+		{
+			
+		$unregister_checkout = array('instructions' => $this->input->post('instructions'));
+			
+		$unregister_info = $this->session->set_userdata($unregister_checkout);
+		//$this->show->pe($this->session->all_userdata());
+		redirect('shipping_order/shiping_order_step3');
+		}
+		//$this->show->pe($this->session->all_userdata(''));
 		$this->load->view('fast_checkout_step2' ,$data );
 	}
+	
+	function shiping_order_step3()
+	{
+		$data['instraction'] = $this->session->userdata('instructions');
+		$get_user_info = $this->session->userdata('unregister_user');
+		//echo $get_user_info['firstname']; exit;
+		$data['firstname']	 		= $get_user_info['firstname'];
+		$data['lastname'] 			= $get_user_info['lastname'];
+		$data['street_address'] 	= $get_user_info['street_address'];
+		$data['address_line2']		= $get_user_info['address_line2'];
+		$data['city'] 				= $get_user_info['city'];
+		$data['post_code']			= $get_user_info['post_code'];
+		$data['state'] 				= $get_user_info['state'];
+		$data['country_id'] 		= $get_user_info['country_id'];
+		
+		//$get_user_info = $this->session->userdata('unregister_user');
+		//$data['customer']	= $get_user_info;
+		//$this->show->pe($get_user_info);
+		
+		$data['f_address1']	="";
+		$data['f_address2']	="";
+		$data['address_form_prefix']	="";
+		$data['company']	="";
+		$data['address_street']	="";
+		$data['address_line']	="";
+		$data['phone']	="";
+		$this->load->view('fast_checkout_setp3' , $data);
+	}
+	
+	function shiping_order_step4()
+	
+	{
+		$data['instraction'] = $this->session->userdata('instructions');
+		$get_user_info = $this->session->userdata('unregister_user');
+		//echo $get_user_info['firstname']; exit;
+		$data['firstname']	 		= $get_user_info['firstname'];
+		$data['lastname'] 			= $get_user_info['lastname'];
+		$data['street_address'] 	= $get_user_info['street_address'];
+		$data['address_line2']		= $get_user_info['address_line2'];
+		$data['city'] 				= $get_user_info['city'];
+		$data['post_code']			= $get_user_info['post_code'];
+		$data['state'] 				= $get_user_info['state'];
+		$data['country_id'] 		= $get_user_info['country_id'];
+		
+		$this->load->view('fast_checkout_step4' , $data);
+	}
+	
+	
 	function index($sort_by='order_number',$sort_order='desc', $code=0, $page=0, $rows=15)
 	{/*
 		

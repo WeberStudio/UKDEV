@@ -34,7 +34,7 @@
   </div>
   <div class="one columns">
   <br/>
-  <input type="button" class="button" value="Change Address"/>
+  <a href="<?php echo base_url()."shipping_order/shiping_order_step1";?>"><input type="button" class="button" value="Change Address"/></a>
   </div>
   <div class="six columns" style="margin-right: 120px;"><p> <b>Your order will be delivered to the address at the left or you may change the delivery address by clicking the Change Address button.</b></p>
   </div>
@@ -46,7 +46,7 @@
   
   
   
-  <?php echo form_open('Shipping_order/shiping_order_step2'); ?>
+
   <h3>Delivery Method:</h3>
   <p style="margin-left: -10px; margin-top: -15px;">
   <b>This is currently the only delivery method available to use on this order.</b>
@@ -77,11 +77,19 @@
     }}?>
  
   <br/>
+  <?php echo form_open('shipping_order/shiping_order_step2'); ?>
   <div>
   		<h4>Special Instructions or Comments About Your Order</h4>
-        <textarea rows="5" cols="5"></textarea>
+        <?php $instructions	= array('id'=>'', 'class'=>'input-text', 'name'=>'instructions', 'value'=>set_value('instructions',$instraction));
+		
+		echo form_textarea($instructions);
+		?>
+       
   </div>
-  <input type="submit" name="" value="continue">
+  
+  <p class="form-row " id="billing_company_field">
+        <input type="submit" value="Continue " class="button" name="continue" style="height: 34px; width: 74px;" />
+		</p>
   </form>
   </div>
 </div>
