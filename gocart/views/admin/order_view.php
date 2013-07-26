@@ -128,29 +128,36 @@
 					<td><?php echo format_currency($product['price']*$product['quantity']);?></td>
 				</tr>
 				<?php endforeach;?>
+                
 			  </tbody>
-			  <tfoot>
-				<?php if($order->coupon_discount > 0):?>
-				<tr>
-					<td><strong><?php echo lang('coupon_discount');?></strong></td>
-					<td colspan="3"></td>
+              <tfoot>
+              
+               
+              </tfoot>
+              
+			  <!--<tfoot>
+              <div>
+              	<?php if($order->coupon_discount > 0):?>
+				<tr class="order_view">
+					<td style="text-align: right;"><strong><?php echo lang('coupon_discount');?></strong></td>
+					
 					<td><?php echo format_currency(0-$order->coupon_discount); ?></td>
 				</tr>
 				<?php endif;?>
 				
-				<tr>
-					<td><strong><?php echo lang('subtotal');?></strong></td>
-					<td colspan="3"></td>
+				<tr class="order_view">
+					<td style="text-align: right;"><strong><?php echo lang('subtotal');?></strong></td>
+					
 					<td><?php echo format_currency($order->subtotal); ?></td>
 				</tr>
-				 <tr>
-                    <td><strong><?php echo 'Zone Rates (Delivery to GB):';?></strong></td>
-                    <td colspan="3"></td>
+				 <tr class="order_view">
+                    <td style="text-align: right;"><strong><?php echo 'Zone Rates (Delivery to GB):';?></strong></td>
+                    
                     <td><?php  ?></td>
                 </tr>
-                 <tr>
-                    <td><strong><?php echo 'VAT + Export:';?></strong></td>
-                    <td colspan="3"></td>
+                 <tr class="order_view">
+                    <td style="text-align: right;"><strong><?php echo 'VAT + Export:';?></strong></td>
+                   
                     <td><?php  ?></td>
                 </tr>
 				<?php 
@@ -159,9 +166,9 @@
 				{
 					foreach($charges as $name=>$price) : ?>
 						
-				<tr>
-					<td><strong><?php echo $name?></strong></td>
-					<td colspan="3"></td>
+				<tr class="order_view">
+					<td style="text-align: right;"><strong><?php echo $name?></strong></td>
+					
 					<td><?php echo format_currency($price); ?></td>
 				</tr>	
 						
@@ -169,14 +176,61 @@
 				}
 				?>
 				
-				<tr>
-					<td><h3><?php echo lang('total');?></h3></td>
-					<td colspan="3"></td>
+				<tr class="order_view">
+					<td style="text-align: right;"><h3 style="padding:0px;"><?php echo lang('total');?></h3></td>
+					
 					<td><strong><?php echo format_currency($order->total); ?></strong></td>
 				</tr>
-			  </tfoot>
+                </div>
+              </tfoot>-->
             </table>
-              
+             <table style="width:100%">
+             
+				<?php if($order->coupon_discount > 0):?>
+				<tr>
+					<td style="text-align: right;"><strong><?php echo lang('coupon_discount');?></strong></td>
+					
+					<td style="width: 135px;"><?php echo format_currency(0-$order->coupon_discount); ?></td>
+				</tr>
+				<?php endif;?>
+				
+				<tr>
+					<td style="text-align: right;"><strong><?php echo lang('subtotal');?></strong></td>
+					
+					<td style="width: 135px;"><?php echo format_currency($order->subtotal); ?></td>
+				</tr>
+				 <tr>
+                    <td style="text-align: right;"><strong><?php echo 'Zone Rates (Delivery to GB):';?></strong></td>
+                    
+                    <td style="width: 135px;"><?php  ?></td>
+                </tr>
+                 <tr>
+                    <td style="text-align: right;"><strong><?php echo 'VAT + Export:';?></strong></td>
+                    
+                    <td style="width: 135px;"><?php  ?></td>
+                </tr>
+				<?php 
+				$charges = @$order->custom_charges;
+				if(!empty($charges))
+				{
+					foreach($charges as $name=>$price) : ?>
+						
+				<tr>
+					<td style="text-align: right;"><strong><?php echo $name?></strong></td>
+					
+					<td style="width: 135px;"><?php echo format_currency($price); ?></td>
+				</tr>	
+						
+				<?php endforeach;
+				}
+				?>
+				
+				<tr>
+					<td style="text-align: right;"><h3><?php echo lang('total');?></h3></td>
+					
+					<td style="width: 135px;"><strong><?php echo format_currency($order->total); ?></strong></td>
+				</tr>
+                </table>
             </div>
             <!-- End row-fluid -->
           </div>

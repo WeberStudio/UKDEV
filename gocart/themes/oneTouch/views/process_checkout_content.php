@@ -24,7 +24,7 @@
 	</p>
 	<p align="right">
 	<!--<input class="submitbutton" name="submitted" id="wp-submit" value="Continue" type="submit">--> 
-    <a class="button" href="http://localhost/UKOpenColleges/cart/view_cart">Continue →</a> 
+    <a class="button" href="<?php echo base_url()."shipping_order/shiping_order_step1";?>">Continue →</a> 
 	</p>
 	</div>
 		
