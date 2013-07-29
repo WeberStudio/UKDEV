@@ -604,13 +604,23 @@ class Checkout extends Front_Controller {
           
       $this->session->set_flashdata('message', "<div  class='woocommerce_message'>Your Order Have Been Submitted Successfully!</div>");
        $this->go_cart->destroy();
+	   $this->session->unset_userdata('unregister_user'); 
+			$this->session->unset_userdata('instructions');
+			$this->session->unset_userdata('deliveryadd');
+			$this->session->unset_userdata('delivrey_info');
        redirect('cart/view_cart');
 		}
        
     }   
     
 	function place_order()
-	{		
+	{
+		
+			$this->session->unset_userdata('unregister_user'); 
+			$this->session->unset_userdata('instructions');
+			$this->session->unset_userdata('deliveryadd');
+			$this->session->unset_userdata('delivrey_info');
+			//$this->show->pe($this->session->all_userdata());		
             
 		// retrieve the payment method
        // DebugBreak();
@@ -634,6 +644,8 @@ class Checkout extends Front_Controller {
 		$contents = $this->go_cart->contents();
 		if(empty($contents))
 		{
+			//$get_user_info = $this->session->userdata('unregister_user');
+			//$this->session->unset_userdata($get_user_info); 
 			redirect('cart/view_cart');
 		}
         
@@ -705,6 +717,10 @@ class Checkout extends Front_Controller {
         //echo $this->email->print_debugger(); exit;
        
        $this->go_cart->destroy();
+	   		$this->session->unset_userdata('unregister_user'); 
+			$this->session->unset_userdata('instructions');
+			$this->session->unset_userdata('deliveryadd');
+			$this->session->unset_userdata('delivrey_info');
        redirect('cart/view_cart');
 		
 		

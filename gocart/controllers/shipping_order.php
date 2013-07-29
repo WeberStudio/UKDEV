@@ -107,47 +107,129 @@ class Shipping_order extends Front_Controller {
         //$this->show->pe($this->session->all_userdata(''));
         //$this->show->pe($this->cart->contents());
         //$this->show->pe($this->session->all_userdata());
-        $data['instraction'] 		= $this->session->userdata('instructions');
+        $data['instraction'] 			= $this->session->userdata('instructions');
         //echo $data['instraction']; exit;
-        $datatt = $this->session->userdata('cart_contents');
+        $datatt 						= $this->session->userdata('cart_contents');
         //$this->show->pe($datatt['items']);
-        $data['delivery_price'] 	= $datatt['items'];
+        $data['delivery_price'] 		= $datatt['items'];
        // $get_user_info = $this->session->userdata('unregister_user');   
         //$this->show->pe($this->session->userdata('deliveryadd'));     
         // echo empty();
-        echo $this->status ;
-        if($this->status == '1')
+         $status = $this->session->userdata('delivrey_info');
+		// $this->show->pe($status);
+       if($status=="active")
         {
-            $get_user_info 			= $this->session->userdata('deliveryadd');   
+            $get_user_info 				= $this->session->userdata('deliveryadd');   
 
         }
 
-        else{
-            $get_user_info 			= $this->session->userdata('unregister_user');   
+       else{
+            $get_user_info 				= $this->session->userdata('unregister_user');   
 
         }
 
-        $data['firstname']             = $get_user_info['firstname'];
-        $data['lastname']             = $get_user_info['lastname'];
-        $data['street_address']     = $get_user_info['street_address'];
-        $data['address_line2']        = $get_user_info['address_line2'];
-        $data['city']                 = $get_user_info['city'];
-        $data['post_code']            = $get_user_info['post_code'];
-        $data['state']                 = $get_user_info['state'];
-        $data['country_id']         = $get_user_info['country_id'];
+        $data['firstname']            	= $get_user_info['firstname'];
+        $data['lastname']             	= $get_user_info['lastname'];
+        $data['street_address']     	= $get_user_info['street_address'];
+        $data['address_line2']        	= $get_user_info['address_line2'];
+        $data['city']                 	= $get_user_info['city'];
+        $data['post_code']            	= $get_user_info['post_code'];
+        $data['state']                 	= $get_user_info['state'];
+        $data['country_id']         	= $get_user_info['country_id'];
+		
         if($this->input->post('continue')!="")
         {
 
 
-            $unregister_checkout = array('instructions' => $this->input->post('instructions'));
+            $unregister_checkout 		= array('instructions' => $this->input->post('instructions'));
 
-            $unregister_info = $this->session->set_userdata($unregister_checkout);
+            $unregister_info 			= $this->session->set_userdata($unregister_checkout);
             //$this->show->pe($this->session->all_userdata());
             redirect('shipping_order/shiping_order_step3');
         }
         //$this->show->pe($this->session->all_userdata(''));
         $this->load->view('fast_checkout_step2' ,$data );
     }
+	
+	function delivery_address()
+    {
+        //$this->load->library('session');        
+        $data['id']                    	= '';
+        $data['company']            	= '';
+        $data['firstname']            	= '';
+        $data['lastname']            	= '';
+        $data['email']                	= '';
+        $data['phone']                	= '';
+        $data['street_address']        	= '';
+        $data['address_line2']        	= '';
+        $data['city']                	= '';
+        $data['state']                	= '';
+        $data['post_code']            	= '';
+        $data['country_id']            	= '222';
+        $data['zone_id']            	= '';
+        $password                    	= '';
+
+        $data['zones_menu']            	= $this->Location_model->get_zones_menu('222');
+        $data['countries_menu']        	= $this->Location_model->get_countries_menu();
+		
+		$data['country']				= $this->Location_model->get_country($this->input->post('country_id'));
+		$data['zone']					= $this->Location_model->get_zone($this->input->post('zone_id'));
+		
+		$status = $this->session->userdata('delivrey_info');
+        if($status != '' && !empty($status))
+		{
+			 $get_user_info 				= $this->session->userdata('deliveryadd');
+		} 
+		else
+		{
+			$get_user_info 					= $this->session->userdata('unregister_user');
+		}
+        
+
+        $data['firstname']             	= $get_user_info['firstname'];
+        $data['lastname']             	= $get_user_info['lastname'];
+        $data['street_address']     	= $get_user_info['street_address'];
+        $data['address_line2']        	= $get_user_info['address_line2'];
+        $data['city']                 	= $get_user_info['city'];
+        $data['post_code']            	= $get_user_info['post_code'];
+        $data['state']                	= $get_user_info['state'];
+        $data['country_id']        		= $get_user_info['country_id'];
+
+        $data['customer']    			= $get_user_info;
+		//$this->show->pe($data['customer']);
+
+
+        if($this->input->post('continue')!=""){        
+
+            $unregister_array = array(
+            'gender'            	=> $this->input->post('gender'),
+            'firstname'            	=> $this->input->post('firstname'),
+            'lastname'            	=> $this->input->post('lastname'),
+            'street_address'    	=> $this->input->post('street_address'),
+            'address_line2'        	=> $this->input->post('address_line2'),
+            'city'                	=> $this->input->post('city'),
+            'state'                	=> $data['zone']->name,
+            'post_code'            	=> $this->input->post('post_code'),
+            'country_id'        	=> $data['country']->name,
+            'email'                	=> $this->input->post('email'),
+            'type'                	=> $this->input->post('type'),
+            'telephone'            	=> $this->input->post('phone')
+            );
+            $unregister_checkout 	= array('deliveryadd' => $unregister_array);    
+            $unregister_info 		= $this->session->set_userdata($unregister_checkout);
+            //$unregister_checkout = array('unregister_user' => $unregister_array);    
+            //$unregister_info = $this->session->set_userdata($unregister_checkout);
+
+            //$this->show->pe($unregister_info);
+            //exit();
+            $delivrey_info 			= array('delivrey_info'=>'active');
+			$delivrey_infos 		= $this->session->set_userdata($delivrey_info);
+			//$this->show->pe($this->session->all_userdata());
+            redirect('shipping_order/shiping_order_step2');
+        }   
+        $this->load->view('delivery_address' , $data);
+    }
+
 
     function shiping_order_step3()
     {
@@ -305,69 +387,7 @@ class Shipping_order extends Front_Controller {
         $this->load->view('fast_checkout_step4' , $data);
     }
 
-    function delivery_address()
-    {
-        //$this->load->library('session');        
-        $data['id']                    = '';
-        $data['company']            = '';
-        $data['firstname']            = '';
-        $data['lastname']            = '';
-        $data['email']                = '';
-        $data['phone']                = '';
-        $data['street_address']        = '';
-        $data['address_line2']        = '';
-        $data['city']                = '';
-        $data['state']                = '';
-        $data['post_code']            = '';
-        $data['country_id']            = '222';
-        $data['zone_id']            = '';
-        $password                    = '';
-
-        $data['zones_menu']            = $this->Location_model->get_zones_menu('222');
-        $data['countries_menu']        = $this->Location_model->get_countries_menu();
-        $get_user_info = $this->session->userdata('unregister_user');
-
-        $data['firstname']             = $get_user_info['firstname'];
-        $data['lastname']             = $get_user_info['lastname'];
-        $data['street_address']     = $get_user_info['street_address'];
-        $data['address_line2']        = $get_user_info['address_line2'];
-        $data['city']                 = $get_user_info['city'];
-        $data['post_code']            = $get_user_info['post_code'];
-        $data['state']                 = $get_user_info['state'];
-        $data['country_id']         = $get_user_info['country_id'];
-
-        $data['customer']    = $get_user_info;
-
-
-        if($this->input->post('continue')!=""){        
-
-            $unregister_array = array(
-            'gender'            => $this->input->post('gender'),
-            'firstname'            => $this->input->post('firstname'),
-            'lastname'            => $this->input->post('lastname'),
-            'street_address'    => $this->input->post('street_address'),
-            'address_line2'        => $this->input->post('address_line2'),
-            'city'                => $this->input->post('city'),
-            'state'                => $this->input->post('zone_id'),
-            'post_code'            => $this->input->post('post_code'),
-            'country_id'        => $this->input->post('country_id'),
-            'email'                => $this->input->post('email'),
-            'type'                => $this->input->post('type'),
-            'telephone'            => $this->input->post('phone')
-            );
-            $unregister_checkout = array('deliveryadd' => $unregister_array);    
-            $unregister_info = $this->session->set_userdata($unregister_checkout);
-            //$unregister_checkout = array('unregister_user' => $unregister_array);    
-            //$unregister_info = $this->session->set_userdata($unregister_checkout);
-
-            //$this->show->pe($unregister_info);
-            //exit();
-            $this->status = 1;
-            redirect('shipping_order/shiping_order_step2');
-        }   
-        $this->load->view('delivery_address' , $data);
-    }
-
+    
 
     function index($sort_by='order_number',$sort_order='desc', $code=0, $page=0, $rows=15)
     {/*
