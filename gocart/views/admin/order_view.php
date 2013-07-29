@@ -79,15 +79,40 @@
                   <tr>
                     <th><?php echo lang('name');?></th>
 					<th><?php echo lang('description');?></th>
-                    <th><?php echo "Tax";?></th> 
+                    <th><?php echo lang('tax');?></th> 
 					<th><?php echo lang('price')."(ex)";?></th>
 					<th><?php echo lang('quantity');?></th>
 					<th><?php echo lang('total');?></th>
                   </tr>
                 </thead>
                 <tbody>
-				<?php foreach($order->contents as $orderkey=>$product):?>
-				<tr>
+				
+				<?php
+				 if(empty($order->contents))
+				 {?>
+				 	<tr>
+					<td>
+						
+					</td>
+					<td>
+						
+					</td>
+                    <td><?php echo $order->tax.'%';?></td>
+					<td>
+					<?php 
+						$price_ex 	= ($order->total/1.2);
+						$tax_amount	= ($price_ex*.2);
+						echo format_currency($price_ex);
+					?>
+					</td>
+					<td><?php echo $product['quantity'] = 1 ;?></td>
+					<td><?php echo format_currency($order->total*$product['quantity']);?></td>
+				</tr>
+				<? }
+				 else
+				 {
+					foreach($order->contents as $orderkey=>$product):?>
+					<tr>
 					<td>
 						<?php echo $product['name'];?>
 						<?php echo (trim($product['sku']) != '')?'<br/><small>'.lang('sku').': '.$product['sku'].'</small>':'';?>
@@ -119,15 +144,25 @@
 							}
 						}
 						
-						if(isset($product['gc_status'])) echo $product['gc_status'];
+						//if(isset($product['gc_status'])) echo $product['gc_status'];
 						?>
 					</td>
                     <td><?php echo $order->tax.'%';?></td>
-					<td><?php echo format_currency($product['price']);?></td>
+					<td>
+					<?php 
+						//echo format_currency($product['price']);
+						
+						$price_ex 	= ($product['price']/1.2);
+						$tax_amount	= ($price_ex*.2);
+						echo format_currency($price_ex);
+					?>
+					</td>
 					<td><?php echo $product['quantity'];?></td>
 					<td><?php echo format_currency($product['price']*$product['quantity']);?></td>
 				</tr>
-				<?php endforeach;?>
+				<?php endforeach;
+				}
+				?>
                 
 			  </tbody>
               <tfoot>
@@ -202,12 +237,22 @@
 				 <tr>
                     <td style="text-align: right;"><strong><?php echo 'Zone Rates (Delivery to GB):';?></strong></td>
                     
-                    <td style="width: 135px;"><?php  ?></td>
+                    <td style="width: 135px;">
+					<?php
+					  if(is_null($order->product_name)){
+					  	$product = $this->Product_model->get_product($order->product_name, false);
+					  }
+					 	if(isset($product->delivery_price))
+						{
+							echo $product->delivery_price;
+						}
+					 ?>
+					</td>
                 </tr>
                  <tr>
                     <td style="text-align: right;"><strong><?php echo 'VAT + Export:';?></strong></td>
                     
-                    <td style="width: 135px;"><?php  ?></td>
+                    <td style="width: 135px;"><?php echo format_currency($tax_amount); ?></td>
                 </tr>
 				<?php 
 				$charges = @$order->custom_charges;

@@ -42,7 +42,7 @@ Class Invoice_model extends CI_Model
 	function get_all_admin($admin_id = '')
 	{
 		$this->db->select('*');
-		$this->db->where('access !=', 'Superadmin');
+		$this->db->where('access', 'Admin');
 		$this->db->where('status', '1');
 		
 		if(!empty($admin_id))
@@ -87,7 +87,6 @@ Class Invoice_model extends CI_Model
 	function get_invoice_items_by_invoice_id($invoice_id)
 	{
 		$invoice_items = $this->db->query("SELECT * FROM oc_invoice_items it LEFT JOIN oc_invoice_item_amounts iia ON it.item_id = iia.item_id WHERE it.invoice_id = ".$invoice_id." ORDER BY  it.item_id ASC ");
-		//echo $this->db->last_query(); exit;
 		$result 	   = $invoice_items->result_array($invoice_items);
 		//$this->show->pe($result);
 		return $result;

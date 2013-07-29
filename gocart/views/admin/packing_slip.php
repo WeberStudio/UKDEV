@@ -200,7 +200,7 @@
 				<tr>
 					<td><strong><?php echo lang('subtotal');?></strong></td>
 					<td colspan="3"></td>
-					<td><?php echo format_currency($order->subtotal); ?></td>
+					<td><?php echo str_replace('Â','',format_currency($order->subtotal)); ?></td>
 				</tr>
 				
 				<?php 
@@ -212,7 +212,7 @@
 				<tr>
 					<td><strong><?php echo $name?></strong></td>
 					<td colspan="3"></td>
-					<td><?php echo format_currency($price); ?></td>
+					<td><?php echo  str_replace('Â','',format_currency($price)); ?></td>
 				</tr>	
 						
 				<?php endforeach;
@@ -222,7 +222,7 @@
 				<tr>
 					<td><h3><?php echo lang('total');?></h3></td>
 					<td colspan="3"></td>
-					<td><strong><?php echo format_currency($order->total); ?></strong></td>
+					<td><strong><?php echo str_replace('Â','',format_currency($order->total)); ?></strong></td>
 				</tr>
 			  </tfoot>
             </table>

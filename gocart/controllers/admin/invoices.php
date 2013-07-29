@@ -144,6 +144,8 @@ class Invoices extends Admin_Controller {
 		
 		//Get All Course Providers       
 		$data['users'] 					= $this->Invoice_model->get_all_admin();
+        
+        // $this->show->pe($data['users']);
 		
 		//Get All Groups 
 		$data['groups'] 				= $this->Invoice_model->get_all_groups();

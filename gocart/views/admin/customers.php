@@ -7,15 +7,50 @@ function areyousure()
 <div id="main" style="min-height:1000px">
   <div class="container">
     <? include_once('includes/admin_profile.php');?>
+	
+	<!--=======Search Panel Start=======-->
+    <div class="box paint color_0">
+      <div class="title">
+        <h4> <i class="icon-book"></i><span>Search Customer</span> </h4>
+      </div>
+      <div class="content"> <?php echo form_open($this->config->item('admin_folder').'/customers/index', 'class="form-horizontal row-fluid" ');?>
+        <div class="form-row control-group row-fluid">
+              <div class="controls span5">
+                <input type="text" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Customer Name, Keyword" placeholder="Search Customer...." class="row-fluid">
+              </div>
+              <div class="controls span5">
+                <?php
+                        if(!empty($all_customers))
+                        {
+                            echo '<select name="customer_id"   data-placeholder="Filter By Customer Email..." class="chzn-select" id="default-select">';
+                            echo '<option value="">Select Customer E-mail</option>';
+                            foreach ($all_customers as $customer)
+							{
+								echo "<option value=".$customer->id.">$customer->email</option>";
+							}
+							echo '</select>';
+                            
+                        }
+                ?>
+              </div>
+              <div class="controls span2">
+                <button class="btn" rel="tooltip" data-placement="top" data-original-title="Search" name="submit" value="search"><?php echo lang('search')?></button>
+                <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/products/index');?>">Reset</a> 	  </div>
+          </div>
+          </form>
+        </div>
+      </div>
+  <!--=======Search Panel End=======-->
+	
+	
      <div id="main_container">
       <div class="row-fluid ">
         <div class="span12">
           <div class="box paint color_18">
             <div class="title">
              <h4> <i class=" icon-bar-chart"></i><span>Customers 
-             
-	           <?php /*?> <a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/customers/export_xml');?>"><i class="icon-download"></i> <?php echo lang('xml_download');?></a>
-	            <a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/customers/get_subscriber_list');?>"><i class="icon-download"></i> <?php echo lang('subscriber_download');?></a><?php */?>
+             	
+	         
 	            <a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/customers/form'); ?>"><i class="icon-plus-sign"></i> <?php echo lang('add_new_customer');?></a>
                      </span></h4>
                 
@@ -50,7 +85,7 @@ function areyousure()
 	
 	<tbody>
 		<?php
-		$page_links	= $this->pagination->create_links(); 
+		$page_links	= $this->pagination->create_links();
 		echo (count($customers) < 1)?'<tr><td style="text-align:center;" colspan="5">'.lang('no_customers').'</td></tr>':''?>
 <?php foreach ($customers as $customer):?>
 		<tr>

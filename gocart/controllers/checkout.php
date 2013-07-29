@@ -61,7 +61,6 @@ class Checkout extends Front_Controller {
 	function step_1()
 	{
 		$data['customer']	= $this->go_cart->customer();
-		//$this->show->pe($data['customer']);
 
 		if(isset($data['customer']['id']))
 		{
@@ -104,7 +103,6 @@ class Checkout extends Front_Controller {
 		{
 			/*load any customer data to get their ID (if logged in)*/
 			$customer				= $this->go_cart->customer();
-			//$this->show->pe($customer);
 
 			$customer['bill_address']['company']		= $this->input->post('company');
 			$customer['bill_address']['firstname']	= $this->input->post('firstname');
@@ -542,12 +540,21 @@ class Checkout extends Front_Controller {
                         'exp_year'      => $select_year, 
                         'csc'           => $cvv_num
                         ); 
-        $settings = array(
+       /* $settings = array(
                'username' => 'j.khalil_api1.weprosolutions.co.uk',
                'password' => '1370608609',
                'signature' => 'A7JgWk4uZhO1rqjMVjT4K9TltcFFAfOAFFulZRA.BaXpmcgm0L1DZ3sX',
                'test_mode' => true,            
+        );*/
+		
+		
+		$settings = array(
+               'username' => 'accounts_api1.ukopencollege.co.uk',
+               'password' => 'XVPKXGVGBMB7KSAE',
+               'signature' => 'ADrvt-oQ4IwKnFsOFQLtS3l4BuTYA2T8VODekRJgOqmvoufiDF8aUivH',
+               'test_mode' => false,            
         );
+        
         
         $return = $this->merchant->initialize($settings);
         
@@ -570,7 +577,7 @@ class Checkout extends Front_Controller {
         $slip_html            = $this->create_slip($order_info);
         $message  = '';
         $message .= $email_attributes[0]['email_header'];        
-        $message .= '<tr id="simple-content-row"><td class="w640" width="640" bgcolor="#ffffff"><table class="w640" width="640" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td class="w30" width="30"></td><td class="w580" width="580"><repeater><layout label="Text only"><table class="w580" width="580" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td class="w580" width="580"><p align="left" class="article-title"><singleline label="Title"> Order has been placed successfully!</singleline></p><div align="left" class="article-content">  <multiline label="Description"></multiline>We are pleased to tell you that your order has been placed with us under the details you provided. Any course/order related information would be directed to you on your registered ID. We wish you good luck for your study plan with UK Open College.</div></td></tr><tr><td class="w580" width="100%" height="10">'.$slip_html.'<br><br></td></tr><tr><td class="w580" width="580" height="10"><div align="left" class="article-content">Regards,<br><br>Student support office<br>UK Open College Limited<br> 4, Copthall House<br> The Meridian<br> Station Square<br> Coventry<br> West Midlands<br> CV1 2FL<br>Tell: 0121 288 0181<br>Fax: 01827 288298</div></td></tr></tbody></table></layout></repeater></td><td class="w30" width="30"></td></tr></tbody></table></td></tr>';
+       	$message .= '<tr id="simple-content-row"><td class="w640" width="640" bgcolor="#ffffff"><table class="w640" width="640" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td class="w30" width="30"></td><td class="w580" width="580"><repeater><layout label="Text only"><table class="w580" width="580" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td class="w580" width="580"><p align="left" class="article-title"><singleline label="Title"> Order has been placed successfully!</singleline></p><div align="left" class="article-content">  <multiline label="Description"></multiline><p>We are pleased to inform you that your order has been successfully placed with us under the details you provided. Any course/order related information would be directed to you on your registered e-mail ID. We wish you good luck for your study plan with the UK Open College.</p></div></td></tr><tr><td class="w580" width="100%" height="10">'.$slip_html.'<br><br></td></tr><tr><td style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><div align="left" >Student Support can be accessed via e-mail :  <a href="mailto:support@ukopencollege.co.uk"> support@ukopencollege.co.uk</a>.<br><br>Or<br><br>Get in touch via</div></td></tr></tbody></table></layout></repeater></td><td class="w30" width="30"></td></tr></tbody></table></td></tr>';
         $message .= $email_attributes[0]['email_footer'];
         $this->load->library('email');                
         $config['mailtype'] = 'html';
@@ -672,7 +679,7 @@ class Checkout extends Front_Controller {
         $slip_html            = $this->create_slip($order_info);
         $message  = '';
         $message .= $email_attributes[0]['email_header'];        
-        $message .= '<tr id="simple-content-row"><td class="w640" width="640" bgcolor="#ffffff"><table class="w640" width="640" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td class="w30" width="30"></td><td class="w580" width="580"><repeater><layout label="Text only"><table class="w580" width="580" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td class="w580" width="580"><p align="left" class="article-title"><singleline label="Title"> Order has been placed successfully!</singleline></p><div align="left" class="article-content">  <multiline label="Description"></multiline>We are pleased to tell you that your order has been placed with us under the details you provided. Any course/order related information would be directed to you on your registered ID. We wish you good luck for your study plan with UK Open College.</div></td></tr><tr><td class="w580" width="100%" height="10">'.$slip_html.'<br><br></td></tr><tr><td class="w580" width="580" height="10"><div align="left" class="article-content">Regards,<br><br>Student support office<br>UK Open College Limited<br> 4, Copthall House<br> The Meridian<br> Station Square<br> Coventry<br> West Midlands<br> CV1 2FL<br>Tell: 0121 288 0181<br>Fax: 01827 288298</div></td></tr></tbody></table></layout></repeater></td><td class="w30" width="30"></td></tr></tbody></table></td></tr>';
+        $message .= '<tr id="simple-content-row"><td class="w640" width="640" bgcolor="#ffffff"><table class="w640" width="640" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td class="w30" width="30"></td><td class="w580" width="580"><repeater><layout label="Text only"><table class="w580" width="580" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td class="w580" width="580"><p align="left" class="article-title"><singleline label="Title"> Order has been placed successfully!</singleline></p><div align="left" class="article-content">  <multiline label="Description"></multiline>We are pleased to inform you that your order has been successfully placed with us under the details you provided. Any course/order related information would be directed to you on your registered e-mail ID. We wish you good luck for your study plan with the UK Open College.</div></td></tr><tr><td class="w580" width="100%" height="10">'.$slip_html.'<br><br></td></tr><tr><td style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><div align="left" >Student Support can be accessed via e-mail :  <a href="mailto:support@ukopencollege.co.uk"> support@ukopencollege.co.uk</a>.<br><br>Or<br><br>Get in touch via</div></td></tr></tbody></table></layout></repeater></td><td class="w30" width="30"></td></tr></tbody></table></td></tr>';
         $message .= $email_attributes[0]['email_footer'];
         $this->load->library('email');                
         $config['mailtype'] = 'html';

@@ -16,17 +16,47 @@ Class Customer_model extends CI_Model
 
 	********************************************************************/
 	
-	function get_customers($limit=5, $offset=0, $order_by='ASC', $direction='firstname')
+	function get_customers($limit=0, $offset=0, $order_by='ASC', $direction='firstname', $term =false)
 	{
 		$this->db->order_by($direction, $order_by);
 		if($limit>0)
 		{
 			$this->db->limit($limit, $offset);
 		}
+		
+		//do we have a search submitted?
+			if(!empty($term))
+			{
+				$search	= json_decode($term);
+				//if we are searching dig through some basic fields
+				if(!empty($search->term))
+				{
+					$this->db->like('firstname', $search->term);
+					$this->db->or_like('lastname', $search->term);
+					$this->db->or_like('email', $search->term);
+					$this->db->or_like('phone', $search->term);
+					$this->db->or_like('address_street', $search->term);
+					$this->db->or_like('city', $search->term);
+					$this->db->or_like('state', $search->term);
+					$this->db->or_like('country', $search->term);
+					$this->db->or_like('gender', $search->term);
+				}
+				
+				if(!empty($search->customer_id))
+				{
+					//lets do some joins to get the proper category products
+					
+					$this->db->where('id', $search->customer_id);
+					$this->db->order_by('firstname', 'ASC');
+				}
+			}
+		
 
 		$result	= $this->db->get('customers');
 		return $result->result();
 	}
+	
+	
 	
 	function get_deactive_customers()
 	{	

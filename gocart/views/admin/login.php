@@ -32,7 +32,7 @@
   <div id="main_container">
 
     <div class="row-fluid fluid">
-      <div class="span5"><img src="<?=base_url().ASSETS_PATH?>img/thumbnail_george2.jpg"/></div>
+      <div class="span5"><img src="<?=base_url().ASSETS_PATH?>img/thumbnail_george2.png"/></div>
       <div class="span7">
         <div class="title"><span class="name">Login</span><span class="subtitle"></span></div>
         <? $attributes = array('class' => 'bs-docs-example form-horizontal');?>
