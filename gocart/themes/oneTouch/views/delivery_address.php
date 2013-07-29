@@ -31,7 +31,7 @@
         experience this site.
         </div><![endif]-->
         <?php  include('header.php'); ?> 
-        <?php $last            = array('id'=>'billing_last_name','class'=>'input-text','placeholder'=>'Last Name','name'=>'lastname','value'=> set_value('lastname'));?>
+       
         <!--===================main content start=======================-->
         <div class="row">
             <h1 class="page-title" style="margin-left:20px;">
@@ -67,7 +67,11 @@
             <div class="col-1">
             <h3>Address Details</h3>
             <p class="form-row " id="billing_company_field">
-            <label style="margin-bottom: -5px;" for="billing_company" class="">Mr. <input type="radio" name="gender" value="mr"/> Ms.<input type="radio" name="gender" value="ms"/></label>
+            <label style="margin-bottom: -5px;" for="billing_company" class="">
+            Mr. 
+            <input type="radio" name="gender" value="mr" <?php if($customer['gender'] == "mr"){ echo 'checked';}?>/>
+            Ms.
+            <input type="radio" name="gender" value="ms" <?php if($customer['gender'] == "ms"){ echo 'checked';}?>/></label>
             </p>
             <p class="form-row form-row-first" id="billing_first_name_field">
             <label for="billing_first_name" class=""><?php echo lang('account_firstname');?><abbr class="required" title="required">*</abbr> </label>
