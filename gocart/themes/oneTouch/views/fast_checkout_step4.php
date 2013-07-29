@@ -40,13 +40,13 @@
   </div>-->
   <div class="six columns" style="margin-right: 120px;">
   <h4>Delivery Information</h4>
-   <p><?php echo $firstname." ".$lastname;?></p>
+   <p><?php echo $dfirstname." ".$dlastname;?></p>
  
-<p style="margin-top:-15px  !important;"> <?php echo $street_address;?></p>
- <p style="margin-top:-15px !important;"><?php echo $address_line2;?></p>
- <p style="margin-top:-15px !important;"><?php echo $city." ".$post_code;?></p>
-<p style="margin-top:-15px !important;"> <?php echo $state." ".$country_id;?></p>
-<a href="<?php echo base_url()."shipping_order/shiping_order_step3";?>"><input type="button" class="button" value="Change Address"/></a>
+<p style="margin-top:-15px  !important;"> <?php echo $dstreet_address;?></p>
+ <p style="margin-top:-15px !important;"><?php echo $daddress_line2;?></p>
+ <p style="margin-top:-15px !important;"><?php echo $dcity." ".$dpost_code;?></p>
+<p style="margin-top:-15px !important;"> <?php echo $dstate." ".$dcountry_id;?></p>
+<a href="<?php echo base_url()."shipping_order/shiping_order_step2";?>"><input type="button" class="button" value="Change Address"/></a>
   </div>
   </div>
  

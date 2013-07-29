@@ -6,6 +6,7 @@
 <?php include('header.php'); ?>
 <? //Content Area Start ?>
 
+ 
 
 <!--<div class="page-header">
 	<h2><?php //echo lang('form_checkout');?></h2>
@@ -301,7 +302,7 @@ $con_password 	= array('id'=>'confirm','name'=>'confirm','class'=>'input-text','
 		$data = array('name'=>'pay_method', 'checked'=>'checked',  'onClick'=>'hide_block()');
 		echo form_radio($data);
 	?>
-		<img src="<?php echo theme_img('pay_cards/PayPal_mark');?>"/>
+		<img src="<?php echo theme_img('pay_cards/PayPal_mark.gif');?>"/>
 		<b>Checkout with PayPal </b>
         <a href="<?php echo base_url()."shipping_order/shiping_order_step4";?>"><input type="button" class="button" value="Countnue"></a>    
      </p>
@@ -312,7 +313,7 @@ $con_password 	= array('id'=>'confirm','name'=>'confirm','class'=>'input-text','
 			$data = array('name'=>'pay_method',  'onClick'=>'show_block()', 'checked'=>$checked);
 		 	echo form_radio($data);
 	 ?>
-    		<b>Checkout with PayPal </b>
+    		<b>Credit/Debit Card (Secured by Protx) </b>
             
      </p>
  <form action="<?=base_url()?>checkout/place_order_paypal_pro" method="post">        
@@ -324,12 +325,12 @@ $con_password 	= array('id'=>'confirm','name'=>'confirm','class'=>'input-text','
 	</p>
     
 	<p class="form-row form-row-last" id="billing_last_name_field"  style="width: 290px; margin-right: -14px;">
-		<img src="<?php echo theme_img('pay_cards/visa');?>"/>
-		<img src="<?php echo theme_img('pay_cards/mc');?>"/>
-		<img src="<?php echo theme_img('pay_cards/visa_debit');?>"/>
-		<img src="<?php echo theme_img('pay_cards/solo');?>"/>
-		<img src="<?php echo theme_img('pay_cards/maestro');?>"/>
-		<img src="<?php echo theme_img('pay_cards/visa_electron');?>"/>
+		<img src="<?php echo theme_img('pay_cards/visa.png');?>"/>
+		<img src="<?php echo theme_img('pay_cards/mc.png');?>"/>
+		<img src="<?php echo theme_img('pay_cards/visa_debit.png');?>"/>
+		<img src="<?php echo theme_img('pay_cards/solo.png');?>"/>
+		<img src="<?php echo theme_img('pay_cards/maestro.png');?>"/>
+		<img src="<?php echo theme_img('pay_cards/visa_electron.png');?>"/>
 	</p>
 	<div class="clear"></div>
     
