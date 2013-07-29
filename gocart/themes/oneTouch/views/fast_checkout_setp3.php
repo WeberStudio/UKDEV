@@ -145,16 +145,16 @@ function hide_block()
 <?php endif;?>
 
 <?php
-$countries = $this->Location_model->get_countries_menu();
+//$countries = $this->Location_model->get_countries_menu();
 
-if(!empty($customer[$address_form_prefix.'_address']['country_id']))
-{
-	$zone_menu	= $this->Location_model->get_zones_menu($customer[$address_form_prefix.'_address']['country_id']);
-}
-else
-{
-	$zone_menu = array(''=>'')+$this->Location_model->get_zones_menu(array_shift(array_keys($countries)));
-}
+//if(!empty($customer[$address_form_prefix.'_address']['country_id']))
+//{
+	//$zone_menu	= $this->Location_model->get_zones_menu($customer[$address_form_prefix.'_address']['country_id']);
+//}
+//else
+//{
+	//$zone_menu = array(''=>'')+$this->Location_model->get_zones_menu(array_shift(array_keys($countries)));
+//}
 
 //form elements
 
@@ -316,7 +316,7 @@ $con_password 	= array('id'=>'confirm','name'=>'confirm','class'=>'input-text','
     		<b>Credit/Debit Card (Secured by Protx) </b>
             
      </p>
- <form action="<?=base_url()?>checkout/place_order_paypal_pro" method="post">        
+ <form action="<?=base_url()?>shipping_order/shiping_order_step3" method="post">        
      <div id="card_info_block" style="display:<?php if (validation_errors()){ echo "";} else{echo "none;";}?>">
     <p class="form-row form-row-first" id="billing_first_name_field" style="padding-left: 120px;">
         <label for="billing_first_name" class="">Cards Accepted: 
@@ -341,7 +341,9 @@ $con_password 	= array('id'=>'confirm','name'=>'confirm','class'=>'input-text','
 	</p>
     
 	<p class="form-row form-row-last" id="billing_last_name_field">
-        <?php echo form_input($first);?>
+        <?php 
+		$first = array('id'=>'firstname', 'class'=>'input-text', 'name'=>'firstname', 'value'=> set_value('firstname', $firstname));
+		echo form_input($first);?>
 	</p>
 	<div class="clear"></div>
     
@@ -409,7 +411,7 @@ $con_password 	= array('id'=>'confirm','name'=>'confirm','class'=>'input-text','
     
     
    <p class="form-row form-row-last" id="billing_last_name_field" style="width: 464px;">
-   	<i>You need to fill in the following fields <b>ONLY</b> if the information is on your card. <i/>
+   	<i>You need to fill in the following fields <b>ONLY</b> if the information is on your card. </i>
    </p> 
    <div class="clear"></div>
    <p>
@@ -444,7 +446,7 @@ $con_password 	= array('id'=>'confirm','name'=>'confirm','class'=>'input-text','
 		?>
 	</p>
    <div class="clear"></div>
- <input type="submit" value="<?php echo lang('form_continue');?>" class="btn btn-primary" style="height: 34px; width: 74px;" />  
+ <input type="submit" name="pay_pal" value="Continue" class="btn btn-primary" style="height: 34px; width: 74px;" />  
  </div>    
  </form>
  </div>

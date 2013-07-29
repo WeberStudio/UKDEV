@@ -18,18 +18,17 @@
 	//$company		= array('id'=>'bill_company', 'class'=>'input-text', 'placeholder'=>'Company', 'name'=>'company', 'value'=> set_value('company'));
 	$first			= array('id'=>'billing_first_name','class'=>'input-text','placeholder'=>'First Name','name'=>'firstname','value'=> set_value('firstname', $customer['firstname']));
 	$last			= array('id'=>'billing_last_name','class'=>'input-text','placeholder'=>'Last Name','name'=>'lastname','value'=> set_value('lastname', $customer['lastname']));
-	$email			= array('id'=>'bill_email', 'class'=>'input-text', 'placeholder'=>'E-Mail', 'name'=>'email', 'value'=>set_value('email', $customer['email']));
-	
-	$phone		= array('id'=>'bill_phone', 'class'=>'input-text', 'name'=>'phone', 'placeholder'=>'Phone', 'value'=> set_value('telephone', $customer['telephone']));
-	
+		$f_address1		= array('id'=>'street_address', 'placeholder'=>'Address', 'class'=>'input-text', 'name'=>'street_address', 'value'=>set_value('street_address', $customer['street_address']));
+	$f_address2		= array('id'=>'address_line2','class'=>'input-text','placeholder'=>'Address  (optional)','name'=>'address_line2', 'value'=> set_value('address_line2', $customer['address_line2']));
 	$f_city			= array('id'=>'f_city', 'class'=>'input-text', 'placeholder'=>'City', 'name'=>'city', 'value'=>set_value('city',$customer['city']));
 	$f_zip			= array('id'=>'f_zip',  'class'=>'input-text', 'placeholder'=>'Post Code', 'name'=>'post_code', 'value'=> set_value('zip', $customer['post_code']));
-	$f_address1		= array('id'=>'f_address1', 'placeholder'=>'Address', 'class'=>'input-text', 'name'=>'street_address', 'value'=>set_value('address1', $customer['street_address']));
-	$f_address2		= array('id'=>'f_address2','class'=>'input-text','placeholder'=>'Address  (optional)','name'=>'address_line2', 'value'=> set_value('address2', $customer['address_line2']));
+
+	$email			= array('id'=>'bill_email', 'class'=>'input-text', 'placeholder'=>'E-Mail', 'name'=>'email', 'value'=>set_value('email', $customer['email']));
+	$phone		= array('id'=>'telephone', 'class'=>'input-text', 'name'=>'telephone', 'placeholder'=>'telephone', 'value'=> set_value('telephone', $customer['telephone']));
 	//$password 		= array('id'=>'password','name'=>'password','class'=>'input-text','placeholder'=>'Password'); 
 	//$con_password 	= array('id'=>'confirm','name'=>'confirm','class'=>'input-text','placeholder'=>'Confirm'); 
-	//$gender_m 	= array('id'=>'gender_m', 'class'=>'','name'=>'gender', 'value'=>'male' );
-	//$gender_f 	= array('id'=>'gender_f', 'class'=>'', 'name'=>'gender', 'value'=>'female' );
+	//$gender_m 	= array('id'=>'gender_m', 'class'=>'','name'=>'gender', 'value'=>'Mr' );
+	//$gender_f 	= array('id'=>'gender_f', 'class'=>'', 'name'=>'gender', 'value'=>'Ms' );
 ?>
 
 <div class="row">
@@ -85,7 +84,11 @@ function showStuff() {
       <div class="col-1">
         <h3>Address Details</h3>
         <p class="form-row " id="billing_company_field">
-          <label style="margin-bottom: -5px;" for="billing_company" class="">Mr. <input type="radio" name="gender" value="mr"/> Ms.<input type="radio" name="gender" value="ms"/></label>
+          <label style="margin-bottom: -5px;" for="billing_company" class="">
+          Mr.
+           <input type="radio" name="gender" value="mr" <?php if($customer['gender'] == "mr"){ echo 'checked';}?> /> 
+           Ms.
+           <input type="radio" name="gender" value="ms" <?php if($customer['gender'] == "ms"){ echo 'checked';}?>/></label>
          </p>
         <p class="form-row form-row-first" id="billing_first_name_field">
           <label for="billing_first_name" class=""><?php echo lang('account_firstname');?><abbr class="required" title="required">*</abbr> </label>
@@ -210,7 +213,9 @@ j(function(){
                 <!--===================main content start=======================-->
             </div>
         </div>
-        
+        </div>
+        </div>
+        </div>
 
         <?php include_once('footer.php'); ?> 
         
