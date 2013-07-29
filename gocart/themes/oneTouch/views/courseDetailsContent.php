@@ -1,8 +1,10 @@
 <?php echo theme_css('simpletabs.css', true); ?>    
 
+<!--Socil Icon Share Button Files-->
 <script type="text/javascript">var switchTo5x=false;</script>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "39c7f6c5-ccfb-494c-b58a-2fd80efbe0c2", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+<!--Socil Icon Share Button Files-->
 <script type="text/javascript">
     jQuery =    jQuery.noConflict();
     jQuery(document).ready(function() {
@@ -15,6 +17,27 @@
 
 
     });
+	
+	function check_payment_price()
+	{
+		//alert('Please select price option before enrol.');
+		
+		price_val = jQuery('#price_option').val();		
+		//alert(price_val);
+		if(price_val == 0)
+		{
+			jQuery('#price_select_error').show();
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+		
+		
+		
+	}
+	
 </script>
 
 
@@ -104,8 +127,7 @@
                                 <?php }?>
                                 </select>
 								</span>
-								<?php } else{?>
-                                <p itemprop="price" class="price"><span class="amount"><?=format_currency($product->id)?></span></p>
+						
                                 <?php }?>
                              
                       </div>-->
@@ -113,30 +135,33 @@
 
 
                         <?php echo form_open('cart/add_to_cart', 'class="cart"');?>
-								<div itemprop="offers" itemscope="" >
+                         <div itemprop="offers" itemscope="" >
                         <?php if(!empty($product->price_options)){ ?>
-                        	<span class="custom-dropdown custom-dropdown--white">
-                                <select class="custom-dropdown__select custom-dropdown__select--white" name="price_option">
-                                    <option>Price Options</option>
+                        	<span class="custom-dropdown custom-dropdown--white">								
+                                <select class="custom-dropdown__select custom-dropdown__select--white" name="price_option" id="price_option">
+                                    <option value="0">Price Options</option>
                                      <?php foreach($product->price_options as $price){?>
-                                <option value="<?php echo $price->p_option_price?>"><?php echo $price->p_option_title." ".format_currency($price->p_option_price)?></option>
+                                <option value="<?php echo $price->p_option_price?>"><?php echo $price->p_option_title?></option>
                                 <?php }?>
                                 </select>
 								</span>
-								<?php } else{?>
+						
+                                <?php } else{?>
                                 <p itemprop="price" class="price"><span class="amount"><?=format_currency($product->price)?></span></p>
                                 <?php }?>
                              
                       </div>
+						
                         <input type="hidden" name="cartkey" value="<?php echo $this->session->flashdata('cartkey');?>" />
 
                         <input type="hidden" name="id" value="<?php echo $product->id?>"/>
                         <input type="hidden" name="slug" value="<?php if($this->uri->segment(2)==""){echo $this->uri->segment(1);}
                                 if($this->uri->segment(2)!=""){echo $this->uri->segment(1)."/".$this->uri->segment(2);}?>"/>
                         <div class="quantity buttons_added"><input type="button" value="-" class="minus"><input name="quantity" data-min="1" data-max="0" value="1" size="4" title="Qty" class="input-text qty text" maxlength="12"><input type="button" value="+" class="plus"></div>
-                        <button type="submit" class="single_add_to_cart_button button alt">Enrol Now</button>
+                        <button type="submit" class="single_add_to_cart_button button alt" onclick=" return check_payment_price()">Enrol Now</button>
                         <br/>
 						<br/>
+						<div id="price_select_error" style="display:none; color:#FF0000; font-weight:bold;">Please select a price option before you enrol</div>
 						<br/>
 						<span class='st_sharethis_large' displayText='ShareThis'></span>
 						<span class='st_facebook_large' displayText='Facebook'></span>
@@ -296,11 +321,11 @@
                         }
 
                     </script>
-                    <div class="simpleTabs">
+					<div class="simpleTabs">
                     <p class="woocommerce_info">Click Here To → <a href="javascript:void(0)" class="" onClick="return toggle()"> Ask A Question</a></p>
                     </div>
                     <div class="eleven columns" style="padding-left: 0px; width: 854px;">
-                        
+                       <?php /*?> <p class="woocommerce_info">Click Here To → <a href="javascript:void(0)" class="" onClick="return toggle()"> Ask A Question</a></p><?php */?>
                         <div <?php if($open==""){echo 'style="display:none;"';}?> id="obj" method="post" class="login">
                             <?php if($open!="")
                                 {    
@@ -846,7 +871,7 @@
 
                         <a href="<?php echo site_url('cart/view_cart');?>" class="button">View Cart →</a>
 
-                        <a href="#" class="button checkout">Checkout →</a>
+                        <a href="<?php echo site_url('checkout');?>" class="button checkout">Checkout →</a>
 
                     </p>
 
@@ -882,7 +907,7 @@
     <h2>Related Products</h2>
 
     <ul class="thumbnails">    
-
+<? //$this->show->pe($product->related_products); ?>
     <?php foreach($product->related_products as $relate):?>
 
         <li class="span2 product">
@@ -890,16 +915,16 @@
         <?php
 
             $photo    = theme_img('no_picture.png', lang('no_image_available'));
+			//echo $relate->images;
+            //$relate->images    = array_values((array)json_decode($relate->images));
 
-            $relate->images    = array_values((array)json_decode($relate->images));
 
 
-
-            if(!empty($relate->images[0]))
+            if(!empty($relate->images))
 
             {
 
-                $primary    = $relate->images[0];
+                $primary    = $relate->images;
 
                 $photo    = '<img src="'.base_url('uploads/images/small/'.$primary).'" alt="'.$relate->seo_title.'" style="width: 270px; height: 200px;"/>';
 
