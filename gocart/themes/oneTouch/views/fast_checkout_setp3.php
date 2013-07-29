@@ -5,13 +5,7 @@
 <div id="body-wrapper-padding">
 <?php include('header.php'); ?>
 <? //Content Area Start ?>
- 
-<?php if($this->Customer_model->is_logged_in(false, false)):?>
- <?php else: ?>
-<script>
-window.location="<?=base_url();?>secure/process_checkout";
-</script>
-<?php endif; ?>
+
 
 <!--<div class="page-header">
 	<h2><?php //echo lang('form_checkout');?></h2>

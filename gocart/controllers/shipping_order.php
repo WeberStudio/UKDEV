@@ -22,6 +22,7 @@ class Shipping_order extends Front_Controller {
 	}
 	function shiping_order_step1()
 	{
+		$this->load->library('form_validation');
 		 //$this->load->library('session');		
 		$data['id']					= '';
 		$data['company']			= '';
@@ -42,6 +43,26 @@ class Shipping_order extends Front_Controller {
 		$data['countries_menu']		= $this->Location_model->get_countries_menu();
 		$get_user_info = $this->session->userdata('unregister_user');
 		$data['customer']	= $get_user_info;
+		
+		
+		$this->form_validation->set_rules('gender', 'Gender', 'trim|required ');
+		$this->form_validation->set_rules('firstname', 'First Name', 'trim|required |max_length[50]');
+		$this->form_validation->set_rules('lastname', 'Last Name', 'required |max_length[50]');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[128]');
+		$this->form_validation->set_rules('phone', 'Telephone', 'trim|required');
+		$this->form_validation->set_rules('city', 'City', 'trim|required|max_length[128]');
+		$this->form_validation->set_rules('post_code', 'Post Code', 'trim|required');
+		$this->form_validation->set_rules('street_address', 'Street Aaddress', 'trim|required');
+		$this->form_validation->set_rules('address_line2', 'Address Line', 'trim|required');
+		
+		
+		if ($this->form_validation->run() == FALSE)
+		{
+		$this->load->view('fast_checkout_step1' , $data);
+		}
+		else{
+		
+		
 		
 	
 	if($this->input->post('continue')!=""){		
@@ -64,6 +85,7 @@ class Shipping_order extends Front_Controller {
 		
 		
 		redirect('Shipping_order/shiping_order_step2');
+	}
 		}
 									
 		
