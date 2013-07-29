@@ -58,23 +58,19 @@ class Order extends Admin_Controller {
 		$data['id'] 			= $id;
 		//print_r($data['id']);exit;
 		
-		$data['category'] 		= $this->Category_model->get_all_categories();
-		$data['courses'] 		= $this->Product_model->get_all_products_array();
-		$data['admins']			= $this->auth->get_admin_list();
-		
+		$data['category'] 				= $this->Category_model->get_all_categories();
+		$data['courses'] 				= $this->Product_model->get_all_products_array();
+		$data['admins']					= $this->auth->get_admin_list();
 		
 		if($id==2)
 		{$data['orders']				= $this->Order_model->get_delivered_oder();}
 		elseif($id==3)
 		{$data['orders']				= $this->Order_model->get_processing_order();}
 		elseif($id==6)
-		{$data['orders']				= $this->Order_model->get_cancelled_order();}
-		
+		{$data['orders']				= $this->Order_model->get_cancelled_order();}		
 		else
-		{$data['orders']				= $this->Order_model->get_orders('',$sort_by,$sort_order,$rows,$page);}
-		
-		$this->load->library('pagination');	
-		
+		{$data['orders']				= $this->Order_model->get_orders('',$sort_by,$sort_order,$rows,$page);}		
+		$this->load->library('pagination');		
 		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/order/index/'.$sort_by.'/'.$sort_order.'/';
 		//$config['total_rows']		= $this->Order_model->count_customer_orders();
 		
@@ -105,9 +101,9 @@ class Order extends Admin_Controller {
 		$config['next_tag_close']	= '</li>';
 		
 		$this->pagination->initialize($config);
-		$data['page']			= $page;
-		$data['sort_by']		= $sort_by;
-		$data['sort_order']		= $sort_order;
+		$data['page']				= $page;
+		$data['sort_by']			= $sort_by;
+		$data['sort_order']			= $sort_order;
 		
         $this->load->view($this->config->item('admin_folder').'/includes/header');
         $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
