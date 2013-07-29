@@ -62,6 +62,8 @@ class PayPal {
 		// retrieve settings
 		if ( $settings = $this->CI->Settings_model->get_settings('paypal_express') ) 
 		{
+            
+           
 			$this->API_USERNAME = $settings['username'];
 			$this->API_PASSWORD = $settings['password'];
 			$this->API_SIGNATURE = $settings['signature'];
@@ -151,6 +153,7 @@ class PayPal {
 
 		$query = $this->buildQuery($data);
 
+        DebugBreak();
 		$result = $this->response($query);
 
 		if (!$result) return false;

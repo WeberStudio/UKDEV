@@ -613,7 +613,7 @@ class Checkout extends Front_Controller {
 	{		
             
 		// retrieve the payment method
-        //DebugBreak();
+       // DebugBreak();
         $payment['module']                  = "paypal_express";
         $payment['description']             = "PayPal Express";		
         $paypal_express['name']             = "PayPal Express";
