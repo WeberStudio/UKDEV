@@ -108,33 +108,55 @@ function areyousure()
 			}
 			?>
 			
-			<th><a href="<?php //echo site_url($this->config->item('admin_folder').'/customers/index/lastname/');?>/<?php //echo ($field == 'lastname')?$by:'';?>"><?php //echo lang('lastname');?>
-				<?php //if($field == 'lastname'){ echo ($by == 'ASC')?'<i class="icon-chevron-up"></i>':'<i class="icon-chevron-down"></i>';} ?> Commision Level</a></th>
+			<th><a href=""> Commision Level</a></th>
 			
-			<th><a href="<?php //echo site_url($this->config->item('admin_folder').'/customers/index/firstname/');?>/<?php //echo ($field == 'firstname')?$by:'';?>"><?php //echo lang('firstname');?>
-				<?php //if($field == 'firstname'){ echo ($by == 'ASC')?'<i class="icon-chevron-up"></i>':'<i class="icon-chevron-down"></i>';} ?>Commision Rate</a></th>
+			<th><a href="">Commision Rate</a></th>
 			
-			<th><a href="<?php //echo site_url($this->config->item('admin_folder').'/customers/index/email/');?>/<?php //echo ($field == 'email')?$by:'';?>"><?php //echo lang('email');?>
-				<?php //if($field == 'email'){ echo ($by == 'ASC')?'<i class="icon-chevron-up"></i>':'<i class="icon-chevron-down"></i>';} ?> Persentage</a></th>
-			<th> Active<?php //echo lang('active');?></th>
+			<th><a href=""> Persentage</a></th>
+			<th> Active</th>
 			<th>Actions</th>
 			
 		</tr>
 	</thead>
 	
 	<tbody>
+		<?php //$name =  $this->auth->get_admin($commission->comm_level_id);
+		//$this->show->pe($this->auth->get_admin(21));
+		 //echo $name->name; exit;
 		
+		
+		?>
 		<?php echo (count($commissions) < 1)?'<tr><td style="text-align:center;" colspan="5">'.lang('no_customers').'</td></tr>':''?>
 <?php foreach ($commissions as $commission):?>
 		<tr>
-			<?php /*<td style="width:16px;"><?php echo  $customer->id; ?></td>*/?>
-			<td><?php echo  $commission->comm_level; ?></td>
+			<?php if($commission->comm_level=='cat_level'){
+				$name = $this->Category_model->get_category($commission->comm_level_id);
+			 	echo '<td>'.ucwords(str_replace('_',' ',$commission->comm_level)).' ('.$name->name.')'. '</td>';
+			}?>
+            
+            <?php if($commission->comm_level=='course_level'){ 
+					//$name = $this->Product_model->get_product($commission->comm_level_id);
+					$name = mysql_query("SELECT * FROM oc_products WHERE id= '".$commission->comm_level_id."'");
+					$name = mysql_fetch_array($name);
+					//$this->show->pe( $name['name']) ; exit;
+			 		echo '<td>'.ucwords(str_replace('_',' ',$commission->comm_level)).' ('.$name['name'].')'. '</td>';
+				}?>
+             
+            <?php  if($commission->comm_level=='course_provider'){
+				$name = $this->auth->get_admin($commission->comm_level_id);
+			 	echo '<td>'.ucwords(str_replace('_',' ',$commission->comm_level)).' ('.$name->firstname.' '.$name->lastname.')'. '</td>';
+				}?>
+            <?php  if($commission->comm_level=='universal'){
+				  echo '<td>'.ucwords($commission->comm_level). '</td>';
+				}?>
+			<!--<td><?php //echo  $commission->comm_level; ?><?php //echo $name->name;?> </td>-->
 			<td class="gc_cell_left"> <?php echo  $commission->comm_rate; ?></td>
 			<td><?php if($commission->comm_rate_mode == ''){ echo 'Fix'; }else{ echo  $commission->comm_rate_mode;} ?></td>
 			<td><?php echo  $commission->comm_active; ?></td>
 			<td>
 				<div class="btn-group" >
-					<a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/commission/form/'.$commission->comm_id); ?>"><i class="icon-pencil"></i> Edit </a>				
+					<a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/commission/form/'.$commission->comm_id); ?>"><i class="icon-pencil"></i> Edit </a>	
+                    			
 					<a class="btn btn-danger" href="<?php echo site_url($this->config->item('admin_folder').'/commission/delete/'.$commission->comm_id); ?>" onclick="return areyousure();"><i class="icon-trash"></i> Delete</a>
 				</div>
 			</td>

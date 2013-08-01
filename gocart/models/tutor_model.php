@@ -21,6 +21,8 @@ Class Tutor_model extends CI_Model
         $this->db->order_by($order_by, $direction);
         if($limit>0)
         {
+			//echo $offset;exit;
+			
             $this->db->limit($limit, $offset);
         }
 

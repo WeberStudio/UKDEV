@@ -30,8 +30,8 @@ function sort_url($lang, $by, $sort, $sorder, $code, $admin_folder)
 $sort_by='';
 $sort_order='ASC';
 $code=0; 
-$page=0;
-$rows=15;
+//$page=0;
+//$rows=5;
 ?>
 
 <div id="main" style="min-height:1000px">
@@ -43,19 +43,19 @@ $rows=15;
       <div class="title">
         <h4> <i class="icon-book"></i><span>Search Orders</span> </h4>
       </div>
-      <div class="content"> <?php //echo form_open($this->config->item('admin_folder').'/products/index', 'class="" ');?>
+      <div class="content"> <?php echo form_open($this->config->item('admin_folder').'/order/order_search', 'class="" ');?>
       
          <div class="form-row control-group row-fluid">
         
               <div class="controls span3">
                 <?php 
-					$option = array( 'select_frequently'=>'select frequently','per_week'=>'Per Week', 'per_month'=>'Per Month','per_year'=>'Per Year');
+					$option = array( ''=>'select frequently','week'=>'Per Week', 'month'=>'Per Month','year'=>'Per Year');
 					echo form_dropdown('date',$option,set_value('someValue'),'class="chzn-select"','id="default-select"', 'placeholder="select frequently"');
 				?>
               </div>
               <div class="controls span3">
                 <select class="chzn-select" id="" name="categories">
-                <option> All Categories</option>
+                <option value=""> All Categories</option>
                 <?php foreach($category as $cat){?>
                 	
                     <option value="<?php echo $cat['id'];?>"> <?php echo $cat['name'];?></option>
@@ -64,7 +64,7 @@ $rows=15;
               </div>
               <div class="controls span3">
               <select class="chzn-select" id="" name="courses">
-                <option> All Courses</option>
+                <option value=""> All Courses</option>
                 <?php foreach($courses as $cour){?>
                 	
                     <option value="<?php echo $cour['id'];?>"> <?php echo $cour['name'];?></option>
@@ -74,7 +74,7 @@ $rows=15;
               <div class="controls span3">
               
                <select class="chzn-select" id="" name="courses_provider">
-                <option> Courses Provider</option>
+                <option value=""> Courses Provider</option>
                  
                 	<?php
 					foreach($admins as $admin){?>

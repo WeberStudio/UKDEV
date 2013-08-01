@@ -18,6 +18,7 @@ class Order extends Admin_Controller {
 		$this->last_name = $user_info['lastname'];
 		$this->image = $user_info['image'];		
 		$this->load->helper('formatting_helper');
+		
 				
         /*** Get User Info***/
 		
@@ -39,40 +40,47 @@ class Order extends Admin_Controller {
 		$this->load->model('Product_model');
 		//$this->load->model('Product_model');		
 		$this->lang->load('order');
+		$this->load->helper('form');
 		
 
     }
 	
-	 function index($id = false)
+	 function index($id = false , $rows=5, $page=0 , $search = false)
 	 {
 		$sort_by='order_number';
 		$sort_order='ASC';
 	 	$code=0;
-	 	$page=0;
-	   	$rows=0;
+	 	//$page=0;
+	   $rows=25;
+		//$search = false;
 		
-       	$this->load->helper('form');
+       	
 		
         $data = array();
 		
 		$data['id'] 			= $id;
 		//print_r($data['id']);exit;
 		
-		$data['category'] 				= $this->Category_model->get_all_categories();
-		$data['courses'] 				= $this->Product_model->get_all_products_array();
-		$data['admins']					= $this->auth->get_admin_list();
+		$data['category'] 		= $this->Category_model->get_all_categories();
+		$data['courses'] 		= $this->Product_model->get_all_products_array();
+		$data['admins']			= $this->auth->get_admin_list();
+		
 		
 		if($id==2)
 		{$data['orders']				= $this->Order_model->get_delivered_oder();}
 		elseif($id==3)
 		{$data['orders']				= $this->Order_model->get_processing_order();}
 		elseif($id==6)
-		{$data['orders']				= $this->Order_model->get_cancelled_order();}		
+		{$data['orders']				= $this->Order_model->get_cancelled_order();}
+		
 		else
-		{$data['orders']				= $this->Order_model->get_orders('',$sort_by,$sort_order,$rows,$page);}		
-		$this->load->library('pagination');		
+		{
+		$data['orders']				= $this->Order_model->get_orders($search,$sort_by,$sort_order,$rows,$page);}
+		//echo $this->db->last_query();exit;
+		$this->load->library('pagination');	
+		
 		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/order/index/'.$sort_by.'/'.$sort_order.'/';
-		//$config['total_rows']		= $this->Order_model->count_customer_orders();
+		$config['total_rows']		= $this->Order_model->get_orders_count();
 		
 		$config['per_page']			= $rows;
 		
@@ -101,9 +109,9 @@ class Order extends Admin_Controller {
 		$config['next_tag_close']	= '</li>';
 		
 		$this->pagination->initialize($config);
-		$data['page']				= $page;
-		$data['sort_by']			= $sort_by;
-		$data['sort_order']			= $sort_order;
+		$data['page']			= $page;
+		$data['sort_by']		= $sort_by;
+		$data['sort_order']		= $sort_order;
 		
         $this->load->view($this->config->item('admin_folder').'/includes/header');
         $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
@@ -207,6 +215,100 @@ class Order extends Admin_Controller {
    		//redirect as to change the url
 		redirect($this->config->item('admin_folder').'/orders');	
     }
+	
+	function order_search($id = false , $rows=5, $page=0)
+	{
+		$sort_by='order_number';
+		$sort_order='ASC';
+	 	$code=0;
+	 	$rows=25;
+		$this->load->library('pagination');	
+		
+       	
+		
+        $data = array();
+		$data['category'] 				= $this->Category_model->get_all_categories();
+		$data['courses'] 				= $this->Product_model->get_all_products_array();
+		$data['admins']					= $this->auth->get_admin_list();
+		
+		
+		$search = array();
+		
+		
+		$search['date'] 				= $this->input->post('date');
+		$search['categories'] 			= $this->input->post('categories');
+		$search['courses'] 				= $this->input->post('courses');
+		$search['courses_provider'] 	= $this->input->post('courses_provider');
+		$search['start_date'] 			= $this->input->post('start_date');
+		$search['end_date'] 			= $this->input->post('end_date');
+		//$this->show->pe($search);
+		$data['orders']					= $this->Order_model->search_order($search);
+		//if($search['categories']!="" || $search['courses']!="" || $search['courses_provider']!="" )
+		//{
+			
+			
+			
+		//}
+		
+		//else
+		//{
+			
+		if($id==2)
+		{$data['orders']				= $this->Order_model->get_delivered_oder();}
+		elseif($id==3)
+		{$data['orders']				= $this->Order_model->get_processing_order();}
+		elseif($id==6)
+		{$data['orders']				= $this->Order_model->get_cancelled_order();}
+		
+		else
+		{
+		//$data['orders']				= $this->Order_model->get_orders($search,$sort_by,$sort_order,$rows,$page);
+		}
+		//}
+		//echo $this->db->last_query();exit;
+		$data['id'] 			= $id;
+		$this->load->library('pagination');	
+		
+		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/order/index/'.$sort_by.'/'.$sort_order.'/';
+		$config['total_rows']		= $this->Order_model->get_orders_count();
+		
+		$config['per_page']			= $rows;
+		
+		$config['uri_segment']		= 6;
+		$config['first_link']		= 'First';
+		$config['first_tag_open']	= '<li>';
+		$config['first_tag_close']	= '</li>';
+		$config['last_link']		= 'Last';
+		$config['last_tag_open']	= '<li>';
+		$config['last_tag_close']	= '</li>';
+
+		$config['full_tag_open']	= '<div class="pagination"><ul>';
+		$config['full_tag_close']	= '</ul></div>';
+		$config['cur_tag_open']		= '<li class="active"><a href="#">';
+		$config['cur_tag_close']	= '</a></li>';
+		
+		$config['num_tag_open']		= '<li>';
+		$config['num_tag_close']	= '</li>';
+		
+		$config['prev_link']		= 'Prev';
+		$config['prev_tag_open']	= '<li>';
+		$config['prev_tag_close']	= '</li>';
+
+		$config['next_link']		= 'Next';
+		$config['next_tag_open']	= '<li>';
+		$config['next_tag_close']	= '</li>';
+		
+		$this->pagination->initialize($config);
+		$data['page']			= $page;
+		$data['sort_by']		= $sort_by;
+		$data['sort_order']		= $sort_order;
+		
+        $this->load->view($this->config->item('admin_folder').'/includes/header');
+        $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
+        $this->load->view($this->config->item('admin_folder').'/order_listing', $data);
+        $this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
+
+	}
 
 }
 ?>

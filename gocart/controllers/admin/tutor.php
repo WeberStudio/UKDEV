@@ -49,7 +49,7 @@ class tutor extends Admin_Controller {
        	
         $data = array();
 		$data['tutors']	= $this->Tutor_model->get_tutors($row, $page, $field, $by);
-		
+		//echo $this->db->last_query();exit;
 		$this->load->library('pagination');
 		//echo $this->db->last_query(); exit;
 		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/tutor/index/'.$field.'/'.$by.'/';
