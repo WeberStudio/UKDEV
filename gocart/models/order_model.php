@@ -37,8 +37,9 @@ Class order_model extends CI_Model
 		return $years;
 	}
 	
-	function get_orders($search=false, $sort_by='', $sort_order='DESC', $limit=0, $offset=0)
-	{			
+	function get_orders($search=false,$sort_by='', $sort_order='DESC',$limit=0,$offset=0)
+	{	
+			
 		if ($search)
 		{
 			if(!empty($search->term))
@@ -86,14 +87,16 @@ Class order_model extends CI_Model
 		
 		if($limit>0)
 		{
+			//echo $offset; exit;
 			$this->db->limit($limit, $offset);
 		}
 		if(!empty($sort_by))
 		{
 			$this->db->order_by($sort_by, $sort_order);
 		}
-		
-		return $this->db->get('orders')->result();
+		$result = $this->db->get('orders');
+		//echo $this->db->last_query();exit;
+		return $result->result();
 	}
 	
 	function get_orders_count($search=false)
@@ -432,6 +435,80 @@ Class order_model extends CI_Model
 		$order->contents	= $this->get_items($order->id);
 		
 		return $order;
+	}
+	
+		function search_order ($search= array())
+	{
+		if(!empty($search['categories']))
+		{
+			//$this->db->where('comm_level_id',$search['categories']);
+			//$this->db->where('comm_level','cat_level');
+			$result 	= $this->db->query("SELECT * FROM oc_orders 
+						   JOIN oc_order_items
+						   ON  oc_orders.id = oc_order_items.order_id 
+						   JOIN oc_category_products
+						   ON oc_order_items.product_id = oc_category_products.product_id
+						   WHERE oc_category_products.category_id = '".$search['categories']."'");
+			
+			//echo $this->db->last_query(); exit;
+			return $result->result();
+			
+		}
+		elseif(!empty($search['courses']))
+		{
+			//$this->db->where('comm_level_id',$search['courses']);
+			//$this->db->where('comm_level','course_level');
+			$result 	= $this->db->query("SELECT * FROM oc_orders JOIN oc_order_items
+						   ON  oc_orders.id = oc_order_items.order_id 
+						   WHERE oc_order_items.product_id = '".$search['courses']."'");
+			
+			
+			return $result->result();
+			
+		}
+		elseif(!empty($search['courses_provider']))
+		{
+			$this->db->where('admin_id', $search['courses_provider']);
+			$result 	= $this->db->get('orders');
+			//echo $this->db->last_query(); exit;
+			return $result->result();
+			//$this->db->where('comm_level','course_provider');
+		}
+		elseif(!empty($search['start_date']) && !empty($search['end_date']))
+		{
+			$result = $this->db->query("SELECT * FROM oc_orders 
+										WHERE ordered_on 
+										BETWEEN '".$search['start_date']."' AND '".$search['end_date']."'
+										");
+				return $result->result();
+		}
+		elseif(!empty($search['date']))
+		{
+			if($search['date']=="week")
+			{
+				$result = $this->db->query("select * from oc_orders where ordered_on >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)");
+				//echo $this->db->last_query(); exit;
+				return $result->result();
+			}
+			if($search['date']=="month")
+			{
+				$result = $this->db->query("select * from oc_orders where ordered_on >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)");
+				//echo $this->db->last_query(); exit;
+				return $result->result();
+			}
+			if($search['date']=="year")
+			{
+				$result = $this->db->query("select * from oc_orders where ordered_on >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)");
+				return $result->result();
+			}
+			
+		}
+		
+		
+		//$this->show->pe($result->result());exit;
+		
+		
+		
 	}
 	
 }

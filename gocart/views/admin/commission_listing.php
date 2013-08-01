@@ -135,8 +135,11 @@ function areyousure()
 			}?>
             
             <?php if($commission->comm_level=='course_level'){ 
-					$name = $this->Product_model->get_product($commission->comm_level_id);
-			 		echo '<td>'.ucwords(str_replace('_',' ',$commission->comm_level)).' ('.$name->name.')'. '</td>';
+					//$name = $this->Product_model->get_product($commission->comm_level_id);
+					$name = mysql_query("SELECT * FROM oc_products WHERE id= '".$commission->comm_level_id."'");
+					$name = mysql_fetch_array($name);
+					//$this->show->pe( $name['name']) ; exit;
+			 		echo '<td>'.ucwords(str_replace('_',' ',$commission->comm_level)).' ('.$name['name'].')'. '</td>';
 				}?>
              
             <?php  if($commission->comm_level=='course_provider'){
