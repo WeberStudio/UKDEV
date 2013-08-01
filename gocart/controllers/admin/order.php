@@ -242,16 +242,16 @@ class Order extends Admin_Controller {
 		$search['start_date'] 			= $this->input->post('start_date');
 		$search['end_date'] 			= $this->input->post('end_date');
 		//$this->show->pe($search);
-		$data['orders']					= $this->Order_model->search_order($search);
-		//if($search['categories']!="" || $search['courses']!="" || $search['courses_provider']!="" )
-		//{
-			
-			
-			
-		//}
 		
-		//else
-		//{
+		if($search['categories']!="" || $search['courses']!="" || $search['courses_provider']!="" || $search['date']!="" || $search['start_date']!="" || $search['end_date']!="" )
+		{
+			
+			$data['orders']					= $this->Order_model->search_order($search);
+			
+		}
+		
+		else
+		{
 			
 		if($id==2)
 		{$data['orders']				= $this->Order_model->get_delivered_oder();}
@@ -262,9 +262,9 @@ class Order extends Admin_Controller {
 		
 		else
 		{
-		//$data['orders']				= $this->Order_model->get_orders($search,$sort_by,$sort_order,$rows,$page);
+		$data['orders']				= $this->Order_model->get_orders($search,$sort_by,$sort_order,$rows,$page);
 		}
-		//}
+		}
 		//echo $this->db->last_query();exit;
 		$data['id'] 			= $id;
 		$this->load->library('pagination');	
