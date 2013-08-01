@@ -11,7 +11,7 @@
     <div class="span12">
       <div class="box paint color_18">
         <div class="title">
-          <h4> <i class=" icon-bar-chart"></i>Add Product Price Options</h4>        
+          <h4> <i class=" icon-bar-chart"></i>Add Delivery Options</h4>        
         <!-- End .title -->
         <div class="content">		
 		<div class="tab-pane fade in active" id="form">
@@ -20,13 +20,13 @@
           <div class="control-group row-fluid">
             <label class="control-label span2">Delivery Option Text <?php echo lang('group');?><span class="help-block"></span></label>
             <div class="controls span7">
-              e.g <input type="text" name="d_option_title" value="<?=set_value('d_option_title', $d_option_title)?>"  placeholder ="Course Price Only In UK"/>
+              e.g <input type="text" name="d_option_title" value="<?=set_value('d_option_title', $d_option_title)?>"  placeholder ="Delivery title"/>
             </div>
           </div>          
 		  <div class="control-group row-fluid">
             <label class="control-label span2">Delivery Option Rate<?php echo lang('group');?><span class="help-block"></span></label>
             <div class="controls span7">
-             e.g <input type="text" name="d_option_price" value="<?=set_value('d_option_price', $d_option_price)?>" placeholder ="99"/>
+             e.g <input type="text" name="d_option_price" value="<?=set_value('d_option_price', $d_option_price)?>" placeholder ="20"/>
             </div>
           </div>
 		            

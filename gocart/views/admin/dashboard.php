@@ -145,7 +145,7 @@
               </table>
             </div>
             <!-- End .content -->
-            <div class="description">Some explanation text here <i class="gicon-info-sign icon-white"></i></div>
+            <div class="description">LATEST ORDER (click on order number to view details) <i class="gicon-info-sign icon-white"></i></div>
           </div>
           
           <!-- End .box --> 
@@ -187,7 +187,7 @@
               <?php endforeach;?>
             </ul>
             <!-- End .content -->
-            <div class="description">Some explanation text here <i class="gicon-info-sign icon-white"></i> </div>
+            <div class="description">NEW CUSTOMERS (click on customer name to view details) <i class="gicon-info-sign icon-white"></i> </div>
           </div>
           <!-- End .box --> 
         </div>
@@ -225,7 +225,7 @@
               </table>
             </div>
             <!-- End .content -->
-            <div class="description">Some explanation text here <i class="gicon-info-sign icon-white"></i></div>
+            <div class="description">LATEST CUSTOMER HISTORY<i class="gicon-info-sign icon-white"></i></div>
           </div>
           
           <!-- End .box --> 
@@ -283,7 +283,7 @@
               
             </ul>
             <!-- End .content -->
-            <div class="description">Some explanation text here <i class="gicon-info-sign icon-white"></i> </div>
+            <div class="description">ORDER HISTORY (click on order history to view details) <i class="gicon-info-sign icon-white"></i> </div>
           </div>
           <!-- End .box --> 
         </div>

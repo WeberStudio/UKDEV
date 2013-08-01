@@ -27,6 +27,7 @@ class Customers extends Admin_Controller {
 		/*** Left Menu Selection ***/
 				
 		$this->load->model(array('Customer_model', 'Location_model'));
+		
 		$this->load->helper('formatting_helper');
 		$this->lang->load('customer');
 	
@@ -34,12 +35,26 @@ class Customers extends Admin_Controller {
 	
 	function index($field='lastname', $by='ASC', $page=0, $row=25)
 	{
-		//we're going to use flash data and redirect() after form submissions to stop people from refreshing and duplicating submissions
-		//$this->session->set_flashdata('message', 'this is our message');
 		
+		
+		
+		$this->load->helper('form');
 		$data['page_title']	= lang('customers');
-		$data['customers']	= $this->Customer_model->get_customers($row, $page, $by, $field);
 		
+		$term				= false;
+		$post				= $this->input->post(null, false);
+		$this->load->model('Search_model');
+		if($post)
+		{
+			$term			= json_encode($post);
+			$code			= $this->Search_model->record_term($term);
+			$data['code']	= $code;
+		}
+		
+		
+		
+		$data['customers']	= $this->Customer_model->get_customers($row, $page, $by, $field, $term);
+		$data['all_customers']	= $this->Customer_model->get_customers();
 		$this->load->library('pagination');
 
 		$config['base_url']		= base_url().'/'.$this->config->item('admin_folder').'/customers/index/'.$field.'/'.$by.'/';
@@ -71,7 +86,8 @@ class Customers extends Admin_Controller {
 		
 		$this->pagination->initialize($config);
 		
-		
+		//store the search term
+		$data['term']		= $term;
 		$data['page']	= $page;
 		$data['field']	= $field;
 		$data['by']		= $by;
@@ -117,7 +133,7 @@ class Customers extends Admin_Controller {
 		$data['city']				= '';
 		$data['state']				= '';
 		$data['zip_code']			= '';
-		$data['country']			= '';
+		$data['country']			= '222';
 		$data['telephone']			= '';	
 		$password					= '';
 		$password 					= $this->input->post('password');	
@@ -166,7 +182,7 @@ class Customers extends Admin_Controller {
 		
 		if(empty($data['id']))
 		{
-			$data['zones_menu']	= $this->Location_model->get_zones_menu('223');
+			$data['zones_menu']	= $this->Location_model->get_zones_menu('222');
 			
 		}
 		else
@@ -187,8 +203,8 @@ class Customers extends Admin_Controller {
 		$this->form_validation->set_rules('firstname', 'lang:firstname', 'trim|required|max_length[32]');
 		$this->form_validation->set_rules('lastname', 'lang:lastname', 'trim|required|max_length[32]');
 		$this->form_validation->set_rules('email', 'lang:email', 'trim|required|valid_email|max_length[128]|callback_check_email');
-		$this->form_validation->set_rules('phone', 'lang:phone', 'trim|required|max_length[32]|numeric');
-		$this->form_validation->set_rules('zip_code', 'Zip', 'trim|required|max_length[32]|numeric');
+		$this->form_validation->set_rules('phone', 'lang:phone', 'trim|required|max_length[32]');
+		$this->form_validation->set_rules('zip_code', 'Zip', 'trim|required|max_length[32]');
 		$this->form_validation->set_rules('city', 'City', 'trim|required');
 		$this->form_validation->set_rules('company', 'lang:company', 'trim|max_length[128]');
 		//$this->form_validation->set_rules('active', 'lang:active');

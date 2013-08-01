@@ -144,7 +144,7 @@ $code=0;
 							<?php /*?><th><input type="checkbox" id="gc_check_all" /> <button type="submit" class="btn btn-small btn-danger"><i class="icon-trash"></i></button></th><?php */?>
 							<th><?php echo sort_url('order', 'order_number', $sort_by, $sort_order, $code, $this->config->item('admin_folder')); ?></th>
 							<th><?php echo sort_url('bill_to', 'bill_lastname', $sort_by, $sort_order, $code, $this->config->item('admin_folder')); ?></th>
-							<th><?php echo sort_url('ship_to', 'ship_lastname', $sort_by, $sort_order, $code, $this->config->item('admin_folder')); ?></th>
+							<?php /*?><th><?php echo sort_url('ship_to', 'ship_lastname', $sort_by, $sort_order, $code, $this->config->item('admin_folder')); ?></th><?php */?>
 							<th><?php echo sort_url('ordered_on','ordered_on', $sort_by, $sort_order, $code, $this->config->item('admin_folder')); ?></th>
 							<th><?php echo sort_url('status','status', $sort_by, $sort_order, $code, $this->config->item('admin_folder')); ?></th>
 							<th><?php echo sort_url('total','total', $sort_by, $sort_order, $code, $this->config->item('admin_folder')); ?></th>
@@ -159,8 +159,8 @@ $code=0;
 						<tr>
 							<?php /*?><td class="to_hide_phone"><input name="order[]" type="checkbox" value="<?php echo $order->id; ?>" class="gc_check"/></td><?php */?>
 							<td class="to_hide_phone"><?php echo $order->order_number; ?></td>
-							<td class="to_hide_phone" style="white-space:nowrap"><?php echo $order->bill_lastname.', '.$order->bill_firstname; ?></td>
-							<td class="to_hide_phone" style="white-space:nowrap"><?php echo $order->ship_lastname.', '.$order->ship_firstname; ?></td>
+							<td class="to_hide_phone" style="white-space:nowrap"><?php echo $order->bill_lastname.' '.$order->bill_firstname; ?></td>
+							<?php /*?><td class="to_hide_phone" style="white-space:nowrap"><?php echo $order->ship_lastname.', '.$order->ship_firstname; ?></td><?php */?>
 							<td class="to_hide_phone" style="white-space:nowrap"><?php echo date('m/d/y h:i a', strtotime($order->ordered_on)); ?></td>
 							<td style="span2">
 							<div class="btn-group inline">

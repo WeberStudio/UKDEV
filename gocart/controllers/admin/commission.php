@@ -56,13 +56,6 @@ class Commission extends Admin_Controller {
 	
 	function form($id = false)
 	{
-		
-			/*echo  $this->input->post('comm_level_id')."<br/>";
-			 echo $this->input->post('comm_level')."<br/>";
-			echo $this->input->post('comm_rate_mode')."<br/>";
-			 echo $this->input->post('comm_rate')."<br/>";
-			exit;*/
-			
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -86,7 +79,7 @@ class Commission extends Admin_Controller {
 			{
 				//forum does not exist
 				$this->session->set_flashdata('error', lang('error_forum_not_found'));
-				redirect($this->config->item('admin_folder').'/commission/commission_form/'.$topic_id);
+				redirect($this->config->item('admin_folder').'/commission_form/'.$topic_id);
 			}
 			
 			

@@ -351,7 +351,7 @@ class Secure extends Front_Controller {
 			$message .= $email_attributes[0]['email_header'];
 			
 			
-			 $message .= '<tr><td style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><br><p align="left" class="article-title"><singleline label="Title"> Dear '.$this->input->post('firstname').' '. $this->input->post('lastname').'!</singleline></p><div align="left" ><multiline label="Description"></multiline>Thank you for registering with UK Open College. This email is to certify that your account has been registered with us. Please save the login information.<br><br>Username: '.$this->input->post('email').' <br>Password: '.$password.' <br><br>as you would require that for future coordination.</div></td></tr><tr><td style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><div align="left" >Please let us know by describe the problem at <a href="mailto:support@ukopencollege.co.uk"> support@ukopencollege.co.uk</a>.</div></td></tr></tbody></table></td></tr>';
+			 $message .= '<tr><td style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><br><p align="left" class="article-title"><singleline label="Title"> Dear '.$this->input->post('firstname').' '. $this->input->post('lastname').'!</singleline></p><div align="left" ><multiline label="Description"></multiline>Thank you for registering with UK Open College. This email is to certify that your account has been registered with us. Please save the login information i.e. user name and password as you would require this in future when logging in at the UK OPEN COLLEGE website. <br><br>Username: '.$this->input->post('email').' <br>Password: '.$password.' <br></div></td></tr><tr><td style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><div align="left" >Student Support can be accessed via e-mail :  <a href="mailto:support@ukopencollege.co.uk"> support@ukopencollege.co.uk</a>.<br><br>Or<br><br>Get in touch via</div></td></tr></tbody></table></td></tr>';
 			
 			$message .= $email_attributes[0]['email_footer'];
 			
@@ -423,10 +423,12 @@ class Secure extends Front_Controller {
 				$email_attributes = $this->Settings_model->get_system_email($this->config->item('email_template'));
 				$message  = '';
 				$message .= $email_attributes[0]['email_header'];				
-				$message .= '<tr><td style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><br><b>Password has been generated successfully!</b><br> In order to set a new password, you need to provide your user name by clicking on the following link to rest your password. We will send you a new user name and password. If you have difficulty in resetting your password, please let us know by describe the problem at <a href="mailto:support@ukopencollege.co.uk
-"> support@ukopencollege.co.uk</a>.</td></tr><tr><td ><div align="left" class="article-content"><b>New Password:</b>'.$reset.'</div></td></tr></tbody></table></td></tr>';
+				$message .= '<tr><td style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><br><b>Password has been generated successfully!</b><br>In order to set a new password, you need to provide your user name by clicking on the following link to rest your password. We will send you a new user name and password. please  get in touch via e-mail: <a href="mailto:support@ukopencollege.co.uk"> support@ukopencollege.co.uk</a>.</td></tr><tr><td ><div align="left" class="article-content"><b>New Password:</b>'.$reset.'</div> <br/>Or<br/><br/>Call us<br/></td></tr></tbody></table></td></tr>';
 				
-				$message .= $email_attributes[0]['email_footer'];			
+				$message .= $email_attributes[0]['email_footer'];
+				
+				//echo $message;exit;
+							
 				$this->load->library('email');				
 				$config['mailtype'] = 'html';				
 				$this->email->initialize($config);		
