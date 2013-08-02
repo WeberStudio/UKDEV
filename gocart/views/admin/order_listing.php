@@ -43,7 +43,7 @@ $code=0;
       <div class="title">
         <h4> <i class="icon-book"></i><span>Search Orders</span> </h4>
       </div>
-      <div class="content"> <?php echo form_open($this->config->item('admin_folder').'/order/order_search', 'class="" ');?>
+      <div class="content"> <?php echo form_open($this->config->item('admin_folder').'/order', 'class="" ');?>
       
          <div class="form-row control-group row-fluid">
         

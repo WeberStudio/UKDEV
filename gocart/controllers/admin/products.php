@@ -60,6 +60,8 @@ class Products extends Admin_Controller {
 		//get the category list for the drop menu
 		$data['categories']	= $this->Category_model->get_categories_tierd();
 		
+		$data['admins']			= $this->auth->get_admin_list();
+		
 		$post				= $this->input->post(null, false);
 		$this->load->model('Search_model');
 		if($post)

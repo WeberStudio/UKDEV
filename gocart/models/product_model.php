@@ -82,6 +82,12 @@ Class Product_model extends CI_Model
 					$this->db->where('category_products.category_id', $search->category_id);
 					$this->db->order_by('sequence', 'ASC');
 				}
+				if(!empty($search->courses_provider))
+				{
+					//echo $search->courses_provider; exit;
+					$this->db->where('admin_id',$search->courses_provider);
+					
+				}
 			}
 		
 			if($return_count)

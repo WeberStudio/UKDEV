@@ -57,13 +57,29 @@ class Order extends Admin_Controller {
        	
 		
         $data = array();
-		
-		$data['id'] 			= $id;
-		//print_r($data['id']);exit;
-		
 		$data['category'] 		= $this->Category_model->get_all_categories();
 		$data['courses'] 		= $this->Product_model->get_all_products_array();
 		$data['admins']			= $this->auth->get_admin_list();
+		$data['id'] 			= $id;
+		
+		$search = array();
+		$search['date'] 				= $this->input->post('date');
+		$search['categories'] 			= $this->input->post('categories');
+		$search['courses'] 				= $this->input->post('courses');
+		$search['courses_provider'] 	= $this->input->post('courses_provider');
+		$search['start_date'] 			= $this->input->post('start_date');
+		$search['end_date'] 			= $this->input->post('end_date');
+		//$this->show->pe($search);
+		
+		if($search['categories']!="" || $search['courses']!="" || $search['courses_provider']!="" || $search['date']!="" || $search['start_date']!="" || $search['end_date']!="" )
+		{
+			
+			$data['orders']					= $this->Order_model->search_order($search);
+			
+		}
+		//print_r($data['id']);exit;
+		
+		else{
 		
 		
 		if($id==2)
@@ -75,7 +91,11 @@ class Order extends Admin_Controller {
 		
 		else
 		{
-		$data['orders']				= $this->Order_model->get_orders($search,$sort_by,$sort_order,$rows,$page);}
+		$data['orders']				= $this->Order_model->get_orders($search,$sort_by,$sort_order,$rows,$page);
+		
+		}
+		
+		}
 		//echo $this->db->last_query();exit;
 		$this->load->library('pagination');	
 		
@@ -216,7 +236,7 @@ class Order extends Admin_Controller {
 		redirect($this->config->item('admin_folder').'/orders');	
     }
 	
-	function order_search($id = false , $rows=5, $page=0)
+	/*function order_search($id = false , $rows=5, $page=0)
 	{
 		$sort_by='order_number';
 		$sort_order='ASC';
@@ -309,6 +329,6 @@ class Order extends Admin_Controller {
         $this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
 
 	}
-
+*/
 }
 ?>
