@@ -104,10 +104,10 @@ function selectGroup(childs)
       </div>
       <div class="content"> <?php echo form_open($this->config->item('admin_folder').'/products/index', 'class="form-horizontal row-fluid" ');?>
         <div class="form-row control-group row-fluid">
-              <div class="controls span5">
+              <div class="controls span3">
                 <input type="text" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Course Name, Sku, Keyword" placeholder="<?php echo lang('search_term');?>" class="row-fluid">
               </div>
-              <div class="controls span5">
+              <div class="controls span3">
                 <?php
                         if(!empty($categories))
                         {
@@ -118,6 +118,17 @@ function selectGroup(childs)
                             
                         }
                 ?>
+              </div>
+              <div class="controls span3">
+              
+               <select class="chzn-select" id="" name="courses_provider">
+                <option value=""> Courses Provider</option>
+                 
+                	<?php
+					foreach($admins as $admin){?>
+                    <option value="<?php echo $admin->id;?>"> <?php echo $admin->firstname;?></option>
+                    <?php }?>
+                </select>
               </div>
               <div class="controls span2">
                 <button class="btn" rel="tooltip" data-placement="top" data-original-title="Search" name="submit" value="search"><?php echo lang('search')?></button>
