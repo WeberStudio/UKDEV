@@ -63,7 +63,14 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
 			<tr>
 				<td><?php echo  $cat['category']->id; ?></td>
 				<td><?php echo  $sub.$cat['category']->name; ?></td>
-                <td>10</td>
+                <td>
+                <?php 
+					$query = "SELECT * FROM oc_category_products WHERE category_id='".$cat['category']->id."'";
+					$exe = mysql_query($query);
+					$count = mysql_num_rows($exe);
+					echo $count
+				?>
+                </td>
                 <td>
 					<select name="publish_by_admin" id="cat_id_<?=$cat['category']->id?>" onchange="change_cat_status(<?=$cat['category']->id?>)">						
 						<option <?php if($cat['category']->publish_by_super=='1'){ echo  'selected'; }?>  value="1">Published</option>

@@ -251,6 +251,14 @@ Class Category_model extends CI_Model
         //echo "<pre>";print_r($result->result());
         return $result->result();       
     }
+	
+	function course_count($id)
+	{
+		 $this->db->where('category_id',$id);
+		 $result = $this->db->get('category_products');
+		 return $result->count_all_results();
+		
+	}
     
     
     
