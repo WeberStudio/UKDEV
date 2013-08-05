@@ -15,7 +15,7 @@
         <!-- End .title -->
         <div class="content">		
 		<div class="tab-pane fade in active" id="form">
-          <?php echo form_open($this->config->item('admin_folder').'/products/price_options_form/'.$id, array('class' => '', 'id' => 'validateForm')); ?>
+          <?php echo form_open($this->config->item('admin_folder').'/products/price_options_form/'.$page.'/'.$id, array('class' => '', 'id' => 'validateForm')); ?>
  
           <div class="control-group row-fluid">
             <label class="control-label span2">Price Option Text <?php echo lang('group');?><span class="help-block"></span></label>
@@ -51,9 +51,9 @@
 					<td class="gc_cell_left"><?php echo  $all_price['p_option_price']; ?></td>
 					<td>
 						<div class="btn-group" align="right">
-							<a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/products/price_options_form/'.$all_price['p_option_id']); ?>"><i class="icon-pencil"></i> <?php echo lang('edit');?></a>
+							<a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/products/price_options_form/'.$page.'/'.$all_price['p_option_id']); ?>"><i class="icon-pencil"></i> <?php echo lang('edit');?></a>
 							&nbsp;
-							<a class="btn btn-danger" href="<?php echo site_url($this->config->item('admin_folder').'/products/delete_price_option/'.$all_price['p_option_id']); ?>" onclick="return areyousure();"><i class="icon-trash"></i>   <?php echo lang('delete');?></a>
+							<a class="btn btn-danger" href="<?php echo site_url($this->config->item('admin_folder').'/products/delete_price_option/'.$page.'/'.$all_price['p_option_id']); ?>" onclick="return areyousure();"><i class="icon-trash"></i>   <?php echo lang('delete');?></a>
 						</div>
 					</td>
 				</tr>
@@ -65,6 +65,12 @@
 		</div>
         <!-- End .span4 -->		  
       </div>
+      <div class="row-fluid control-group">
+               
+                <div class="span6">
+                  <div class="pagination pull-right "><?php echo $this->pagination->create_links();?> &nbsp; </div
+                ></div>
+              </div>
 	  <!-------end content------>
       <!-- End .row-fluid --> 
     </div>

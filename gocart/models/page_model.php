@@ -5,10 +5,14 @@ Class Page_model extends CI_Model
 	/********************************************************************
 	Page functions
 	********************************************************************/
-	function get_pages($parent = 0)
+	function get_pages($parent = 0, $limit=0, $offset=0)
 	{
 		$this->db->order_by('sequence', 'ASC');
 		$this->db->where('parent_id', $parent);
+		if($limit>0)
+		{
+			$this->db->limit($limit, $offset);
+		}
 		$result = $this->db->get('pages')->result();
 		$return	= array();
 		foreach($result as $page)
@@ -147,5 +151,10 @@ Class Page_model extends CI_Model
 		
 		$result = $this->db->get('pages')->result();
 		return $result;
+	}
+	
+	function page_count()
+	{
+		return $this->db->count_all_results('pages');
 	}
 }

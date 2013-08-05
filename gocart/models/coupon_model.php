@@ -105,12 +105,16 @@ class Coupon_model extends CI_Model
 	}
 	
 	// get coupons list, sorted by start_date (default), end_date
-	function get_coupons($sort=NULL) 
+	function get_coupons($sort=NULL , $limit=0 , $offset=0) 
 	{
 		if($sort=='end_date') {
 			$this->db->order_by('end_date');
 		} else {
 			$this->db->order_by('start_date');
+		}
+		if($limit>0)
+		{
+			$this->db->limit($limit, $offset);
 		}
 		$res = $this->db->get('coupons');
 		return $res->result();
@@ -217,6 +221,10 @@ class Coupon_model extends CI_Model
 	{
 		$this->db->where(array('coupon_id'=>$coupon_id, 'product_id'=>$prod_id));
 		$this->db->update('coupons_products', array('sequence'=>$seq));
+	}
+	function coupon_count()
+	{
+		return $this->db->count_all_results('coupons');
 	}
 	
 	
