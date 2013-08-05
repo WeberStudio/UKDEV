@@ -984,14 +984,60 @@ class Products extends Admin_Controller {
 	*
 	*/
 	
-	function price_options_form($id = false)
+	function price_options_form($page=0 , $id = false)
 	{
-				
+		
+		
+		$rows = 5;		
 		$this->session->set_userdata('active_module', 'price');	
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-		$data['all_price_options']	= $this->Product_model->get_price_options();
+		$data['all_price_options']	= $this->Product_model->get_price_options($rows , $page);
+		
+		//$count = $this->Product_model->price_count();
+		//echo $count; exit;
+		
+		
+		$this->load->library('pagination');	
+		
+		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/products/price_options_form/';
+		$config['total_rows']		= $this->Product_model->price_count();
+		
+		$config['per_page']			= $rows;
+		
+		$config['uri_segment']		= 4;
+		$config['first_link']		= 'First';
+		$config['first_tag_open']	= '<li>';
+		$config['first_tag_close']	= '</li>';
+		$config['last_link']		= 'Last';
+		$config['last_tag_open']	= '<li>';
+		$config['last_tag_close']	= '</li>';
+
+		$config['full_tag_open']	= '<div class="pagination"><ul>';
+		$config['full_tag_close']	= '</ul></div>';
+		$config['cur_tag_open']		= '<li class="active"><a href="#">';
+		$config['cur_tag_close']	= '</a></li>';
+		
+		$config['num_tag_open']		= '<li>';
+		$config['num_tag_close']	= '</li>';
+		
+		$config['prev_link']		= 'Prev';
+		$config['prev_tag_open']	= '<li>';
+		$config['prev_tag_close']	= '</li>';
+
+		$config['next_link']		= 'Next';
+		$config['next_tag_open']	= '<li>';
+		$config['next_tag_close']	= '</li>';
+		
+		$this->pagination->initialize($config);
+		$data['page']			= $page;
+		//$data['sort_by']		= $sort_by;
+		//$data['sort_order']	= $sort_order;
+		
+		
+		
+		
 		//print_r($data['all_price_options']);exit;
 		$data['id'] 				= $id;
 		$data['option_text'] 		= '';
@@ -1007,7 +1053,7 @@ class Products extends Admin_Controller {
 			{
 				//forum does not exist
 				$this->session->set_flashdata('error', lang('error_forum_not_found'));
-				redirect($this->config->item('admin_folder').'/products/price_options_form/'.$id);
+				redirect($this->config->item('admin_folder').'/products/price_options_form/'.$page.'/'.$id);
 			}
 			
 			
@@ -1073,7 +1119,7 @@ class Products extends Admin_Controller {
 	function product_delivery_form($id = false)
 	{
 				
-			
+		$this->session->set_userdata('active_module', 'price');	
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');

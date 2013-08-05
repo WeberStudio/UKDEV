@@ -21,6 +21,7 @@ Class Commission_model extends CI_Model
 		}
 
 		$result	= $this->db->get('oc_commission');
+		//echo $this->db->last_query();exit;
 		return $result->result();
 	}
 	
@@ -105,6 +106,11 @@ Class Commission_model extends CI_Model
 		return $result->result();
 		
 		
+	}
+	
+	function commission_count()
+	{
+		return $this->db->count_all_results('commission');
 	}
 	
 }

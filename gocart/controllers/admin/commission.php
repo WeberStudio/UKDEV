@@ -38,14 +38,54 @@ class Commission extends Admin_Controller {
     }
 	
 
-    function index()
+    function index($page=0)
     {
+		$rows = 5;
+		$order_by='comm_level';
+		$direction='ASC';
        	$data['category'] 		= $this->Category_model->get_all_categories();
 		$data['courses'] 		= $this->Product_model->get_all_products_array();
 		$data['admins']			= $this->auth->get_admin_list();
 		
 		
-		$data['commissions'] = $this->Commission_model->get_commissions($limit=0, $offset=0, $order_by='comm_level', $direction='ASC');
+		$data['commissions'] = $this->Commission_model->get_commissions($rows, $page, $order_by='comm_level', $direction='ASC');
+		//$count = $this->Commission_model->commission_count();
+		//echo $count; exit;
+		$this->load->library('pagination');	
+		
+		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/commission/index/';
+		$config['total_rows']		= $this->Commission_model->commission_count();
+		
+		$config['per_page']			= $rows;
+		
+		$config['uri_segment']		= 4;
+		$config['first_link']		= 'First';
+		$config['first_tag_open']	= '<li>';
+		$config['first_tag_close']	= '</li>';
+		$config['last_link']		= 'Last';
+		$config['last_tag_open']	= '<li>';
+		$config['last_tag_close']	= '</li>';
+
+		$config['full_tag_open']	= '<div class="pagination"><ul>';
+		$config['full_tag_close']	= '</ul></div>';
+		$config['cur_tag_open']		= '<li class="active"><a href="#">';
+		$config['cur_tag_close']	= '</a></li>';
+		
+		$config['num_tag_open']		= '<li>';
+		$config['num_tag_close']	= '</li>';
+		
+		$config['prev_link']		= 'Prev';
+		$config['prev_tag_open']	= '<li>';
+		$config['prev_tag_close']	= '</li>';
+
+		$config['next_link']		= 'Next';
+		$config['next_tag_open']	= '<li>';
+		$config['next_tag_close']	= '</li>';
+		
+		$this->pagination->initialize($config);
+		$data['page']			= $page;
+		//$data['sort_by']		= $sort_by;
+		//$data['sort_order']		= $sort_order;
 		
         $this->load->view($this->config->item('admin_folder').'/includes/header');
         $this->load->view($this->config->item('admin_folder').'/includes/leftbar');

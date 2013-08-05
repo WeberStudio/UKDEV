@@ -648,9 +648,12 @@ Class Product_model extends CI_Model
 	*/
 	
 	
-	function get_price_options()
+	function get_price_options($limit=0 ,$offset=0)
 	{
-	
+		if($limit>0)
+		{
+			$this->db->limit($limit, $offset);
+		}
 		$result	= $this->db->get('oc_product_price_options');
 		$return = $result->result_array();
 		if(count($return))
@@ -659,6 +662,10 @@ Class Product_model extends CI_Model
 		}
 		return false;
 		
+	}
+	function price_count()
+	{
+		return $this->db->count_all_results('product_price_options');
 	}
 	
 	function get_price_option($id)

@@ -36,12 +36,51 @@ class Pages extends Admin_Controller
 		$this->session->set_userdata('active_module', 'contents');
 	}
 		
-	function index()
+	function index($page=0)
 	{
-	$data['pages']		= '';
+		$rows = 5;
+		$data['pages']		= '';
 		$this->load->helper('form');
 		$data['page_title']	= lang('pages');
-		$data['pages']		= $this->Page_model->get_pages();
+		$data['pages']		= $this->Page_model->get_pages($parent = 0,$rows,$page);
+		
+		//$count = $this->Page_model->page_count();
+		//echo $count; exit;
+			$this->load->library('pagination');	
+		
+		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/pages/index/';
+		$config['total_rows']		= $this->Page_model->page_count();
+		
+		$config['per_page']			= $rows;
+		
+		$config['uri_segment']		= 4;
+		$config['first_link']		= 'First';
+		$config['first_tag_open']	= '<li>';
+		$config['first_tag_close']	= '</li>';
+		$config['last_link']		= 'Last';
+		$config['last_tag_open']	= '<li>';
+		$config['last_tag_close']	= '</li>';
+
+		$config['full_tag_open']	= '<div class="pagination"><ul>';
+		$config['full_tag_close']	= '</ul></div>';
+		$config['cur_tag_open']		= '<li class="active"><a href="#">';
+		$config['cur_tag_close']	= '</a></li>';
+		
+		$config['num_tag_open']		= '<li>';
+		$config['num_tag_close']	= '</li>';
+		
+		$config['prev_link']		= 'Prev';
+		$config['prev_tag_open']	= '<li>';
+		$config['prev_tag_close']	= '</li>';
+
+		$config['next_link']		= 'Next';
+		$config['next_tag_open']	= '<li>';
+		$config['next_tag_close']	= '</li>';
+		
+		$this->pagination->initialize($config);
+		//$data['page']			= $page;
+		//$data['sort_by']		= $sort_by;
+		//$data['sort_order']		= $sort_order;
 		
 		
 		$this->load->view($this->config->item('admin_folder').'/includes/header');
