@@ -69,10 +69,6 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
 					$exe = mysql_query($query);
 					$count = mysql_num_rows($exe);
 					echo $count
-				
-				
-				
-				
 				?>
                 </td>
                 <td>
