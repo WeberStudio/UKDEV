@@ -13,6 +13,8 @@
 	$commisioin_links	= '';
 	$active_price		= '';
 	$price_link			= '';
+	$active_report		= '';
+	$report_link		= '';
 	$active = $this->session->userdata('active_module');
 	//print_r($active);
     if($active=='dashboard')
@@ -52,6 +54,11 @@
             $active_price		= 'opened';
 			$price_link			= 'in collapse';
     }
+	else if($active == 'report')
+	{
+		 	$active_report		= 'opened';
+			$report_link		= 'in collapse';
+	}
 ?>
 <div id="sidebar" class="">
     <div class="scrollbar">
@@ -136,6 +143,16 @@
                     <ul id="collapse1" class="accordion-body collapse <?php echo $price_link; ?>">
                         <li><a href="<?=base_url().ADMIN_PATH?>products/price_options_form">Price Options</a></li>
                         <li><a href="<?=base_url().ADMIN_PATH?>products/product_delivery_form">Delivery Charges</a></li>
+                    </ul>
+                </li>
+                
+                <li class="accordion-group color_25 <?php echo $active_report ; ?>" onclick="set_module('report')" >
+                    <a class="accordion-toggle widgets collapsed " data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse11">
+                        <img src="<?=base_url().ASSETS_PATH?>img/menu_icons/forms.png"><span>Reports</span></a>
+                    <ul id="collapse11" class="accordion-body collapse <?php echo $report_link; ?>">
+                        <!--<li><a href="<?=base_url().ADMIN_PATH?>report/product_purchased">Products Viewed</a></li>-->
+                        <li><a href="<?=base_url().ADMIN_PATH?>reports/product_purchased">Products Purchased</a></li>
+                        <!--<li><a href="<?=base_url().ADMIN_PATH?>products/product_delivery_form">Customer Orders-Total</a></li>-->
                     </ul>
                 </li>
                 
