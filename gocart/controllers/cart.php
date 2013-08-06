@@ -523,9 +523,11 @@ class Cart extends Front_Controller {
 	
 
 	function product($id)
-
 	{
-
+		print_r($_POST);
+		///$vall = $this->input->post('view_product_id');
+		//echo $vall;
+		exit;
 		//get the product
          // DebugBreak();
 		$data['product']		= $this->Product_model->get_product($id);

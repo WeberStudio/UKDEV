@@ -107,14 +107,37 @@ ul.menu1 li a{
                             </li>                                      
                 </a>     
                <?php endforeach?>
-               
+              
                
                
               <!--Product Listing Start-->
              <?php } else if(isset($products) && count($products) > 0){ ?>
-             <?php foreach($products as $product):?>
+<script type="text/javascript" language="javascript">
+function myFunction(id)
+{
+alert(id)
+ $.ajax({
+                    type: "POST", 		//GET or POST or PUT or DELETE verb
+                    url: '<?=base_url()?>cart/product/', 		// Location of the service
+                    data: 'productID='+id, 		//Data sent to server
+                    contentType: "",		// content type sent to server
+                    dataType: "json", 	//Expected data format from server
+                    processdata: true, 	//True or False
+                    success: function (json) {//On Successful service call
+                        var result = json.name;
+                        $("#dvAjax").html(result);
+                    },
+                    error: ServiceFailed	// When Service call fails
+                });
+				return false;
 
-                <a class="all" href="<?php echo site_url().$product->slug; ?>">
+
+}
+</script>
+             
+             <?php foreach($products as $product):?>
+        <a class="all" onclick="return myFunction('<?=$product->id?>')" href="#">
+                
                             <li data-type="1" data-id="id-1" class="item">
                              
                                 <div class="half even">
