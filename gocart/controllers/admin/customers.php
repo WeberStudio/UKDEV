@@ -36,7 +36,7 @@ class Customers extends Admin_Controller {
 	function index($field='lastname', $by='ASC', $page=0, $row=25)
 	{
 		
-		
+		$cvs = "";
 		
 		$this->load->helper('form');
 		$data['page_title']	= lang('customers');
@@ -51,8 +51,7 @@ class Customers extends Admin_Controller {
 			$data['code']	= $code;
 		}
 		$data['csv_call'] 			= $this->input->post('csv_call');
-		//$records = $this->db->last_query();
-		//echo $records; exit;
+		
 		if(!empty($data['csv_call']))
 		{
 			$cvs = '1';
@@ -60,12 +59,14 @@ class Customers extends Admin_Controller {
 		
 		
 		$data['customers']	= $this->Customer_model->get_customers($row, $page, $by, $field, $term , $cvs);
+		//$this->show->pe($data['customers']);
 		$records = $data['customers'];
-		if(!empty($data['csv_call']))
+		/*if(!empty($data['csv_call']))
 		{
+			//$this->show->pe($records);
 			$this->load->helper('csv');
 			query_to_csv($records, TRUE, 'sales_report.csv'); 
-		}
+		}*/
 		$data['all_customers']	= $this->Customer_model->get_customers();
 		$this->load->library('pagination');
 

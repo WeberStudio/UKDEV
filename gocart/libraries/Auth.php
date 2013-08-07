@@ -255,7 +255,7 @@ class Auth
 	/*
 	This function gets a complete list of all admin
 	*/
-	function get_admin_list($data=array(), $term =false)
+	function get_admin_list($data=array(), $term =false , $csv="")
 	{
 		$this->CI->db->select('*');
 		if(!empty($term))
@@ -310,9 +310,21 @@ class Auth
 		
 		
 		$result = $this->CI->db->get('admin');
+		if($csv !="")
+		{
+			
+			$this->CI->load->helper('csv');
+			query_to_csv($result, TRUE, 'sales_report.csv'); 
+			exit;
+		}
+		else
+		{
+		
+		
 		$result	= $result->result();
 		
 		return $result;
+		}
 	}
 
 	/*
