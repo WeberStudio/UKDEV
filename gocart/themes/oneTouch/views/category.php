@@ -112,31 +112,40 @@ ul.menu1 li a{
                
               <!--Product Listing Start-->
              <?php } else if(isset($products) && count($products) > 0){ ?>
+             
 <script type="text/javascript" language="javascript">
 function myFunction(id)
 {
-alert(id)
- $.ajax({
+//alert(id)
+/*j = jQuery.noConflict();
+j.ajax({
+   type: "GET",
+   url: urll,
+   data: ({'viewed_id' : id }),
+   success: function(msg){
+     alert( "Data Saved: " + msg+ urll);
+   }
+ });*/
+ j = jQuery.noConflict();
+ j.ajax({
                     type: "POST", 		//GET or POST or PUT or DELETE verb
-                    url: '<?=base_url()?>cart/product/', 		// Location of the service
+                    url: '<?=base_url()?>cart/product/'+id, 		// Location of the service
                     data: 'productID='+id, 		//Data sent to server
-                    contentType: "",		// content type sent to server
-                    dataType: "json", 	//Expected data format from server
-                    processdata: true, 	//True or False
                     success: function (json) {//On Successful service call
-                        var result = json.name;
+                       var result = json.name;
                         $("#dvAjax").html(result);
                     },
-                    error: ServiceFailed	// When Service call fails
+                    //error: ServiceFailed	// When Service call fails
                 });
-				return false;
+				//return false;
 
 
 }
 </script>
+
              
              <?php foreach($products as $product):?>
-        <a class="all" onclick="return myFunction('<?=$product->id?>')" href="#">
+        <a class="all" onClick="myFunction('<?=$product->id?>')"  href="<?php echo $product->slug;?>">
                 
                             <li data-type="1" data-id="id-1" class="item">
                              

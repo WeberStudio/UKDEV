@@ -524,10 +524,24 @@ class Cart extends Front_Controller {
 
 	function product($id)
 	{
-		print_r($_POST);
-		///$vall = $this->input->post('view_product_id');
-		//echo $vall;
-		exit;
+		//print_r($_POST['productID']);
+		//exit;
+		////////////////product view section start/////////////
+		if(isset($_POST['productID']))
+		{
+		$product 			= $this->Product_model->get_product($id);
+		$viewed 			= $product->viewed;
+		$save['id'] 		= $id;
+		$save['viewed']		= $viewed + 1;
+		$this->Product_model->save($save);
+		}
+		
+		//echo $viewed;
+		//exit;
+		////////////////product view section end/////////////
+		
+		
+		
 		//get the product
          // DebugBreak();
 		$data['product']		= $this->Product_model->get_product($id);
@@ -599,7 +613,10 @@ class Cart extends Front_Controller {
 		$this->load->view('courseDetails', $data);
 
 	}
-
+	function updateProCount()
+	{
+		
+	}
 	
 
 	
