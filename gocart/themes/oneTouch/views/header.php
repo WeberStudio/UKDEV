@@ -21,7 +21,35 @@ experience this site.
 
 <div class="clear"> </div>
 <div align="right" style="font-size:16px; color:#57BAE8;"> </div>
+<script type="text/javascript" language="javascript">
+function myFunction(id)
+{
+alert(id);
+/*j = jQuery.noConflict();
+j.ajax({
+   type: "GET",
+   url: urll,
+   data: ({'viewed_id' : id }),
+   success: function(msg){
+     alert( "Data Saved: " + msg+ urll);
+   }
+ });*/
+ j = jQuery.noConflict();
+ j.ajax({
+                    type: "POST", 		//GET or POST or PUT or DELETE verb
+                    url: '<?=base_url()?>cart/product/'+id, 		// Location of the service
+                    data: 'productID='+id, 		//Data sent to server
+                    success: function (json) {//On Successful service call
+                       var result = json.name;
+                        $("#dvAjax").html(result);
+                    },
+                    //error: ServiceFailed	// When Service call fails
+                });
+				//return false;
 
+
+}
+</script>
 	
      <script>
         jQuery(document).ready(function(){
@@ -40,7 +68,7 @@ experience this site.
 	  <select class="chosen" style="width:300px;" >
          <option value="-1">Search Course</option>
    <?php foreach($this->courses as $course):?>        
-          <option value="<?=$course['slug']?>"><?=$course['name']?></option>                            
+          <option onClick="myFunction('<?=$course['id']?>')" value="<?=$course['slug']?>"><?=$course['name']?></option>                            
    <?php  endforeach;?>
        </select>                
      </div>
