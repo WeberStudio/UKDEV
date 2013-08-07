@@ -511,4 +511,52 @@ Class order_model extends CI_Model
 		
 	}
 	
+	function get_sales_record($data)
+	{
+		
+		$this->db->like('status', $data['date_status']);
+		
+		if(!empty($data['payment_method']))
+		{
+			$this->db->like('payment_info', $data['payment_method']); 
+		}	
+		
+		if(empty($data['search_custom']) && $data['search_custom'] !='on')
+		{
+			if(!empty($data['date_preset']) && $data['date_preset'] == 'last_month')
+			{
+				$start_date = date('Y-m-d', strtotime('-1 months'));
+				$end_date 	= date('Y-m-d');
+				$this->db->where('ordered_on >=', $start_date);
+				$this->db->where('ordered_on <=', $end_date);				
+			}
+			else if(!empty($data['date_preset']) && $data['date_preset'] == 'last_month')
+			{
+				$this->db->where('ordered_on <=', date('Y-m-d'));
+			}
+			else if(!empty($data['date_preset']) && $data['date_preset'] == 'this_month')
+			{
+				$this->db->where('ordered_on =', date('Y-m-d'));
+			}
+		}
+		else if(!empty($data['start_date']) && !empty($data['end_date']))
+		{
+			$this->db->where('ordered_on >=', $data['start_date']);
+			$this->db->where('ordered_on <=', $data['end_date']);    		
+		}
+		
+		if(isset($data['courses_provider']) && !empty($data['courses_provider']))
+		{		
+			$this->db->where('admin_id', $data['courses_provider']); 
+		}
+		
+		
+		$this->db->select('order_number	, customer_id, status, tax,	total, subtotal, status_message, payment_info, product_name');
+		$this->db->from('orders');
+		$result = $this->db->get();		
+		//echo '<pre>'; print_r($this->db->last_query());exit;
+		//return $result->result_array();
+		return $result;
+	}
+	
 }

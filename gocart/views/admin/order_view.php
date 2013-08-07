@@ -42,7 +42,11 @@
               </div>
 			  <div class="row-fluid">
 					<div class="span4">
-						<h2><?php echo lang('order_details');?></h2>					
+						<h2><?php echo lang('order_details');?></h2>
+						<?php echo  (!empty($order->notes) ? 'Order Note:  '.$order->notes : '');?><br/>
+						<?php echo  (!empty($order->card_no) ? 'Card Number:  '.$order->card_no : '');?><br/>
+						<?php echo 	(!empty($order->transaction_id) ? 'Transaction Id:  '.$order->transaction_id : '');?><br/>	
+						<?php echo  (!empty($order->status_message) ? 'Message:  '.$order->status_message : '');?>								
 					</div>
 					<div class="span4">
 						<h2><?php echo lang('payment_method');?></h2>
@@ -77,8 +81,9 @@
               <table id="datatable_example" class="responsive table table-striped table-bordered" style="width:100%;margin-bottom:0; ">
                 <thead>
                   <tr>
-                    <th><?php echo lang('name');?></th>
-					<th><?php echo lang('description');?></th>
+                    <?php /*?><th><?php echo lang('name');?></th>
+					<th><?php echo lang('description');?></th><?php */?>
+					<th colspan="2">Products</th> 
                     <th><?php echo lang('tax');?></th> 
 					<th><?php echo lang('price')."(ex)";?></th>
 					<th><?php echo lang('quantity');?></th>
@@ -92,7 +97,21 @@
 				 {?>
 				 	<tr>
 					<td>
+						<?php 
+						//echo '----------------'.$order->product_name;exit;
+						if(!is_numeric($order->product_name))
+						{
+							$product_name = $this->Product_model->get_product($order->product_name, $related=false);
+							echo $product_name->name;
+							//$this->show->pe($product_name);
+						}
+						else
+						{
+							echo $order->product_name;
+						}
 						
+						?>
+					
 					</td>
 					<td>
 						
