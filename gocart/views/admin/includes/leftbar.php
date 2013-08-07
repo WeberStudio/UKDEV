@@ -153,6 +153,7 @@
                         <!--<li><a href="<?=base_url().ADMIN_PATH?>report/product_purchased">Products Viewed</a></li>-->
                         <li><a href="<?=base_url().ADMIN_PATH?>reports/product_purchased">Products Purchased</a></li>
                         <!--<li><a href="<?=base_url().ADMIN_PATH?>products/product_delivery_form">Customer Orders-Total</a></li>-->
+						<li><a href="<?=base_url().ADMIN_PATH?>reports/">Sales Report</a></li>
                     </ul>
                 </li>
                 

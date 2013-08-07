@@ -32,10 +32,113 @@ class Reports extends Admin_Controller {
 			redirect($this->config->item('admin_folder'));
 		}
 		
-		$this->load->model(array('Customer_model', 'Product_model', 'Product_model', 'Category_model'));
+		$this->load->model(array('Customer_model', 'Product_model', 'order_model', 'Category_model'));
 		$this->load->model('Commission_model');
 		
     }
+	
+	function index()
+	{
+		$data['page_title']		= lang('reports');
+		$data['admins']			= $this->auth->get_admin_list();		
+		//$data['years']		= $this->Order_model->get_sales_years();
+		
+		$this->load->view($this->config->item('admin_folder').'/includes/header');
+        $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
+        $this->load->view($this->config->item('admin_folder').'/sales_report', $data);
+        $this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
+	}	
+	
+	function get_sales_report()
+	{
+	
+		//echo '<pre>'; print_r($_POST);exit;
+		$output_html 				= '';
+		$data['search_custom'] 		= '';
+		$data['start_date']			= '';
+		$data['end_date']			= '';
+		$data['date_status']		= '';
+		$data['payment_method'] 	= '';
+		$data['courses_provider'] 	= '';
+		$data['date_target'] 		= '';
+		$data['print_call'] 		= '';
+		$data['csv_call'] 			= '';
+		$data['date_status_search'] = '';
+		
+		
+		if(!empty($_POST))
+		{
+			$data['search_custom'] 		= $this->input->post('search_custom');
+			$data['start_date']			= $this->input->post('start_date');
+			$data['end_date']			= $this->input->post('end_date');
+			$data['date_status']		= $this->input->post('date_status');
+			$data['payment_method'] 	= $this->input->post('payment_method');
+			$data['courses_provider'] 	= $this->input->post('courses_provider');
+			$data['date_target'] 		= $this->input->post('date_target');
+			$data['date_status_search'] = $this->input->post('date_status_search');
+			$data['print_call'] 		= $this->input->post('print_call');
+			$data['csv_call'] 			= $this->input->post('csv_call');
+		}
+		
+		$records = $this->order_model->get_sales_record($data);
+		//echo '<pre>'; print_r($records);exit;
+		if(!empty($data['csv_call']))
+		{
+			$this->load->helper('csv');
+			query_to_csv($records, TRUE, 'sales_report.csv'); 
+		}
+		else if(!empty($data['print_call']))
+		{
+			//echo '<pre>'; print_r($records->result_array());
+			$this->load->library('mpdf/mpdf');
+			$this->load->library('cezpdf');
+			$this->load->helper('pdf');	
+			prep_pdf();
+			$invoice_footer 	= '';
+			$invoice_header 	= '';
+			$html_output 		= '';	
+			$this->mpdf->SetHeader('{DATE d-m-Y}|{PAGENO}|Sales Record');			 
+			$output_array = $records->result_array();			
+			$output_html .= '<table width="0" border="0" cellspacing="10" cellpadding="10">
+			  <tr>
+				<th>Order Number</th>
+				<th>Customer Id</th>
+				<th>Status</th>
+				<th>Tax</th>
+				<th>Total</th>
+				<th>Subtotal</th>
+				<th>Status Message</th>
+				<th>Payment Info</th>
+				<th>Product Name</th>
+			  </tr>';
+			  
+			  foreach($output_array as $output)
+			  {
+			  	$output_html .= '<tr>
+					<td>'.$output['order_number'].'</td>
+					<td>'.$output['customer_id'].'</td>
+					<td>'.$output['status'].'</td>
+					<td>'.format_currency($output['tax']).'</td>
+					<td>'.format_currency($output['total']).'</td>
+					<td>'.format_currency($output['subtotal']).'</td>
+					<td>'.$output['status_message'].'</td>
+					<td>'.$output['payment_info'].'</td>
+					<td>'.$output['product_name'].'</td>
+				  </tr>';
+			  }
+			  		  
+			$output_html .= '</table>';
+			$this->mpdf->SetWatermarkText('UKOPENCOLLEGE', 0.1);
+			$this->mpdf->showWatermarkText = true;
+			$this->mpdf->WriteHTML($output_html);
+			$this->mpdf->Output('sales_report.pdf', 'I');			
+		}
+		exit;
+		//$this->load->view($this->config->item('admin_folder').'/sales_csv', $csv_data);
+		
+	
+	}
+	
 	
 	function product_purchased()
 	{
@@ -46,6 +149,8 @@ class Reports extends Admin_Controller {
         $this->load->view($this->config->item('admin_folder').'/product_purchased');
         $this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
 	}
+	
+	
 	
 
     /*function index($page=0)
