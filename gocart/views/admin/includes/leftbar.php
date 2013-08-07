@@ -150,10 +150,14 @@
                     <a class="accordion-toggle widgets collapsed " data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse11">
                         <img src="<?=base_url().ASSETS_PATH?>img/menu_icons/forms.png"><span>Reports</span></a>
                     <ul id="collapse11" class="accordion-body collapse <?php echo $report_link; ?>">
-                        <!--<li><a href="<?=base_url().ADMIN_PATH?>report/product_purchased">Products Viewed</a></li>-->
+                        <li><a href="<?=base_url().ADMIN_PATH?>reports/stats_product_viewed">Products Viewed</a></li>
                         <li><a href="<?=base_url().ADMIN_PATH?>reports/product_purchased">Products Purchased</a></li>
+<<<<<<< HEAD
                         <!--<li><a href="<?=base_url().ADMIN_PATH?>products/product_delivery_form">Customer Orders-Total</a></li>-->
 						<li><a href="<?=base_url().ADMIN_PATH?>reports/">Sales Report</a></li>
+=======
+                        <li><a href="<?=base_url().ADMIN_PATH?>reports/stats_customer">Customer Orders-Total</a></li>
+>>>>>>> ebbfc799f50b028d6792030d7632ff12456ae56f
                     </ul>
                 </li>
                 

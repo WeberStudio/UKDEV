@@ -87,7 +87,7 @@ function areyousure()
         <div class="span12">
           <div class="box paint color_18">
             <div class="title">
-             <h4> <i class=" icon-bar-chart"></i><span>BEST PRODUCTS PURCHASED 
+             <h4> <i class=" icon-bar-chart"></i><span>BEST CUSTOMER ORDERS-TOTAL 
              
 	            <!--<a class="btn" href="<?php echo site_url($this->config->item('admin_folder')."/commission/form/"); ?>"><i class="icon-plus-sign"></i>Add New Commision <?php //echo lang('add_new_customer');?></a>-->
                      </span></h4>
@@ -101,9 +101,9 @@ function areyousure()
 			
 			<th><a href="">ID</a></th>
 			
-			<th><a href="">Products</a></th>
+			<th><a href="">Customers</a></th>
 			
-			<th><a href="">Purchased </a></th>
+			<th><a href="">Total Purchased</a></th>
 			<!--<th> Active</th>-->
 			<!--<th>Actions</th>-->
 			
@@ -113,45 +113,23 @@ function areyousure()
 	<tbody>
 		
 		<?php //echo (count($commissions) < 1)?'<tr><td style="text-align:center;" colspan="5">'.lang('no_customers').'</td></tr>':''?>
-<?php foreach ($product_purchased as $product_purchaseds):?>
+<?php foreach ($customer_stats as $customer_stat):?>
 		<tr>
 			
 			
 		
-			<a><td><?php echo $product_purchaseds->product_id; ?></td></a>
-			<td><a href="<?=base_url().ADMIN_PATH?>products">
-			<?php 
-			
-			//echo $product_purchaseds->product_id; 
-			$product_name = $this->Product_model->get_product($product_purchaseds->product_id);
-			if(!empty($product_name))
-			{
-				echo $product_name->name;
-				echo '</a>';
-			}
-			
-			
-            
-			else
-			{
-				echo "product is deleted";
-			}
-			
-			?>
-            </td>
-			<a><td><?php echo $product_purchaseds->count_product; ?></td></a>
+			<a><td><?php echo $customer_stat->customer_id; ?></td></a>
+			<td> <a href="<?=base_url().ADMIN_PATH?>customers">  <?php echo $customer_stat->customer_job;?> </a> </td> 
+			<a><td><?php echo format_currency($customer_stat->sum_subtotal); ?></td></a>
 		</tr>
-<?php endforeach;
-		//if($page_links != ''):?>
-		<!--<tr><td colspan="5" style="text-align:center"><?php //echo $page_links;?></td></tr>-->
-		<?php //endif;?>
+<?php endforeach;?>
 	</tbody>
 </table>
 </div>
 <div class="row-fluid control-group">
                 
                 <div class="span6">
-                  <div class="pagination pull-right "><?php //echo $this->pagination->create_links();?> &nbsp; </div
+                  <div class="pagination pull-right "><?php echo $this->pagination->create_links();?> &nbsp; </div
                 ></div>
               </div>
             </div>
