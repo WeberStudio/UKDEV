@@ -4,6 +4,7 @@ function areyousure()
     return confirm('<?php echo lang('confirm_delete');?>');
 }
 </script>
+
 <?php define('ADMIN_FOLDER', $this->config->item('admin_folder'));
 
 function sort_url($heading, $by, $sort, $sorder, $admin_folder)
@@ -62,6 +63,37 @@ function list_admin($admins, $current_admin_id)
   <div class="container">
     <? include_once('includes/admin_profile.php');?>
      <div id="main_container">
+     <div class="box paint color_0">
+      <div class="title">
+        <h4> <i class="icon-book"></i><span>Search Courses Provider</span> </h4>
+      </div>
+      <div class="content"> <?php echo form_open($this->config->item('admin_folder').'/admin/index', 'class="form-horizontal row-fluid" ');?>
+        <div class="form-row control-group row-fluid">
+              <div class="controls span5">
+                <input type="text" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Customer Name, Keyword" placeholder="Search Customer...." class="row-fluid">
+              </div>
+              <div class="controls span5">
+                <?php
+                        if(!empty($all_admin))
+                        {
+                            echo '<select name="admin_id"   data-placeholder="Filter By Customer Email..." class="chzn-select" id="default-select">';
+                            echo '<option value="">Select Customer E-mail</option>';
+                            foreach ($all_admin as $all_admins)
+							{
+								echo "<option value=".$all_admins->id.">$all_admins->email</option>";
+							}
+							echo '</select>';
+                            
+                        }
+                ?>
+              </div>
+              <div class="controls span2">
+                <button class="btn" rel="tooltip" data-placement="top" data-original-title="Search" name="submit" value="search"><?php echo lang('search')?></button>
+                <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/products/index');?>">Reset</a> 	  </div>
+          </div>
+          </form>
+        </div>
+      </div>
       <div class="row-fluid ">
         <div class="span12">
           <div class="box paint color_18">

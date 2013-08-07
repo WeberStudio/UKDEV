@@ -29,29 +29,36 @@ class Admin extends Admin_Controller
 		$this->lang->load('admin');
 		$this->current_admin	= $this->session->userdata('admin');
 		$this->load->model(array('location_model'));
+		$this->load->helper('form');
 	}
 
 	function index($order_by="firstname", $sort_order="ASC", $page=0, $rows=5)
 	{
-       //Go back to the customer list if not Superadmin
-		if($this->admin_access=='Admin')
-		{
-			redirect($this->config->item('admin_folder'));
-		}
+       
 		
+		$term						= false;
+		$post						= $this->input->post(null, false);
+		$this->load->model('Search_model');
+		if($post)
+		{
+			$term					= json_encode($post);
+			$code					= $this->Search_model->record_term($term);
+			$data['code']			= $code;
+		}
+		$data['all_admin']			= $this->auth->get_admin_list();
 		//Store the sort term
-		$data['order_by']	= $order_by;
-		$data['sort_order']	= $sort_order;      
+		$data['order_by']			= $order_by;
+		$data['sort_order']			= $sort_order;      
 	   
 	   
-		$data['page_title']	= lang('admins');
-		$data['admins']		= $this->auth->get_admin_list(array('order_by'=>$order_by, 'sort_order'=>$sort_order, 'rows'=>$rows, 'offset'=>$page));
+		$data['page_title']			= lang('admins');
+		$data['admins']				= $this->auth->get_admin_list(array('order_by'=>$order_by, 'sort_order'=>$sort_order, 'rows'=>$rows, 'offset'=>$page) , $term);
 		
     	$this->load->library('pagination');
-		$config['base_url']		= base_url().'/'.$this->config->item('admin_folder').'/admin/index/'.$order_by.'/'.$sort_order.'/';
-		$config['total_rows']	= 12;
-		$config['per_page']		= $rows;
-		$config['uri_segment']	= 6;
+		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/admin/index/'.$order_by.'/'.$sort_order.'/';
+		$config['total_rows']		= 12;
+		$config['per_page']			= $rows;
+		$config['uri_segment']		= 6;
 		$config['first_link']		= 'First';
 		$config['first_tag_open']	= '<li>';
 		$config['first_tag_close']	= '</li>';

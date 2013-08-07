@@ -11,9 +11,13 @@ function areyousure()
 	<!--=======Search Panel Start=======-->
     <div class="box paint color_0">
       <div class="title">
-        <h4> <i class="icon-book"></i><span>Search Customer</span> </h4>
+      
+      
+      <?php echo form_open($this->config->item('admin_folder').'/customers/index', 'class="form-horizontal row-fluid" ');?>
+        <h4> <i class="icon-book"></i><span>Search Customer<input type="submit"  class="btn" name="csv_call" value="Sales Report (CSV)" > </span> </h4>
       </div>
-      <div class="content"> <?php echo form_open($this->config->item('admin_folder').'/customers/index', 'class="form-horizontal row-fluid" ');?>
+      <div class="content"> 
+      
         <div class="form-row control-group row-fluid">
               <div class="controls span5">
                 <input type="text" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Customer Name, Keyword" placeholder="Search Customer...." class="row-fluid">

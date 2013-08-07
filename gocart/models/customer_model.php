@@ -16,7 +16,7 @@ Class Customer_model extends CI_Model
 
 	********************************************************************/
 	
-	function get_customers($limit=0, $offset=0, $order_by='ASC', $direction='firstname', $term =false)
+	function get_customers($limit=0, $offset=0, $order_by='ASC', $direction='firstname', $term =false , $cvs = "")
 	{
 		$this->db->order_by($direction, $order_by);
 		if($limit>0)
@@ -53,7 +53,14 @@ Class Customer_model extends CI_Model
 		
 
 		$result	= $this->db->get('customers');
+		if($cvs !="")
+		{
+			return $result;
+		}
+		else
+		{
 		return $result->result();
+		}
 	}
 	
 	

@@ -50,10 +50,22 @@ class Customers extends Admin_Controller {
 			$code			= $this->Search_model->record_term($term);
 			$data['code']	= $code;
 		}
+		$data['csv_call'] 			= $this->input->post('csv_call');
+		//$records = $this->db->last_query();
+		//echo $records; exit;
+		if(!empty($data['csv_call']))
+		{
+			$cvs = '1';
+		}
 		
 		
-		
-		$data['customers']	= $this->Customer_model->get_customers($row, $page, $by, $field, $term);
+		$data['customers']	= $this->Customer_model->get_customers($row, $page, $by, $field, $term , $cvs);
+		$records = $data['customers'];
+		if(!empty($data['csv_call']))
+		{
+			$this->load->helper('csv');
+			query_to_csv($records, TRUE, 'sales_report.csv'); 
+		}
 		$data['all_customers']	= $this->Customer_model->get_customers();
 		$this->load->library('pagination');
 
