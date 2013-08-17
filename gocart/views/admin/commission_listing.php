@@ -11,9 +11,10 @@ function areyousure()
      <div id="main_container">
      <div class="box paint color_0">
       <div class="title">
-        <h4> <i class="icon-book"></i><span>Search Orders</span> </h4>
+      <?php echo form_open($this->config->item('admin_folder').'/commission/search_commisssion', 'class="" ');?> 
+        <h4> <i class="icon-book"></i><span>Search Commission<input type="submit"  class="btn" name="csv_call" value="Commission Report (CSV)" ></span> </h4>
       </div>
-      <div class="content"> <?php echo form_open($this->config->item('admin_folder').'/commission/search_commisssion', 'class="" ');?>
+      <div class="content"> 
       
          <div class="form-row control-group row-fluid">
         
@@ -77,7 +78,7 @@ function areyousure()
          <div class="form-row control-group row-fluid">
               <div class="controls span12" align="right">
                 <button class="btn" rel="tooltip" data-placement="top" data-original-title="Search" name="submit" value="search"><?php echo lang('search')?></button>
-                <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/products/index');?>">Reset</a> 	  </div>
+                <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/commission/index');?>">Reset</a> 	  </div>
           </div>
           </form>
         </div>

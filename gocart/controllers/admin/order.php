@@ -47,20 +47,21 @@ class Order extends Admin_Controller {
 	
 	 function index($id = false , $rows=5, $page=0 , $search = false)
 	 {
-		$sort_by='order_number';
-		$sort_order='ASC';
-	 	$code=0;
-	 	//$page=0;
-	   $rows=25;
-		//$search = false;
+		$sort_by                        = 'order_number';
+		$sort_order                     = 'ASC';
+	 	$code                           = 0;
+	 	
+	    $rows                           = 25;
+        $csv                            = '';       
+		
 		
        	
 		
-        $data = array();
-		$data['category'] 		= $this->Category_model->get_all_categories();
-		$data['courses'] 		= $this->Product_model->get_all_products_array();
-		$data['admins']			= $this->auth->get_admin_list();
-		$data['id'] 			= $id;
+        $data                           = array();
+		$data['category'] 		        = $this->Category_model->get_all_categories();
+		$data['courses'] 		        = $this->Product_model->get_all_products_array();
+		$data['admins']			        = $this->auth->get_admin_list();
+		$data['id'] 			        = $id;
 		
 		$search = array();
 		$search['date'] 				= $this->input->post('date');
@@ -69,15 +70,21 @@ class Order extends Admin_Controller {
 		$search['courses_provider'] 	= $this->input->post('courses_provider');
 		$search['start_date'] 			= $this->input->post('start_date');
 		$search['end_date'] 			= $this->input->post('end_date');
-		//$this->show->pe($search);
+		
+        $data['csv_call']               = $this->input->post('csv_call');
+        
+        if(!empty($data['csv_call']))
+        {
+            $csv                        = '1';
+        }
 		
 		if($search['categories']!="" || $search['courses']!="" || $search['courses_provider']!="" || $search['date']!="" || $search['start_date']!="" || $search['end_date']!="" )
 		{
 			
-			$data['orders']					= $this->Order_model->search_order($search);
+			$data['orders']				= $this->Order_model->search_order($search , $csv);
 			
 		}
-		//print_r($data['id']);exit;
+		
 		
 		else{
 		
@@ -91,7 +98,7 @@ class Order extends Admin_Controller {
 		
 		else
 		{
-		$data['orders']				= $this->Order_model->get_orders($search,$sort_by,$sort_order,$rows,$page);
+		$data['orders']				    = $this->Order_model->get_orders($search,$sort_by,$sort_order,$rows,$page , $csv);
 		
 		}
 		

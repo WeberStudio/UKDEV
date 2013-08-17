@@ -100,9 +100,10 @@ function selectGroup(childs)
 <!--=======Search Panel Start=======-->
     <div class="box paint color_0">
       <div class="title">
-        <h4> <i class="icon-book"></i><span>Search Courses</span> </h4>
+      <?php echo form_open($this->config->item('admin_folder').'/products/index', 'class="form-horizontal row-fluid" ');?>
+        <h4> <i class="icon-book"></i><span>Search Courses<input type="submit"  class="btn" name="csv_call" value="Courses Report (CSV)" ></span> </h4>
       </div>
-      <div class="content"> <?php echo form_open($this->config->item('admin_folder').'/products/index', 'class="form-horizontal row-fluid" ');?>
+      <div class="content"> 
         <div class="form-row control-group row-fluid">
               <div class="controls span3">
                 <input type="text" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Course Name, Sku, Keyword" placeholder="<?php echo lang('search_term');?>" class="row-fluid">

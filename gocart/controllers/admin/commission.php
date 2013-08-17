@@ -40,13 +40,15 @@ class Commission extends Admin_Controller {
 
     function index($page=0)
     {
+        
 		$rows = 5;
 		$order_by='comm_level';
 		$direction='ASC';
        	$data['category'] 		= $this->Category_model->get_all_categories();
 		$data['courses'] 		= $this->Product_model->get_all_products_array();
 		$data['admins']			= $this->auth->get_admin_list();
-		
+        
+        
 		
 		$data['commissions'] = $this->Commission_model->get_commissions($rows, $page, $order_by='comm_level', $direction='ASC');
 		//$count = $this->Commission_model->commission_count();
@@ -225,10 +227,11 @@ class Commission extends Admin_Controller {
 	}
 	function search_commisssion()
 	{
+        $this->load->library('pagination');     
 		$data['category'] 				= $this->Category_model->get_all_categories();
 		$data['courses'] 				= $this->Product_model->get_all_products_array();
 		$data['admins']					= $this->auth->get_admin_list();
-		
+		 $csv                           = "";
 		$search = array();
 		$search['date'] 				= $this->input->post('date');
 		$search['categories'] 			= $this->input->post('categories');
@@ -236,8 +239,13 @@ class Commission extends Admin_Controller {
 		$search['courses_provider'] 	= $this->input->post('courses_provider');
 		$search['start_date'] 			= $this->input->post('start_date');
 		$search['end_date'] 			= $this->input->post('end_date');
+        $data['csv_call']               = $this->input->post('csv_call'); 
+        if(!empty($data['csv_call']))
+        {
+        $csv                            = '1';
+        } 
 		
-		$data['commissions']  = $this->Commission_model->search_commission($search);
+		$data['commissions']            = $this->Commission_model->search_commission($search , $csv);
 		
 		
 		//$this->show->pe($data['commissions']);

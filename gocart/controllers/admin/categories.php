@@ -43,7 +43,8 @@ class Categories extends Admin_Controller {
 		
 		$this->auth->check_access($this->admin_access, true);
 		$this->lang->load('category');
-		$this->load->model('Category_model');		
+		$this->load->model('Category_model');
+        $this->load->helper('form');		
 		
 		
 	}
@@ -52,16 +53,33 @@ class Categories extends Admin_Controller {
 	{
 		
 		//Store the sort term
-		$data['order_by']	= $order_by;
-		$data['sort_order']	= $sort_order;
-		$data['code']		= $code;
-		$term				= false;
+        $csv                          = '';
+        $data['csv_call']             = $this->input->post('csv_call');
+        if(!empty($data['csv_call']))
+        {
+             $csv                      = '1';
+        }        
+                 
+        $termm                       = false;
+        $post                        = $this->input->post(null, false);
+        $this->load->model('Search_model');
+        if($post)
+        {
+            $termm                    = json_encode($post);
+            $codee                    = $this->Search_model->record_term($termm);
+            $data['codee']            = $codee;
+        }
+        
+		$data['order_by']	           = $order_by;
+		$data['sort_order']	           = $sort_order;
+		$data['code']		           = $code;
+		$term				           = false;
 		//we're going to use flash data and redirect() after form submissions to stop people from refreshing and duplicating submissions
 		//$this->session->set_flashdata('message', 'this is our message');
-		$data['page_title']	= lang('categories');   
-		$data['categories']	= $this->Category_model->get_categories_tierd($parent = false, array('order_by'=>$order_by, 'sort_order'=>$sort_order, 'rows'=>$rows, 'page'=>$page));
+		$data['page_title']	           = lang('categories');   
+		$data['categories']	           = $this->Category_model->get_categories_tierd($parent = false, array('order_by'=>$order_by, 'sort_order'=>$sort_order, 'rows'=>$rows, 'page'=>$page) , $termm , $csv);
 		 
-		$data['total']		= count($this->Category_model->get_all_categories());
+		$data['total']		           = count($this->Category_model->get_all_categories());
 		
 		$this->load->library('pagination');		
 		$config['base_url']			= site_url($this->config->item('admin_folder').'/categories/index/'.$order_by.'/'.$sort_order.'/'.$code.'/');

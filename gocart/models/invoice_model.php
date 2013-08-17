@@ -2,17 +2,59 @@
 Class Invoice_model extends CI_Model
 {
 
-    function get_all_invoices($field='invoice_id', $by='ASC', $page=0, $rows=5)
+    function get_all_invoices($field='invoice_id', $by='ASC', $page=0, $rows=5 , $term =false , $csv = '')
     {
-         $query  = $this->db->query('SELECT i.*, ia.invoice_item_subtotal, ia.invoice_item_tax_total, ia.invoice_total  FROM oc_invoices i LEFT JOIN oc_invoice_amounts ia ON i.invoice_id = ia.invoice_id ORDER BY i.'.$field.' '.$by.' LIMIT '.$page.', '.$rows);  
-        $result = $query->result_array();
-        if(count($result)>0)
+         //$query  = $this->db->query('SELECT i.*, ia.invoice_item_subtotal, ia.invoice_item_tax_total, ia.invoice_total  FROM oc_invoices i LEFT JOIN oc_invoice_amounts ia ON i.invoice_id = ia.invoice_id ORDER BY i.'.$field.' '.$by.' LIMIT '.$page.', '.$rows);  
+          $this->db->select('i.*, ia.invoice_item_subtotal, ia.invoice_item_tax_total, ia.invoice_total');
+          $this->db->from('oc_invoices i');
+          $this->db->join('oc_invoice_amounts ia' , 'i.invoice_id = ia.invoice_id','left');
+          $this->db->order_by('i.'.$field.'' , $by);
+          $this->db->limit($rows,$page);
+          if(!empty($term))
+            {
+                $search    = json_decode($term);
+                //if we are searching dig through some basic fields
+                if(!empty($search->term))
+                {
+                    $this->db->like('i.invoice_id', $search->term);
+                   // $this->db->or_like('lastname', $search->term);
+                   // $this->db->or_like('email', $search->term);
+                   // $this->db->or_like('phone', $search->term);
+                    
+                    //$this->db->or_like('city', $search->term);
+                    //$this->db->or_like('state', $search->term);
+                    //$this->db->or_like('country', $search->term);
+                    
+                }
+                
+                if(!empty($search->admin_id))
+                {
+                    //lets do some joins to get the proper category products
+                    
+                    $this->db->where('i.admin_id', $search->admin_id);
+                    //$this->db->order_by('firstname', 'ASC');
+                }
+            }
+          
+        $query = $this->db->get();
+        if($csv !="")
         {
-            return $result;
+            
+            $this->load->helper('csv');
+            query_to_csv($query, TRUE, 'sales_report.csv'); 
+            exit;
         }
         else
         {
-            return false;
+            $result = $query->result_array();
+            if(count($result)>0)
+            {
+                return $result;
+            }
+            else
+            {
+                return false;
+            }
         }    
     }
     

@@ -14,7 +14,7 @@ function areyousure()
       
       
       <?php echo form_open($this->config->item('admin_folder').'/customers/index', 'class="form-horizontal row-fluid" ');?>
-        <h4> <i class="icon-book"></i><span>Search Customer<input type="submit"  class="btn" name="csv_call" value="Sales Report (CSV)" > </span> </h4>
+        <h4> <i class="icon-book"></i><span>Search Customer<input type="submit"  class="btn" name="csv_call" value="Customer Report (CSV)" > </span> </h4>
       </div>
       <div class="content"> 
       
@@ -39,7 +39,7 @@ function areyousure()
               </div>
               <div class="controls span2">
                 <button class="btn" rel="tooltip" data-placement="top" data-original-title="Search" name="submit" value="search"><?php echo lang('search')?></button>
-                <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/products/index');?>">Reset</a> 	  </div>
+                <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/customers/index');?>">Reset</a> 	  </div>
           </div>
           </form>
         </div>

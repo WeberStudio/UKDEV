@@ -16,19 +16,46 @@ Class Tutor_model extends CI_Model
     ********************************************************************/
     
              
-    function get_tutors($limit=0, $offset=0, $order_by='tutor_id', $direction='DESC')
+    function get_tutors($limit=0, $offset=0, $order_by='tutor_id', $direction='DESC' , $term = false , $csv = '')
     {
-        $this->db->order_by($order_by, $direction);
-        if($limit>0)
-        {
-			//echo $offset;exit;
-			
-            $this->db->limit($limit, $offset);
-        }
-
+        
+        if(!empty($term))
+            {
+                $search    = json_decode($term);
+                //if we are searching dig through some basic fields
+                if(!empty($search->term))
+                {
+                    $this->db->like('email', $search->term);
+                    $this->db->or_like('firstname', $search->term);
+                    $this->db->or_like('lastname', $search->term);
+                    
+                }
+                  
+            }
+                
+           else
+           {     
+            
+                $this->db->order_by($order_by, $direction);
+                if($limit>0)
+                {
+			        //echo $offset;exit;
+			        
+                    $this->db->limit($limit, $offset);
+                }
+           }
         $result    = $this->db->get('tutors');
-        //echo $this->db->last_query(); exit;
-        return $result->result();
+        if($csv !="")
+        {
+            
+            $this->load->helper('csv');
+            query_to_csv($result, TRUE, 'sales_report.csv'); 
+            exit;
+        }
+        else
+        {
+            return $result->result();
+        }
     }
     
     function count_tutors()
