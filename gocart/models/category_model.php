@@ -28,6 +28,7 @@ Class Category_model extends CI_Model
 		$this->db->where('delete', '0');
 		//$this->db->where('publish_by_admin', '1');
 		$this->db->where('publish_by_super', '1');
+        
 		$result	= $this->db->get('categories');
 		if(count($result)>0)
 		{
@@ -39,9 +40,35 @@ Class Category_model extends CI_Model
 		}	
 	}
 	
-	function get_categories($parent = false, $data=array())
+	function get_categories($parent = false, $data=array() , $term = false , $csv="")
 	{
-		
+		if(!empty($term))
+            {
+                $search    = json_decode($term);
+                //if we are searching dig through some basic fields
+                if(!empty($search->term))
+                {
+                    $this->db->like('name', $search->term);
+                    $this->db->or_like('publish_by_super', $search->term);
+                  //  $this->db->or_like('email', $search->term);
+                   // $this->db->or_like('phone', $search->term);
+                    //$this->CI->db->or_like('address_street', $search->term);
+                    //$this->db->or_like('city', $search->term);
+                    //$this->db->or_like('state', $search->term);
+                   // $this->db->or_like('country', $search->term);
+                    //$this->CI->db->or_like('gender', $search->term);
+                }
+                
+                //if(!empty($search->admin_id))
+                //{
+                    //lets do some joins to get the proper category products
+                    
+                    //$this->CI->db->where('id', $search->admin_id);
+                    //$this->CI->db->order_by('firstname', 'ASC');
+                //}
+            }
+            else
+             {
 		if ($parent !== false)
 		{
 			$this->db->where('parent_id', $parent);
@@ -88,13 +115,20 @@ Class Category_model extends CI_Model
 				//$this->db->order_by($data['order_by'], $data['sort_order']);
 			}	
 		}
-		
+             }
 		
 		//this will alphabetize them if there is no sequence
 		
 		$this->db->where('delete', '0');
 		
 		$result	= $this->db->get('categories');
+        if($csv !="")
+        {
+            
+            $this->load->helper('csv');
+            query_to_csv($result, TRUE, 'sales_report.csv'); 
+            exit;
+        }
 		//echo $this->db->last_query();exit;
 		$categories	= array();
 		foreach($result->result() as $cat)
@@ -106,7 +140,7 @@ Class Category_model extends CI_Model
 	}
 	
 	//this is for building a menu
-	function get_categories_tierd($parent=0, $data=array())
+	function get_categories_tierd($parent=0, $data=array(), $term = false , $csv="")
 	{
 		$categories	= array();
 		if(!empty($data['rows']))
@@ -121,7 +155,7 @@ Class Category_model extends CI_Model
 			$this->db->order_by($data['order_by'], $data['sort_order']);
 		}
 		
-		$result	= $this->get_categories($parent, $data);
+		$result	= $this->get_categories($parent, $data , $term , $csv);
 		foreach ($result as $category)
 		{
 			$categories[$category->id]['category']	= $category;

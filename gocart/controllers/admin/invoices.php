@@ -65,9 +65,27 @@ class Invoices extends Admin_Controller {
     {
         //we're going to use flash data and redirect() after form submissions to stop people from refreshing and duplicating submissions
         //$this->session->set_flashdata('message', 'this is our message');
-
-        $data['page_title']    	= lang('Invoices');
-        $data['invoices']    	= $this->Invoice_model->get_all_invoices($field, $by, $page, $rows);
+        $csv                            = "";
+        $data['page_title']    	        = lang('Invoices');
+        
+        $term                           = false;
+        $post                           = $this->input->post(null, false);
+        $this->load->model('Search_model');
+        if($post)
+        {
+            $term                       = json_encode($post);
+            $code                       = $this->Search_model->record_term($term);
+            $data['code']               = $code;
+        }
+        $data['csv_call']               = $this->input->post('csv_call');
+        
+        if(!empty($data['csv_call']))
+        {
+            $csv                        = '1';
+        }
+        
+        $data['all_admin']              = $this->auth->get_admin_list();
+        $data['invoices']    	        = $this->Invoice_model->get_all_invoices($field, $by, $page, $rows, $term , $csv);
 		//echo "<pre>"; print_r($data['invoices']);exit;
 		
 		

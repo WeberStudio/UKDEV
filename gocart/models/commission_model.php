@@ -21,8 +21,10 @@ Class Commission_model extends CI_Model
 		}
 
 		$result	= $this->db->get('oc_commission');
-		//echo $this->db->last_query();exit;
-		return $result->result();
+
+        
+		    return $result->result();
+        
 	}
 	
 	function get_commissions_dropdown()
@@ -81,7 +83,7 @@ Class Commission_model extends CI_Model
 		$this->db->delete('oc_commission', array('comm_id' => $id));
 		return true;	
 	}
-	function search_commission ($search= array())
+	function search_commission ($search= array() , $csv = '')
 	{
 		if(!empty($search['categories']))
 		{
@@ -102,11 +104,18 @@ Class Commission_model extends CI_Model
 		}
 		
 		$result 	= $this->db->get('commission');
-		//$this->show->pe($result->result());exit;
-		return $result->result();
-		
-		
-	}
+        if($csv !="")
+        {
+            
+            $this->load->helper('csv');
+            query_to_csv($result, TRUE, 'sales_report.csv'); 
+            exit;
+        }
+        else
+        {
+             return $result->result(); 
+        }
+    }
 	
 	function commission_count()
 	{

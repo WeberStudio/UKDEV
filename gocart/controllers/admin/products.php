@@ -50,7 +50,13 @@ class Products extends Admin_Controller {
 
 	function index($order_by="name", $sort_order="ASC", $code=0, $page=0, $rows=30)
 	{
-		
+        $csv = '';
+	    $data['csv_call']             = $this->input->post('csv_call');
+        if(!empty($data['csv_call']))
+        {
+            $csv = '1';
+        }
+        
 		$data['page_title']	= lang('products');
 		
 		$data['code']		= $code;
@@ -79,7 +85,7 @@ class Products extends Admin_Controller {
 		$data['term']		= $term;
 		$data['order_by']	= $order_by;
 		$data['sort_order']	= $sort_order;		
-		$data['products']	= $this->Product_model->products(array('term'=>$term, 'order_by'=>$order_by, 'sort_order'=>$sort_order, 'rows'=>$rows, 'page'=>$page));
+		$data['products']	= $this->Product_model->products(array('term'=>$term, 'order_by'=>$order_by, 'sort_order'=>$sort_order, 'rows'=>$rows, 'page'=>$page) , false , $csv);
 		
 		//echo $this->db->last_query();exit;
 //ho $this->show->pe($data['products']);

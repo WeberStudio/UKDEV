@@ -41,9 +41,10 @@ $code=0;
      <!--=======Search Panel Start=======-->
      <div class="box paint color_0">
       <div class="title">
-        <h4> <i class="icon-book"></i><span>Search Orders</span> </h4>
+      <?php echo form_open($this->config->item('admin_folder').'/order', 'class="" ');?> 
+        <h4> <i class="icon-book"></i><span>Search Orders<input type="submit"  class="btn" name="csv_call" value="Order Report (CSV)" ></span> </h4>
       </div>
-      <div class="content"> <?php echo form_open($this->config->item('admin_folder').'/order', 'class="" ');?>
+      <div class="content"> 
       
          <div class="form-row control-group row-fluid">
         

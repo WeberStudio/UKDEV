@@ -8,6 +8,40 @@ function areyousure()
   <div class="container">
     <? include_once(realpath('.').'/gocart/views/admin/includes/admin_profile.php');?>
      <div id="main_container">
+     <div class="box paint color_0">
+      <div class="title">
+       <?php echo form_open($this->config->item('admin_folder').'/tutor/index', 'class="form-horizontal row-fluid" ');?>
+        <h4> <i class="icon-book"></i><span>Search Tutor<input type="submit"  class="btn" name="csv_call" value="Tutor  Report (CSV)" >
+        
+        </span> </h4>
+      </div>
+      <div class="content">
+        <div class="form-row control-group row-fluid">
+              <div class="controls span5">
+                <input type="text" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By tutor Name, Email" placeholder="Search Tutor...." class="row-fluid">
+              </div>
+              <div class="controls span5">
+                <?php
+                       /* if(!empty($all_admin))
+                        {
+                            echo '<select name="admin_id"   data-placeholder="Filter By Customer Email..." class="chzn-select" id="default-select">';
+                            echo '<option value="">Select Courses Provider E-mail</option>';
+                            foreach ($all_admin as $all_admins)
+                            {
+                                echo "<option value=".$all_admins->id.">$all_admins->email</option>";
+                            }
+                            echo '</select>';
+                            
+                        }  */
+                ?>
+              </div>
+              <div class="controls span2">
+                <button class="btn" rel="tooltip" data-placement="top" data-original-title="Search" name="submit" value="search"><?php echo lang('search')?></button>
+                <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/tutor/index');?>">Reset</a>       </div>
+          </div>
+          </form>
+        </div>
+      </div>
       <div class="row-fluid ">
         <div class="span12">
           <div class="box paint color_18">

@@ -47,8 +47,25 @@ class tutor extends Admin_Controller {
     function index($field='lastname', $by='ASC', $page=0, $row=5)
     {
        	
-        $data = array();
-		$data['tutors']	= $this->Tutor_model->get_tutors($row, $page, $field, $by);
+        $data                       = array();
+        $csv                        = '';
+        
+        $term                       = false;
+        $post                       = $this->input->post(null, false);
+        $this->load->model('Search_model');
+        if($post)
+        {
+            $term                   = json_encode($post);
+            $code                   = $this->Search_model->record_term($term);
+            $data['code']           = $code;
+        }
+        $data['csv_call']           = $this->input->post('csv_call');
+        if(!empty($data['csv_call']))
+        {
+            $csv                    = '1';
+        }
+        
+		$data['tutors']	            = $this->Tutor_model->get_tutors($row, $page, $field, $by , $term , $csv);
 		//echo $this->db->last_query();exit;
 		$this->load->library('pagination');
 		//echo $this->db->last_query(); exit;
@@ -77,9 +94,9 @@ class tutor extends Admin_Controller {
 		
 		$this->pagination->initialize($config);
 		
-		$data['page']	= $page;
-		$data['field']	= $field;
-		$data['by']		= $by;
+		$data['page']	            = $page;
+		$data['field']	            = $field;
+		$data['by']		            = $by;
 		
         $this->load->view($this->config->item('admin_folder').'/includes/header');
         $this->load->view($this->config->item('admin_folder').'/includes/leftbar');

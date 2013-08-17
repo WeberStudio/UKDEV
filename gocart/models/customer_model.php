@@ -55,7 +55,10 @@ Class Customer_model extends CI_Model
 		$result	= $this->db->get('customers');
 		if($cvs !="")
 		{
-			return $result;
+			
+			$this->load->helper('csv');
+			query_to_csv($result, TRUE, 'sales_report.csv'); 
+			exit;
 		}
 		else
 		{

@@ -6,7 +6,8 @@ function areyousure()
 </script>
 <?php 
 define('ADMIN_FOLDER', $this->config->item('admin_folder'));
-	function list_categories($invoices) {            
+	function list_categories($invoices) {
+    if(!empty($invoices)){            
 		foreach ($invoices as $invoice):?>
 			<tr>
 			  <td><?php echo  $invoice['invoice_paid_status']; ?></td>
@@ -47,6 +48,7 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
 			<?php
             
             endforeach;
+            }
         }
 ?>
 <div id="main" style="min-height:1000px">
@@ -55,6 +57,45 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
     <!-- End top-right -->
   
   <div id="main_container">
+  
+      <!--=======Search Panel Start=======-->
+    <div class="box paint color_0">
+      <div class="title">
+      
+      
+      <?php echo form_open($this->config->item('admin_folder').'/invoices/index', 'class="form-horizontal row-fluid" ');?>
+        <h4> <i class="icon-book"></i><span>Search  Invoice<input type="submit"  class="btn" name="csv_call" value="Invoice Report (CSV)" > </span> </h4>
+      </div>
+      <div class="content"> 
+      
+        <div class="form-row control-group row-fluid">
+              <div class="controls span5">
+                <input type="text" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Invoice Id" placeholder="Search Invoice...." class="row-fluid">
+              </div>
+              <div class="controls span5">
+              <?php
+                        if(!empty($all_admin))
+                        {
+                            echo '<select name="admin_id"   data-placeholder="Filter By Customer Email..." class="chzn-select" id="default-select">';
+                            echo '<option value="">Select Courses Provider Name</option>';
+                            foreach ($all_admin as $all_admins)
+                            {
+                                echo "<option value=".$all_admins->id.">$all_admins->firstname $all_admins->lastname $all_admins->id</option>";
+                            }
+                            echo '</select>';
+                            
+                        }
+                ?>
+              </div>
+              <div class="controls span2">
+                <button class="btn" rel="tooltip" data-placement="top" data-original-title="Search" name="submit" value="search"><?php echo lang('search')?></button>
+                <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/invoices/index');?>">Reset</a>       </div>
+          </div>
+          </form>
+        </div>
+      </div>
+  <!--=======Search Panel End=======-->
+  
     <div class="row-fluid ">
       <div class="span12">
         <div class="box paint color_18">

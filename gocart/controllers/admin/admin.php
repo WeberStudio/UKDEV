@@ -34,7 +34,7 @@ class Admin extends Admin_Controller
 
 	function index($order_by="firstname", $sort_order="ASC", $page=0, $rows=5)
 	{
-       
+       $csv = '';
 		
 		$term						= false;
 		$post						= $this->input->post(null, false);
@@ -49,10 +49,15 @@ class Admin extends Admin_Controller
 		//Store the sort term
 		$data['order_by']			= $order_by;
 		$data['sort_order']			= $sort_order;      
-	   
+	   $data['csv_call'] 			= $this->input->post('csv_call');
+		
+		if(!empty($data['csv_call']))
+		{
+			$csv = '1';
+		}
 	   
 		$data['page_title']			= lang('admins');
-		$data['admins']				= $this->auth->get_admin_list(array('order_by'=>$order_by, 'sort_order'=>$sort_order, 'rows'=>$rows, 'offset'=>$page) , $term);
+		$data['admins']				= $this->auth->get_admin_list(array('order_by'=>$order_by, 'sort_order'=>$sort_order, 'rows'=>$rows, 'offset'=>$page) , $term , $csv);
 		
     	$this->load->library('pagination');
 		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/admin/index/'.$order_by.'/'.$sort_order.'/';

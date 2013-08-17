@@ -23,7 +23,7 @@ Class Product_model extends CI_Model
 		return	$this->db->like('name', $name)->get('products', $limit)->result();
 	}
 	
-	function products($data=array(), $return_count=false)
+	function products($data=array(), $return_count=false , $csv = "")
 	{
 		
 		if(empty($data))
@@ -98,8 +98,17 @@ Class Product_model extends CI_Model
 			}
 			else
 			{
-				return $this->db->get('products')->result();
-				
+				$result =  $this->db->get('products');
+                    if($csv !="")
+                    {
+                        
+                        $this->load->helper('csv');
+                        query_to_csv($result, TRUE, 'sales_report.csv'); 
+                        exit;
+                    }
+                            
+                
+				return  $result->result();
 			}
 			
 		}
