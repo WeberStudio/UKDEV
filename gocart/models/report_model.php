@@ -7,11 +7,20 @@ Class Report_model extends CI_Model
 			parent::__construct();
 	}
 	
-	function get_purchesed_product()
+	function get_purchesed_product($limit = 0 , $offset = 0)
 	{
-		$result	= "SELECT order_id , product_id , COUNT(*) AS count_product FROM oc_order_items GROUP BY product_id HAVING 
-    COUNT(*) > 0";
-		$result	=$this->db->query($result);
+		$this->db->select('order_id , product_id , COUNT(*) AS count_product');
+		$this->db->from('oc_order_items');
+		$this->db->group_by('product_id');
+		$this->db->having('COUNT(*) > 0');
+		
+		 if($limit>0)
+		{
+			$this->db->limit($limit, $offset);
+		}
+		 
+		
+		$result = $this->db->get();
 		
 		return $result->result();
 	}
@@ -36,8 +45,13 @@ Class Report_model extends CI_Model
 		return $result->result();
 		
 	}
-	function viewed_product()
+	function viewed_product($limit = 0 , $offset = 0)
 	{
+		if($limit>0)
+		{
+			$this->db->limit($limit, $offset);
+		}
+		
 		$result	= $this->db->get('products');
 		return $result->result();
 	}

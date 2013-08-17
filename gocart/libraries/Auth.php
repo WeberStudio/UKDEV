@@ -255,30 +255,58 @@ class Auth
 	/*
 	This function gets a complete list of all admin
 	*/
-	function get_admin_list($data=array())
+	function get_admin_list($data=array(), $term =false)
 	{
 		$this->CI->db->select('*');
-		
-		if(empty($data))
-		{
-			$this->CI->db->order_by('lastname', 'ASC');
-			$this->CI->db->order_by('firstname', 'ASC');
-			$this->CI->db->order_by('email', 'ASC');
-		}
-		else
-		{
-			if(!empty($data['order_by']))
+		if(!empty($term))
 			{
-				//if we have an order_by then we must have a direction otherwise KABOOM
-				$this->CI->db->order_by($data['order_by'], $data['sort_order']);
+				$search	= json_decode($term);
+				//if we are searching dig through some basic fields
+				if(!empty($search->term))
+				{
+					$this->CI->db->like('firstname', $search->term);
+					$this->CI->db->or_like('lastname', $search->term);
+					$this->CI->db->or_like('email', $search->term);
+					$this->CI->db->or_like('phone', $search->term);
+					//$this->CI->db->or_like('address_street', $search->term);
+					$this->CI->db->or_like('city', $search->term);
+					$this->CI->db->or_like('state', $search->term);
+					$this->CI->db->or_like('country', $search->term);
+					//$this->CI->db->or_like('gender', $search->term);
+				}
+				
+				if(!empty($search->admin_id))
+				{
+					//lets do some joins to get the proper category products
+					
+					$this->CI->db->where('id', $search->admin_id);
+					$this->CI->db->order_by('firstname', 'ASC');
+				}
 			}
+			else
+			{
+				
+				if(empty($data))
+				{
+					$this->CI->db->order_by('lastname', 'ASC');
+					$this->CI->db->order_by('firstname', 'ASC');
+					$this->CI->db->order_by('email', 'ASC');
+				}
+				else
+				{
+					if(!empty($data['order_by']))
+					{
+						//if we have an order_by then we must have a direction otherwise KABOOM
+						$this->CI->db->order_by($data['order_by'], $data['sort_order']);
+					}
+					
+					if($data['rows']>0)
+					{
+						$this->CI->db->limit($data['rows'], $data['offset']);
+					}
 			
-			if($data['rows']>0)
-			{
-				$this->CI->db->limit($data['rows'], $data['offset']);
+				}
 			}
-	
-		}
 		
 		
 		$result = $this->CI->db->get('admin');
