@@ -33,8 +33,8 @@ class Reports extends Admin_Controller {
 		}
 		
 
-		$this->load->model(array('Customer_model', 'Product_model', 'order_model', 'Category_model'));
-		$this->load->model('Commission_model');
+		$this->load->model(array('Customer_model', 'Report_model', 'order_model'));
+		
 		
     }
 	
@@ -139,13 +139,6 @@ class Reports extends Admin_Controller {
 		
 	
 	}
-	
-	
-
-		$this->load->model(array('Customer_model', 'Product_model', 'Category_model','Report_model'));
-		
-		
-    }
 	
 	function stats_product_viewed()
 	{
