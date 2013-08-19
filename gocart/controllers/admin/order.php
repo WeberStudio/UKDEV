@@ -52,7 +52,14 @@ class Order extends Admin_Controller {
 	 	$code                           = 0;
 	 	
 	    $rows                           = 25;
-        $csv                            = '';       
+        $csv                            = '';
+        $print                          = '';
+        $data['date']                   = '';
+        $data['categories']             = '';
+        $data['courses_s']              = '';
+        $data['courses_provider']       = '';
+        $data['start_date']             = '';
+        $data['end_date']               = '';        
 		
 		
        	
@@ -62,6 +69,13 @@ class Order extends Admin_Controller {
 		$data['courses'] 		        = $this->Product_model->get_all_products_array();
 		$data['admins']			        = $this->auth->get_admin_list();
 		$data['id'] 			        = $id;
+        //search prefill
+        $data['date']                   = $this->input->post('date');
+        $data['categories']             = $this->input->post('categories');
+        $data['courses_s']              = $this->input->post('courses');
+        $data['courses_provider']       = $this->input->post('courses_provider');
+        $data['start_date']             = $this->input->post('start_date');
+        $data['end_date']               = $this->input->post('end_date');
 		
 		$search = array();
 		$search['date'] 				= $this->input->post('date');
@@ -72,16 +86,23 @@ class Order extends Admin_Controller {
 		$search['end_date'] 			= $this->input->post('end_date');
 		
         $data['csv_call']               = $this->input->post('csv_call');
+        $data['print_call']             = $this->input->post('print_call'); 
         
         if(!empty($data['csv_call']))
         {
             $csv                        = '1';
+            $rows                       = ''; 
+        }
+        if(!empty($data['print_call']))
+        {
+            $print                      = '1'; 
+            $rows                       = '';  
         }
 		
 		if($search['categories']!="" || $search['courses']!="" || $search['courses_provider']!="" || $search['date']!="" || $search['start_date']!="" || $search['end_date']!="" )
 		{
 			
-			$data['orders']				= $this->Order_model->search_order($search , $csv);
+			$data['orders']			    = $this->Order_model->search_order($search , $csv);
 			
 		}
 		
@@ -103,7 +124,63 @@ class Order extends Admin_Controller {
 		}
 		
 		}
-		//echo $this->db->last_query();exit;
+		//this is the print section
+         //$this->show->pe($data['orders']);
+        if($print!='')
+        {
+            $this->load->library('mpdf/mpdf');
+            $this->load->library('cezpdf');
+            $this->load->helper('pdf');    
+            prep_pdf();
+            $invoice_footer      = '';
+            $invoice_header      = '';
+            $html_output         = '';    
+            $this->mpdf->SetHeader('{DATE d-m-Y}|{PAGENO}|Orders Record');             
+            $output_array        = $data['orders'];            
+            $output_html        .= '<table width="0" border="0" cellspacing="10" cellpadding="10">
+              <tr>
+                <th>Id</th>
+                <th>Order Number</th>
+                <th>Customer Name</th>
+                <th>Phone</th>
+                <th>Tax</th>
+                <th>Total</th>
+                <th>Subtotal</th>
+                <th>Email</th>
+                <th>Status</th>
+                
+                
+              </tr>';
+              
+              foreach($output_array as $output)
+              {
+
+                  $output_html .= '<tr>
+                  <td>'.$output->id.'</td>
+                  <td>'.$output->order_number.'</td>
+                  <td>'.$output->firstname.' '.$output->lastname.'</td>
+                  <td>'.$output->phone.'</td> 
+                  <td>'.$output->tax.'</td> 
+                  <td>'.$output->total.'</td> 
+                  <td>'.$output->subtotal.'</td> 
+                  <td>'.$output->email.'</td>
+                  <td>'.$output->status.'</td> 
+
+                    
+                    
+                  </tr>';
+              }
+                        
+            $output_html .= '</table>';
+            $this->mpdf->SetWatermarkText('UKOPENCOLLEGE', 0.1);
+            $this->mpdf->showWatermarkText = true;
+            $this->mpdf->WriteHTML($output_html);
+            $this->mpdf->Output('sales_report.pdf', 'I');            
+        
+        exit;
+        }
+        
+        
 		$this->load->library('pagination');	
 		
 		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/order/index/'.$sort_by.'/'.$sort_order.'/';

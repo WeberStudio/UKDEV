@@ -11,14 +11,16 @@ function areyousure()
      <div class="box paint color_0">
       <div class="title">
        <?php echo form_open($this->config->item('admin_folder').'/tutor/index', 'class="form-horizontal row-fluid" ');?>
-        <h4> <i class="icon-book"></i><span>Search Tutor<input type="submit"  class="btn" name="csv_call" value="Tutor  Report (CSV)" >
+        <h4> <i class="icon-book"></i><span>Search Tutor
+        <input type="submit"  class="btn" name="csv_call" value="Tutor  Report (CSV)" >
+        <input type="submit" class="btn" name="print_call" value="Tutor Report (Print)">  
         
         </span> </h4>
       </div>
       <div class="content">
         <div class="form-row control-group row-fluid">
               <div class="controls span5">
-                <input type="text" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By tutor Name, Email" placeholder="Search Tutor...." class="row-fluid">
+                <input type="text" value="<?php echo $search_input;?>" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By tutor Name, Email" placeholder="Search Tutor...." class="row-fluid">
               </div>
               <div class="controls span5">
                 <?php
@@ -40,6 +42,9 @@ function areyousure()
                 <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/tutor/index');?>">Reset</a>       </div>
           </div>
           </form>
+          <?php
+            $this->session->unset_userdata('post_session'); 
+          ?>
         </div>
       </div>
       <div class="row-fluid ">

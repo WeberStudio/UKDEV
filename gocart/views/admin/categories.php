@@ -135,36 +135,28 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
     
     <div class="box paint color_0">
       <div class="title">
-       <?php echo form_open($this->config->item('admin_folder').'/categories/index', 'class="form-horizontal row-fluid" ');?>
-        <h4> <i class="icon-book"></i><span>Search Categories<input type="submit"  class="btn" name="csv_call" value="Categories  Report (CSV)" >
+       <?php echo form_open($this->config->item('admin_folder').'/categories', 'class="form-horizontal row-fluid" ');?>
+        <h4> <i class="icon-book"></i><span>Search Categories
+        <input type="submit"  class="btn" name="csv_call" value="Categories  Report (CSV)" >
+        <input type="submit" class="btn" name="print_call" value="Categories Report (Print)">
         
         </span> </h4>
       </div>
       <div class="content">
         <div class="form-row control-group row-fluid">
               <div class="controls span5">
-                <input type="text" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Categories Name, Status" placeholder="Search Categories...." class="row-fluid">
+                <input type="text" value="<?php echo $search_input;?>" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Categories Name, Status" placeholder="Search Categories...." class="row-fluid">
+                
               </div>
-              <div class="controls span5">
-                <?php
-                       /* if(!empty($all_admin))
-                        {
-                            echo '<select name="admin_id"   data-placeholder="Filter By Customer Email..." class="chzn-select" id="default-select">';
-                            echo '<option value="">Select Courses Provider E-mail</option>';
-                            foreach ($all_admin as $all_admins)
-                            {
-                                echo "<option value=".$all_admins->id.">$all_admins->email</option>";
-                            }
-                            echo '</select>';
-                            
-                        }  */
-                ?>
-              </div>
-              <div class="controls span2">
+             <div class="controls span2">
                 <button class="btn" rel="tooltip" data-placement="top" data-original-title="Search" name="submit" value="search"><?php echo lang('search')?></button>
                 <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/categories/index');?>">Reset</a>       </div>
           </div>
-          </form>
+          </form> 
+          <?php
+          $this->session->unset_userdata('post_session'); 
+           ?>
+          
         </div>
       </div>
     

@@ -66,14 +66,16 @@ function list_admin($admins, $current_admin_id)
      <div class="box paint color_0">
       <div class="title">
        <?php echo form_open($this->config->item('admin_folder').'/admin/index', 'class="form-horizontal row-fluid" ');?>
-        <h4> <i class="icon-book"></i><span>Search Courses Provider<input type="submit"  class="btn" name="csv_call" value="Courses Provider Report (CSV)" >
+        <h4> <i class="icon-book"></i><span>Search Courses Provider
+        <input type="submit"  class="btn" name="csv_call" value="Courses Provider Report (CSV)" >
+        <input type="submit" class="btn" name="print_call" value="Courses Provider Report (Print)">  
         
         </span> </h4>
       </div>
       <div class="content">
         <div class="form-row control-group row-fluid">
               <div class="controls span5">
-                <input type="text" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Courses Provider Name, Keyword" placeholder="Search Courses Provider...." class="row-fluid">
+                <input type="text" value="<?php echo $search_input;?>" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Courses Provider Name, Keyword" placeholder="Search Courses Provider...." class="row-fluid">
               </div>
               <div class="controls span5">
                 <?php
@@ -83,8 +85,10 @@ function list_admin($admins, $current_admin_id)
                             echo '<option value="">Select Courses Provider E-mail</option>';
                             foreach ($all_admin as $all_admins)
 							{
-								echo "<option value=".$all_admins->id.">$all_admins->email</option>";
-							}
+                                ?>
+								<option value="<?php echo $all_admins->id; ?>" <?php if($all_admins->id == $search_admin){echo 'selected';}?>><?php echo $all_admins->email; ?></option>";
+							<?php 
+                            }
 							echo '</select>';
                             
                         }
@@ -95,6 +99,9 @@ function list_admin($admins, $current_admin_id)
                 <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/admin/index');?>">Reset</a> 	  </div>
           </div>
           </form>
+          <?php
+            $this->session->unset_userdata('post_session'); 
+          ?>
         </div>
       </div>
       <div class="row-fluid ">

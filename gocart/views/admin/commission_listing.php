@@ -11,8 +11,13 @@ function areyousure()
      <div id="main_container">
      <div class="box paint color_0">
       <div class="title">
-      <?php echo form_open($this->config->item('admin_folder').'/commission/search_commisssion', 'class="" ');?> 
-        <h4> <i class="icon-book"></i><span>Search Commission<input type="submit"  class="btn" name="csv_call" value="Commission Report (CSV)" ></span> </h4>
+      <?php echo form_open($this->config->item('admin_folder').'/commission/', 'class="" ');?> 
+        <h4> <i class="icon-book"></i><span>Search Commission
+        
+        <input type="submit"  class="btn" name="csv_call" value="Commission Report (CSV)" >
+        <input type="submit" class="btn" name="print_call" value="Commission Report (Print)"> 
+        
+        </span> </h4>
       </div>
       <div class="content"> 
       
@@ -29,7 +34,7 @@ function areyousure()
                 <option value=""> All Categories</option>
                 <?php foreach($category as $cat){?>
                 	
-                    <option value="<?php echo $cat['id'];?>"> <?php echo $cat['name'];?></option>
+                    <option value="<?php echo $cat['id'];?>" <?php if($cat['id'] == $categories){ echo 'selected';}?>> <?php echo $cat['name'];?></option>
                     <?php }?>
                 </select>
               </div>
@@ -38,7 +43,7 @@ function areyousure()
                 <option value=""> All Courses</option>
                 <?php foreach($courses as $cour){?>
                 	
-                    <option value="<?php echo $cour['id'];?>"> <?php echo $cour['name'];?></option>
+                    <option value="<?php echo $cour['id'];?>" <?php if($cour['id'] == $search_courses){ echo 'selected';}?>> <?php echo $cour['name'];?></option>
                     <?php }?>
                 </select>
               </div>
@@ -48,7 +53,7 @@ function areyousure()
                  
                 	<?php
 					foreach($admins as $admin){?>
-                    <option value="<?php echo $admin->id;?>"> <?php echo $admin->firstname;?></option>
+                    <option value="<?php echo $admin->id;?>" <?php if($admin->id == $courses_provider){ echo 'selected';}?>> <?php echo $admin->firstname;?></option>
                     <?php }?>
                 </select>
               </div>

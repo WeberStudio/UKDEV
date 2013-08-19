@@ -44,14 +44,32 @@ class tutor extends Admin_Controller {
     }
 	
 
-    function index($field='lastname', $by='ASC', $page=0, $row=5)
+    function index($field='lastname', $by='ASC', $page=0)
     {
        	
         $data                       = array();
         $csv                        = '';
+        $print                      = '';
+        $row                        = 5;
+        
+        $data['search_input']       = '';
         
         $term                       = false;
         $post                       = $this->input->post(null, false);
+        
+        //search prefill
+        if($post !="")
+        {
+            $this->session->set_flashdata('item', $post);
+            $session                    = array('post_session'=>$post);
+            $this->session->set_userdata($session);
+            $post_data = $this->session->userdata('post_session');
+            $data['search_input']       =   $post_data['term'];
+              
+            
+        }
+        
+        
         $this->load->model('Search_model');
         if($post)
         {
@@ -60,15 +78,71 @@ class tutor extends Admin_Controller {
             $data['code']           = $code;
         }
         $data['csv_call']           = $this->input->post('csv_call');
+        $data['print_call']         = $this->input->post('print_call');
         if(!empty($data['csv_call']))
         {
             $csv                    = '1';
+            $row                    = '';
+        }
+        if(!empty($data['print_call']))
+        {
+            $print                  = '1'; 
+            $row                    = '';  
         }
         
 		$data['tutors']	            = $this->Tutor_model->get_tutors($row, $page, $field, $by , $term , $csv);
-		//echo $this->db->last_query();exit;
+        //$this->show->pe($data['tutors']);
+        //this is for pdf   
+        if($print!='')
+        {
+            $this->load->library('mpdf/mpdf');
+            $this->load->library('cezpdf');
+            $this->load->helper('pdf');    
+            prep_pdf();
+            $invoice_footer      = '';
+            $invoice_header      = '';
+            $html_output         = '';    
+            $this->mpdf->SetHeader('{DATE d-m-Y}|{PAGENO}|Tutors Record');             
+            $output_array        = $data['tutors'];            
+            $output_html        .= '<table width="0" border="0" cellspacing="10" cellpadding="10">
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Status</th> 
+                
+              </tr>';
+              
+              foreach($output_array as $output)
+              {
+                  if($output->status == '1')
+                  {$status      = 'Active';}
+                  else
+                  {$status      = 'Inactive';}
+                  $output_html .= '<tr>
+                  <td>'.$output->tutor_id.'</td>
+                  <td>'.$output->firstname.' '.$output->lastname.'</td>
+                  <td>'.$output->email.'</td>
+                  <td>'.$output->phone.'</td>
+                  <td>'.$status.'</td>   
+                    
+                  </tr>';
+              }
+                        
+            $output_html .= '</table>';
+            $this->mpdf->SetWatermarkText('UKOPENCOLLEGE', 0.1);
+            $this->mpdf->showWatermarkText = true;
+            $this->mpdf->WriteHTML($output_html);
+            $this->mpdf->Output('sales_report.pdf', 'I');            
+        
+        exit;
+        }
+        
+        
+		
 		$this->load->library('pagination');
-		//echo $this->db->last_query(); exit;
+		
 		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/tutor/index/'.$field.'/'.$by.'/';
 		$config['total_rows']		= $this->Tutor_model->count_tutors();
 		$config['per_page']			= $row;

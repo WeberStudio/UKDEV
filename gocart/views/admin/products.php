@@ -1,9 +1,9 @@
 <?php
-function list_categories($cats, $product_categories, $sub='') {
+function list_categories($cats, $product_categories, $sub='' , $search_cat='') {
 
 	foreach ($cats as $cat):?>
 
-<option value="<?php echo $cat['category']->id;?>"><?php echo  $sub.$cat['category']->name; ?></option>
+<option value="<?php echo $cat['category']->id;?>" <?php if($cat['category']->id == $search_cat){echo 'selected';}?> ><?php echo  $sub.$cat['category']->name; ?></option>
 <?php
 			if (sizeof($cat['children']) > 0)
 			{
@@ -101,12 +101,15 @@ function selectGroup(childs)
     <div class="box paint color_0">
       <div class="title">
       <?php echo form_open($this->config->item('admin_folder').'/products/index', 'class="form-horizontal row-fluid" ');?>
-        <h4> <i class="icon-book"></i><span>Search Courses<input type="submit"  class="btn" name="csv_call" value="Courses Report (CSV)" ></span> </h4>
+        <h4> <i class="icon-book"></i><span>Search Courses
+        <input type="submit"  class="btn" name="csv_call" value="Courses Report (CSV)" >
+        <input type="submit" class="btn" name="print_call" value="Courses Report (Print)">
+        </span> </h4>
       </div>
       <div class="content"> 
         <div class="form-row control-group row-fluid">
               <div class="controls span3">
-                <input type="text" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Course Name, Sku, Keyword" placeholder="<?php echo lang('search_term');?>" class="row-fluid">
+                <input type="text" value="<?php echo $search_input;?>" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Course Name, Sku, Keyword" placeholder="<?php echo lang('search_term');?>" class="row-fluid">
               </div>
               <div class="controls span3">
                 <?php
@@ -114,7 +117,7 @@ function selectGroup(childs)
                         {
                             echo '<select name="category_id"   data-placeholder="Filter By Category..." class="chzn-select" id="default-select">';
                             echo '<option value="">'.lang('filter_by_category').'</option>';
-                            list_categories($categories);
+                            list_categories($categories , '' , '' , $search_cat);
                             echo '</select>';
                             
                         }
@@ -127,7 +130,7 @@ function selectGroup(childs)
                  
                 	<?php
 					foreach($admins as $admin){?>
-                    <option value="<?php echo $admin->id;?>"> <?php echo $admin->firstname;?></option>
+                    <option value="<?php echo $admin->id;?>" <?php if($admin->id == $search_courses){echo 'selected';}?>> <?php echo $admin->firstname;?></option>
                     <?php }?>
                 </select>
               </div>
@@ -136,6 +139,9 @@ function selectGroup(childs)
                 <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/products/index');?>">Reset</a> 	  </div>
           </div>
           </form>
+          <?php
+            $this->session->unset_userdata('post_session'); 
+          ?>
         </div>
       </div>
   <!--=======Search Panel End=======-->

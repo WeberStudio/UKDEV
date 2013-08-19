@@ -14,13 +14,16 @@ function areyousure()
       
       
       <?php echo form_open($this->config->item('admin_folder').'/customers/index', 'class="form-horizontal row-fluid" ');?>
-        <h4> <i class="icon-book"></i><span>Search Customer<input type="submit"  class="btn" name="csv_call" value="Customer Report (CSV)" > </span> </h4>
+        <h4> <i class="icon-book"></i><span>Search Customer
+        <input type="submit"  class="btn" name="csv_call" value="Customer Report (CSV)" >
+        <input type="submit" class="btn" name="print_call" value="Customer Report (Print)">  
+        </span> </h4>
       </div>
       <div class="content"> 
       
         <div class="form-row control-group row-fluid">
               <div class="controls span5">
-                <input type="text" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Customer Name, Keyword" placeholder="Search Customer...." class="row-fluid">
+                <input type="text" value="<?php echo $search_input;?>" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Customer Name, Keyword" placeholder="Search Customer...." class="row-fluid">
               </div>
               <div class="controls span5">
                 <?php
@@ -30,8 +33,10 @@ function areyousure()
                             echo '<option value="">Select Customer E-mail</option>';
                             foreach ($all_customers as $customer)
 							{
-								echo "<option value=".$customer->id.">$customer->email</option>";
-							}
+                  ?>
+								<option value="<?php echo  $customer->id;?>" <?php if($customer->id == $search_customer){echo 'selected';}?>><?php echo $customer->email;?></option>;
+				<?php 
+                            }
 							echo '</select>';
                             
                         }
@@ -42,6 +47,9 @@ function areyousure()
                 <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/customers/index');?>">Reset</a> 	  </div>
           </div>
           </form>
+          <?php
+            $this->session->unset_userdata('post_session'); 
+          ?>
         </div>
       </div>
   <!--=======Search Panel End=======-->

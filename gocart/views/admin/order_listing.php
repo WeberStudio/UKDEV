@@ -42,24 +42,32 @@ $code=0;
      <div class="box paint color_0">
       <div class="title">
       <?php echo form_open($this->config->item('admin_folder').'/order', 'class="" ');?> 
-        <h4> <i class="icon-book"></i><span>Search Orders<input type="submit"  class="btn" name="csv_call" value="Order Report (CSV)" ></span> </h4>
+        <h4> <i class="icon-book"></i><span>Search Orders
+        <input type="submit"  class="btn" name="csv_call" value="Order Report (CSV)" >
+        <input type="submit" class="btn" name="print_call" value="Order Report (Print)">  
+        </span> </h4>
       </div>
       <div class="content"> 
       
          <div class="form-row control-group row-fluid">
         
               <div class="controls span3">
-                <?php 
-					$option = array( ''=>'select frequently','week'=>'Per Week', 'month'=>'Per Month','year'=>'Per Year');
-					echo form_dropdown('date',$option,set_value('someValue'),'class="chzn-select"','id="default-select"', 'placeholder="select frequently"');
-				?>
+                
+                <select class="chzn-select" id="" name="date">
+                    <option value=""> Select Frequently</option>
+                    <option value="week"<?php if($date == 'week'){echo 'selected';}?>> Per Week</option> 
+                    <option value="month" <?php if($date == 'month'){echo 'selected';}?>> Per Month</option> 
+                    <option value="year" <?php if($date == 'year'){echo 'selected';}?>> Per Year</option> 
+                
+                </select>
+                
               </div>
               <div class="controls span3">
                 <select class="chzn-select" id="" name="categories">
                 <option value=""> All Categories</option>
                 <?php foreach($category as $cat){?>
                 	
-                    <option value="<?php echo $cat['id'];?>"> <?php echo $cat['name'];?></option>
+                    <option value="<?php echo $cat['id'];?>" <?php if($cat['id']== $categories){echo 'selected';}?>> <?php echo $cat['name'];?></option>
                     <?php }?>
                 </select>
               </div>
@@ -68,7 +76,7 @@ $code=0;
                 <option value=""> All Courses</option>
                 <?php foreach($courses as $cour){?>
                 	
-                    <option value="<?php echo $cour['id'];?>"> <?php echo $cour['name'];?></option>
+                    <option value="<?php echo $cour['id'];?>" <?php if($cour['id']== $courses_s){echo 'selected';}?>> <?php echo $cour['name'];?></option>
                     <?php }?>
                 </select>
               </div>
@@ -79,7 +87,7 @@ $code=0;
                  
                 	<?php
 					foreach($admins as $admin){?>
-                    <option value="<?php echo $admin->id;?>"> <?php echo $admin->firstname;?></option>
+                    <option value="<?php echo $admin->id;?>" <?php if( $admin->id==$courses_provider){echo 'selected';}?>> <?php echo $admin->firstname;?></option>
                     <?php }?>
                 </select>
               </div>
@@ -91,7 +99,7 @@ $code=0;
          <label class="control-label "><h3> Form </h3></label>
                 <?php 
 					$data = array('id'=>'datepicker1','name'=>'start_date','placeholder'=>'Start Date','style'=>'margin-bottom: 0px;');
-					echo form_input($data);
+					echo form_input($data , $start_date);
 				?>
               </div>
             
@@ -102,7 +110,7 @@ $code=0;
                <label class="control-label"> <h3> To </h3></label>
                 <?php 
 				$data = array('id'=>'datepicker2','name'=>'end_date','placeholder'=>'End Date','style'=>'margin-bottom: 0px;');
-					echo form_input($data);
+					echo form_input($data , $end_date);
 				?>
               </div>
               </div>
@@ -112,6 +120,7 @@ $code=0;
                 <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/products/index');?>">Reset</a> 	  </div>
           </div>
           </form>
+
         </div>
       </div>
      <div class="row-fluid ">

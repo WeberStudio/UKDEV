@@ -64,15 +64,31 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
       
       
       <?php echo form_open($this->config->item('admin_folder').'/invoices/index', 'class="form-horizontal row-fluid" ');?>
-        <h4> <i class="icon-book"></i><span>Search  Invoice<input type="submit"  class="btn" name="csv_call" value="Invoice Report (CSV)" > </span> </h4>
+        <h4> <i class="icon-book"></i><span>Search  Invoice
+        <input type="submit"  class="btn" name="csv_call" value="Invoice Report (CSV)" >
+        <input type="submit" class="btn" name="print_call" value="Courses Report (Print)"> 
+        
+        </span> </h4>
       </div>
       <div class="content"> 
       
         <div class="form-row control-group row-fluid">
-              <div class="controls span5">
-                <input type="text" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Invoice Id" placeholder="Search Invoice...." class="row-fluid">
+            <div class="controls span3">
+                <input type="text" value="<?php echo $search_input;?>" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Invoice Id" placeholder="Search Invoice...." class="row-fluid">
               </div>
-              <div class="controls span5">
+              <div class="controls span3">
+                <?php 
+                    //$option = array( ''=>'select frequently','month'=>'Per Month', 'quarter'=>'Per Quarter','year'=>'Per Year');
+                    //echo form_dropdown('date',$option,set_value($search_cat),'class="chzn-select"','id="default-select"', 'placeholder="select frequently"');
+                ?>
+                 <select name="date" class="chzn-select" id="default-select1">
+                        <option value="">Select Frequently</option>
+                        <option value="month"<?php if($search_date == 'month'){echo 'selected';}?>>Per Month</option>
+                        <option value="quarter" <?php if($search_date == 'quarter'){echo 'selected';}?>>Per Quarter</option>
+                        <option value="year"<?php if($search_date == 'year'){echo 'selected';}?>>Per Year</option>
+                    </select>   
+              </div>
+            <div class="controls span3">
               <?php
                         if(!empty($all_admin))
                         {
@@ -80,7 +96,9 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
                             echo '<option value="">Select Courses Provider Name</option>';
                             foreach ($all_admin as $all_admins)
                             {
-                                echo "<option value=".$all_admins->id.">$all_admins->firstname $all_admins->lastname $all_admins->id</option>";
+                                ?>
+                            <option value="<?php echo $all_admins->id;?>" <?if($all_admins->id==$search_courses){ echo 'selected';}?> ><?php echo $all_admins->firstname.' '. $all_admins->lastname;?></option>;
+                             <?php
                             }
                             echo '</select>';
                             
@@ -92,6 +110,9 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
                 <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/invoices/index');?>">Reset</a>       </div>
           </div>
           </form>
+          <?php
+            $this->session->unset_userdata('post_session'); 
+          ?>
         </div>
       </div>
   <!--=======Search Panel End=======-->
