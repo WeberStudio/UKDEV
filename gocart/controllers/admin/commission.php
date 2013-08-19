@@ -40,19 +40,105 @@ class Commission extends Admin_Controller {
 
     function index($page=0)
     {
-        
-		$rows = 5;
+        $data['categories']             = '';
+        $data['search_courses']         = '';
+        $data['courses_provider']       = ''; 
+		$rows                           = 5;
+        $csv                            = '';
+        $print                          = '';
 		$order_by='comm_level';
 		$direction='ASC';
-       	$data['category'] 		= $this->Category_model->get_all_categories();
-		$data['courses'] 		= $this->Product_model->get_all_products_array();
-		$data['admins']			= $this->auth->get_admin_list();
+       	$data['category'] 		        = $this->Category_model->get_all_categories();
+		$data['courses'] 		        = $this->Product_model->get_all_products_array();
+		$data['admins']			        = $this->auth->get_admin_list();
         
+        
+              if($this->input->post(null, false)!="")
+          {
+              $data['categories']       =$this->input->post('categories');
+              $data['search_courses']   =$this->input->post('courses');
+              $data['courses_provider'] =$this->input->post('courses_provider'); 
+          }
+        
+         
+        $search                         = array();
+        $search['date']                 = $this->input->post('date');
+        $search['categories']           = $this->input->post('categories');
+        $search['courses']              = $this->input->post('courses');
+        $search['courses_provider']     = $this->input->post('courses_provider');
+        $search['start_date']           = $this->input->post('start_date');
+        $search['end_date']             = $this->input->post('end_date');
+        $data['csv_call']               = $this->input->post('csv_call');
+        $data['print_call']             = $this->input->post('print_call');  
+        if(!empty($data['csv_call']))
+        {
+            $csv                        = '1';
+            $rows                       = ''; 
+        }
+        if(!empty($data['print_call']))
+        {
+            $print                      = '1';
+            $rows                       = '';  
+              
+        } 
+         if($this->input->post(null, false)!="")
+         {
+            $data['commissions']        = $this->Commission_model->search_commission($search , $csv);
+         }
+         else
+         {
+            $data['commissions']        = $this->Commission_model->get_commissions($rows, $page, $order_by='comm_level', $direction='ASC');   
+         }
+         
+         //$this->show->pe($data['commissions']);
+         
+         //this is for pdf 
+         if($print!='')
+         {
+            $this->load->library('mpdf/mpdf');
+            $this->load->library('cezpdf');
+            $this->load->helper('pdf');    
+            prep_pdf();
+            $invoice_footer      = '';
+            $invoice_header      = '';
+            $html_output         = '';    
+            $this->mpdf->SetHeader('{DATE d-m-Y}|{PAGENO}|Commissions Record');             
+            $output_array        = $data['commissions'];            
+            $output_html        .= '<table width="0" border="0" cellspacing="10" cellpadding="10">
+              <tr>
+                <th>Commision ID</th> 
+                <th>Commision Level</th>
+                <th>Commision Rate</th>
+                <th>Persentage</th>
+                <th>Active</th>
+                
+              </tr>';
+              
+              foreach($output_array as $output)
+              {
+                  
+                  $output_html .= '<tr>
+                  <td>'.$output->comm_id.'</td>
+                  <td>'.$output->comm_level.'</td> 
+                  <td>'.$output->comm_rate.'</td>
+                  <td>'.$output->comm_rate_mode.'</td> 
+                  <td>'.$output->comm_active.'</td>   
+                    
+                  </tr>';
+              }
+                        
+            $output_html .= '</table>';
+            $this->mpdf->SetWatermarkText('UKOPENCOLLEGE', 0.1);
+            $this->mpdf->showWatermarkText = true;
+            $this->mpdf->WriteHTML($output_html);
+            $this->mpdf->Output('sales_report.pdf', 'I');            
+        
+        exit;
+         }
         
 		
-		$data['commissions'] = $this->Commission_model->get_commissions($rows, $page, $order_by='comm_level', $direction='ASC');
-		//$count = $this->Commission_model->commission_count();
-		//echo $count; exit;
+		
+		
 		$this->load->library('pagination');	
 		
 		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/commission/index/';
@@ -85,9 +171,8 @@ class Commission extends Admin_Controller {
 		$config['next_tag_close']	= '</li>';
 		
 		$this->pagination->initialize($config);
-		$data['page']			= $page;
-		//$data['sort_by']		= $sort_by;
-		//$data['sort_order']		= $sort_order;
+		$data['page']			    = $page;
+		
 		
         $this->load->view($this->config->item('admin_folder').'/includes/header');
         $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
@@ -231,18 +316,33 @@ class Commission extends Admin_Controller {
 		$data['category'] 				= $this->Category_model->get_all_categories();
 		$data['courses'] 				= $this->Product_model->get_all_products_array();
 		$data['admins']					= $this->auth->get_admin_list();
-		 $csv                           = "";
-		$search = array();
+        $data['categories']             = '';
+          if($this->input->post(null, false)!="")
+          {
+              $data['categories']       =$this->input->post('categories');
+              $data['courses']          =$this->input->post('categories');
+              $data['categories']       =$this->input->post('categories'); 
+          }
+        
+		$csv                            = "";
+        $print                          = ""; 
+		$search                         = array();
 		$search['date'] 				= $this->input->post('date');
 		$search['categories'] 			= $this->input->post('categories');
 		$search['courses'] 				= $this->input->post('courses');
 		$search['courses_provider'] 	= $this->input->post('courses_provider');
 		$search['start_date'] 			= $this->input->post('start_date');
 		$search['end_date'] 			= $this->input->post('end_date');
-        $data['csv_call']               = $this->input->post('csv_call'); 
+        $data['csv_call']               = $this->input->post('csv_call');
+        $data['print_call']             = $this->input->post('print_call');  
         if(!empty($data['csv_call']))
         {
         $csv                            = '1';
+        }
+                if(!empty($data['print_call']))
+        {
+            $print                      = '1'; 
+              
         } 
 		
 		$data['commissions']            = $this->Commission_model->search_commission($search , $csv);

@@ -61,15 +61,34 @@ class Invoices extends Admin_Controller {
 
     }
 
-    function index($field='invoice_id', $by='ASC', $page=0, $rows=5)
+    function index($field='invoice_id', $by='ASC', $page=0)
     {
         //we're going to use flash data and redirect() after form submissions to stop people from refreshing and duplicating submissions
         //$this->session->set_flashdata('message', 'this is our message');
-        $csv                            = "";
+        $csv                            = '';
+        $print                          = '';
+        $rows                           = 5;
+        $data['search_input']           = '';
+        $data['search_date']            = '';
+        $data['search_courses']         = ''; 
         $data['page_title']    	        = lang('Invoices');
         
         $term                           = false;
         $post                           = $this->input->post(null, false);
+        
+        if($post !="")
+        {
+            $this->session->set_flashdata('item', $post);
+            $session                    = array('post_session'=>$post);
+            $this->session->set_userdata($session);
+            $post_data = $this->session->userdata('post_session');
+            $data['search_input']       =   $post_data['term'];
+            $data['search_date']        =   $post_data['date'];
+            $data['search_courses']     =   $post_data['admin_id'];  
+            
+        }
+        
+        
         $this->load->model('Search_model');
         if($post)
         {
@@ -78,15 +97,69 @@ class Invoices extends Admin_Controller {
             $data['code']               = $code;
         }
         $data['csv_call']               = $this->input->post('csv_call');
+        $data['print_call']             = $this->input->post('print_call');
         
         if(!empty($data['csv_call']))
         {
             $csv                        = '1';
+            $rows                       = '';
+        }
+        if(!empty($data['print_call']))
+        {
+            $print                      = '1'; 
+            $rows                       = '';  
         }
         
         $data['all_admin']              = $this->auth->get_admin_list();
         $data['invoices']    	        = $this->Invoice_model->get_all_invoices($field, $by, $page, $rows, $term , $csv);
+        
 		//echo "<pre>"; print_r($data['invoices']);exit;
+        
+               //this is for pdf   
+        if($print!='')
+        {
+            $this->load->library('mpdf/mpdf');
+            $this->load->library('cezpdf');
+            $this->load->helper('pdf');    
+            prep_pdf();
+            $invoice_footer      = '';
+            $invoice_header      = '';
+            $html_output         = '';    
+            $this->mpdf->SetHeader('{DATE d-m-Y}|{PAGENO}|Invoices Record');             
+            $output_array        = $data['invoices'];            
+            $output_html        .= '<table width="0" border="0" cellspacing="10" cellpadding="10">
+              <tr>
+                <th>Invoices Id</th>
+                <th>Creat Date</th>
+                <th>Due Date</th>
+                <th>Item Subtotal</th>
+                <th>Item Tax total</th>
+                <th>Invoice total</th>
+                
+              </tr>';
+              
+              foreach($output_array as $output)
+              {
+                  
+                  $output_html .= '<tr>
+                  <td>'.$output->invoice_id.'</td>
+                  <td>'.$output->invoice_date_created.'</td>
+                  <td>'.$output->invoice_date_due.'</td> 
+                  <td>'.$output->invoice_item_subtotal.'</td> 
+                  <td>'.$output->invoice_item_tax_total.'</td>
+                  <td>'.$output->invoice_total.'</td>    
+                    
+                  </tr>';
+              }
+                        
+            $output_html .= '</table>';
+            $this->mpdf->SetWatermarkText('UKOPENCOLLEGE', 0.1);
+            $this->mpdf->showWatermarkText = true;
+            $this->mpdf->WriteHTML($output_html);
+            $this->mpdf->Output('sales_report.pdf', 'I');            
+
+        exit;
+        }
 		
 		
 		$this->load->library('pagination');

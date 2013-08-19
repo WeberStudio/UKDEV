@@ -49,38 +49,107 @@ class Categories extends Admin_Controller {
 		
 	}
 	
-	function index($order_by="name", $sort_order="ASC", $code=0, $page=0, $rows=15)
+	function index($order_by="name", $sort_order="ASC", $code=0, $page=0)
 	{
 		
 		//Store the sort term
-        $csv                          = '';
-        $data['csv_call']             = $this->input->post('csv_call');
+        $rows                                = 15;
+        $csv                                 = '';
+        $print                               = '';
+        $data['search_input']                = '';
+        $data['csv_call']                    = $this->input->post('csv_call');
+        $data['print_call']                  = $this->input->post('print_call');
+        if(!empty($data['print_call']))
+        {
+            $print                           = '1'; 
+            $rows                            = '';  
+        }
         if(!empty($data['csv_call']))
         {
-             $csv                      = '1';
+             $csv                            = '1';
+             $rows                           = '';  
         }        
                  
-        $termm                       = false;
-        $post                        = $this->input->post(null, false);
+        $termm                               = false;
+        $post                                = $this->input->post(null, false);
+        if($post !="")
+        {
+            $this->session->set_flashdata('item', $post);
+            $session                    = array('post_session'=>$post);
+            $this->session->set_userdata($session);
+            $post_data = $this->session->userdata('post_session');
+            $data['search_input']       =   $post_data['term'];  
+            
+        }
+        
+         
+
+        
         $this->load->model('Search_model');
         if($post)
         {
-            $termm                    = json_encode($post);
-            $codee                    = $this->Search_model->record_term($termm);
-            $data['codee']            = $codee;
+            $termm                     = json_encode($post);
+            $codee                     = $this->Search_model->record_term($termm);
+            $data['codee']             = $codee;
         }
         
 		$data['order_by']	           = $order_by;
 		$data['sort_order']	           = $sort_order;
 		$data['code']		           = $code;
 		$term				           = false;
+        
 		//we're going to use flash data and redirect() after form submissions to stop people from refreshing and duplicating submissions
 		//$this->session->set_flashdata('message', 'this is our message');
 		$data['page_title']	           = lang('categories');   
-		$data['categories']	           = $this->Category_model->get_categories_tierd($parent = false, array('order_by'=>$order_by, 'sort_order'=>$sort_order, 'rows'=>$rows, 'page'=>$page) , $termm , $csv);
-		 
-		$data['total']		           = count($this->Category_model->get_all_categories());
+		$data['categories']	           = $this->Category_model->get_categories_tierd($parent = false, array('order_by'=>$order_by, 'sort_order'=>$sort_order, 'rows'=>$rows, 'page'=>$page) , $termm , $csv , $print);
 		
+         //this is for pdf 
+         
+         if($print!='')
+         {
+            $this->load->library('mpdf/mpdf');
+            $this->load->library('cezpdf');
+            $this->load->helper('pdf');    
+            prep_pdf();
+            $invoice_footer      = '';
+            $invoice_header      = '';
+            $html_output         = '';    
+            $this->mpdf->SetHeader('{DATE d-m-Y}|{PAGENO}|Categories Record');             
+            $output_array        = $data['categories'];            
+            $output_html        .= '<table width="0" border="0" cellspacing="10" cellpadding="10">
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Publish Date</th>
+                <th>Status</th>
+                
+              </tr>';
+              
+              foreach($output_array as $output)
+              {
+                  if($output['category']->publish_by_super == '1')
+                  {$status = 'Published';}
+                  else
+                  {$status = 'Unpublished';}
+                  $output_html .= '<tr>
+                  <td>'.$output['category']->id.'</td>
+                  <td>'.$output['category']->name.'</td>
+                  <td>'.$output['category']->publish_date.'</td> 
+                  <td>'.$status.'</td>   
+                    
+                  </tr>';
+              }
+                        
+            $output_html .= '</table>';
+            $this->mpdf->SetWatermarkText('UKOPENCOLLEGE', 0.1);
+            $this->mpdf->showWatermarkText = true;
+            $this->mpdf->WriteHTML($output_html);
+            $this->mpdf->Output('sales_report.pdf', 'I');            
+        
+        exit;
+         }
+         
+		$data['total']		           = count($this->Category_model->get_all_categories());
 		$this->load->library('pagination');		
 		$config['base_url']			= site_url($this->config->item('admin_folder').'/categories/index/'.$order_by.'/'.$sort_order.'/'.$code.'/');
 		$config['total_rows']		= $data['total'];

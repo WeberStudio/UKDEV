@@ -32,33 +32,109 @@ class Admin extends Admin_Controller
 		$this->load->helper('form');
 	}
 
-	function index($order_by="firstname", $sort_order="ASC", $page=0, $rows=5)
+	function index($order_by="firstname", $sort_order="ASC", $page=0)
 	{
-       $csv = '';
+        $csv                            = '';
+        $rows                           = 5;
+        $print                          ='';
+        $data['search_input']           =   '';
+        $data['search_admin']           =   '';
 		
-		$term						= false;
-		$post						= $this->input->post(null, false);
+		$term						    = false;
+		$post						    = $this->input->post(null, false);
+        //search prefill
+        
+        if($post !="")
+        {
+            $this->session->set_flashdata('item', $post);
+            $session                    = array('post_session'=>$post);
+            $this->session->set_userdata($session);
+            $post_data = $this->session->userdata('post_session');
+            $data['search_input']       =   $post_data['term'];
+            $data['search_admin']       =   $post_data['admin_id'];
+             
+            
+        }
+        
 		$this->load->model('Search_model');
 		if($post)
 		{
-			$term					= json_encode($post);
-			$code					= $this->Search_model->record_term($term);
-			$data['code']			= $code;
+			$term					    = json_encode($post);
+			$code					    = $this->Search_model->record_term($term);
+			$data['code']			    = $code;
 		}
-		$data['all_admin']			= $this->auth->get_admin_list();
+		$data['all_admin']			    = $this->auth->get_admin_list();
 		//Store the sort term
-		$data['order_by']			= $order_by;
-		$data['sort_order']			= $sort_order;      
-	   $data['csv_call'] 			= $this->input->post('csv_call');
+		$data['order_by']			    = $order_by;
+		$data['sort_order']			    = $sort_order;
+              
+	   $data['csv_call'] 			    = $this->input->post('csv_call');
+       $data['print_call']              = $this->input->post('print_call'); 
 		
 		if(!empty($data['csv_call']))
 		{
-			$csv = '1';
+			$csv                        = '1';
+            $rows                       = '';
 		}
+        if(!empty($data['print_call']))
+        {
+            $print                      = '1'; 
+            $rows                       = '';  
+        }
 	   
-		$data['page_title']			= lang('admins');
-		$data['admins']				= $this->auth->get_admin_list(array('order_by'=>$order_by, 'sort_order'=>$sort_order, 'rows'=>$rows, 'offset'=>$page) , $term , $csv);
-		
+		$data['page_title']			    = lang('admins');
+		$data['admins']				    = $this->auth->get_admin_list(array('order_by'=>$order_by, 'sort_order'=>$sort_order, 'rows'=>$rows, 'offset'=>$page) , $term , $csv);
+		//$this->show->pe($data['admins']);
+        //this is for pdf  
+        if($print!='')
+        {
+            $this->load->library('mpdf/mpdf');
+            $this->load->library('cezpdf');
+            $this->load->helper('pdf');    
+            prep_pdf();
+            $invoice_footer         = '';
+            $invoice_header         = '';
+            $html_output            = '';    
+            $this->mpdf->SetHeader('{DATE d-m-Y}|{PAGENO}|Courses Provider Record');             
+            $output_array           = $data['admins'];            
+            $output_html           .= '<table width="0" border="0" cellspacing="10" cellpadding="10">
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Access</th>
+                <th>Company</th>
+                <th>Phone</th>
+                <th>StreetAddress</th>
+                
+              </tr>';
+              
+              foreach($output_array as $output)
+              {
+                  
+                  $output_html      .= '<tr>
+                  <td>'.$output->id.'</td>
+                  <td>'.$output->firstname.' '.$output->lastname.'</td>
+                  <td>'.$output->email.'</td>
+                  <td>'.$output->access.'</td> 
+                  <td>'.$output->company.'</td>
+                  <td>'.$output->phone.'</td> 
+                  <td>'.$output->street_address.'</td>  
+                    
+                    
+                  </tr>';
+              }
+                        
+            $output_html .= '</table>';
+            $this->mpdf->SetWatermarkText('UKOPENCOLLEGE', 0.1);
+            $this->mpdf->showWatermarkText = true;
+            $this->mpdf->WriteHTML($output_html);
+            $this->mpdf->Output('sales_report.pdf', 'I');            
+        
+        exit;
+        }
+        
+        
     	$this->load->library('pagination');
 		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/admin/index/'.$order_by.'/'.$sort_order.'/';
 		$config['total_rows']		= 12;

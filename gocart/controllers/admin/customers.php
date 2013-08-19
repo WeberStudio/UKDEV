@@ -33,47 +33,121 @@ class Customers extends Admin_Controller {
 	
 	}
 	
-	function index($field='lastname', $by='ASC', $page=0, $row=25)
+	function index($field='lastname', $by='ASC', $page=0)
 	{
 		
-		$cvs = "";
+		$cvs                        = "";
+        $row                        =25;
+        $print                      = '';
+        $data['search_input']       = '';
+        $data['search_customer']    = '';
 		
 		$this->load->helper('form');
-		$data['page_title']	= lang('customers');
+		$data['page_title']	        = lang('customers');
 		
-		$term				= false;
-		$post				= $this->input->post(null, false);
+		$term				        = false;
+		$post				        = $this->input->post(null, false);
+        
+       if($post !="")
+        {
+            $this->session->set_flashdata('item', $post);
+            $session                    = array('post_session'=>$post);
+            $this->session->set_userdata($session);
+            $post_data = $this->session->userdata('post_session');
+            $data['search_input']       =   $post_data['term'];
+            $data['search_customer']    =   $post_data['customer_id'];
+             
+            
+        }
+        
 		$this->load->model('Search_model');
 		if($post)
 		{
-			$term			= json_encode($post);
-			$code			= $this->Search_model->record_term($term);
-			$data['code']	= $code;
+			$term			        = json_encode($post);
+			$code			        = $this->Search_model->record_term($term);
+			$data['code']	        = $code;
 		}
 		$data['csv_call'] 			= $this->input->post('csv_call');
+        $data['print_call']         = $this->input->post('print_call');
 		
 		if(!empty($data['csv_call']))
 		{
-			$cvs = '1';
+			$cvs                    = '1';
+            $row                   = '';
 		}
+        if(!empty($data['print_call']))
+        {
+            $print                  = '1'; 
+            //$row                   = '';  
+        }
 		
 		
-		$data['customers']	= $this->Customer_model->get_customers($row, $page, $by, $field, $term , $cvs);
+		$data['customers']	        = $this->Customer_model->get_customers($row, $page, $by, $field, $term , $cvs);
 		//$this->show->pe($data['customers']);
-		$records = $data['customers'];
-		/*if(!empty($data['csv_call']))
-		{
-			//$this->show->pe($records);
-			$this->load->helper('csv');
-			query_to_csv($records, TRUE, 'sales_report.csv'); 
-		}*/
-		$data['all_customers']	= $this->Customer_model->get_customers();
+        
+        if($print!='')
+        {
+            $this->load->library('mpdf/mpdf');
+            $this->load->library('cezpdf');
+            $this->load->helper('pdf');    
+            prep_pdf();
+            $invoice_footer      = '';
+            $invoice_header      = '';
+            $html_output         = '';    
+            $this->mpdf->SetHeader('{DATE d-m-Y}|{PAGENO}|Customers Record');             
+            $output_array        = $data['customers'];            
+            $output_html        .= '<table width="0" border="0" cellspacing="10" cellpadding="10">
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Gender</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Post Code</th>
+                <th>Country</th>
+                <th>Status</th> 
+                
+              </tr>';
+              
+              foreach($output_array as $output)
+              {
+                  if($output->active == '1')
+                  {$status      = 'Active';}
+                  else
+                  {$status      = 'Inactive';}
+                  $output_html .= '<tr>
+                  <td>'.$output->id.'</td>
+                  <td>'.$output->firstname.' '.$output->lastname.'</td>
+                  <td>'.$output->email.'</td>
+                  <td>'.$output->phone.'</td>
+                  <td>'.$output->gender.'</td>   
+                  <td>'.$output->city.'</td>
+                  <td>'.$output->state.'</td> 
+                  <td>'.$output->post_code.'</td> 
+                  <td>'.$output->country.'</td>
+                  <td>'.$status.'</td>   
+                    
+                  </tr>';
+              }
+                        
+            $output_html .= '</table>';
+            $this->mpdf->SetWatermarkText('UKOPENCOLLEGE', 0.1);
+            $this->mpdf->showWatermarkText = true;
+            $this->mpdf->WriteHTML($output_html);
+            $this->mpdf->Output('sales_report.pdf', 'I');            
+        
+        exit;
+        }
+		
+		$data['all_customers']	    = $this->Customer_model->get_customers();
 		$this->load->library('pagination');
 
-		$config['base_url']		= base_url().'/'.$this->config->item('admin_folder').'/customers/index/'.$field.'/'.$by.'/';
-		$config['total_rows']	= $this->Customer_model->count_customers();
-		$config['per_page']		= $row;
-		$config['uri_segment']	= 6;
+		$config['base_url']		    = base_url().'/'.$this->config->item('admin_folder').'/customers/index/'.$field.'/'.$by.'/';
+		$config['total_rows']	    = $this->Customer_model->count_customers();
+		$config['per_page']		    = $row;
+		$config['uri_segment']	    = 6;
 		$config['first_link']		= 'First';
 		$config['first_tag_open']	= '<li>';
 		$config['first_tag_close']	= '</li>';
@@ -100,10 +174,10 @@ class Customers extends Admin_Controller {
 		$this->pagination->initialize($config);
 		
 		//store the search term
-		$data['term']		= $term;
-		$data['page']	= $page;
-		$data['field']	= $field;
-		$data['by']		= $by;
+		$data['term']		        = $term;
+		$data['page']	            = $page;
+		$data['field']	            = $field;
+		$data['by']		            = $by;
 		$this->load->view($this->config->item('admin_folder').'/includes/header');
         $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
 		$this->load->view($this->config->item('admin_folder').'/customers', $data);

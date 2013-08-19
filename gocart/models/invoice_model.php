@@ -5,11 +5,17 @@ Class Invoice_model extends CI_Model
     function get_all_invoices($field='invoice_id', $by='ASC', $page=0, $rows=5 , $term =false , $csv = '')
     {
          //$query  = $this->db->query('SELECT i.*, ia.invoice_item_subtotal, ia.invoice_item_tax_total, ia.invoice_total  FROM oc_invoices i LEFT JOIN oc_invoice_amounts ia ON i.invoice_id = ia.invoice_id ORDER BY i.'.$field.' '.$by.' LIMIT '.$page.', '.$rows);  
+            if(!empty($term))
+            {
+                $search    = json_decode($term);
+            }
+            if(empty($search->date)) {
           $this->db->select('i.*, ia.invoice_item_subtotal, ia.invoice_item_tax_total, ia.invoice_total');
           $this->db->from('oc_invoices i');
           $this->db->join('oc_invoice_amounts ia' , 'i.invoice_id = ia.invoice_id','left');
           $this->db->order_by('i.'.$field.'' , $by);
           $this->db->limit($rows,$page);
+            }
           if(!empty($term))
             {
                 $search    = json_decode($term);
@@ -27,6 +33,22 @@ Class Invoice_model extends CI_Model
                     
                 }
                 
+                if(!empty($search->date))
+                {
+                     if($search->date == 'month')
+                     {
+                         $query =  $this->db->query('select * from oc_invoices  where oc_invoices.invoice_date_created >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)') ;
+                     }
+                     if($search->date == 'quarter')
+                     {
+                          $query =  $this->db->query('select * from oc_invoices  where oc_invoices.invoice_date_created >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)') ;  
+                     }
+                     if($search->date == 'year')
+                     {
+                         $query =  $this->db->query('select * from oc_invoices  where oc_invoices.invoice_date_created >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)') ; 
+                     } 
+                }
+                
                 if(!empty($search->admin_id))
                 {
                     //lets do some joins to get the proper category products
@@ -35,8 +57,11 @@ Class Invoice_model extends CI_Model
                     //$this->db->order_by('firstname', 'ASC');
                 }
             }
-          
+         if(empty($search->date))
+         {  
         $query = $this->db->get();
+         }
+        //$this->show->pe($this->db->last_query());
         if($csv !="")
         {
             
@@ -57,6 +82,7 @@ Class Invoice_model extends CI_Model
             }
         }    
     }
+
     
 	function get_count_invoices()
 	{
