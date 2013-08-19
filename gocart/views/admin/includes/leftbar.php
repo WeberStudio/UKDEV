@@ -15,6 +15,9 @@
 	$price_link			= '';
 	$active_report		= '';
 	$report_link		= '';
+	$system_templates	= '';
+	$active_template	= '';
+	$active_template_link= '';
 	$active = $this->session->userdata('active_module');
 	//print_r($active);
     if($active=='dashboard')
@@ -58,6 +61,11 @@
 	{
 		 	$active_report		= 'opened';
 			$report_link		= 'in collapse';
+	}
+	else if($active == 'system_templates')
+	{
+		$active_template		= 'opened';
+		$active_template_link	= 'in collapse';
 	}
 ?>
 <div id="sidebar" class="">
@@ -210,6 +218,15 @@
                             <li><a href="<?=base_url().ADMIN_PATH?>giftcards">Giftcards</a></li>-->
                         </ul>
                     </li>
+					
+					<li class="accordion-group color_25 <?php echo $active_template ; ?>" onclick="set_module('email_template')" >
+						<a class="accordion-toggle widgets collapsed " data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse12" >
+						<img src="<?=base_url().ASSETS_PATH?>img/menu_icons/forms.png"><span>System Template</span></a>
+						<ul id="collapse12" class="accordion-body collapse <?php echo $active_template_link; ?>">
+							<li><a href="<?=base_url().ADMIN_PATH?>system_templates">Email Templates</a></li>							
+						</ul>
+                	</li>
+					
                     <? } ?>
                     <?php if(isset($this->admin_access) && $this->admin_access=='Course Provider'){ ?>
                     <li class="accordion-group color_7 <?php echo $active_catalog; ?>" onclick="set_module('catalog')" >
