@@ -33,7 +33,7 @@ class Reports extends Admin_Controller {
 		}
 		
 
-		$this->load->model(array('Customer_model', 'Product_model', 'order_model', 'Report_model'));
+		$this->load->model(array('Customer_model', 'Report_model', 'order_model'));
 		
 		
     }

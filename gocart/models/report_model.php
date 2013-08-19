@@ -24,6 +24,7 @@ Class Report_model extends CI_Model
 		
 		return $result->result();
 	}
+	
 	function customer_state($limit = 0 , $offset = 0)
 	{
 		

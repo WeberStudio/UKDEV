@@ -151,7 +151,7 @@
                         <img src="<?=base_url().ASSETS_PATH?>img/menu_icons/forms.png"><span>Reports</span></a>
                     <ul id="collapse11" class="accordion-body collapse <?php echo $report_link; ?>">
                         <li><a href="<?=base_url().ADMIN_PATH?>reports/stats_product_viewed">Products Viewed</a></li>
-                        <li><a href="<?=base_url().ADMIN_PATH?>reports/product_purchased">Products Purchased</a></li>
+                        <li><a href="<?=base_url().ADMIN_PATH?>reports/product_purchased">Products Purchased</a></li>                        
 						<li><a href="<?=base_url().ADMIN_PATH?>reports/">Sales Report</a></li>
                         <li><a href="<?=base_url().ADMIN_PATH?>reports/stats_customer">Customer Orders-Total</a></li>
                     </ul>
