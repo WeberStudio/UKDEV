@@ -42,6 +42,10 @@ Class Category_model extends CI_Model
 	
 	function get_categories($parent = false, $data=array() , $term = false , $csv="")
 	{
+        if($csv !="")
+        {
+            $this->db->select('id, name, old_route, slug, description, excerpt, seo_title, meta, meta_key, publish_date, google_follow');
+        }
 		if(!empty($term))
         {
             $search    = json_decode($term);
@@ -107,7 +111,7 @@ Class Category_model extends CI_Model
         {
             
             $this->load->helper('csv');
-            query_to_csv($result, TRUE, 'sales_report.csv'); 
+            query_to_csv($result, TRUE, 'Categories_report.csv'); 
             exit;
         }
         

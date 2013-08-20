@@ -145,7 +145,7 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
       <div class="content">
         <div class="form-row control-group row-fluid">
               <div class="controls span5">
-                <input type="text" value="<?php echo $search_input;?>" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Categories Name, Status" placeholder="Search Categories...." class="row-fluid">
+                <input type="text" value="<?php echo $search_input;?>" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Categories Name" placeholder="Search Categories...." class="row-fluid">
                 
               </div>
              <div class="controls span2">

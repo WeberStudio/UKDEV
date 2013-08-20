@@ -25,6 +25,8 @@ Class Customer_model extends CI_Model
 		}
 		
 		//do we have a search submitted?
+        
+        if($cvs!=''){}
 			if(!empty($term))
 			{
 				$search	= json_decode($term);
@@ -57,7 +59,7 @@ Class Customer_model extends CI_Model
 		{
 			
 			$this->load->helper('csv');
-			query_to_csv($result, TRUE, 'sales_report.csv'); 
+			query_to_csv($result, TRUE, 'Customer_report.csv'); 
 			exit;
 		}
 		else

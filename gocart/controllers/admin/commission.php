@@ -69,7 +69,8 @@ class Commission extends Admin_Controller {
         $search['start_date']           = $this->input->post('start_date');
         $search['end_date']             = $this->input->post('end_date');
         $data['csv_call']               = $this->input->post('csv_call');
-        $data['print_call']             = $this->input->post('print_call');  
+        $data['print_call']             = $this->input->post('print_call');
+        //$this->show->pe($search['courses']);  
         if(!empty($data['csv_call']))
         {
             $csv                        = '1';
