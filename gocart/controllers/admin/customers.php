@@ -36,26 +36,26 @@ class Customers extends Admin_Controller {
 	function index($field='lastname', $by='ASC', $page=0)
 	{
 		
-		$cvs                        = "";
-        $row                        =25;
-        $print                      = '';
-        $data['search_input']       = '';
-        $data['search_customer']    = '';
+		$cvs                                = "";
+        $row                                =25;
+        $print                              = '';
+        $data['search_customer_name']       = '';
+        $data['search_customer_email']      = '';
 		
 		$this->load->helper('form');
-		$data['page_title']	        = lang('customers');
+		$data['page_title']	                = lang('customers');
 		
-		$term				        = false;
-		$post				        = $this->input->post(null, false);
+		$term				                = false;
+		$post				                = $this->input->post(null, false);
         
        if($post !="")
         {
             $this->session->set_flashdata('item', $post);
-            $session                    = array('post_session'=>$post);
+            $session                        = array('post_session'=>$post);
             $this->session->set_userdata($session);
             $post_data = $this->session->userdata('post_session');
-            $data['search_input']       =   $post_data['term'];
-            $data['search_customer']    =   $post_data['customer_id'];
+            $data['search_customer_name']  =   $post_data['customer_name'];
+            $data['search_customer_email'] =   $post_data['customer_email'];
              
             
         }
@@ -63,26 +63,26 @@ class Customers extends Admin_Controller {
 		$this->load->model('Search_model');
 		if($post)
 		{
-			$term			        = json_encode($post);
-			$code			        = $this->Search_model->record_term($term);
-			$data['code']	        = $code;
+			$term			            = json_encode($post);
+			$code			            = $this->Search_model->record_term($term);
+			$data['code']	            = $code;
 		}
-		$data['csv_call'] 			= $this->input->post('csv_call');
-        $data['print_call']         = $this->input->post('print_call');
+		$data['csv_call'] 			    = $this->input->post('csv_call');
+        $data['print_call']             = $this->input->post('print_call');
 		
 		if(!empty($data['csv_call']))
 		{
-			$cvs                    = '1';
-            $row                   = '';
+			$cvs                        = '1';
+            $row                        = '';
 		}
         if(!empty($data['print_call']))
         {
-            $print                  = '1'; 
-            //$row                   = '';  
+            $print                      = '1'; 
+            $row                        = '';  
         }
 		
 		
-		$data['customers']	        = $this->Customer_model->get_customers($row, $page, $by, $field, $term , $cvs);
+		$data['customers']	            = $this->Customer_model->get_customers($row, $page, $by, $field, $term , $cvs);
 		//$this->show->pe($data['customers']);
         
         if($print!='')

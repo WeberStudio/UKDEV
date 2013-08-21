@@ -20,23 +20,16 @@ function areyousure()
       <div class="content">
         <div class="form-row control-group row-fluid">
               <div class="controls span5">
-                <input type="text" value="<?php echo $search_input;?>" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By tutor Name, Email" placeholder="Search Tutor...." class="row-fluid">
+                <select class="chzn-select" id="" name="term">
+                <option value=""> Tutors</option>
+                 
+                    <?php
+                    foreach($search_tutors as $search_tutor){?>
+                    <option value="<?php echo $search_tutor->tutor_id;?>" <?php if($search_tutor->tutor_id == $search_tutor_a){echo 'selected';}?>> <?php echo  $search_tutor->firstname.' '.$search_tutor->lastname;?></option>
+                    <?php }?>
+                </select>
               </div>
-              <div class="controls span5">
-                <?php
-                       /* if(!empty($all_admin))
-                        {
-                            echo '<select name="admin_id"   data-placeholder="Filter By Customer Email..." class="chzn-select" id="default-select">';
-                            echo '<option value="">Select Courses Provider E-mail</option>';
-                            foreach ($all_admin as $all_admins)
-                            {
-                                echo "<option value=".$all_admins->id.">$all_admins->email</option>";
-                            }
-                            echo '</select>';
-                            
-                        }  */
-                ?>
-              </div>
+              
               <div class="controls span2">
                 <button class="btn" rel="tooltip" data-placement="top" data-original-title="Search" name="submit" value="search"><?php echo lang('search')?></button>
                 <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/tutor/index');?>">Reset</a>       </div>

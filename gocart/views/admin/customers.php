@@ -23,18 +23,32 @@ function areyousure()
       
         <div class="form-row control-group row-fluid">
               <div class="controls span5">
-                <input type="text" value="<?php echo $search_input;?>" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Customer Name, Keyword" placeholder="Search Customer...." class="row-fluid">
+                <?php
+                        if(!empty($all_customers))
+                        {
+                            echo '<select name="customer_name" onchange="get_customer_email()"   data-placeholder="Filter By Customer Name..." class="chzn-select" id="customer_id">';
+                            echo '<option value="">Select Customer Name</option>';
+                            foreach ($all_customers as $customer)
+                            {
+                  ?>
+                                <option value="<?php echo  $customer->id;?>" <?php if($customer->id == $search_customer_name){echo 'selected';}?>><?php echo $customer->firstname.' '.$customer->lastname;?></option>;
+                <?php 
+                            }
+                            echo '</select>';
+                            
+                        }
+                ?>
               </div>
               <div class="controls span5">
                 <?php
                         if(!empty($all_customers))
                         {
-                            echo '<select name="customer_id"   data-placeholder="Filter By Customer Email..." class="chzn-select" id="default-select">';
+                            echo '<select name="customer_email"   data-placeholder="Filter By Customer Email..." class="" id="customer_email">';
                             echo '<option value="">Select Customer E-mail</option>';
                             foreach ($all_customers as $customer)
 							{
                   ?>
-								<option value="<?php echo  $customer->id;?>" <?php if($customer->id == $search_customer){echo 'selected';}?>><?php echo $customer->email;?></option>;
+								<option value="<?php echo  $customer->id;?>" <?php if($customer->id == $search_customer_email){echo 'selected';}?>><?php echo $customer->email;?></option>;
 				<?php 
                             }
 							echo '</select>';
@@ -144,3 +158,22 @@ function areyousure()
     </div>
     <!-- End .row-fluid -->
   </div>
+<script type="text/javascript" language="javascript">
+function get_customer_email()
+{
+  
+var id  = document.getElementById('customer_id').value;
+ j      = jQuery.noConflict();
+ 
+ j.ajax({ 
+                type: "POST",         //GET or POST or PUT or DELETE verb
+                url:  '<?=base_url()?>admin/ajax_search/get_customer_email',         // Location of the service
+                data: 'customer_id='+id,         //Data sent to server
+                success: function (data)
+                 {//On Successful service call
+                    //alert(data);
+                    j('#customer_email').html(data);
+                 },
+        });
+}
+</script>

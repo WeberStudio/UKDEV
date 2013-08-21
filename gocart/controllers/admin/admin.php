@@ -36,9 +36,9 @@ class Admin extends Admin_Controller
 	{
         $csv                            = '';
         $rows                           = 5;
-        $print                          ='';
-        $data['search_input']           =   '';
-        $data['search_admin']           =   '';
+        $print                          = '';
+        $data['search_name']            = '';
+        $data['search_email']           = '';
 		
 		$term						    = false;
 		$post						    = $this->input->post(null, false);
@@ -47,11 +47,11 @@ class Admin extends Admin_Controller
         if($post !="")
         {
             $this->session->set_flashdata('item', $post);
-            $session                    = array('post_session'=>$post);
+            $session                   = array('post_session'=>$post);
             $this->session->set_userdata($session);
             $post_data = $this->session->userdata('post_session');
-            $data['search_input']       =   $post_data['term'];
-            $data['search_admin']       =   $post_data['admin_id'];
+            $data['search_name']       =   $post_data['admin_name'];
+            $data['search_email']      =   $post_data['admin_email'];
              
             
         }

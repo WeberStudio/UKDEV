@@ -62,7 +62,7 @@ $code=0;
                 </select>
                 
               </div>
-              <div class="controls span3">
+              <!--<div class="controls span3">
                 <select class="chzn-select" id="" name="categories">
                 <option value=""> All Categories</option>
                 <?php foreach($category as $cat){?>
@@ -88,6 +88,47 @@ $code=0;
                 	<?php
 					foreach($admins as $admin){?>
                     <option value="<?php echo $admin->id;?>" <?php if( $admin->id==$courses_provider){echo 'selected';}?>> <?php echo $admin->firstname;?></option>
+                    <?php }?>
+                </select>
+              </div>-->
+              <div class="controls span3">
+                <!--<input type="text" value="<?php echo $search_input;?>" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Course Name, Sku, Keyword" placeholder="<?php echo lang('search_term');?>" class="row-fluid"> -->
+                <select name="categories" onchange="get_courses()"   data-placeholder="Filter By Category..." class="chzn-select" id="s_category_id">
+                <option value="">Categories</option>  
+                <?php 
+                 foreach($search_category as $search_cat)
+                 {
+                 ?>
+                 <option value="<?php echo $search_cat['id']; ?>" <?php if($search_cat['id']==$categories_a){echo 'selected';}?>><?php echo $search_cat['name'];  ?></option>
+                 <?php
+                 }
+                ?>
+                </select>
+                
+              </div>
+              <div class="controls span3">
+              
+                <select name="courses" onchange="get_course_pro()"   data-placeholder="Filter By Category..." class="" id="course_id">
+                <option value="">Courses</option>  
+                <?php 
+                foreach($search_course as $search_courses)
+                 {
+                 ?>
+                <option value="<?php echo $search_courses['id'];?>" <?php if($search_courses['id']==$courses_a){echo 'selected';}?>><?php echo $search_courses['name'];  ?></option>
+                 <?php
+                 }
+                ?>
+                </select>
+                 
+              </div>  
+              <div class="controls span3">
+              
+               <select class=""  id="course_pro" name="courses_provider">
+                <option value=""> Courses Provider</option>
+                 
+                    <?php
+                    foreach($admins as $admin){?>
+                    <option value="<?php echo $admin->id;?>" <?php if($admin->id==$courses_provider_a){echo 'selected';}?>>  <?php echo $admin->firstname;?></option>
                     <?php }?>
                 </select>
               </div>
@@ -219,4 +260,43 @@ function areyousure()
 	return confirm('<?php echo lang('confirm_delete_order');?>');
 }
 
+</script>
+<script type="text/javascript" language="javascript">
+function get_courses()
+{
+    
+var id  = document.getElementById('s_category_id').value;
+ j      = jQuery.noConflict();
+ 
+ j.ajax({ 
+                type: "POST",         //GET or POST or PUT or DELETE verb
+                url:  '<?=base_url()?>admin/ajax_search/get_courses_by_id',         // Location of the service
+                data: 'productid='+id,         //Data sent to server
+                success: function (data) 
+                {//On Successful service call
+                 //alert(data);
+                    j('#course_id').html(data);
+                },
+                
+       });
+}
+</script>
+<script type="text/javascript" language="javascript">
+function get_course_pro()
+{
+  
+var id  = document.getElementById('course_id').value;
+ j      = jQuery.noConflict();
+ 
+ j.ajax({ 
+                type: "POST",         //GET or POST or PUT or DELETE verb
+                url:  '<?=base_url()?>admin/ajax_search/get_courses_pro_by_id',         // Location of the service
+                data: 'coursesid='+id,         //Data sent to server
+                success: function (data)
+                 {//On Successful service call
+                 //alert(data);
+                    j('#course_pro').html(data);
+                 },
+        });
+}
 </script>

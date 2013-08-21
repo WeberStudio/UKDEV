@@ -99,7 +99,7 @@ Class order_model extends CI_Model
         {
             
             $this->load->helper('csv');
-            query_to_csv($result, TRUE, 'sales_report.csv'); 
+            query_to_csv($result, TRUE, 'order_report.csv'); 
             exit;
         }
         else
@@ -447,10 +447,11 @@ Class order_model extends CI_Model
 		return $order;
 	}
 	
-		function search_order ($search= array() , $csv = '')
+	function search_order ($search= array() , $csv = '')
 	{
 		if(!empty($search['categories']))
 		{
+             
 			
 			$result 	= $this->db->query("SELECT * FROM oc_orders 
 						   JOIN oc_order_items
@@ -516,7 +517,7 @@ Class order_model extends CI_Model
         {
             
             $this->load->helper('csv');
-            query_to_csv($result, TRUE, 'sales_report.csv'); 
+            query_to_csv($result, TRUE, 'order_report.csv'); 
             exit;
         }
         else

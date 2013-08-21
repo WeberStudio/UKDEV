@@ -22,39 +22,49 @@ function areyousure()
       <div class="content"> 
       
          <div class="form-row control-group row-fluid">
-        
-              <!--<div class="controls span3">
+             
+
+              <div class="controls span3">
+                
+                <select name="category_id" onchange="get_courses()"   data-placeholder="Filter By Category..." class="chzn-select" id="s_category_id">
+                <option value="">Categories</option>  
                 <?php 
-					$option = array( ''=>'select frequently','per_week'=>'Per Week', 'per_month'=>'Per Month','per_year'=>'Per Year');
-					echo form_dropdown('date',$option,set_value('someValue'),'class="chzn-select"','id="default-select"', 'placeholder="select frequently"');
-				?>
-              </div>-->
-              <div class="controls span3">
-                <select class="chzn-select" id="" name="categories">
-                <option value=""> All Categories</option>
-                <?php foreach($category as $cat){?>
-                	
-                    <option value="<?php echo $cat['id'];?>" <?php if($cat['id'] == $categories){ echo 'selected';}?>> <?php echo $cat['name'];?></option>
-                    <?php }?>
+                 foreach($search_category as $search_cat)
+                 {
+                 ?>
+                 <option value="<?php echo $search_cat['id']; ?>" <?php if($search_cat['id']==$search_cat_a){echo 'selected';}?>><?php echo $search_cat['name'];  ?></option>
+                 <?php
+                 }
+                ?>
                 </select>
+                
               </div>
               <div class="controls span3">
-               <select class="chzn-select" id="" name="courses">
-                <option value=""> All Courses</option>
-                <?php foreach($courses as $cour){?>
-                	
-                    <option value="<?php echo $cour['id'];?>" <?php if($cour['id'] == $search_courses){ echo 'selected';}?>> <?php echo $cour['name'];?></option>
-                    <?php }?>
+              
+                <select name="product_id" onchange="get_course_pro()"   data-placeholder="Filter By Category..." class="" id="course_id">
+                <option value="">Courses</option>  
+                <?php 
+                foreach($search_course as $search_courses)
+                 {
+                 ?>
+                <option value="<?php echo $search_courses['id'];?>"<?php if($search_courses['id']==$search_cour_a){echo 'selected';}?>><?php echo $search_courses['name'];  ?></option>
+                 <?php
+                 }
+                ?>
                 </select>
-              </div>
+                
+              </div>  
               <div class="controls span3">
-               <select class="chzn-select" id="" name="courses_provider">
+              
+               <select class=""  id="course_pro" name="admin_id">
                 <option value=""> Courses Provider</option>
                  
-                	<?php
-					foreach($admins as $admin){?>
-                    <option value="<?php echo $admin->id;?>" <?php if($admin->id == $courses_provider){ echo 'selected';}?>> <?php echo $admin->firstname;?></option>
-                    <?php }?>
+                    <?php
+                    foreach($admins as $admin)
+                    {?>
+                    <option value="<?php echo $admin->id;?>" <?php if($admin->id == $search_admin_a){echo 'selected';}?>> <?php echo $admin->firstname;?></option>
+                    <?php
+                    }?>
                 </select>
               </div>
             
@@ -192,3 +202,43 @@ function areyousure()
     <!-- End .row-fluid -->
   </div>
   </div>
+  
+  <script type="text/javascript" language="javascript">
+function get_courses()
+{
+    
+var id  = document.getElementById('s_category_id').value;
+ j      = jQuery.noConflict();
+ 
+ j.ajax({ 
+                type: "POST",         //GET or POST or PUT or DELETE verb
+                url:  '<?=base_url()?>admin/ajax_search/get_courses_by_id',         // Location of the service
+                data: 'productid='+id,         //Data sent to server
+                success: function (data) 
+                {//On Successful service call
+                 //alert(data);
+                    j('#course_id').html(data);
+                },
+                
+       });
+}
+</script>
+<script type="text/javascript" language="javascript">
+function get_course_pro()
+{
+  
+var id  = document.getElementById('course_id').value;
+ j      = jQuery.noConflict();
+ 
+ j.ajax({ 
+                type: "POST",         //GET or POST or PUT or DELETE verb
+                url:  '<?=base_url()?>admin/ajax_search/get_courses_pro_by_id',         // Location of the service
+                data: 'coursesid='+id,         //Data sent to server
+                success: function (data)
+                 {//On Successful service call
+                 //alert(data);
+                    j('#course_pro').html(data);
+                 },
+        });
+}
+</script>

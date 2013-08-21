@@ -52,7 +52,7 @@ class tutor extends Admin_Controller {
         $print                      = '';
         $row                        = 5;
         
-        $data['search_input']       = '';
+        $data['search_tutor_a']       = '';
         
         $term                       = false;
         $post                       = $this->input->post(null, false);
@@ -61,14 +61,12 @@ class tutor extends Admin_Controller {
         if($post !="")
         {
             $this->session->set_flashdata('item', $post);
-            $session                    = array('post_session'=>$post);
+            $session                = array('post_session'=>$post);
             $this->session->set_userdata($session);
             $post_data = $this->session->userdata('post_session');
-            $data['search_input']       =   $post_data['term'];
-              
-            
+            $data['search_tutor_a']   =   $post_data['term'];
         }
-        
+        //$this->show->pe($data['search_tutor']);
         
         $this->load->model('Search_model');
         if($post)
@@ -77,6 +75,7 @@ class tutor extends Admin_Controller {
             $code                   = $this->Search_model->record_term($term);
             $data['code']           = $code;
         }
+        
         $data['csv_call']           = $this->input->post('csv_call');
         $data['print_call']         = $this->input->post('print_call');
         if(!empty($data['csv_call']))
@@ -90,6 +89,7 @@ class tutor extends Admin_Controller {
             $row                    = '';  
         }
         
+        $data['search_tutors']      = $this->Tutor_model->get_tutors();
 		$data['tutors']	            = $this->Tutor_model->get_tutors($row, $page, $field, $by , $term , $csv);
         //$this->show->pe($data['tutors']);
         //this is for pdf   

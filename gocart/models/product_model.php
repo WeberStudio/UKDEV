@@ -25,6 +25,7 @@ Class Product_model extends CI_Model
 	
 	function products($data=array(), $return_count=false , $csv = "")
 	{
+        
         if($csv !="")
         {
             $this->db->select('id, name, old_route, slug, description, excerpt, price, saleprice, delivery_price, seo_title, meta, google_follow, viewed');
@@ -71,25 +72,26 @@ Class Product_model extends CI_Model
 			{
 				$search	= json_decode($data['term']);
 				//if we are searching dig through some basic fields
-				if(!empty($search->term))
+				/*if(!empty($search->categories))
 				{
 					$this->db->like('name', $search->term);
 					$this->db->or_like('description', $search->term);
 					$this->db->or_like('excerpt', $search->term);
 					$this->db->or_like('sku', $search->term);
-				}
+				} */
 				
-				if(!empty($search->category_id))
+				if(!empty($search->courses))
 				{
+                    $this->db->where('id',$search->courses); 
 					//lets do some joins to get the proper category products
-					$this->db->join('category_products', 'category_products.product_id=products.id', 'right');
-					$this->db->where('category_products.category_id', $search->category_id);
-					$this->db->order_by('sequence', 'ASC');
+					//$this->db->join('category_products', 'category_products.product_id=products.id', 'right');
+					//$this->db->where('category_products.category_id', $search->category_id);
+					//$this->db->order_by('sequence', 'ASC');
 				}
-				if(!empty($search->courses_provider))
+				if(!empty($search->admin))
 				{
 					//echo $search->courses_provider; exit;
-					$this->db->where('admin_id',$search->courses_provider);
+					$this->db->where('admin_id',$search->admin);
 					
 				}
 			}
@@ -102,6 +104,7 @@ Class Product_model extends CI_Model
 			}
 			else
 			{
+                
 				$result =  $this->db->get('products');
                     if($csv !="")
                     {
@@ -221,10 +224,10 @@ Class Product_model extends CI_Model
 		if ($category_id)
 		{
 			$this->db->select('category_products.*, LEAST(IFNULL(NULLIF(saleprice, 0), price), price) as sort_price', false)->from('category_products')->join('products', 'category_products.product_id=products.id')->where(array('category_id'=>$category_id, 'enabled'=>1));
-			$this->db->order_by($by, $sort);
+			//$this->db->order_by($by, $sort);
 			
-			$result	= $this->db->limit($limit)->offset($offset)->get()->result();
-
+			//$result	= $this->db->limit($limit)->offset($offset)->get()->result();
+             $result    = $this->db->get()->result(); 
 			$contents	= array();
 			$count		= 0;
 			foreach ($result as $product)

@@ -76,17 +76,31 @@ function list_admin($admins, $current_admin_id)
         <div class="form-row control-group row-fluid">
               <div class="controls span5">
                 <input type="text" value="<?php echo $search_input;?>" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Admin Users Name, Keyword" placeholder="Search Admin Users...." class="row-fluid">
+                        if(!empty($all_admin))
+                        {
+                            echo '<select name="admin_name" onchange="get_course_provider_email()"   data-placeholder="Filter By Courses Provider Name..." class="chzn-select" id="course_provider_id">';
+                            echo '<option value="">Select Courses Provider Name</option>';
+                            foreach ($all_admin as $all_admins)
+                            {
+                                ?>
+                                <option value="<?php echo $all_admins->id; ?>" <?php if($all_admins->id == $search_name){echo 'selected';}?>><?php echo $all_admins->firstname.' ' . $all_admins->lastname; ?></option>";
+                            <?php 
+                            }
+                            echo '</select>';
+                            
+                        }
+                ?>
               </div>
               <div class="controls span5">
                 <?php
                         if(!empty($all_admin))
                         {
-                            echo '<select name="admin_id"   data-placeholder="Filter By Customer Email..." class="chzn-select" id="default-select">';
+                            echo '<select name="admin_email"   data-placeholder="Filter By Customer Email..." class="" id="course_provider_email">';
                             echo '<option value="">Select Admin User E-mail</option>';
                             foreach ($all_admin as $all_admins)
 							{
                                 ?>
-								<option value="<?php echo $all_admins->id; ?>" <?php if($all_admins->id == $search_admin){echo 'selected';}?>><?php echo $all_admins->email; ?></option>";
+								<option value="<?php echo $all_admins->id; ?>" <?php if($all_admins->id == $search_email){echo 'selected';}?>><?php echo $all_admins->email; ?></option>";
 							<?php 
                             }
 							echo '</select>';
@@ -148,3 +162,22 @@ function list_admin($admins, $current_admin_id)
     </div>
     <!-- End .row-fluid -->
   </div>
+<script type="text/javascript" language="javascript">
+function get_course_provider_email()
+{
+  
+var id  = document.getElementById('course_provider_id').value;
+ j      = jQuery.noConflict();
+ 
+ j.ajax({ 
+                type: "POST",         //GET or POST or PUT or DELETE verb
+                url:  '<?=base_url()?>admin/ajax_search/get_course_provider_email',         // Location of the service
+                data: 'course_provider_id='+id,         //Data sent to server
+                success: function (data)
+                 {//On Successful service call
+                    //alert(data);
+                    j('#course_provider_email').html(data);
+                 },
+        });
+}
+</script>
