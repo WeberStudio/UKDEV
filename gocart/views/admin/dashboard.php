@@ -110,7 +110,8 @@
                     <th class="jv no_sort"> No </th>
                     <th class="ue"> Order No </th>
                     <th> User</th>
-                    <th>Date</th>
+                    <!--<th>Date</th>-->
+					 <th> </th>
                     <th class="Yy to_hide_phone">Subtotal </th>
                   </tr>
                 </thead>
@@ -133,7 +134,7 @@
 					$exp = explode(" ", $date);
 					$exp[0];
 					$exp1 = explode("-",$exp[0]);
-					echo $exp1[2]."/".$exp1[1]."/".$exp1[0];
+					//echo $exp1[2]."/".$exp1[1]."/".$exp1[0];
 					?>
 					</td>
                     <td class="to_hide_phone"><?php echo "£".$order->subtotal;?></td>
@@ -175,7 +176,7 @@
 					$exp = explode(" ", $date);
 					$exp[0];
 					$exp1 = explode("-",$exp[0]);
-					echo $exp1[2]."/".$exp1[1]."/".$exp1[0];
+					//echo $exp1[2]."/".$exp1[1]."/".$exp1[0];
 					?>
                   </div>
                 </div>

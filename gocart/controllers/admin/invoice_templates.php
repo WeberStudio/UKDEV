@@ -35,7 +35,7 @@ class Invoice_Templates extends Admin_Controller {
 		
 		
 		/*** Left Menu Selection ***/
-		$this->session->set_userdata('active_module', 'invoice');
+		$this->session->set_userdata('active_module', 'system_templates');
 		/*** Left Menu Selection ***/
 		
 		

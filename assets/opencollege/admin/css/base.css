@@ -6798,8 +6798,12 @@ table form {
 }
 .table tbody tr:hover td, .table tbody tr:hover th {
 	cursor:pointer;
-	background-image:url("../images/b10.png");
+	background-image:url("../img/shadows/b10.png");
 	background-color:transparent !important
+}
+.table tbody tr:hover td a{
+	color:#ad103d !important;
+	font-weight:bold;
 }
 .table tbody tr.success td {
 	background-color:#4d9b4d
@@ -6873,15 +6877,15 @@ table form {
 	background-color:transparent
 }
 .table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
-background-image:url("../images/b10.png");
+background-image:url("../img/shadows/b10.png");
 background-color:transparent !important
 }
 .table-striped tbody tr:nth-child(even):hover td, .table-striped tbody tr:hover td, .table-striped tbody tr:nth-child(even):hover th, .table-striped tbody tr:hover th {
-background-image:url("../images/b10.png");
+background-image:url("../img/shadows/b10.png");
 background-color:transparent !important
 }
 .table-striped tbody tr:nth-child(odd):hover td, .table-striped tbody tr:nth-child(odd):hover th {
-background-image:url("../images/b10.png");
+background-image:url("../img/shadows/b10.png");
 background-color:transparent !important
 }
 .table-condensed {
@@ -7190,7 +7194,7 @@ html.sidebar_hover #main {
 	background-image:url("../img/shadows/b15.png")
 }
 .b10, #main ul.dropdown-menu li>a, .accordion .accordion-group .accordion-heading a, #sidebar_menu .color_0.active ul li.active, #sidebar_menu .color_1.active ul li.active, #sidebar_menu .color_2.active ul li.active, #sidebar_menu .color_3.active ul li.active, #sidebar_menu .color_4.active ul li.active, #sidebar_menu .color_5.active ul li.active, #sidebar_menu .color_6.active ul li.active, #sidebar_menu .color_7.active ul li.active, #sidebar_menu .color_8.active ul li.active, #sidebar_menu .color_9.active ul li.active, #sidebar_menu .color_10.active ul li.active, #sidebar_menu .color_11.active ul li.active, #sidebar_menu .color_12.active ul li.active, #sidebar_menu .color_13.active ul li.active, #sidebar_menu .color_14.active ul li.active, #sidebar_menu .color_15.active ul li.active, #sidebar_menu .color_16.active ul li.active, #sidebar_menu .color_17.active ul li.active, #sidebar_menu .color_18.active ul li.active, #sidebar_menu .color_19.active ul li.active, #sidebar_menu .color_20.active ul li.active, #sidebar_menu .color_21.active ul li.active, #sidebar_menu .color_22.active ul li.active, #sidebar_menu .color_23.active ul li.active, #sidebar_menu .color_24.active ul li.active, #sidebar_menu .color_25.active ul li.active, #sidebar_menu .color_26.active ul li.active, #sidebar_menu .color_27.active ul li.active, #sidebar_menu .color_light.active ul li.active, .change_color_outside:hover, .btn.btn-secondary, .btn.btn-inverse:hover, .well, .options_arrow a.dropdown-toggle, ul.messages_layout li .message_wrap, .bar_stats .content .result, #todo-list li .todo-text:hover, #todo-list li .done .todo-text {
-	background-image:url("../images/b10.png")
+	background-image:url("../img/shadows/b10.png")
 }
 .w20, #sidebar .thumb .end, #sidebar .thumb, .background_changer ul li a:hover, .container .elfinder .elfinder-cwd-wrapper {
 	background-image:url("../img/shadows/w20.png")
@@ -8175,7 +8179,7 @@ i.xxbig {
 }
 .box .content {
 	padding:10px 15px;
-	background:url("../images/b10.png");
+	background:url("../img/shadows/b10.png");
 	min-height: 175px;
 }
 .box>.description {
@@ -9653,6 +9657,8 @@ color:#333
 .users li {
 	margin:7px 0
 }
+
+
 .users .info {
 	padding:5px 0 8px
 }
