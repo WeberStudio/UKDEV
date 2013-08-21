@@ -85,13 +85,13 @@ Class Commission_model extends CI_Model
 	}
 	function search_commission ($search= array() , $csv = '')
 	{
-		if(!empty($search['categories']))
+		if(!empty($search['courses']))
 		{
 			$this->db->where('comm_level_id',$search['categories']);
 			$this->db->where('comm_level','cat_level');
 			
 		}
-		elseif(!empty($search['courses']))
+	    elseif(!empty($search['categories']))
 		{
 			$this->db->where('comm_level_id',$search['courses']);
 			$this->db->where('comm_level','course_level');
@@ -108,7 +108,7 @@ Class Commission_model extends CI_Model
         {
             
             $this->load->helper('csv');
-            query_to_csv($result, TRUE, 'sales_report.csv'); 
+            query_to_csv($result, TRUE, 'commission_report.csv'); 
             exit;
         }
         else

@@ -48,8 +48,13 @@ class Products extends Admin_Controller {
 		
 	}
 
-	function index($order_by="name", $sort_order="ASC", $code=0, $page=0)
+	/*function index($order_by="name", $sort_order="ASC", $code=0, $page=0)
 	{
+        $data['search_category']        = $this->Category_model->get_all_categories();
+        //$data['search_course']          = $this->Product_model->products();
+        $this->show->pe($this->Product_model->get_all_products());
+        //echo $this->db->last_query(); exit;
+       // exit;
         $csv                            = '';
         $print                          = '';
         $rows                           = 30;
@@ -111,7 +116,8 @@ class Products extends Admin_Controller {
 		//store the search term
 		$data['term']		            = $term;
 		$data['order_by']	            = $order_by;
-		$data['sort_order']	            = $sort_order;		
+		$data['sort_order']	            = $sort_order;
+        $data['search_course']          = $this->Product_model->products(array('term'=>$term, 'order_by'=>$order_by, 'sort_order'=>$sort_order, 'rows'=>$rows, 'page'=>$page) , false , $csv); 		
 		$data['products']	            = $this->Product_model->products(array('term'=>$term, 'order_by'=>$order_by, 'sort_order'=>$sort_order, 'rows'=>$rows, 'page'=>$page) , false , $csv);
 		
         
@@ -199,7 +205,97 @@ class Products extends Admin_Controller {
 		$this->load->view($this->config->item('admin_folder').'/includes/leftbar');
 		$this->load->view($this->config->item('admin_folder').'/products', $data);
 		$this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
-	}
+	} */
+    
+    
+    
+    function index($order_by="name", $sort_order="ASC", $code=0, $page=0)
+    {
+        
+        
+        
+        
+        $csv                            = '';
+        
+        $rows                           = 30;
+
+        $data['page_title']                = lang('products');
+        
+        $data['code']                    = $code;
+        $term                            = false;
+        $category_id                    = false;
+        
+        //get the category list for the drop menu
+        $data['categories']                = $this->Category_model->get_categories_tierd();
+        $data['admins']                    = $this->auth->get_admin_list();
+        $post                            = $this->input->post(null, false); 
+        $this->load->model('Search_model');
+        if($post)
+        {
+            $term                        = json_encode($post);
+            $code                        = $this->Search_model->record_term($term);
+            $data['code']                = $code;
+        }
+        elseif ($code)
+        {
+            $term                        = $this->Search_model->get_term($code);
+        }
+        
+        //store the search term
+        $data['term']                    = $term;
+        $data['order_by']                = $order_by;
+        $data['sort_order']              = $sort_order;
+       
+        $data['search_course']           = $this->Product_model->products(array('term'=>$term, 'order_by'=>$order_by, 'sort_order'=>$sort_order) , false , $csv);         
+        $data['search_category']         = $this->Category_model->get_all_categories(); 
+        $data['products']                = $this->Product_model->products(array('term'=>$term, 'order_by'=>$order_by, 'sort_order'=>$sort_order, 'rows'=>$rows, 'page'=>$page) , false , $csv);
+        
+        
+  
+        
+        //total number of products
+        $data['total']                    = $this->Product_model->products(array('term'=>$term, 'order_by'=>$order_by, 'sort_order'=>$sort_order), true);
+
+        
+        $this->load->library('pagination');
+        
+        $config['base_url']            = site_url($this->config->item('admin_folder').'/products/index/'.$order_by.'/'.$sort_order.'/'.$code.'/');
+        $config['total_rows']        = $data['total'];
+        $config['per_page']            = $rows;
+        $config['uri_segment']        = 7;
+        $config['first_link']        = 'First';
+        $config['first_tag_open']    = '<li>';
+        $config['first_tag_close']    = '</li>';
+        $config['last_link']        = 'Last';
+        $config['last_tag_open']    = '<li>';
+        $config['last_tag_close']    = '</li>';
+
+        $config['full_tag_open']    = '<div class="pagination"><ul>';
+        $config['full_tag_close']    = '</ul></div>';
+        $config['cur_tag_open']        = '<li class="active"><a href="#">';
+        $config['cur_tag_close']    = '</a></li>';
+        
+        $config['num_tag_open']        = '<li>';
+        $config['num_tag_close']    = '</li>';
+        
+        $config['prev_link']        = 'Prev';
+        $config['prev_tag_open']    = '<li>';
+        $config['prev_tag_close']    = '</li>';
+
+        $config['next_link']        = 'Next';
+        $config['next_tag_open']    = '<li>';
+        $config['next_tag_close']    = '</li>';
+        
+        $this->pagination->initialize($config);
+        
+        $this->load->view($this->config->item('admin_folder').'/includes/header');
+        $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
+        $this->load->view($this->config->item('admin_folder').'/products', $data);
+        $this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
+    }
+    
+
+     
 	
 	//basic category search
 	function product_autocomplete()

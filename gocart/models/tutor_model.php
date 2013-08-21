@@ -25,9 +25,10 @@ Class Tutor_model extends CI_Model
                 //if we are searching dig through some basic fields
                 if(!empty($search->term))
                 {
-                    $this->db->like('email', $search->term);
-                    $this->db->or_like('firstname', $search->term);
-                    $this->db->or_like('lastname', $search->term);
+                    $this->db->where('tutor_id',$search->term);
+                    //$this->db->like('email', $search->term);
+                    //$this->db->or_like('firstname', $search->term);
+                    //$this->db->or_like('lastname', $search->term);
                     
                 }
                   
@@ -49,7 +50,7 @@ Class Tutor_model extends CI_Model
         {
             
             $this->load->helper('csv');
-            query_to_csv($result, TRUE, 'sales_report.csv'); 
+            query_to_csv($result, TRUE, 'tutors_report.csv'); 
             exit;
         }
         else

@@ -26,8 +26,24 @@ function change_cat_status(cat_id)
 
 }
 </script>
-<?php 
-define('ADMIN_FOLDER', $this->config->item('admin_folder'));
+<?php
+define('ADMIN_FOLDER', $this->config->item('admin_folder'));  
+  function cat_dropwown($cats, $product_categories, $sub='' , $search_cat='') {
+
+    foreach ($cats as $cat):?>
+
+<option value="<?php echo $cat['category']->id;?>" <?php if($cat['category']->id == $search_cat){echo 'selected';}?> ><?php echo  $sub.$cat['category']->name; ?></option>
+<?php
+            if (sizeof($cat['children']) > 0)
+            {
+                $sub2 = str_replace('&rarr;&nbsp;', '&nbsp;', $sub);
+                $sub2 .=  '&nbsp;&nbsp;&nbsp;&rarr;&nbsp;';
+                list_categories($cat['children'], $product_categories, $sub2);
+            }
+            endforeach;
+}
+ 
+
 
 		function sort_url($heading, $by, $sort, $sorder, $admin_folder)
 		{
@@ -145,8 +161,17 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
       <div class="content">
         <div class="form-row control-group row-fluid">
               <div class="controls span5">
-                <input type="text" value="<?php echo $search_input;?>" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Categories Name" placeholder="Search Categories...." class="row-fluid">
-                
+
+              
+                <!--<input type="text" value="<?php echo $search_input;?>" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Categories Name" placeholder="Search Categories...." class="row-fluid">-->
+                 <select class="chzn-select" id="" name="term">
+                <option value=""> Categories</option>
+                 
+                    <?php
+                    foreach($search_cats as $search_cat){?>
+                    <option value="<?php echo $search_cat['id'];?>" <?php if($search_cat['id'] == $search_input){echo 'selected';}?>> <?php echo  $search_cat['name'];?></option>
+                    <?php }?>
+                </select>
               </div>
              <div class="controls span2">
                 <button class="btn" rel="tooltip" data-placement="top" data-original-title="Search" name="submit" value="search"><?php echo lang('search')?></button>

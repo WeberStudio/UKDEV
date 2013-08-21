@@ -26,14 +26,17 @@ Class Customer_model extends CI_Model
 		
 		//do we have a search submitted?
         
-        if($cvs!=''){}
+        if($cvs!='')
+        {
+            $this->db->select('id, firstname, lastname, email, phone, billing_address2, billing_address3, billing_address4, billing_address5, active, city, country, register_on');
+        }
 			if(!empty($term))
 			{
 				$search	= json_decode($term);
 				//if we are searching dig through some basic fields
-				if(!empty($search->term))
+				if(!empty($search->customer_name))
 				{
-					$this->db->like('firstname', $search->term);
+					/*$this->db->like('firstname', $search->term);
 					$this->db->or_like('lastname', $search->term);
 					$this->db->or_like('email', $search->term);
 					$this->db->or_like('phone', $search->term);
@@ -41,15 +44,16 @@ Class Customer_model extends CI_Model
 					$this->db->or_like('city', $search->term);
 					$this->db->or_like('state', $search->term);
 					$this->db->or_like('country', $search->term);
-					$this->db->or_like('gender', $search->term);
+					$this->db->or_like('gender', $search->term);*/
+                    $this->db->where('id', $search->customer_name);
 				}
 				
-				if(!empty($search->customer_id))
+				if(!empty($search->customer_email))
 				{
 					//lets do some joins to get the proper category products
 					
-					$this->db->where('id', $search->customer_id);
-					$this->db->order_by('firstname', 'ASC');
+					$this->db->where('id', $search->customer_email);
+					//$this->db->order_by('firstname', 'ASC');
 				}
 			}
 		

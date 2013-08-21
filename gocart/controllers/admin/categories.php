@@ -53,12 +53,15 @@ class Categories extends Admin_Controller {
 	{
 		
 		//Store the sort term
-        $rows                                = 15;
+        $rows                                = 25;
         $csv                                 = '';
         $print                               = '';
         $data['search_input']                = '';
         $data['csv_call']                    = $this->input->post('csv_call');
         $data['print_call']                  = $this->input->post('print_call');
+        
+        $data['search_cats']                  = $this->Category_model->get_all_categories();  
+        
         if(!empty($data['print_call']))
         {
             $print                           = '1'; 
@@ -74,11 +77,12 @@ class Categories extends Admin_Controller {
         $post                                = $this->input->post(null, false);
         if($post !="")
         {
-            $this->session->set_flashdata('item', $post);
+           $this->session->set_flashdata('item', $post);
             $session                    = array('post_session'=>$post);
             $this->session->set_userdata($session);
             $post_data = $this->session->userdata('post_session');
-            $data['search_input']       =   $post_data['term'];  
+            $data['search_input']       =   $post_data['term'];
+            
             
         }
         

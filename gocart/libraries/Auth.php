@@ -262,9 +262,12 @@ class Auth
 			{
 				$search	= json_decode($term);
 				//if we are searching dig through some basic fields
-				if(!empty($search->term))
+				if(!empty($search->admin_name))
 				{
-					$this->CI->db->like('firstname', $search->term);
+                   // echo 'admin name';
+                   // exit;
+                    $this->CI->db->where('id',$search->admin_name);
+					/*$this->CI->db->like('firstname', $search->term);
 					$this->CI->db->or_like('lastname', $search->term);
 					$this->CI->db->or_like('email', $search->term);
 					$this->CI->db->or_like('phone', $search->term);
@@ -272,15 +275,17 @@ class Auth
 					$this->CI->db->or_like('city', $search->term);
 					$this->CI->db->or_like('state', $search->term);
 					$this->CI->db->or_like('country', $search->term);
-					//$this->CI->db->or_like('gender', $search->term);
+					//$this->CI->db->or_like('gender', $search->term); */
 				}
 				
-				if(!empty($search->admin_id))
+				if(!empty($search->admin_email))
 				{
 					//lets do some joins to get the proper category products
-					
-					$this->CI->db->where('id', $search->admin_id);
-					$this->CI->db->order_by('firstname', 'ASC');
+					  //echo 'admin email';
+                    //exit;
+                      $this->CI->db->where('id',$search->admin_email);
+					//$this->CI->db->where('id', $search->admin_id);
+					//$this->CI->db->order_by('firstname', 'ASC');
 				}
 			}
 			else
@@ -314,7 +319,7 @@ class Auth
 		{
 			
 			$this->CI->load->helper('csv');
-			query_to_csv($result, TRUE, 'sales_report.csv'); 
+			query_to_csv($result, TRUE, 'Course_provider_report.csv'); 
 			exit;
 		}
 		else

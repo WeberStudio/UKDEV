@@ -55,9 +55,9 @@ class Order extends Admin_Controller {
         $csv                            = '';
         $print                          = '';
         $data['date']                   = '';
-        $data['categories']             = '';
-        $data['courses_s']              = '';
-        $data['courses_provider']       = '';
+        $data['categories_a']           = '';
+        $data['courses_a']              = '';
+        $data['courses_provider_a']     = '';
         $data['start_date']             = '';
         $data['end_date']               = '';        
 		
@@ -65,15 +65,15 @@ class Order extends Admin_Controller {
        	
 		
         $data                           = array();
-		$data['category'] 		        = $this->Category_model->get_all_categories();
-		$data['courses'] 		        = $this->Product_model->get_all_products_array();
+		$data['search_category'] 		= $this->Category_model->get_all_categories();
+		$data['search_course'] 		    = $this->Product_model->get_all_products_array();
 		$data['admins']			        = $this->auth->get_admin_list();
 		$data['id'] 			        = $id;
         //search prefill
         $data['date']                   = $this->input->post('date');
-        $data['categories']             = $this->input->post('categories');
-        $data['courses_s']              = $this->input->post('courses');
-        $data['courses_provider']       = $this->input->post('courses_provider');
+        $data['categories_a']           = $this->input->post('categories');
+        $data['courses_a']              = $this->input->post('courses');
+        $data['courses_provider_a']     = $this->input->post('courses_provider');
         $data['start_date']             = $this->input->post('start_date');
         $data['end_date']               = $this->input->post('end_date');
 		
@@ -97,11 +97,11 @@ class Order extends Admin_Controller {
         {
             $print                      = '1'; 
             $rows                       = '';  
-        }
-		
-		if($search['categories']!="" || $search['courses']!="" || $search['courses_provider']!="" || $search['date']!="" || $search['start_date']!="" || $search['end_date']!="" )
+        } 
+		 $post                                = $this->input->post(null, false);
+		if($post!="" )
 		{
-			
+			   
 			$data['orders']			    = $this->Order_model->search_order($search , $csv);
 			
 		}
@@ -119,6 +119,7 @@ class Order extends Admin_Controller {
 		
 		else
 		{
+            
 		$data['orders']				    = $this->Order_model->get_orders($search,$sort_by,$sort_order,$rows,$page , $csv);
 		
 		}
@@ -178,7 +179,7 @@ class Order extends Admin_Controller {
             $this->mpdf->Output('sales_report.pdf', 'I');            
         
         exit;
-        }
+        } 
         
         
 		$this->load->library('pagination');	

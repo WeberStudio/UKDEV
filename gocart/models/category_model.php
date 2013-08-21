@@ -52,8 +52,9 @@ Class Category_model extends CI_Model
             //if we are searching dig through some basic fields
             if(!empty($search->term))
             {
-                $this->db->like('name', $search->term);
-                $this->db->or_like('publish_by_super', $search->term);
+                $this->db->where('id' , $search->term);
+                //$this->db->like('name', $search->term);
+                //$this->db->or_like('publish_by_super', $search->term);
             }
             
             
