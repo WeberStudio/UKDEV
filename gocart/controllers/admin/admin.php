@@ -430,4 +430,24 @@ class Admin extends Admin_Controller
 			return TRUE;
 		}
 	}
+	
+	
+	function admin_view($id = false)
+	{
+		$data['admin']	= $this->auth->get_admin($id);
+
+		//$this->show->pe($data['admin']);
+		//if the customer does not exist, redirect them to the customer list with an error
+		if (!$data['admin'])
+		{
+			$this->session->set_flashdata('error', lang('error_not_found'));
+			redirect($this->config->item('admin_folder').'/admin');
+		}
+		
+		
+		$this->load->view($this->config->item('admin_folder').'/includes/header');
+        $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
+		$this->load->view($this->config->item('admin_folder').'/admin_details_view', $data);
+        $this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
+	}
 }

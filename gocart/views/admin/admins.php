@@ -47,6 +47,8 @@ function list_admin($admins, $current_admin_id)
 				<td><?php echo $admin->access; ?></td>             
 				<td>
                     <div class="btn-group" style="float:left;">
+					
+						<a class="btn" href="<?php echo site_url(ADMIN_FOLDER.'/admin/admin_view/'.$admin->id); ?>" rel="tooltip" data-placement="top" data-original-title="View Admin Details"><i class="icon-eye-open"></i>View</a>
                     	<a class="btn" href="<?php echo site_url(ADMIN_FOLDER.'/admin/form/'.$admin->id);?>"><i class="icon-pencil"></i> <?php echo lang('edit');?></a>    
 						<?php                                
                         if ($current_admin_id != $admin->id){ ?>
@@ -67,19 +69,19 @@ function list_admin($admins, $current_admin_id)
       <div class="title">
        <?php echo form_open($this->config->item('admin_folder').'/admin/index', 'class="form-horizontal row-fluid" ');?>
         <h4> <i class="icon-book"></i><span>Search Admin Users
-        <input type="submit"  class="btn" name="csv_call" value="Courses Provider Report (CSV)" >
-        <input type="submit" class="btn" name="print_call" value="Courses Provider Report (Print)">  
+        <input type="submit"  class="btn" name="csv_call" value="Admin Users Report (CSV)" >
+        <input type="submit" class="btn" name="print_call" value="Admin Users Report (Print)">  
         
         </span> </h4>
       </div>
       <div class="content">
         <div class="form-row control-group row-fluid">
               <div class="controls span5">
-                <input type="text" value="<?php echo $search_input;?>" id="with-tooltip" rel="tooltip" data-placement="top" name="term" data-original-title="Search By Admin Users Name, Keyword" placeholder="Search Admin Users...." class="row-fluid">
+                <?php
                         if(!empty($all_admin))
                         {
-                            echo '<select name="admin_name" onchange="get_course_provider_email()"   data-placeholder="Filter By Courses Provider Name..." class="chzn-select" id="course_provider_id">';
-                            echo '<option value="">Select Courses Provider Name</option>';
+                            echo '<select name="admin_name" onchange="get_course_provider_email()"   data-placeholder="Filter By Admin Users Name..." class="chzn-select" id="course_provider_id">';
+                            echo '<option value="">Select Admin Users Name</option>';
                             foreach ($all_admin as $all_admins)
                             {
                                 ?>

@@ -6801,10 +6801,7 @@ table form {
 	background-image:url("../img/shadows/b10.png");
 	background-color:transparent !important
 }
-.table tbody tr:hover td a{
-	color:#ad103d !important;
-	font-weight:bold;
-}
+
 .table tbody tr.success td {
 	background-color:#4d9b4d
 }

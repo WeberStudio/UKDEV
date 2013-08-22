@@ -358,6 +358,29 @@ class Customers extends Admin_Controller {
 		}
 	}
 	
+	
+	
+	
+	function customer_view($id = false)
+	{
+		$data['customer']		= $this->Customer_model->get_customer($id);
+
+		//$this->show->pe($data['customer']);
+		//if the customer does not exist, redirect them to the customer list with an error
+		if (!$data['customer'])
+		{
+			$this->session->set_flashdata('error', lang('error_not_found'));
+			redirect($this->config->item('admin_folder').'/customers');
+		}
+		
+		
+		$this->load->view($this->config->item('admin_folder').'/includes/header');
+        $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
+		$this->load->view($this->config->item('admin_folder').'/customer_detail_view', $data);
+        $this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
+	}
+	
+	
 	function addresses($id = false)
 	{
 		$data['customer']		= $this->Customer_model->get_customer($id);
