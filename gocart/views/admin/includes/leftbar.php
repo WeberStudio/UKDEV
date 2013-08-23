@@ -16,11 +16,15 @@
 	$active_report		= '';
 	$report_link		= '';
 	$system_templates	= '';
-	$active_template	= '';
-	$active_template_link= '';
+	$active_template	= '';	
 	$user_management	 = '';
 	$active_promotions	 = '';
 	$coupons_links		 = '';
+	$active_template_link			= '';
+	$active_assignment_management	= '';
+	$assignment_management_links	= '';
+	
+	
 	$active = $this->session->userdata('active_module');
 	//print_r($active);
     if($active=='dashboard')
@@ -78,6 +82,11 @@
 	{
 		 $active_promotions		= 'opened';
 		 $coupons_links			= 'in collapse';
+	}
+	else if($active == 'tutors')
+	{
+		 $active_assignment_management	= 'opened';
+		 $assignment_management_links	= 'in collapse';
 	}	
 	
 ?>
@@ -170,10 +179,10 @@
                 
                 <li class="accordion-group color_25 <?php echo $active_report ; ?>" onclick="set_module('report')" >
                     <a class="accordion-toggle widgets collapsed " data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse11">
-                        <img src="<?=base_url().ASSETS_PATH?>img/menu_icons/forms.png"><span>Reports</span></a>
+                        <img src="<?=base_url().ASSETS_PATH?>img/menu_icons/forms.png"><span>General Reports</span></a>
                     <ul id="collapse11" class="accordion-body collapse <?php echo $report_link; ?>">
-                        <li><a href="<?=base_url().ADMIN_PATH?>reports/stats_product_viewed">Products Viewed</a></li>
-                        <li><a href="<?=base_url().ADMIN_PATH?>reports/product_purchased">Products Purchased</a></li>                        
+                        <li><a href="<?=base_url().ADMIN_PATH?>reports/stats_product_viewed">Courses Viewed</a></li>
+                        <li><a href="<?=base_url().ADMIN_PATH?>reports/product_purchased">Purchased Courses</a></li>                        
 						<li><a href="<?=base_url().ADMIN_PATH?>reports/">Sales Report</a></li>
                         <li><a href="<?=base_url().ADMIN_PATH?>reports/stats_customer">Customer Orders-Total</a></li>
                     </ul>
@@ -182,13 +191,21 @@
 				<li class="accordion-group color_3 <?php echo $active_sales; ?>"> <a class="accordion-toggle widgets collapsed" data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse2" onclick="set_module('sales')">
 					<img src="<?=base_url().ASSETS_PATH?>img/menu_icons/widgets.png"><span>Sales Management</span></a>
 					<ul id="collapse2" class="accordion-body collapse <?php echo $sales_links; ?>">
-						<li><a href="<?=base_url().ADMIN_PATH?>customers">Customers</a></li>                           
-						<li><a href="<?=base_url().ADMIN_PATH?>tutor">Tutors</a></li>
-						<li><a href="<?=base_url().ADMIN_PATH?>tutor/requested_tutor">Requested Tutors</a></li>
+						<li><a href="<?=base_url().ADMIN_PATH?>customers">Customers</a></li>
 						<li><a href="<?=base_url().ADMIN_PATH?>order">Orders</a></li>							
 						<li><a href="<?=base_url().ADMIN_PATH?>forums">Forums</a></li>                            
 					</ul>
 				</li>
+				
+				<li class="accordion-group color_3 <?php echo $active_assignment_management; ?>"> <a class="accordion-toggle widgets collapsed" data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse9" onclick="set_module('assignment_management')">
+					<img src="<?=base_url().ASSETS_PATH?>img/menu_icons/widgets.png"><span>Assignment Management</span></a>
+					<ul id="collapse9" class="accordion-body collapse <?php echo $assignment_management_links; ?>">						             
+						<li><a href="<?=base_url().ADMIN_PATH?>tutor">Tutors</a></li>
+						<li><a href="<?=base_url().ADMIN_PATH?>tutor/requested_tutor">Students Request for Tutors</a></li>						                           
+					</ul>
+				</li>
+				
+				
                 <li class="accordion-group color_9 <?=$active_promotions?>" >
 					<a class="accordion-toggle widgets collapsed" data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse8" onclick="set_module('promotions')">
 					<img src="<?=base_url().ASSETS_PATH?>img/menu_icons/others.png"><span>Promotions</span></a>

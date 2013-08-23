@@ -29,6 +29,7 @@ class Dashboard extends Admin_Controller {
 		$this->load->model('Order_model');
 		$this->load->model('Customer_model');
 		$this->load->model('Product_model');
+		$this->load->model('Notifications_model');
 		$this->load->helper('date');		
 		$this->lang->load('dashboard');
 		$this->load->model('dashboard_model');
@@ -91,9 +92,21 @@ class Dashboard extends Admin_Controller {
 		$data['products_d'] 				= $this->Product_model->get_deactive_products_array();
 		$data['products_d']					= count($data['products_d']);
 		
+		// New Customer Notifications
+		$data['customer_notifi'] 			= $this->Notifications_model->get_customer_viewed();
+		$data['customer_notifi']			= count($data['customer_notifi']);	
 		
+		// New Users Notifications
+		$data['users_notifi'] 			= $this->Notifications_model->set_users_viewed();
+		$data['users_notifi']			= count($data['users_notifi']);	
 		
+		// New Users Notifications
+		$data['tutors_notifi'] 			= $this->Notifications_model->set_users_viewed();
+		$data['tutors_notifi']			= count($data['tutors_notifi']);	
 		
+		// New Orders Notifications
+		$data['orders_notifi'] 			= $this->Notifications_model->set_orders_viewed();
+		$data['orders_notifi']			= count($data['orders_notifi']);	
 		
 		$this->load->view($this->config->item('admin_folder').'/includes/header');
 		$this->load->view($this->config->item('admin_folder').'/includes/leftbar');

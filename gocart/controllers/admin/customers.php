@@ -26,18 +26,17 @@ class Customers extends Admin_Controller {
 		$this->session->set_userdata('active_module', 'sales');
 		/*** Left Menu Selection ***/
 				
-		$this->load->model(array('Customer_model', 'Location_model'));
-		
+		$this->load->model(array('Customer_model', 'Location_model', 'Notifications_model'));		
 		$this->load->helper('formatting_helper');
 		$this->lang->load('customer');
 	
 	}
 	
-	function index($field='lastname', $by='ASC', $page=0)
+	function index($field='id', $by='DESC', $page=0)
 	{
 		
 		$cvs                                = "";
-        $row                                =25;
+        $row                                = 25;
         $print                              = '';
         $data['search_customer_name']       = '';
         $data['search_customer_email']      = '';
@@ -178,6 +177,10 @@ class Customers extends Admin_Controller {
 		$data['page']	            = $page;
 		$data['field']	            = $field;
 		$data['by']		            = $by;
+		
+		//Destroy Notifications
+		$this->Notifications_model->set_customer_viewed();
+		
 		$this->load->view($this->config->item('admin_folder').'/includes/header');
         $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
 		$this->load->view($this->config->item('admin_folder').'/customers', $data);

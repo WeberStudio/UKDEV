@@ -153,7 +153,7 @@ class PayPal {
 
 		$query = $this->buildQuery($data);
 
-        DebugBreak();
+        //DebugBreak();
 		$result = $this->response($query);
 
 		if (!$result) return false;
