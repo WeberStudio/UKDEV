@@ -278,6 +278,54 @@ Class Category_model extends CI_Model
         //echo "<pre>";print_r($result->result());
         return $result->result();       
     }
+    
+    function fornt_ent_search_cat($cat_name =false)
+    {   
+        $this->db->select('*'); 
+        $this->db->like('name', $cat_name);
+        if($cat_name==false)
+        {
+            $this->db->limit(6); 
+        }
+        
+        if($cat_name!=false)
+        {
+            $this->db->where('parent_id', '0');    
+        }
+        
+        $result = $this->db->get('categories');
+        return $result->result(); 
+    }
+    
+    
+    function fornt_ent_search_subcat($cat_name =false)
+    {   
+        $this->db->select('*'); 
+        $this->db->like('name', $cat_name);
+        $this->db->where('parent_id !=', '0');
+        $result = $this->db->get('categories');
+        return $result->result(); 
+    }
+    function fornt_ent_search_keywords($cat_name =false)
+    {   
+        $this->db->select('*'); 
+        $this->db->like('name', $cat_name);
+        $this->db->or_like('meta', $cat_name);
+        $this->db->or_like('meta_key', $cat_name); 
+        $this->db->or_like('seo_title', $cat_name);
+        $result = $this->db->get('categories');
+        return $result->result(); 
+    }
+    function fornt_ent_search_price($cat_name =false)
+    {   
+        $this->db->select('*'); 
+        $this->db->like('price', $cat_name);
+        
+        $result = $this->db->get('products');
+        return $result->result(); 
+    }
+
+    
 	
 	/*function course_count($id)
 	{

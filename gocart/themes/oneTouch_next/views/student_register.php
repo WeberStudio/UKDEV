@@ -1,5 +1,12 @@
 <?php include('main_header.php')?>   
-    <body>
+<body>
+    <style>
+       .alert-error
+       {
+                 background-color:#F88C8C;
+                 color:#FFFFFF;
+       }      
+    </style>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
@@ -115,61 +122,61 @@ if(validation_errors() != '')
                                         
                                         <div class="col6">
                                         <p class="username"> First Name</p>
-                                        <input type="text" name="firstname" id="Name" value="" required />
+                                        <input type="text"  name="firstname" id="Name" value="<?= set_value('firstname'); ?>" required />
                                         </div>
                                         
                                         <div class="col6">
                                         <p class="username">Last Name</p>
-                                        <input type="text" name="lastname" id="LastName" value="" required />
+                                        <input type="text" name="lastname" id="LastName" value="<?php echo set_value('lastname'); ?>" required />
                                         </div>
                                         
                                         <div class="col12 padding-left">
                                         <p class="username"> Company </p>
-                                        <input type="text" name="company" id="Company" value="" required />
+                                        <input type="text" name="company" id="Company" value="<?php echo set_value('company'); ?>" required />
                                         </div>
                                         
                                         
                                         
                                         <div class="col6">
                                         <p class="username"> Address</p>
-                                        <input type="text" name="address1" id="Address1" value="" required />
+                                        <input type="text" name="address1" id="Address1" value="<?php echo set_value('address1'); ?>" required />
                                         </div>
                                         
                                         <div class="col6">
                                         <p class="username"> Address (optional)</p>
-                                        <input type="text" name="address2" id="Address2" value=""  />
+                                        <input type="text" name="address2" id="Address2" value="<?php echo set_value('address2'); ?>"  />
                                         </div>
                                         
                                         
                                         
                                         <div class="col6">
                                         <p class="username"> City</p>
-                                        <input type="text" name="city" id="City" value="" required />
+                                        <input type="text" name="city" id="City" value="<?php echo set_value('city'); ?>" required />
                                         </div>
                                         
                                         <div class="col6">
                                         <p class="username"> Postal Code</p>
-                                        <input type="text" name="zip" id="PoastalCode" value="" required />
+                                        <input type="text" name="zip" id="PoastalCode" value="<?php echo set_value('zip'); ?>" required />
                                         </div>
                                         
                                         <div class="col6">
                                         <p class="username"> Country</p>
-                                            <?php echo form_dropdown('country_id',$countries_menu, @$customer['country'], ' onchange="get_county()" id="country_id" class="select-country-state" ');?>
+                                            <?php echo form_dropdown('country_id',$countries_menu, set_value('country_id', $country_id), ' onchange="get_county()" id="country_id" class="select-country-state" ');?>
                                         </div>
                                         
                                         <div class="col6">
                                         <p class="username"> State/County</p>
-                                         <?php echo form_dropdown('zone_id',$zones_menu, @$customer['state'], 'id="f_zone_id" class="select-country-state"');?> 
+                                         <?php echo form_dropdown('zone_id',$zones_menu, set_value('zone_id', $zone_id), 'id="f_zone_id" class="select-country-state"');?> 
                                         </div>
                                       
                                           <div class="col6">
                                         <p class="username"> Phone</p>
-                                        <input type="text" name="phone" id="Phone" value="" required />
+                                        <input type="text" name="phone" id="Phone" value="<?php echo set_value('phone'); ?>" required />
                                         </div>
                                         
                                         <div class="col6">
                                         <p class="username"> E-mail</p>
-                                        <input type="email" name="email" id="Email" value="" required />
+                                        <input type="email" name="email" id="Email" value="<?php echo set_value('email'); ?>" required />
                                         </div>
                                         
                                         <div class="col6">

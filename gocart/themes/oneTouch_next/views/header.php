@@ -126,11 +126,35 @@
                           
                               
                       </article>
-                      
+<script type="">
+function category_search(name)
+{
+    var search = name;
+    var search_field = $('#search').val();
+    //alert(search_field);
+     if(search_field != '')
+     {    
+         $('#search_by').val(search); 
+         $('#search-form').submit()
+         //alert(search_field);
+        
+     }
+     else
+     {
+       alert("search field is empty");  
+     }
+    return false;
+}
+
+
+
+
+</script>                      
                        <article class="col4 filters-res">
-                          <form id="search-form" action="">
-                              <input type="text" id="search" value="" />
-                            <input type="submit" class="button search-btn" value="filters" />
+                          <form method="post" name="search_form" id="search-form" action="<?=base_url().'Search'?>">
+                              <input name="search_field" type="text" id="search" value="" />
+                              <input type="hidden" value="" name="search_by" class="" id="search_by">
+                            <input type="submit"  class="button search-btn" value="filters" />
                             
                             <div class="arrow_down">
                             </div>
@@ -140,16 +164,16 @@
                            <div class="filters-menu round col4">
                           
                             <ul>
-                                <li><a href="#">Search by category</a></li>
-                                <li><a href="#">Search by sub-category</a></li>
-                                <li><a href="#">Search by keyword</a></li>
-                                <li><a href="#">Search by total price</a></li>
-                                <li><a href="#">Search by attributed price options</a>
+                                <li><a id="category" href="javascript:void(0);" onclick="category_search('category');" >Search by category</a></li>
+                                <li><a id="sub_category" href="javascript:void(0);" onclick="category_search('sub_cat');">Search by sub-category</a></li>
+                                <li><a id="keyword" href="javascript:void(0);" onclick="category_search('keyword');">Search by keyword</a></li>
+                                <li><a id="price" href="javascript:void(0);" onclick="category_search('price');">Search by total price</a></li>
+                                <!--<li><a href="#">Search by attributed price options</a>
                                     <ul>
                                         <li><a href="#">paper </a></li>
                                         <li><a href="#">online </a></li>
                                     </ul>
-                                </li>
+                                </li>-->
                             </ul>
                             
                           </div>

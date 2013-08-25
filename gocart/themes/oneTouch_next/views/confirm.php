@@ -78,12 +78,13 @@
                             <p><?=$country_id;?></p> 
                             <p><?=$zone_id;?></p> 
                             <p><?=$phone;?></p>
-                            <p><?=$email;?></p> 
+                            <p><?=$email;?></p>
+                            <p style="float: right;" class=""><a href="<?=base_url().'checkout/step2'?>">Edit</a></p>  
                             </div>
                              </div>
-                            <hr>
+                             
                             <div class="col12">
-                            <div class="col5">
+                            <div class="col5"> 
                             <h3>Card Billing Address</h3>
                             
                             <p><?=$b_firstname;?></p>
@@ -99,9 +100,10 @@
                             <p><?=$b_zone_id;?></p> 
                             <p><?=$b_phone;?></p>
                             <p><?=$b_email;?></p>
+                             <p style="float: right;" class=""><a href="<?=base_url().'checkout/step2'?>">Edit</a></p>
                              </div>
                              </div>
-                            <hr>
+
                             <div class="col12">
                             <div class="col5">
                             
@@ -120,11 +122,12 @@
                             <p><?=$d_zone_id;?></p> 
                             <p><?=$d_phone;?></p>
                             <p><?=$d_email;?></p>
+                            <p style="float: right;" class=""><a href="<?=base_url().'checkout/step2'?>">Edit</a></p> 
                             </div>
                             </div>
-                            <hr>
+                               
                             
-                            <p class="button"><a href="#">Go Back</a></p>
+                            <p class="button"><a href="<?=base_url().'checkout/step2'?>">Go Back</a></p>
                             
                             <p class="button" style="float:right"><a href="<?=base_url().'checkout/step4';?>">Next Step</a></p>
                             
