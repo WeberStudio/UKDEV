@@ -464,6 +464,19 @@ p.sep a:hover
 {
 	background:rgba(45,50,145,0.25);
 }
+.blue-featured-4
+{
+    background:rgba(45,50,145,0.5);
+}
+.blue-featured-5
+{
+    background:rgba(45,50,145,0.25);
+}
+.blue-featured-6
+{
+    background:rgba(45,50,145,.7);
+}
+
 
 .seperator
 {

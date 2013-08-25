@@ -355,7 +355,22 @@ class Checkout extends Front_Controller {
      }
      function step4()
      {
-         $this->session->unset_userdata('complite_address');
+         $data['customer']                              = $this->go_cart->customer();
+          $data['customer']['bill_address']             = array();
+          $data['customer']['ship_address']             = array();
+          $data['customer']['company']                  = '';
+          $data['customer']['firstname']                = '';
+          $data['customer']['lastname']                 = '';
+          $data['customer']['phone']                    = '';
+          $data['customer']['city']                     = '';
+          $data['customer']['post_code']                = '';
+         $data['customer']['address_street']            = '';
+          $data['customer']['address_line']             = '';
+          $data['customer']['email']                    = '';
+          $data['customer']['group_id']                 = '';
+          $this->session->unset_userdata('complite_address'); 
+        
+         //$this->session->unset_userdata('complite_address');
          
        $this->load->view('payment');  
      }

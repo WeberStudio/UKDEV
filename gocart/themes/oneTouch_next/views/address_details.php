@@ -363,7 +363,7 @@ $b_phone        = array('id'=>'b_phone', 'class'=>'input-text', 'name'=>'b_phone
                                         <input type="email" value="<?=$d_email?>" name="d_email" id="Email3" value="" required />
                                         </div>
                                         
-                                      <p class="button"><a href="#">Go Back</a></p>
+                                      <p class="button"><a href="<?=base_url().'checkout'?>">Go Back</a></p>
                                       <input type="submit" name="confirm" class="action primary submit" value="Next Step" style="float:right;" />
                                              
                                     </fieldset>
