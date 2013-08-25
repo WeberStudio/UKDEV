@@ -26,7 +26,7 @@
                     <div class="col10" id="top-menu">
                         <ul>
                             <li <?php if(isset($menu_blue) && $menu_blue == 'home'){echo 'class="current-menu-item"';}?> ><a href="<?= base_url();?>cart">Home</a></li>
-                            <li <?php if(isset($menu_blue) && $menu_blue == 'allcourses'){echo 'class="current-menu-item"';}?> id="all-courses"><a href="#">All Courses</a></li>
+                            <li <?php if(isset($menu_blue) && $menu_blue == 'allcourses'){echo 'class="current-menu-item"';}?> id="all-courses" onmousemove="submenushow();" onmouseover="submenuhide();"><a href="#">All Courses</a></li>
                             <li><a href="<?=base_url()?>blog">Blog</a></li>
                             <li <?php if(isset($menu_blue) && $menu_blue == 'tutors'){ echo 'class="current-menu-item"';}?> ><a href="<?=base_url()?>tutors">Tutors</a></li>
                             <li <?php if(isset($menu_blue) && $menu_blue == 'faq'){echo 'class="current-menu-item"';}?> ><a href="<?=base_url()?>faq">FAQs</a></li>
@@ -72,10 +72,10 @@
                                         <div class="ca-item">
                                         <a href="<?php echo base_url().$menu_category['category']->slug?>">
                                         <?php
-                                        $file_path =   realpath('.')."\uploads\images\small\\".$menu_category['category']->image;
+                                        $file_path =   realpath('.')."/uploads/images/small/".$menu_category['category']->image;
                                         if(file_exists($file_path))
                                         {?>
-                                            <img src="<?php echo catogery_img('images/small/'.$menu_category['category']->image); ?>"  alt="" />
+                                            <img style="height:90px" src="<?php echo catogery_img('images/small/'.$menu_category['category']->image); ?>"  alt="" />
                                             <?php  }
                                             else
                                            {?>
@@ -168,3 +168,5 @@
                    
                     
             </header>
+
+            

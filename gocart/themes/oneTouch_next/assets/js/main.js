@@ -1,5 +1,5 @@
 
-$('#all-courses').click(function(e){
+/*$('#all-courses').click(function(e){
 	
 	e.preventDefault();
 	
@@ -10,13 +10,14 @@ $('#all-courses').click(function(e){
 	{
 		submenushow();
 	}
-});
+});  */
 function submenushow(){
 	$("#sub-menu").stop().animate({
 		height: "195px",
 	},300);
 };
 function submenuhide(){	
+    alert();
 	$("#sub-menu").stop().animate({
 		height: "0px",
 	},300);
