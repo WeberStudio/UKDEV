@@ -44,6 +44,7 @@ class Location_model extends CI_Model
 		$this->db->where('id', $id);
 		return $this->db->get('country_zone_areas')->row();
 	}
+    
 	
 	//zones
 	function save_zone($data)

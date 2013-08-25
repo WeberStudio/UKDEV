@@ -97,11 +97,8 @@ class Secure extends Front_Controller {
 		$this->load->view('process_checkout', $data);
 	}
 	// login 2 content end
-	function login($ajax = false)
+function login($ajax = false)
 	{
-		 //   DebugBreak();
-        //$data['seo_title']		= "Custormer Login";
-		//find out if they're already logged in, if they are redirect them to the my account page
 		$redirect    = $this->Customer_model->is_logged_in(false, false);     
 		
 		//if they are logged in, we send them back to the my_account by default, if they are not logging in
@@ -110,12 +107,9 @@ class Secure extends Front_Controller {
 		{
 			redirect('dashboard');
 		}
-		
 		$data['page_title']	= 'Login';
-		//$data['gift_cards_enabled'] = $this->gift_cards_enabled;
-		
 		$this->load->helper('form');
-		$data['redirect']	= $this->session->flashdata('redirect');
+		
 		
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[128]');
 		$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
@@ -134,78 +128,25 @@ class Secure extends Front_Controller {
 			$password	= $this->input->post('password');
 			$remember   = $this->input->post('remember');
 			$redirect	= $this->input->post('redirect');
-			$review 	= $this->input->post('review_login');
-			$login		= $this->Customer_model->login($email, $password, $remember);
+			
+			$login		= $this->Customer_model->login($email, $password);
 			if ($login)
 			{
-				if($review)
-				{
-					
-					$open = array('open'=>'1');
-					$this->session->set_userdata($open);
-					
-					redirect($this->input->post('slug'));
-				}
-				
-				//echo " found it"; exit;
-               // DebugBreak() ;
-                //echo '<pre>';print_r($this->customer);'</pre>'; exit();
-                if ($redirect == '')
-                {
-                    //if there is not a redirect link, send them to the my account page
-                    
-                    //echo "<pre>"; print_r($this->go_cart->customer());exit;
-                    //$customer_details = $this->go_cart->customer();
-                    //echo $customer_details['firstname']..;exit;
-                     //echo '<pre>';print_r($this->customer);'</pre>'; exit();  
-                    $redirect = 'dashboard';
-                }
                 
-                
-				//to login via ajax
-				if($ajax)
-				{
-					die(json_encode(array('result'=>true)));
-				}
-				else
-				{
-					redirect($redirect);
-				}
-				
-				
-			}
-			else
-			{
-				//this adds the redirect back to flash data if they provide an incorrect credentials
-				
-				
-				//to login via ajax
-				if($ajax)
-				{
-					die(json_encode(array('result'=>false)));
-				}
-				else
+              redirect('secure/login');  
+            }
+            else
 				{
 					$this->session->set_flashdata('redirect', $redirect);
 					$this->session->set_flashdata('error', lang('login_failed'));
 					
 					redirect('secure/login');
 				}
-			}
-		}
-		
-		// load other page content 
-		//$this->load->model('banner_model');
-		$this->load->helper('directory');
-	
-		//if they want to limit to the top 5 banners and use the enable/disable on dates, add true to the get_banners function
-		//$data['banners']	= $this->banner_model->get_banners();
-		//$data['ads']		= $this->banner_model->get_banners(true);
-		$data['categories']	= $this->Category_model->get_categories_tierd(0);
 			
+		}
 		$this->load->view('login', $data);
 	}
-	}
+	} 
 	
 	function logout()
 	{
@@ -272,10 +213,10 @@ class Secure extends Front_Controller {
 		if ($this->form_validation->run() == FALSE)
 		{
 			//if they have submitted the form already and it has returned with errors, reset the redirect
-			if ($this->input->post('submitted'))
-			{
-				$data['redirect']	= $this->input->post('redirect');				
-			}
+			//if ($this->input->post('submitted'))
+			//{
+				//$data['redirect']	= $this->input->post('redirect');				
+			//}
 			
 			// load other page content 
 			//$this->load->model('banner_model');
@@ -286,7 +227,7 @@ class Secure extends Front_Controller {
 			$data['countries_menu']	= $this->Location_model->get_countries_menu();
 			$data['error'] = validation_errors();
 			
-			$this->load->view('register', $data);
+			$this->load->view('student_register', $data);
 			
 		}
 		else
@@ -317,7 +258,7 @@ class Secure extends Front_Controller {
 			//if we don't have a value for redirect
 			if ($redirect == '')
 			{
-				$redirect = 'dashboard/my_account';
+				$redirect = 'cart';
 			}
 			
 			// save the customer info and get their new id

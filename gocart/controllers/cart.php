@@ -20,7 +20,7 @@ class Cart extends Front_Controller {
 
 
 
-	function index()
+	/*function index()
 
 	{
 
@@ -32,16 +32,48 @@ class Cart extends Front_Controller {
 
        $this->load->view('index', $data);
 
-	}
+	}*/
+    
+    function index()
 
-    function   allcourses($page=0,$row=16)
     {
 
+        //$this->load->helper('directory');
+        //$data['homepage']            = true;
+        //$data['allProduct']         = $this->Product_model->get_products_catogery_wise();
+        //$data['pages']                = $this->Page_model->get_pages_by_position('grid-page');
+       // echo '<pre>';print_r($data['allProduct']);
+       $data['menu_blue'] = 'home';
+       $parent                      = 0;
+       $position                    = 'grid-page';
+       $data['special_pages']       = $this->Page_model->get_page('1'); 
+       $data['menu_categories']     = $this->Category_model->get_categories_tierd($parent);
+       
+       $data['grid_pages']          = $this->Page_model->get_pages_by_position($position);
+ 
+      //$this->show->pe($data['menu_categories'] );
+
+       $this->load->view('index', $data);
+
+    }
+
+    function   allcourses($page=0,$row=12)
+    {
+        $data['menu_blue'] = 'allcourses';
+        
+         $count =   count($this->Category_model->get_all_categories());
          
+           
+            
+         $data['categories']     = $this->Category_model->get_all_categories($page , $row); 
+         
+         //$this->show->pe($data['categories']);   
+          //$data['allProduct']             = $this->Product_model->get_products_catogery_wise();
+          //$this->show->pe($data['categories']);
 		//$this->load->helper('directory');       
         //$data['homepage']            	= true;
-        $count =   count($this->Product_model->count_all_published_products());
-         $data['allProduct']         	= $this->Product_model->get_products_catogery_wise($row,$page);
+        //$count =   count($this->Product_model->count_all_published_products());
+         //$data['allProduct']         	= $this->Product_model->get_products_catogery_wise($row,$page);
          $this->load->library('pagination');
 
         $config['base_url']             = base_url().'/cart/allcourses/';
@@ -57,9 +89,9 @@ class Cart extends Front_Controller {
         $config['last_tag_open']        = '<li>';
         $config['last_tag_close']       = '</li>';
 
-        $config['full_tag_open']        = '<nav class="page-nav"><div class=""><ul class="menu1">';
-        $config['full_tag_close']       = '</ul></div></nav>';
-        $config['cur_tag_open']         = '<li class="active"><a href="#">';
+        $config['full_tag_open']        = '<ul class="">';
+        $config['full_tag_close']       = '</ul>';
+        $config['cur_tag_open']         = '<li class=""><a href="#">';
         $config['cur_tag_close']        = '</a></li>';
         
         $config['num_tag_open']         = '<li>';
@@ -73,9 +105,9 @@ class Cart extends Front_Controller {
         $config['next_tag_open']        = '<li>';
         $config['next_tag_close']       = '</li>';
         
-        $this->pagination->initialize($config); 
+        $this->pagination->initialize($config);
 
-	   $this->load->view('allCourses', $data);  
+	   $this->load->view('allCourses' , $data);  
 
     }
 
@@ -89,6 +121,8 @@ class Cart extends Front_Controller {
 			show_404();
 		}
 		$this->load->model('Page_model');
+        $data['menu_blue']          = $data['page']->slug;
+        //$this->show->pe($data['menu_blue']); 
 		$data['base_url']			= $this->uri->segment_array();
 		$data['fb_like']			= true;
 		$data['page_title']			= $data['page']->title;
@@ -524,31 +558,26 @@ class Cart extends Front_Controller {
 
 	function product($id)
 	{
-		//print_r($_POST['productID']);
-		//exit;
-		////////////////product view section start/////////////
-		if(isset($_POST['productID']))
-		{
-		$product 			= $this->Product_model->get_product($id);
-		$viewed 			= $product->viewed;
-		$save['id'] 		= $id;
-		$save['viewed']		= $viewed + 1;
-		$this->Product_model->save($save);
-		}
-		
-		//echo $viewed;
-		//exit;
-		////////////////product view section end/////////////
-		
-		
+        $data['special_pages']          = $this->Page_model->get_page('9'); 
+
+        ////////////////product view section start/////////////
+        if(isset($_POST['productID']))
+        {
+        $product 			            = $this->Product_model->get_product($id);
+        $viewed 			            = $product->viewed;
+        $save['id'] 		            = $id;
+        $save['viewed']		            = $viewed + 1;
+        $this->Product_model->save($save);
+        }
+		////////////////product view section end///////////// 
 		
 		//get the product
-         // DebugBreak();
-		$data['product']		= $this->Product_model->get_product($id);
-//$this->show->pe($data['product']);
+         
+        $data['product']		        = $this->Product_model->get_product($id);
+        //$this->show->pe($data['product']);
 		
 
-		$data['product_tabs']	= $this->Product_model->get_all_products_tabs($id);
+		$data['product_tabs']	        = $this->Product_model->get_all_products_tabs($id);
 
 		//echo $id;exit;
 
@@ -580,9 +609,10 @@ class Cart extends Front_Controller {
 
 		
 
-		$related			= $data['product']->related_products;
-
-		$data['related']	= array();
+		//$related			= 
+         $data['related']    = $data['product']->related_products; 
+          //$this->show->pe($data['related']);
+		
 
 		
 
@@ -606,17 +636,14 @@ class Cart extends Front_Controller {
 		//$this->show->pe($data);
 		
 		
-		$data['quantities'] 		= $this->session->userdata('quantitty');
-		$data['open'] 				= $this->session->userdata('open');
+		//$data['quantities'] 		= $this->session->userdata('quantitty');
+		//$data['open'] 				= $this->session->userdata('open');
 		
 
 		$this->load->view('courseDetails', $data);
 
 	}
-	function updateProCount()
-	{
-		
-	}
+	
 	
 
 	

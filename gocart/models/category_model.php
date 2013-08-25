@@ -2,7 +2,7 @@
 Class Category_model extends CI_Model
 {
 
-	function get_all_categories()
+	function get_all_categories($page=false, $row=false)
 	{
 		
 		$this->db->select('*');
@@ -10,6 +10,10 @@ Class Category_model extends CI_Model
 		$this->db->where('delete', '0');
 		$this->db->where('publish_by_admin', '1');
 		//$this->db->where('publish_by_super', '1');
+        if($row!='')
+        {
+        $this->db->limit($row,$page);
+        }
 		$result	= $this->db->get('categories');
 		if(count($result)>0)
 		{
@@ -269,7 +273,7 @@ Class Category_model extends CI_Model
     function get_blog_posts()
     {
         //return $this->db->get('wp_posts')->result(); 
-        $sql    =  "SELECT * FROM wp_posts where post_status='publish' order by post_date DESC Limit 0,3";
+        $sql    =  "SELECT * FROM wp_posts where post_status='publish' order by post_date DESC Limit 0,2";
         $result = $this->db->query($sql);
         //echo "<pre>";print_r($result->result());
         return $result->result();       

@@ -50,6 +50,8 @@ class Checkout extends Front_Controller {
         $this->load->library('merchant');
         $this->load->model('Order_model');
 		$this->lang->load('common');
+        $this->load->library('session');
+        $this->load->model(array('location_model'));
 	}
 
 	function index()
@@ -57,10 +59,28 @@ class Checkout extends Front_Controller {
 		/*show address first*/
 		$this->step_1();
 	}
+    function unregister()
+    {
+         $this->load->view('unregister'); 
+    }
+
 
 	function step_1()
 	{
+        
+        
 		$data['customer']	= $this->go_cart->customer();
+        //$this->show->pe($data['customer']);
+        if(isset($data['customer']['country']))
+        {
+            $data['zones_menu']             = $this->Location_model->get_zones_menu($data['customer']['country']);
+        }
+        else
+        {
+          $data['zones_menu']             = $this->Location_model->get_zones_menu(222);  
+        }
+        
+        $data['countries_menu']         = $this->Location_model->get_countries_menu(); 
 
 		if(isset($data['customer']['id']))
 		{
@@ -68,7 +88,7 @@ class Checkout extends Front_Controller {
 		}
 
 		/*require a billing address*/
-		$this->form_validation->set_rules('address_id', 'Billing Address ID', 'numeric');
+		//$this->form_validation->set_rules('address_id', 'Billing Address ID', 'numeric');
 		$this->form_validation->set_rules('firstname', 'First Name', 'trim|required|max_length[32]');
 		$this->form_validation->set_rules('lastname', 'Last Name', 'trim|required|max_length[32]');
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[128]');
@@ -96,27 +116,32 @@ class Checkout extends Front_Controller {
 
 		if ($this->form_validation->run() == false)
 		{
+            //$errorrr = explode('The',validation_errors());
+            //console.log($errorrr);
+            //$errorrr = $this->form_validation->set_error_delimiters()->_error_array;
+            //$this->show->pe($errorrr);
+ 
 			$data['address_form_prefix']	= 'bill';
-			$this->load->view('confirm_address', $data);
+			$this->load->view('personal_details', $data);
 		}
 		else
 		{
 			/*load any customer data to get their ID (if logged in)*/
-			$customer				= $this->go_cart->customer();
+			$customer				                    = $this->go_cart->customer();
 
 			$customer['bill_address']['company']		= $this->input->post('company');
-			$customer['bill_address']['firstname']	= $this->input->post('firstname');
+			$customer['bill_address']['firstname']	    = $this->input->post('firstname');
 			$customer['bill_address']['lastname']		= $this->input->post('lastname');
-			$customer['bill_address']['email']		= $this->input->post('email');
-			$customer['bill_address']['phone']		= $this->input->post('phone');
+			$customer['bill_address']['email']		    = $this->input->post('email');
+			$customer['bill_address']['phone']		    = $this->input->post('phone');
 			$customer['bill_address']['address1']		= $this->input->post('address1');
-			$customer['bill_address']['address2']	= $this->input->post('address2');
+			$customer['bill_address']['address2']	    = $this->input->post('address2');
 			$customer['bill_address']['city']			= $this->input->post('city');
 			$customer['bill_address']['zip']			= $this->input->post('zip');
 
 			/* get zone / country data using the zone id submitted as state*/
-			$country								= $this->Location_model->get_country(set_value('country_id'));
-			$zone									= $this->Location_model->get_zone(set_value('zone_id'));
+			$country								    = $this->Location_model->get_country(set_value('country_id'));
+			$zone									    = $this->Location_model->get_zone(set_value('zone_id'));
 
 			$customer['bill_address']['zone']			= $zone->code;  /*  save the state for output formatted addresses */
 			$customer['bill_address']['country']		= $country->name; /*  some shipping libraries require country name */
@@ -127,31 +152,213 @@ class Checkout extends Front_Controller {
 			/* for guest customers, load the billing address data as their base info as well */
 			if(empty($customer['id']))
 			{
-				$customer['company']	= $customer['bill_address']['company'];
-				$customer['firstname']	= $customer['bill_address']['firstname'];
-				$customer['lastname']	= $customer['bill_address']['lastname'];
-				$customer['phone']		= $customer['bill_address']['phone'];
-				$customer['email']		= $customer['bill_address']['email'];
+				$customer['company']	            = $customer['bill_address']['company'];
+				$customer['firstname']	            = $customer['bill_address']['firstname'];
+				$customer['lastname']	            = $customer['bill_address']['lastname'];
+				$customer['phone']		            = $customer['bill_address']['phone'];
+				$customer['city']		            = $customer['bill_address']['city'];
+                $customer['post_code']              = $customer['bill_address']['zip'];
+                $customer['address_street']         = $customer['bill_address']['address1'];
+                $customer['address_line']           = $customer['bill_address']['address2'];
+                $customer['lastname']               = $customer['bill_address']['lastname'];
+                $customer['phone']                  = $customer['bill_address']['phone'];
+                $customer['email']                  = $customer['bill_address']['email']; 
+                
 			}
 
 			if(!isset($customer['group_id']))
 			{
-				$customer['group_id'] = 1; /* default group */
+				$customer['group_id']               = 1; /* default group */
 			}
 
 			/*if there is no address set then return blank*/
 			if(empty($customer['ship_address']))
 			{
-				$customer['ship_address']	= $customer['bill_address'];
+				$customer['ship_address']	        = $customer['bill_address'];
 			}
 			
 			/* save customer details*/
 			$this->go_cart->save_customer($customer);
 
 			/*send to the next form*/
-			redirect('checkout/step_2');
+			redirect('checkout/step2');
 		}
 	}
+    
+    
+    function step2()
+     {
+         $data['d_first']                               =  '';
+         $data['d_last']                                =  '';
+         $data['d_company']                             =  '';
+         $data['d_address']                             =  '';
+         $data['d_address_op']                          =  '';
+         $data['d_city']                                =  '';
+         $data['d_post_code']                           =  '';
+         $data['d_country_id']                          =  '';
+         $data['d_zone_id']                             =  '';
+         $data['d_phone']                               =  '';
+         $data['d_email']                               =  '';
+         $data['complite_address'] =  $this->session->userdata('complite_address');
+         //$this->show->pe($data['complite_address']['d_first']);
+         if(!empty($data['complite_address']))
+         {
+         $data['d_first']                               =  $data['complite_address']['d_first'];
+         $data['d_last']                                =  $data['complite_address']['d_last'];
+         $data['d_company']                             =  $data['complite_address']['d_company'];
+         $data['d_address']                             =  $data['complite_address']['d_address'];
+         $data['d_address_op']                          =  $data['complite_address']['d_address_op'];
+         $data['d_city']                                =  $data['complite_address']['d_city'];
+         $data['d_post_code']                           =  $data['complite_address']['d_post_code'];
+         $data['d_country_id']                          =  $data['complite_address']['d_country_id'];
+         $data['d_zone_id']                             =  $data['complite_address']['d_zone_id'];
+         $data['d_phone']                               =  $data['complite_address']['d_phone'];
+         $data['d_email']                               =  $data['complite_address']['d_email'];  
+         }
+         
+         $data['customer']                       = $this->go_cart->customer();
+         //$this->show->pe($data['customer']);
+         $data['countries_menu']                 = $this->Location_model->get_countries_menu();
+        if(isset($data['customer']['country']))
+        {
+            $data['zones_menu']                  = $this->Location_model->get_zones_menu($data['customer']['country']);
+        }
+        else
+        {
+            $data['zones_menu']                 = $this->Location_model->get_zones_menu(222);  
+        }
+        
+        
+        
+        // Form validation
+        $this->form_validation->set_rules('firstname', 'First Name', 'trim|required|max_length[32]');
+        $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required|max_length[32]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[128]');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim|required|max_length[32]');
+        $this->form_validation->set_rules('company', 'Company', 'trim|max_length[128]');
+        $this->form_validation->set_rules('address1', 'Address 1', 'trim|required|max_length[128]');
+        $this->form_validation->set_rules('address2', 'Address 2', 'trim|max_length[128]');
+        $this->form_validation->set_rules('city', 'City', 'trim|required|max_length[128]');
+        $this->form_validation->set_rules('country_id', 'Country', 'trim|required|numeric');
+        $this->form_validation->set_rules('zone_id', 'State', 'trim|required|numeric');
+        
+        if ($this->form_validation->run() == false)
+        {
+            $this->load->view('address_details', $data);
+        }
+        else
+        {
+            
+        
+        
+        
+        
+        
+           
+        if($this->input->post('confirm')!='')
+        {
+             $address                           =   $this->input->post(null,false);
+             $complite_address                  = array('complite_address'=>$address);
+             $session_store                     = $this->session->set_userdata($complite_address);
+             
+             redirect('checkout/step3');   
+        }
+        }  
+     }
+     function step3() 
+     {
+         $data['firstname']                             =  '';
+         $data['lastname']                              =  '';
+         $data['company']                               =  '';
+         $data['address1']                              =  '';
+         $data['address2']                              =  '';
+         $data['city']                                  =  '';
+         $data['zip']                                   =  '';
+         $data['country_id']                            =  '';
+         $data['zone_id']                               =  '';
+         $data['phone']                                 =  '';
+         $data['email']                                 =  '';
+         $data['b_firstname']                           =  '';
+         $data['b_lastname']                            =  '';
+         $data['b_company']                             =  '';
+         $data['b_address1']                            =  '';
+         $data['b_address2']                            =  '';
+         $data['b_city']                                =  '';
+         $data['b_zip']                                 =  '';
+         $data['b_country_id']                          =  '';
+         $data['b_zone_id']                             =  '';
+         $data['b_phone']                               =  '';
+         $data['b_email']                               =  '';
+         $data['d_first']                               =  '';
+         $data['d_last']                                =  '';
+         $data['d_company']                             =  '';
+         $data['d_address']                             =  '';
+         $data['d_address_op']                          =  '';
+         $data['d_city']                                =  '';
+         $data['d_post_code']                           =  '';
+         $data['d_country_id']                          =  '';
+         $data['d_zone_id']                             =  '';
+         $data['d_phone']                               =  '';
+         $data['d_email']                               =  '';
+
+         $data['complite_address'] =  $this->session->userdata('complite_address');
+         //$this->show->pe($data['complite_address']);
+         if(!empty($data['complite_address'])){
+         
+         $country                                       = $this->location_model->get_country($data['complite_address']['country_id']);
+         $zone                                          = $this->location_model->get_zone($data['complite_address']['zone_id']);
+         $b_country                                     = $this->location_model->get_country($data['complite_address']['b_country_id']);
+         $b_zone                                        = $this->location_model->get_zone($data['complite_address']['b_zone_id']);
+         $d_country                                     = $this->location_model->get_country($data['complite_address']['d_country_id']);
+         $d_zone                                        = $this->location_model->get_zone($data['complite_address']['d_zone_id']);
+          
+         
+         
+         
+         $data['firstname']                             =  $data['complite_address']['firstname'] ;
+         $data['lastname']                              =  $data['complite_address']['lastname'] ;
+         $data['company']                               =  $data['complite_address']['company'] ;
+         $data['address1']                              =  $data['complite_address']['address1'];
+         $data['address2']                              =  $data['complite_address']['address2'];
+         $data['city']                                  =  $data['complite_address']['city'];
+         $data['zip']                                   =  $data['complite_address']['zip'];
+         $data['country_id']                            =  $country->name;
+         $data['zone_id']                               =  $zone->name;
+         $data['phone']                                 =  $data['complite_address']['phone'];
+         $data['email']                                 =  $data['complite_address']['email'];
+         $data['b_firstname']                           =  $data['complite_address']['b_firstname'];
+         $data['b_lastname']                            =  $data['complite_address']['b_firstname'];
+         $data['b_company']                             =  $data['complite_address']['b_company'];
+         $data['b_address1']                            =  $data['complite_address']['b_address1'];
+         $data['b_address2']                            =  $data['complite_address']['b_address2'];
+         $data['b_city']                                =  $data['complite_address']['b_city'];
+         $data['b_zip']                                 =  $data['complite_address']['b_zip'];
+         $data['b_country_id']                          =  $b_country->name;
+         $data['b_zone_id']                             =  $b_zone->name;
+         $data['b_phone']                               =  $data['complite_address']['b_phone'];
+         $data['b_email']                               =  $data['complite_address']['b_email'];
+         $data['d_first']                               =  $data['complite_address']['d_first'];
+         $data['d_last']                                =  $data['complite_address']['d_last'];
+         $data['d_company']                             =  $data['complite_address']['d_company'];
+         $data['d_address']                             =  $data['complite_address']['d_address'];
+         $data['d_address_op']                          =  $data['complite_address']['d_address_op'];
+         $data['d_city']                                =  $data['complite_address']['d_city'];
+         $data['d_post_code']                           =  $data['complite_address']['d_post_code'];
+         $data['d_country_id']                          =  $d_country->name;
+         $data['d_zone_id']                             =  $d_zone->name;
+         $data['d_phone']                               =  $data['complite_address']['d_phone'];
+         $data['d_email']                               =  $data['complite_address']['d_email'];
+         }
+        
+         $this->load->view('confirm',$data);
+        
+     }
+     function step4()
+     {
+         $this->session->unset_userdata('complite_address');
+         
+       $this->load->view('payment');  
+     }
 
 	function shipping_address()
 	{
@@ -424,6 +631,7 @@ class Checkout extends Front_Controller {
 		if($this->form_validation->run() == false)
 		{
 			$this->view('checkout/payment_form', $data);
+            //$this->view('address_details', $data);    
 		}
 		else
 		{
