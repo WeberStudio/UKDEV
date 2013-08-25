@@ -21,7 +21,7 @@ class tutor extends Admin_Controller {
         /*** Get User Info***/
 		
 		/*** Left Menu Selection ***/
-		$this->session->set_userdata('active_module', 'sales');
+		$this->session->set_userdata('active_module', 'tutors');
 		/*** Left Menu Selection ***/
 		
 		$this->auth->check_access($this->admin_access, true);  
@@ -37,6 +37,7 @@ class tutor extends Admin_Controller {
 		$this->load->model('Routes_model');
 		$this->load->model('Forum_model');
 		$this->load->model('location_model');
+		$this->load->model('Notifications_model');
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->lang->load('tutor');
@@ -172,6 +173,9 @@ class tutor extends Admin_Controller {
 		$data['field']	            = $field;
 		$data['by']		            = $by;
 		
+		//Destroy Notifications
+		$this->Notifications_model->set_tutors_viewed();
+		
         $this->load->view($this->config->item('admin_folder').'/includes/header');
         $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
         $this->load->view($this->config->item('admin_folder').'/tutor/tutor_listing', $data);
@@ -198,7 +202,7 @@ class tutor extends Admin_Controller {
 		$this->load->library('upload', $config);		
 		/*** End Image Upload Config******/
 				
-		$data['zones_menu']	= $this->Location_model->get_zones_menu('223');
+		
 		$data['countries_menu']	= $this->Location_model->get_countries_menu();
 		//default values are empty if the customer is new
 		$data['id']					= '';
@@ -211,7 +215,7 @@ class tutor extends Admin_Controller {
 		$data['city']				= '';
 		$data['state']				= '';
 		$data['zip_code']			= '';
-		$data['country']			= '';
+		$data['country']			= '222';
 		$data['telephone']			= '';
 		
 		$data['email']				= '';
@@ -292,6 +296,26 @@ class tutor extends Admin_Controller {
 				$data['categories']		= $tutor->categories;
 				$data['courses']		= $tutor->courses;				
 			}
+		}
+		
+		if(empty($data['id']))
+		{
+			$data['zones_menu']	= $this->Location_model->get_zones_menu('222');
+			
+		}
+		else
+		{
+		
+			if(is_numeric($data['country']))
+			{
+			
+				$data['zones_menu']	= $this->Location_model->get_zones_menu($data['country']);
+			}
+			else
+			{
+				$data['zones_menu']	= $this->Location_model->get_zones_menu(222);
+			}
+			
 		}
 		
 		

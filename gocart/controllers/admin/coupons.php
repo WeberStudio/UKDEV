@@ -26,7 +26,7 @@ class Coupons extends Admin_Controller {
 		$this->load->model('Product_model');
 		$this->lang->load('coupon');
 		/*** Left Menu Selection ***/
-		$this->session->set_userdata('active_module', 'sales');
+		$this->session->set_userdata('active_module', 'promotions');
 		/*** Left Menu Selection ***/
 	}
 	

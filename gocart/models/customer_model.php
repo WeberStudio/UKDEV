@@ -57,7 +57,7 @@ Class Customer_model extends CI_Model
 				}
 			}
 		
-
+		
 		$result	= $this->db->get('customers');
 		if($cvs !="")
 		{

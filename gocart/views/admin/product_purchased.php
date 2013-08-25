@@ -87,7 +87,7 @@ function areyousure()
         <div class="span12">
           <div class="box paint color_18">
             <div class="title">
-             <h4> <i class=" icon-bar-chart"></i><span>BEST PRODUCTS PURCHASED 
+             <h4> <i class=" icon-bar-chart"></i><span>BEST Purchased Courses  
              
 	            <!--<a class="btn" href="<?php echo site_url($this->config->item('admin_folder')."/commission/form/"); ?>"><i class="icon-plus-sign"></i>Add New Commision <?php //echo lang('add_new_customer');?></a>-->
                      </span></h4>
@@ -118,7 +118,7 @@ function areyousure()
 			
 			
 		
-			<a><td><?php echo $product_purchaseds->product_id; ?></td></a>
+			<td><?php echo $product_purchaseds->product_id; ?></td>
 			<td><a href="<?=base_url().ADMIN_PATH?>products">
 			<?php 
 			
@@ -139,7 +139,7 @@ function areyousure()
 			
 			?>
             </td>
-			<a><td><?php echo $product_purchaseds->count_product; ?></td></a>
+			<td><a href="<?=base_url().ADMIN_PATH?>products"><?php echo $product_purchaseds->count_product; ?></a></td>
 		</tr>
 <?php endforeach;
 		//if($page_links != ''):?>

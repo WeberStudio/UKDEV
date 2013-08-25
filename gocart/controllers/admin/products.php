@@ -1240,7 +1240,7 @@ class Products extends Admin_Controller {
 		
 		
 		$this->form_validation->set_rules('option_text', 'Option Text', 'required');
-		$this->form_validation->set_rules('option_price','Option Trice', 'required');
+		$this->form_validation->set_rules('option_price','Option Price', 'required');
 		
 		if($this->form_validation->run() == false)
 		{

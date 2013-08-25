@@ -132,7 +132,8 @@ function areyousure()
 			</td>
 			<td>
 				<div class="btn-group" style="float:right">
-					<a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/customers/form/'.$customer->id); ?>"><i class="icon-pencil"></i> <?php echo lang('edit');?></a>
+					<a class="btn btn-small" href="<?php echo site_url($this->config->item('admin_folder').'/customers/customer_view/'.$customer->id); ?>" rel="tooltip" data-placement="top" data-original-title="View Customer Details"><i class="icon-eye-open"></i>View</a>
+					<a class="btn"  href="<?php echo site_url($this->config->item('admin_folder').'/customers/form/'.$customer->id); ?>"><i class="icon-pencil"></i> <?php echo lang('edit');?></a>
 					
 					<!--<a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/customers/addresses/'.$customer->id); ?>"><i class="icon-envelope"></i> <?php echo lang('addresses');?></a>-->
 					

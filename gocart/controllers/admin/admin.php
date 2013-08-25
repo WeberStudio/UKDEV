@@ -20,7 +20,7 @@ class Admin extends Admin_Controller
 		/*** Get User Info***/		
 		
 		/*** Left Menu Selection ***/
-		$this->session->set_userdata('active_module', 'sales');
+		$this->session->set_userdata('active_module', 'user_management');
 		/*** Left Menu Selection ***/
 		
 		$this->auth->check_access($this->admin_access, true);
@@ -28,11 +28,11 @@ class Admin extends Admin_Controller
 		//load the admin language file in
 		$this->lang->load('admin');
 		$this->current_admin	= $this->session->userdata('admin');
-		$this->load->model(array('location_model'));
+		$this->load->model(array('location_model', 'Notifications_model'));
 		$this->load->helper('form');
 	}
 
-	function index($order_by="firstname", $sort_order="ASC", $page=0)
+	function index($order_by="id", $sort_order="DESC", $page=0)
 	{
         $csv                            = '';
         $rows                           = 5;
@@ -163,8 +163,11 @@ class Admin extends Admin_Controller
 		$config['next_tag_open']	= '<li>';
 		$config['next_tag_close']	= '</li>';
 		
-		$this->pagination->initialize($config);
-			
+		//Destroy Notifications
+		$this->Notifications_model->set_customer_viewed();
+		
+				
+		$this->pagination->initialize($config);			
 		$this->load->view($this->config->item('admin_folder').'/includes/header');
 		$this->load->view($this->config->item('admin_folder').'/includes/leftbar');
 		$this->load->view($this->config->item('admin_folder').'/admins', $data);
@@ -208,7 +211,6 @@ class Admin extends Admin_Controller
 		
 		$data['page_title']		= lang('admin_form');
 		
-		$data['zones_menu']	= $this->Location_model->get_zones_menu('223');
 		$data['countries_menu']	= $this->Location_model->get_countries_menu();
 		
 		//default values are empty if the customer is new
@@ -227,10 +229,13 @@ class Admin extends Admin_Controller
 		$data['city']				= '';
 		$data['state']				= '';
 		$data['zip_code']			= '';
-		$data['country']			= '';
+		$data['country']			= '222';
 		$data['telephone']			= '';
 		$password					= '';
 		$password 					= $this->input->post('password');
+		
+		
+		
 		if ($id)
 		{	
 			$this->admin_id		= $id;
@@ -258,6 +263,26 @@ class Admin extends Admin_Controller
 			$data['country']			= $admin->country;
 			$data['telephone']			= $admin->telephone;
 			$data['access']				= $admin->access;
+		}
+		
+		if(empty($data['id']))
+		{
+			$data['zones_menu']	= $this->Location_model->get_zones_menu('222');
+			
+		}
+		else
+		{
+		
+			if(is_numeric($data['country']))
+			{
+			
+				$data['zones_menu']	= $this->Location_model->get_zones_menu($data['country']);
+			}
+			else
+			{
+				$data['zones_menu']	= $this->Location_model->get_zones_menu(222);
+			}
+			
 		}
 		
 		$this->form_validation->set_rules('access', 'Admin Access', 'required');
@@ -429,5 +454,25 @@ class Admin extends Admin_Controller
 		{
 			return TRUE;
 		}
+	}
+	
+	
+	function admin_view($id = false)
+	{
+		$data['admin']	= $this->auth->get_admin($id);
+
+		//$this->show->pe($data['admin']);
+		//if the customer does not exist, redirect them to the customer list with an error
+		if (!$data['admin'])
+		{
+			$this->session->set_flashdata('error', lang('error_not_found'));
+			redirect($this->config->item('admin_folder').'/admin');
+		}
+		
+		
+		$this->load->view($this->config->item('admin_folder').'/includes/header');
+        $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
+		$this->load->view($this->config->item('admin_folder').'/admin_details_view', $data);
+        $this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
 	}
 }

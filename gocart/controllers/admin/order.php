@@ -38,7 +38,7 @@ class Order extends Admin_Controller {
 		$this->load->model('location_model');
 		$this->load->model('Category_model');
 		$this->load->model('Product_model');
-		//$this->load->model('Product_model');		
+		$this->load->model('Notifications_model');
 		$this->lang->load('order');
 		$this->load->helper('form');
 		
@@ -48,7 +48,7 @@ class Order extends Admin_Controller {
 	 function index($id = false , $rows=5, $page=0 , $search = false)
 	 {
 		$sort_by                        = 'order_number';
-		$sort_order                     = 'ASC';
+		$sort_order                     = 'DESC';
 	 	$code                           = 0;
 	 	
 	    $rows                           = 25;
@@ -217,6 +217,9 @@ class Order extends Admin_Controller {
 		$data['page']			= $page;
 		$data['sort_by']		= $sort_by;
 		$data['sort_order']		= $sort_order;
+		
+		//Destroy Notifications
+		$this->Notifications_model->get_orders_viewed();
 		
         $this->load->view($this->config->item('admin_folder').'/includes/header');
         $this->load->view($this->config->item('admin_folder').'/includes/leftbar');

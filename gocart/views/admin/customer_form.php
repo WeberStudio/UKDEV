@@ -181,15 +181,21 @@
 		
 		$string 	= strtolower($string);
 		$key 		= strtolower($key);
-		if (strpos($string ,$key) !== false)
-		{ 
-			return true; 
+		if(!empty($string) && !empty($key))
+		{	
+			if (strpos($string ,$key) !== false)
+			{ 
+				return true; 
+			}
+			else
+			{ 
+				return false; 
+			}
 		}
 		else
-		{ 
-			return false; 
-		}
-			
+		{
+			return false;
+		}		
 	}
 ?>
 <script type="text/javascript">

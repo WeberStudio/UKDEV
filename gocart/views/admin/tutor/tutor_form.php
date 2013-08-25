@@ -158,7 +158,7 @@
                       <label class="control-label span1" for="default-select"><?php echo lang('country');?> </label>
                       <div class="controls span7">
                       <?php
-                      echo form_dropdown('country',$countries_menu,set_value('state', $state),'class="chzn-select"','id="country_id"');
+                      echo form_dropdown('country',$countries_menu,set_value('state', $country),'class="chzn-select"','id="country_id"');
                        ?>
                       </div>
                     </div>
@@ -167,7 +167,7 @@
                   <div class="controls span7">
                     <?php
                    
-                    echo form_dropdown('state',$zones_menu,set_value('country', $country),'class="chzn-select"','id="f_zone_id"');
+                    echo form_dropdown('state',$zones_menu,set_value('country', $state),'class="chzn-select"','id="f_zone_id"');
                     ?>
                   </div>
                 </div>

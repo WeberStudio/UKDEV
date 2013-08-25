@@ -22,11 +22,11 @@
     
     <div id="main_container">
       <div class="row-fluid">
-        <div class="span6 box color_3 title_big height_big paint_hover">
+        <div class="span6 box color_3">
           <div class="title">
             <div class="row-fluid">
               <div class="span12">
-                <h4> </i><span>Campaigns</span> </h4>
+                <h1> </i><span>Notifications</span> </h1>
               </div>
               <!-- End .span12 --> 
             </div>
@@ -34,9 +34,25 @@
             
           </div>
           <!-- End .title -->
-          <div class="content"  style="padding-top:35px;">
-            <div id="placeholder" style="width:100%;height:240px;"> </div>
-          </div>
+		  
+		  <div class="span8 box color_3" >
+              
+                <div class="content numbers">
+                  <h1 class="value"> <?=$customer_notifi?></h1>
+                  <div class="description mb5"><a style=" font-size:14px; font-weight:bold; color:#fff;" href="<?php echo site_url($this->config->item('admin_folder')."/customers/"); ?>">New Customers</a></div>
+				  
+                  <h1 class="value"> <?=$users_notifi?></h1>
+                  <div class="description mb5"><a style=" font-size:14px; font-weight:bold; color:#fff;" href="<?php echo site_url($this->config->item('admin_folder')."/admin/"); ?>">New Users</a></div>
+				  
+				  <h1 class="value"> <?=$tutors_notifi?></h1>
+                  <div class="description mb5"><a style=" font-size:14px; font-weight:bold; color:#fff;" href="<?php echo site_url($this->config->item('admin_folder')."/tutor/"); ?>">New Tutors</a></div>
+				  
+				   <h1 class="value"> <?=$orders_notifi?></h1>
+                  <div class="description mb5"><a style=" font-size:14px; font-weight:bold; color:#fff;" href="<?php echo site_url($this->config->item('admin_folder')."/order/"); ?>">New Order</a></div>
+				  
+                </div>
+             
+            </div>          
         </div>
         <!-- End .box .span6-->
         <div class="span6">
@@ -110,7 +126,8 @@
                     <th class="jv no_sort"> No </th>
                     <th class="ue"> Order No </th>
                     <th> User</th>
-                    <th>Date</th>
+                    <!--<th>Date</th>-->
+					 <th> </th>
                     <th class="Yy to_hide_phone">Subtotal </th>
                   </tr>
                 </thead>
@@ -133,7 +150,7 @@
 					$exp = explode(" ", $date);
 					$exp[0];
 					$exp1 = explode("-",$exp[0]);
-					echo $exp1[2]."/".$exp1[1]."/".$exp1[0];
+					//echo $exp1[2]."/".$exp1[1]."/".$exp1[0];
 					?>
 					</td>
                     <td class="to_hide_phone"><?php echo "£".$order->subtotal;?></td>
@@ -175,7 +192,7 @@
 					$exp = explode(" ", $date);
 					$exp[0];
 					$exp1 = explode("-",$exp[0]);
-					echo $exp1[2]."/".$exp1[1]."/".$exp1[0];
+					//echo $exp1[2]."/".$exp1[1]."/".$exp1[0];
 					?>
                   </div>
                 </div>
