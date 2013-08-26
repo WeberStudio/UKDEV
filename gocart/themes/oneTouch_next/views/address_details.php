@@ -21,6 +21,13 @@ $b_last         = array('id'=>'b_lastname', 'class'=>'input-text', 'name'=>'b_la
 $b_email        = array('id'=>'b_email', 'class'=>'input-text', 'name'=>'b_email', 'value'=> set_value('email', $customer['bill_address']['email']));
 $b_phone        = array('id'=>'b_phone', 'class'=>'input-text', 'name'=>'b_phone', 'value'=> set_value('phone', $customer['bill_address']['phone']));
 ?>
+<?php
+  if(validation_errors() != '')
+    {
+        $error    = validation_errors();
+    }  
+?>
+
 <script type="text/javascript">
  function fill_address()
  {
@@ -85,6 +92,7 @@ $b_phone        = array('id'=>'b_phone', 'class'=>'input-text', 'name'=>'b_phone
  }
 
 </script>
+
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
@@ -148,7 +156,12 @@ $b_phone        = array('id'=>'b_phone', 'class'=>'input-text', 'name'=>'b_phone
                           <div class="col12">
                             
                                 <form action="<?=base_url().'checkout/step2'?>" method="post" class="personal-form-1" id="personal-form" name="personalDetails">
-                                    <fieldset>
+                                <?php if (!empty($error)): ?>
+                                      <div class="alert alert-error" id="closee"> <a href="javascript:void(0)"  class="close" data-dismiss="alert" onClick="hide_error(); return false;">x</a> <?php echo"<div style='margin-left: 70px;'>". $error. "</div>"; ?> </div>
+                                 <?php endif; ?>
+          
+      
+                            <fieldset>
                                         <legend><h3>Personal Address</h3></legend>
                                         
                                         <hr>   
