@@ -1,5 +1,5 @@
 <?php
-class Invoices extends Admin_Controller {    
+class Customer_Invoice extends Admin_Controller {    
 
     function __construct()
     {        
@@ -10,13 +10,13 @@ class Invoices extends Admin_Controller {
         /*** Get User Info***/
        //$admin_info = $this->admin_session->userdata('admin'); 
 		
-        $user_info = $this->auth->admin_info();
-        $this->admin_id = $user_info['id'];
-        $this->admin_email = $user_info['email'];
+        $user_info 			= $this->auth->admin_info();
+        $this->admin_id 	= $user_info['id'];
+        $this->admin_email 	= $user_info['email'];
         $this->admin_access = $user_info['access'];
-		$this->first_name = $user_info['firstname'];
-		$this->last_name = $user_info['lastname'];
-		$this->image = $user_info['image'];	
+		$this->first_name 	= $user_info['firstname'];
+		$this->last_name 	= $user_info['lastname'];
+		$this->image 		= $user_info['image'];	
 		
 		// checking admin access start\\
 		if($user_info['access'] == "Superadmin")
@@ -28,8 +28,7 @@ class Invoices extends Admin_Controller {
 			$this->auth->check_access('Invoice Admin', true);
 		}
 		
-		// checking admin access end\\
-			
+		// checking admin access end\\			
 		$this->load->helper('formatting_helper');
 		$this->load->library('form_validation');	
 		$this->load->library('mpdf/mpdf');
@@ -39,7 +38,7 @@ class Invoices extends Admin_Controller {
         /*** Get User Info***/
 		
 		/*** Left Menu Selection ***/
-		$this->session->set_userdata('active_module', 'course_provider_invoices');
+		$this->session->set_userdata('active_module', 'student_invoices');
 		/*** Left Menu Selection ***/
 		
 		$this->auth->check_access($this->admin_access, true);  
@@ -49,7 +48,7 @@ class Invoices extends Admin_Controller {
 			redirect($this->config->item('admin_folder'));
 		}
 		
-		$this->load->model('Invoice_model');
+		$this->load->model('Customer_Invoices_model');
 		$this->load->model('Invoice_Groups_Model');
         $this->load->model('Invoice_Tax_Model');
 		$this->load->model('Custom_Fields');
@@ -111,7 +110,7 @@ class Invoices extends Admin_Controller {
         }
         
         $data['all_admin']              = $this->auth->get_admin_list();
-        $data['invoices']    	        = $this->Invoice_model->get_all_invoices($field, $by, $page, $rows, $term , $csv);
+        $data['invoices']    	        = $this->Customer_Invoices_model->get_all_invoices($field, $by, $page, $rows, $term , $csv);
         
 		//echo "<pre>"; print_r($data['invoices']);exit;
         
@@ -163,8 +162,8 @@ class Invoices extends Admin_Controller {
 		
 		
 		$this->load->library('pagination');
-		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/invoices/index/'.$field.'/'.$by.'/';
-		$config['total_rows']		= $this->Invoice_model->get_count_invoices();
+		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/customer_invoice/index/'.$field.'/'.$by.'/';
+		$config['total_rows']		= $this->Customer_Invoices_model->get_count_invoices();
 		$config['per_page']			= $rows;
 		$config['uri_segment']		= 6;
 		$config['first_link']		= 'First';
@@ -194,7 +193,7 @@ class Invoices extends Admin_Controller {
 				
         $this->load->view($this->config->item('admin_folder').'/includes/header');
         $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
-        $this->load->view($this->config->item('admin_folder').'/invoice/invoices_listing', $data);
+        $this->load->view($this->config->item('admin_folder').'/customer_invoice/invoices_listing', $data);
         $this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
 
     }
@@ -203,7 +202,7 @@ class Invoices extends Admin_Controller {
 	{
 		
         //$data['page_title']    = lang('Invoices');
-        $data['rec_invoices']    = $this->Invoice_model->get_recurring_invoices();
+        $data['rec_invoices']    = $this->Customer_Invoices_model->get_recurring_invoices();
 		//echo "<pre>"; print_r($data['rec_invoices']);exit;
         $this->load->view($this->config->item('admin_folder').'/includes/header');
         $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
@@ -220,7 +219,7 @@ class Invoices extends Admin_Controller {
 		//$this->show->pe($_REQUEST);
 		
         //default values are empty if the invoice is new       
-        $data['admin_id']        		= '';
+        $data['customer_id']        	= '';
 		$data['invoice_group_id']       = '';
         $data['invoice_date_created']   = '';
         $data['invoice_date_modified']  = '';
@@ -234,21 +233,16 @@ class Invoices extends Admin_Controller {
 		
 		
 		//Get All Course Providers       
-		$data['users'] 					= $this->Invoice_model->get_all_admin();
+		$data['users'] 					= $this->Customer_Invoices_model->get_all_customer();
         
         // $this->show->pe($data['users']);
 		
 		//Get All Groups 
-		$data['groups'] 				= $this->Invoice_model->get_all_groups();
+		$data['groups'] 				= $this->Customer_Invoices_model->get_all_groups();
 		
 		//Get All Templates 
 		$data['templates'] 				= $this->Invoice_Template_model->get_templates(0, 0, 'invoice_template_id', 'ASC');
-		//$this->show->pe($data['templates']);
-        //create the photos array for later use
-       /* $this->form_validation->set_rules('users', 'users', 'trim|required');
-        $this->form_validation->set_rules('invoice_group_id', 'invoice_group_id', 'trim|required');
-        $this->form_validation->set_rules('invoice_date_created', 'invoice_date_created', 'trim|required');*/
-       // $this->show->pe($data['templates']);
+		
 		
 		// validate the form
         if (!isset($_POST['submit'])  &&  empty($_POST['submit']))
@@ -256,14 +250,14 @@ class Invoices extends Admin_Controller {
 
 			$this->load->view($this->config->item('admin_folder').'/includes/header');
             $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
-            $this->load->view($this->config->item('admin_folder').'/invoice/invoice_form', $data); 
+            $this->load->view($this->config->item('admin_folder').'/customer_invoice/customer_invoice_form', $data); 
             $this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
         }
 		else
 		{
 			//echo $this->input->post('invoice_date_created');exit;
 			
-			$save['admin_id']        		= $this->input->post('users');			
+			$save['customer_id']        	= $this->input->post('users');			
 			$save['invoice_group_id']       = $this->input->post('invoice_group_id');
 			$save['template_id']       		= $this->input->post('invoice_template');
 			$save['invoice_date_created']   = $this->input->post('invoice_date_created');		
@@ -273,12 +267,12 @@ class Invoices extends Admin_Controller {
 			$data['invoice_paid_status']	= 'OPEN';
 			
 			//$this->show->pe($save);
-			$invoice = $this->Invoice_model->save($save);
+			$invoice = $this->Customer_Invoices_model->save($save);
 		
 			$this->session->set_flashdata('message', lang('message_invoice_saved'));
 	
 			//go back to the category list
-			redirect($this->config->item('admin_folder').'/invoices/invoice_detail/'.$invoice);
+			redirect($this->config->item('admin_folder').'/customer_invoice/invoice_detail/'.$invoice);
     	} 
     }
 	
@@ -286,28 +280,22 @@ class Invoices extends Admin_Controller {
 	{
 		
 			//$data = array();
-			$data['invoice_data'] 				= $this->Invoice_model->get_invoice($invoice_id);
-			$data['user_info'] 					= $this->Invoice_model->get_all_admin($data['invoice_data']->admin_id);
-			$data['invoice_group'] 				= $this->Invoice_model->get_all_groups($data['invoice_data']->invoice_group_id);
-			$data['invoice_items'] 				= $this->Invoice_model->get_invoice_items_by_invoice_id($invoice_id);
-			$data['tax_rates'] 					= $this->Invoice_Tax_Model->get_taxes(); 
-			$data['comm_rates'] 				= $this->Commission_model->get_commissions_dropdown();
-			$data['invoice_totals'] 			= $this->Invoice_model->get_invoice_totals($invoice_id);			
-			$data['invoice_products'] 			= $this->order_model->get_admin_related_orders($data['invoice_data']->admin_id);
-			
-			$data['course_commission'] 			= $this->order_model->get_courses_commission($data['invoice_data']->admin_id);
-			//$data['cat_commission'] 			=  $this->order_model->get_cat_commission();
-			//$data['cat_commission'] 			=  $this->order_model->get_cat_commission($data['invoice_data']->admin_id);
-			$data['course_provider_commission'] =  $this->order_model->get_course_provider_commission($data['invoice_data']->admin_id);
-			//$this->show->pe($data['course_provider_commission']);
-			$data['universal_commision']		=  $this->order_model->get_universal_commission();
-			 
-			
+			$data['invoice_data'] 				= $this->Customer_Invoices_model->get_invoice($invoice_id);
+			$data['user_info'] 					= $this->Customer_Invoices_model->get_all_customer($data['invoice_data']->customer_id);
+			$data['invoice_group'] 				= $this->Customer_Invoices_model->get_all_groups($data['invoice_data']->invoice_group_id);
+			$data['invoice_items'] 				= $this->Customer_Invoices_model->get_invoice_items_by_invoice_id($invoice_id);
+			/*$data['tax_rates'] 				= $this->Invoice_Tax_Model->get_customer_taxes(); 
+			$data['comm_rates'] 				= $this->Commission_model->get_commissions_dropdown();*/
+			$data['invoice_totals'] 			= $this->Customer_Invoices_model->get_invoice_totals($invoice_id);			
+			$data['invoice_products'] 			= $this->order_model->get_customer_orders($data['invoice_data']->customer_id);
+			$data['old_customers'] 				= $this->order_model->get_old_customer_orders($data['invoice_data']->customer_id);
+			/*echo $data['invoice_data']->customer_id;
+			$this->show->pe($data);*/
 			
 			//$this->show->pe($data);
 			$this->load->view($this->config->item('admin_folder').'/includes/header');
             $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
-            $this->load->view($this->config->item('admin_folder').'/invoice/invoice_detail', $data); 
+            $this->load->view($this->config->item('admin_folder').'/customer_invoice/invoice_detail', $data); 
             $this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
 		
 	}
@@ -339,7 +327,7 @@ class Invoices extends Admin_Controller {
 			{
 				
 				// First Delete All Old Record
-				$this->Invoice_model->delete_all_items($invoice_id);			
+				$this->Customer_Invoices_model->delete_all_items($invoice_id);			
 				
 				
 				for($i = 0; $i<$item_count; $i++)
@@ -362,7 +350,7 @@ class Invoices extends Admin_Controller {
 					$tax 						= $this->Invoice_Tax_Model->get_tax_by_id($data['item_tax_rate_id']);					
 					
 					//Insert Invoice Item
-					$item_id 					= $this->Invoice_model->insert_invoice_items($data);
+					$item_id 					= $this->Customer_Invoices_model->insert_invoice_items($data);
 					
 					//Get Commission Rate
 					$comm_rate 					= $this->Commission_model->get_commission($comm_rate);
@@ -409,7 +397,7 @@ class Invoices extends Admin_Controller {
 				//echo "<pre>";	print_r($item_totals);	
 					//continue;	
 					// Save Each Calculation Of Each Item	
-					$item_total_id = $this->Invoice_model->insert_invoice_items_totals($item_totals);
+					$item_total_id = $this->Customer_Invoices_model->insert_invoice_items_totals($item_totals);
 					$item_tax_total = 0;
 				}
 				
@@ -422,7 +410,7 @@ class Invoices extends Admin_Controller {
 							'invoice_total'				=> $invoice_tax_total + $invoice_total + $commission_total
 						);
 						
-					$item_total_id = $this->Invoice_model->save_invoice_totals($invoice_totals);
+					$item_total_id = $this->Customer_Invoices_model->save_invoice_totals($invoice_totals);
 					
 					//If Recurring Invoice Enabled
 					$recurring_invoice = array(
@@ -435,18 +423,18 @@ class Invoices extends Admin_Controller {
 							
 						);
 						
-					$recurring_inv_title = $this->Invoice_model->save_recurring_invoice($recurring_invoice);
+					$recurring_inv_title = $this->Customer_Invoices_model->save_recurring_invoice($recurring_invoice);
 										
 			}
 			
-			redirect($this->config->item('admin_folder').'/invoices/invoice_detail/'.$data['invoice_id']);
+			redirect($this->config->item('admin_folder').'/customer_invoice/invoice_detail/'.$data['invoice_id']);
 	}
 	
 	
 	
     function delete($invoice_id)
     {
-		$this->Invoice_model->delete($invoice_id);	
+		$this->Customer_Invoices_model->delete($invoice_id);	
 		redirect($this->config->item('admin_folder').'/invoices');   
     }
 	
@@ -455,7 +443,7 @@ class Invoices extends Admin_Controller {
 		//echo $status.'-----'.$invoice_id;
 		if(!empty($invoice_id) && !empty($status))
 		{
-			$this->Invoice_model->invoice_paid_status($invoice_id, $status);	
+			$this->Customer_Invoices_model->invoice_paid_status($invoice_id, $status);	
 		}		
 		redirect($this->config->item('admin_folder').'/invoices');   
     }
@@ -472,9 +460,9 @@ class Invoices extends Admin_Controller {
 		//echo $template_id; exit;
 		$selected_template 	 = $this->Invoice_Template_model->get_templates_by_for_invoice($template_id);
 		//$this->show->pe($selected_template);
-		$invoice_items 		 = $this->Invoice_model->get_invoice_items_by_invoice_id($invoice_id);
-		$invoice_totals		 = $this->Invoice_model->get_invoice_totals($invoice_id);
-		$customer_details	 = $this->Invoice_model->get_invoice_customer($invoice_id);
+		$invoice_items 		 = $this->Customer_Invoices_model->get_invoice_items_by_invoice_id($invoice_id);
+		$invoice_totals		 = $this->Customer_Invoices_model->get_invoice_totals($invoice_id);
+		$customer_details	 = $this->Customer_Invoices_model->get_invoice_customer($invoice_id);
 		
 		//$this->show->pe($invoice_total);
 		$r_tag_one = htmlspecialchars_decode($selected_template->invoice_template_header);
@@ -501,17 +489,14 @@ class Invoices extends Admin_Controller {
 			</div>';
 		$html_output 		.= '<br><br>';
 		
-		$html_output 		.= '<table id="item_table" class="items table table-striped table-bordered" style="width:100%; text-align: center;">
+		$html_output 		.= '<table id="item_table" class="items table table-striped table-bordered" style="width:100%;  "  cellpadding="10" cellspacing="10" >
 								<thead>
 								  <tr>
 									<th>'.lang('item').'</th>
-									<th style="min-width: 300px;">'.lang('description').'</th>
-									<th style="width: 100px;">'.lang('quantity').'</th>
-									<th style="width: 100px;">'.lang('price').'</th>
-									<th>'.lang('tax_rate').'</th>
-									<th>'.lang('subtotal').'</th>
-									<th>'.lang('tax').'</th>
-									<th>'.lang('comm').'</th>
+									<th >'.lang('description').'</th>
+									<th >'.lang('quantity').'</th>
+									<th >'.lang('price').'</th>									
+									<th>'.lang('subtotal').'</th>									
 									<th>'.lang('total').'</th>
 									<th>'.$invoice_data->invoice_id.'</th>                        
 								  </tr>
@@ -525,11 +510,8 @@ class Invoices extends Admin_Controller {
 										<td style="vertical-align: top;">'.$invoice_item['item_name'].'</td>
 										<td>'.$invoice_item['item_description'].'</td>
 										<td style="vertical-align: top;">'.$invoice_item['item_quantity'].'</td>
-										<td style="vertical-align: top;">'.format_currency($invoice_item['item_price']).'</td>
-										<td style="vertical-align: top;">'.format_currency($invoice_item['tax_rate']).'</td>
-										<td style="vertical-align: top;">'.format_currency($invoice_item['item_subtotal']).'</td>
-										<td style="vertical-align: top;">'.format_currency($invoice_item['item_tax_total']).'</td>
-										<td style="vertical-align: top;">'.format_currency($invoice_item['comm_rate_value']).'</td>
+										<td style="vertical-align: top;">'.format_currency($invoice_item['item_price']).'</td>					
+										<td style="vertical-align: top;">'.format_currency($invoice_item['item_subtotal']).'</td>										
 										<td style="vertical-align: top;">'.format_currency($invoice_item['item_total']).'</td>
 										<td></td>
 									  </tr>';
@@ -537,24 +519,20 @@ class Invoices extends Admin_Controller {
 								}
 									
 		$html_output 		.= 	'</tbody>
-							  </table><br><br>';
+							  </table><br>';
 		
 		
 		 if(!empty($invoice_totals)){
-			$html_output 		.= '<table class="table table-striped table-bordered" style="width:100%; text-align: center;">
+			$html_output 		.= '<table class="table table-striped table-bordered"  cellpadding="10" cellspacing="10">
 								<thead>
 									<tr>
-										<th>'.lang('subtotal').'</th>
-										<th>'.lang('item_tax').'</th>
-										<th>'.lang('comm_total').'</th>							
+										<th>'.lang('subtotal').'</th>																
 										<th>'.lang('total').'</th>							
 									</tr>
 								</thead>
 								<tbody>					
 									<tr>
-										<td>'.format_currency($invoice_totals[0]['invoice_item_subtotal']).'</td>
-										<td>'.format_currency($invoice_totals[0]['invoice_item_tax_total']).'</td>
-										<td>'.format_currency($invoice_totals[0]['invoice_commission_total']).'</td>							
+										<td>'.format_currency($invoice_totals[0]['invoice_item_subtotal']).'</td>																
 										<td>'.format_currency($invoice_totals[0]['invoice_total']).'</td>							
 									</tr>
 								</tbody>

@@ -5,6 +5,7 @@ Class Report_model extends CI_Model
 	function __construct()
 	{
 			parent::__construct();
+			$this->load->model('Product_model');
 	}
 	
 	function get_purchesed_product($limit = 0 , $offset = 0)
@@ -14,15 +15,26 @@ Class Report_model extends CI_Model
 		$this->db->group_by('product_id');
 		$this->db->having('COUNT(*) > 0');
 		
-		 if($limit>0)
+		if($limit>0)
 		{
 			$this->db->limit($limit, $offset);
 		}
-		 
+		$resutl_send = array();		
+		$result = $this->db->get();		
+		$product_purchased =  $result->result();		
+		foreach ($product_purchased as $product_purchaseds){
 		
-		$result = $this->db->get();
-		
-		return $result->result();
+			$product_name = $this->Product_model->get_product($product_purchaseds->product_id);			
+			
+			if(!empty($product_name->name))
+			{
+				$resutl_send[] = $product_purchaseds;
+			
+			}
+		}
+		/*echo "<pre>";print_r($resutl_send);
+		exit;*/
+		return $resutl_send;
 	}
 	
 	function customer_state($limit = 0 , $offset = 0)

@@ -166,6 +166,14 @@ Class order_model extends CI_Model
 		return $this->db->get_where('orders', array('customer_id'=>$id), 15)->result();
 	}
 	
+	//get an old individual customers orders
+	function get_old_customer_orders($id)	{
+		
+		$this->db->order_by('ordered_on', 'DESC');
+		return $this->db->get_where('orders', array('customer_id'=>$id), 15)->result();
+	}
+	
+	
 	//get an individual customers orders
 	function get_admin_related_orders($admin_id)
 	{

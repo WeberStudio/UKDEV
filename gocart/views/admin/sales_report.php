@@ -126,7 +126,8 @@ function date_status_show()
             
          </div>         
          <div class="form-row control-group row-fluid">
-			<div class="controls span12" align="right">      
+			<div class="controls span12" align="right">   
+				<input type="submit"   class="btn" name="print_call" value="Sales Report (View)" >    
 				<input type="submit"  class="btn" name="print_call" value="Sales Report (Print)" >             
 				<input type="submit"  class="btn" name="csv_call" value="Sales Report (CSV)" > 
 			</div>

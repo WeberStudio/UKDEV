@@ -100,7 +100,8 @@ class Tax extends Admin_Controller {
 		$data['admin_id']					= '';
 		$data['tax_rate_name']				= '';
 		$data['tax_rate_percent']			= '';
-		$data['tax_level']					= '0';		
+		$data['tax_level']					= '0';
+		$data['tax_for']					= '';		
 		
 		
 						
@@ -121,6 +122,7 @@ class Tax extends Admin_Controller {
 			$data['tax_rate_name']				= $tax->tax_rate_name;
 			$data['tax_rate_percent']			= $tax->tax_rate_percent;
 			$data['tax_level']					= $tax->tax_level;
+			$data['tax_for']					= $tax->tax_for;	
 		}
 		
 		$this->form_validation->set_rules('tax_rate_name',  'Tax Rate Name', 'trim|required');
@@ -144,6 +146,7 @@ class Tax extends Admin_Controller {
 			$save['tax_rate_name']			= $this->input->post('tax_rate_name');
 			$save['tax_rate_percent']		= $this->input->post('tax_rate_percent');
 			$save['tax_level']				= $this->input->post('tax_level');
+			$save['tax_for']				= $this->input->post('tax_for');
 			if(empty($save['tax_level']))
 			{
 				$save['tax_level']		= 'Normal';

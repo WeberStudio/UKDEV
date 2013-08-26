@@ -20,8 +20,8 @@ function areyousure()
         
               <div class="controls span3">
                 <?php 
-					$option = array( ''=>'select frequently','per_week'=>'Per Week', 'per_month'=>'Per Month','per_year'=>'Per Year');
-					echo form_dropdown('date',$option,set_value('someValue'),'class="chzn-select"','id="default-select"', 'placeholder="select frequently"');
+					$option = array( ''=>'select Frequency','per_week'=>'Per Week', 'per_month'=>'Per Month','per_year'=>'Per Year');
+					echo form_dropdown('date',$option,set_value('someValue'),'class="chzn-select"','id="default-select"', 'placeholder="select Frequency"');
 				?>
               </div>
               <div class="controls span3">
@@ -113,34 +113,35 @@ function areyousure()
 	<tbody>
 		
 		<?php //echo (count($commissions) < 1)?'<tr><td style="text-align:center;" colspan="5">'.lang('no_customers').'</td></tr>':''?>
-<?php foreach ($product_purchased as $product_purchaseds):?>
-		<tr>
-			
-			
-		
+<?php foreach ($product_purchased as $product_purchaseds):
+		//echo $product_purchaseds->product_id; 
+		$product_name = $this->Product_model->get_product($product_purchaseds->product_id);
+		if(!empty($product_name))
+		{
+?>		
+		<tr>		
 			<td><?php echo $product_purchaseds->product_id; ?></td>
 			<td><a href="<?=base_url().ADMIN_PATH?>products">
-			<?php 
+			<?php		
 			
-			//echo $product_purchaseds->product_id; 
-			$product_name = $this->Product_model->get_product($product_purchaseds->product_id);
 			if(!empty($product_name))
 			{
 				echo $product_name->name;
 				echo '</a>';
-			}
-			
-			
-            
+			}          
 			else
 			{
-				echo "product is deleted";
+				//echo "product is deleted";
 			}
 			
 			?>
             </td>
 			<td><a href="<?=base_url().ADMIN_PATH?>products"><?php echo $product_purchaseds->count_product; ?></a></td>
 		</tr>
+		
+	<?	}
+		
+	?>
 <?php endforeach;
 		//if($page_links != ''):?>
 		<!--<tr><td colspan="5" style="text-align:center"><?php //echo $page_links;?></td></tr>-->
