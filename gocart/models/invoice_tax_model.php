@@ -24,6 +24,18 @@ Class Invoice_Tax_Model extends CI_Model
 		return $result->result();
 	}
 	
+	function get_customer_taxes($field='tax_rate_id', $by='ASC', $page=0, $rows=5)
+	{
+		$this->db->order_by($field, $by);
+		if($rows>0)
+		{
+			$this->db->limit($rows, $page);
+		}
+		$this->db->where('tax_for', 'customer');
+		$result	= $this->db->get('oc_tax_rates');
+		return $result->result();
+	}
+	
 	function get_count_taxes()
 	{
 		return $this->db->count_all_results('customers');
@@ -36,7 +48,10 @@ Class Invoice_Tax_Model extends CI_Model
 		$result	= $this->db->get_where('oc_tax_rates', array('tax_rate_id'=>$id));
 		return $result->row();
 	}
-		
+	
+	
+	
+	
 	function save($tax)
 	{
 		if ($tax['tax_rate_id'])

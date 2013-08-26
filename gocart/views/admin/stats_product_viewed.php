@@ -20,8 +20,8 @@ function areyousure()
         
               <div class="controls span3">
                 <?php 
-					$option = array( ''=>'select frequently','per_week'=>'Per Week', 'per_month'=>'Per Month','per_year'=>'Per Year');
-					echo form_dropdown('date',$option,set_value('someValue'),'class="chzn-select"','id="default-select"', 'placeholder="select frequently"');
+					$option = array( ''=>'select Frequency','per_week'=>'Per Week', 'per_month'=>'Per Month','per_year'=>'Per Year');
+					echo form_dropdown('date',$option,set_value('someValue'),'class="chzn-select"','id="default-select"', 'placeholder="select Frequency"');
 				?>
               </div>
               <div class="controls span3">

@@ -54,7 +54,7 @@ $code=0;
               <div class="controls span3">
                 
                 <select class="chzn-select" id="" name="date">
-                    <option value=""> Select Frequently</option>
+                    <option value=""> Select Frequency</option>
                     <option value="week"<?php if($date == 'week'){echo 'selected';}?>> Per Week</option> 
                     <option value="month" <?php if($date == 'month'){echo 'selected';}?>> Per Month</option> 
                     <option value="year" <?php if($date == 'year'){echo 'selected';}?>> Per Year</option> 

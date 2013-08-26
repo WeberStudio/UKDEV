@@ -11,7 +11,7 @@ Class System_Template_model extends CI_Model
 
 	********************************************************************/
 	
-	function get_templates($limit=0, $offset=0, $order_by='id', $direction='DESC')
+	function get_templates($limit=0, $offset=0, $order_by='email_id', $direction='DESC')
 	{
 		$this->db->order_by($order_by, $direction);
 		if($limit>0)
@@ -73,6 +73,9 @@ Class System_Template_model extends CI_Model
 		}
 	}
 	
+	
+	
+	
 	function delete($id)
 	{
 		//this deletes the invoice template record
@@ -80,6 +83,42 @@ Class System_Template_model extends CI_Model
 		$this->db->delete('oc_system_emails');
 	
 	}
+	
+	
+	function save_default_email($template)
+	{
+		if ($template['d_email_id'])
+		{
+			$this->db->where('d_email_id', $template['d_email_id']);
+			$this->db->update('oc_default_emails', $template);
+			return $template['d_email_id'];
+		}
+		else
+		{
+			$this->db->insert('oc_default_emails', $template);
+			return $this->db->insert_id();
+		}
+	}
+	
+	function get_default_emails($limit=0, $offset=0, $order_by='d_email_id', $direction='DESC')
+	{
+		$this->db->order_by($order_by, $direction);
+		if($limit>0)
+		{
+			$this->db->limit($limit, $offset);
+		}
+
+		$result	= $this->db->get('oc_default_emails');
+		return $result->result();
+	}
+	
+	
+	function get_default_email_by_id($id)
+	{
+		$result	= $this->db->get_where('oc_default_emails', array('d_email_id'=>$id));
+		return $result->row();
+	}
+	
 	
 	
 } 

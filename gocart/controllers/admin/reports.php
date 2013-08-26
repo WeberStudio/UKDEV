@@ -98,8 +98,20 @@ class Reports extends Admin_Controller {
 			$invoice_footer 	= '';
 			$invoice_header 	= '';
 			$html_output 		= '';	
-			$this->mpdf->SetHeader('{DATE d-m-Y}|{PAGENO}|Sales Record');			 
+			$this->mpdf->SetHeader("{DATE d-m-Y}|{PAGENO}|Sales Record, Private and Confidential");			 
 			$output_array = $records->result_array();			
+			
+			$output_html .= '<table width="0" border="0" cellspacing="10" cellpadding="10" style="color:#999999">';
+			$output_html .= '<tr>
+					<td >					
+						<small>Student support office, UK Open College Limited, 4 Copthall House, The Meridian Station Square Coventry West Midlands CV1 2FL, Copyright 2013 ukopencollege.co.uk</small>					
+					</td>
+					<td>						
+						<small>Tell: 0121 288 0181 | Fax: 01827 288298, Mail Us : support@ukopencollege.co.uk, Let your friends and family know that,you have joined UK OPEN COLLEGE.</small>					
+					</td>
+				</tr>
+				</table>';
+							
 			$output_html .= '<table width="0" border="0" cellspacing="10" cellpadding="10">
 			  <tr>
 				<th>Order Number</th>
@@ -195,7 +207,7 @@ class Reports extends Admin_Controller {
 	
 	function product_purchased($page = 0)
 	{
-		$rows = 5;
+		$rows = 50;
 		$data['product_purchased'] = $this->Report_model->get_purchesed_product($rows, $page);
 		
 		$this->load->library('pagination');	
