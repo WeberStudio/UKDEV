@@ -56,6 +56,18 @@ function theme_img($uri, $tag=false)
     }
     
 }
+function theme_assets($uri, $tag=false)
+{
+    if($tag)
+    {
+        return '<img src="'.theme_url('assets/'.$uri).'" alt="'.$tag.'">';
+    }
+    else
+    {
+        return theme_url('assets/'.$uri);
+    }
+    
+}
 
 function catogery_img($uri, $tag=false)
 {
