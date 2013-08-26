@@ -1107,6 +1107,7 @@ class Cart extends Front_Controller {
 			$data['gift_cards_enabled']	= $this->gift_cards_enabled;
 
 			$this->load->view('giftcards', $data);
+            
 
 		}
 
