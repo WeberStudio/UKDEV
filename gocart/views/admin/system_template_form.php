@@ -31,10 +31,10 @@
 					$data    = array('name'=>'email_header', 	'id'=>'email_header', 	'class'=>'redactor', 'value'=>set_value('email_header', stripslashes($email_header)));
 					echo form_textarea($data);
 				?>
-				<label for="description"><?php echo lang('middle_content');?></label>
+				<!--<label for="description"><?php //echo lang('middle_content');?></label>-->
 				<?php
-					$data    = array('name'=>'middle_content', 	'id'=>'middle_content',  'style' => 'width:100%','value'=>set_value('middle_content', $middle_content));
-					echo form_textarea($data);
+					//$data    = array('name'=>'middle_content', 	'id'=>'middle_content',  'style' => 'width:100%','value'=>set_value('middle_content', $middle_content));
+					//echo form_textarea($data);
 				?>
 				<label for="description"><?php echo lang('footer_html');?></label>
 				<?php

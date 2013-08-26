@@ -120,14 +120,14 @@ class System_Templates extends Admin_Controller {
 			$data['id']							= $templates->email_id;			
 			$data['email_type']					= $templates->email_type;
 			$data['email_header']				= $templates->email_header;			
-			$data['middle_content']				= $templates->middle_content;
+			//$data['middle_content']				= $templates->middle_content;
 			$data['email_footer']				= $templates->email_footer;
 			
 		}
 		
 		$this->form_validation->set_rules('email_type',  'Template Titile', 'trim|required');
 		$this->form_validation->set_rules('email_header', 'Header html', 'trim|required');
-		$this->form_validation->set_rules('middle_content', 'Middle html', 'trim|required');
+		//$this->form_validation->set_rules('middle_content', 'Middle html', 'trim|required');
 		$this->form_validation->set_rules('email_footer', 'Footer html', 'trim|required');
 		
 		
@@ -147,7 +147,7 @@ class System_Templates extends Admin_Controller {
 			$save['email_id']					= $id;
 			$save['email_type']					= $this->input->post('email_type');
 			$save['email_header']				= addslashes($this->input->post('email_header'));
-			$save['middle_content']				= addslashes($this->input->post('middle_content'));
+			//$save['middle_content']				= addslashes($this->input->post('middle_content'));
 			$save['email_footer']				= addslashes($this->input->post('email_footer'));
 			
 			$id = $this->System_Template_model->save($save);

@@ -262,7 +262,7 @@ function login($ajax = false)
 			}
 			
 			// save the customer info and get their new id
-			$id = $this->Customer_model->save($save);
+			//$id = $this->Customer_model->save($save);
 
 			/* send an email */
 			// get the email template
@@ -285,16 +285,23 @@ function login($ajax = false)
 			$row['subject'] = str_replace('{site_name}', $this->config->item('company_name'), $row['subject']);
 			$row['content'] = str_replace('{site_name}', $this->config->item('company_name'), $row['content']);*/
 			
-			$email_attributes = $this->Settings_model->get_system_email($this->config->item('email_template'));
+			//$email_attributes = $this->Settings_model->get_system_email($this->config->item('email_template'));
+            $email_attributes = $this->Settings_model->join_email_table(2);
+            
 			
 			//print_r($email_attributes);exit;
-			$message = '';
-			$message .= $email_attributes[0]['email_header'];
+			$message  = '';
+			$message .= stripslashes($email_attributes[0]['email_header']);
+            
+            $message .= '<div>
+                        Dear '.$this->input->post('firstname').' '. $this->input->post('lastname').'!
+                        </div>';
+                            
+             $message .=  stripslashes($email_attributes[0]['middle_content']);
+             
+             $message .=  '<div>Username: '.$this->input->post('email').' <br>Password: '.$password.' </div>';              
 			
-			
-			 $message .= '<tr><td style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><br><p align="left" class="article-title"><singleline label="Title"> Dear '.$this->input->post('firstname').' '. $this->input->post('lastname').'!</singleline></p><div align="left" ><multiline label="Description"></multiline>Thank you for registering with UK Open College. This email is to certify that your account has been registered with us. Please save the login information i.e. user name and password as you would require this in future when logging in at the UK OPEN COLLEGE website. <br><br>Username: '.$this->input->post('email').' <br>Password: '.$password.' <br></div></td></tr><tr><td style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><div align="left" >Student Support can be accessed via e-mail :  <a href="mailto:support@ukopencollege.co.uk"> support@ukopencollege.co.uk</a>.<br><br>Or<br><br>Get in touch via</div></td></tr></tbody></table></td></tr>';
-			
-	echo 		$message .= $email_attributes[0]['email_footer'];exit;
+	echo 		$message .= stripslashes($email_attributes[0]['email_footer']);exit;
 			
 			 
 			$this->load->library('email');
