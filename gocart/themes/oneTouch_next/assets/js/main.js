@@ -17,7 +17,6 @@ function submenushow(){
 	},300);
 };
 function submenuhide(){	
-    alert();
 	$("#sub-menu").stop().animate({
 		height: "0px",
 	},300);

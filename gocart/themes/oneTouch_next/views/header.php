@@ -150,7 +150,7 @@ function category_search(name)
 
 
 </script>                      
-                       <article class="col4 filters-res">
+                      <article class="col4 filters-res">
                           <form method="post" name="search_form" id="search-form" action="<?=base_url().'Search'?>">
                               <input name="search_field" type="text" id="search" value="" />
                               <input type="hidden" value="" name="search_by" class="" id="search_by">
