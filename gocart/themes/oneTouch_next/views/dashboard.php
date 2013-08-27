@@ -14,7 +14,7 @@
             <?php include('header.php')?> 
             <!-- /header -->
             
-            THIS IS JOKTJLJLKJFDSL LJKLFDAJFDL LJF JFD FJFSDF J JLKSAFSDKLFJSK   DASHBOARD          
+          <?php include_once('dashboard_content.php'); ?>         
             <div class="clear"></div>
         
    <?php include('footer.php')?> 

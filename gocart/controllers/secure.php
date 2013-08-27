@@ -146,7 +146,59 @@ function login($ajax = false)
 		}
 		$this->load->view('login', $data);
 	}
-	} 
+	}
+    
+    
+    function tutor_login($ajax = false)
+    {
+        $redirect    = $this->Customer_model->is_logged_in(false, false);     
+        
+        //if they are logged in, we send them back to the my_account by default, if they are not logging in
+        $this->load->library('form_validation');
+        if ($redirect)
+        {
+            redirect('dashboard');
+        }
+        $data['page_title']    = 'Login';
+        $this->load->helper('form');
+        
+        
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[128]');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+        
+        if ($this->form_validation->run() == FALSE)
+        {
+        $this->load->view('tutor_login', $data);
+        }
+        
+        else
+        {
+        $submitted         = $this->input->post('submitted');
+        if ($submitted)
+        {
+            $email        = $this->input->post('email');
+            $password    = $this->input->post('password');
+            $remember   = $this->input->post('remember');
+            $redirect    = $this->input->post('redirect');
+            
+            $login        = $this->Customer_model->login($email, $password);
+            if ($login)
+            {
+                
+              redirect('secure/login');  
+            }
+            else
+                {
+                    $this->session->set_flashdata('redirect', $redirect);
+                    $this->session->set_flashdata('error', lang('login_failed'));
+                    
+                    redirect('secure/tutor_login');
+                }
+            
+        }
+        $this->load->view('tutor_login', $data);
+    }
+    }  
 	
 	function logout()
 	{
@@ -262,7 +314,7 @@ function login($ajax = false)
 			}
 			
 			// save the customer info and get their new id
-			//$id = $this->Customer_model->save($save);
+			$id = $this->Customer_model->save($save);
 
 			/* send an email */
 			// get the email template
@@ -301,7 +353,7 @@ function login($ajax = false)
              
              $message .=  '<div>Username: '.$this->input->post('email').' <br>Password: '.$password.' </div>';              
 			
-	echo 		$message .= stripslashes($email_attributes[0]['email_footer']);exit;
+	 		$message .= stripslashes($email_attributes[0]['email_footer']);
 			
 			 
 			$this->load->library('email');
