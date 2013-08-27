@@ -84,11 +84,11 @@ $phone        = array('id'=>'phone', 'class'=>'input-text', 'name'=>'phone', 'va
                         </div>
                         
                         <div class="col3"  onMouseOver="change_text_color();">
-                        <h2 class="dull">3. Confirm</h2>
+                        <h2 align="right" class="dull">3. Confirm</h2>
                         </div>
                         
                         <div class="col3"  onMouseOver="change_text_color();">
-                        <h2 class="dull">4. Payment</h2>
+                        <h2 align="right" class="dull">4. Payment</h2>
                         </div>
                        
                         

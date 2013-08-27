@@ -38,11 +38,11 @@
                     <?php 
                     if($this->Customer_model->is_logged_in(false, false)){                   
                     ?>
-                      <a href="<?php echo site_url('dashboard');?>">Dashboard</a>/
-                      <a href="<?php echo site_url('secure/logout');?>">logout</a> 
+                       <a style="padding:5px;" class="contact-btn" href="<?php echo site_url('dashboard');?>">Dashboard</a>/
+                      <a style="padding:5px;" class="contact-btn" href="<?php echo site_url('secure/logout');?>">logout</a> 
                     <?php }else{?>
-                        <a href="<?php echo site_url('secure/login');?>">login</a> 
-                        / <a href="<?php echo site_url('secure/register'); ?>">Registration</a> 
+                        <a style="padding:5px;" class="contact-btn" href="<?php echo site_url('secure/login');?>">login</a> 
+                        / <a style="padding:5px;"  class="contact-btn" href="<?php echo site_url('secure/register'); ?>">Registration</a> 
                     <?php }?> 
                          
                     </div>
