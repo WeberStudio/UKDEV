@@ -296,6 +296,14 @@ Class Category_model extends CI_Model
         $result = $this->db->get('categories');
         return $result->result(); 
     }
+    function get_cat($parent_id = false)
+    {
+        $this->db->select('*');
+        $this->db->where('parent_id',$parent_id);
+        $result = $this->db->get('categories');
+        return $result->result();
+           
+    }
     
     
     function fornt_ent_search_subcat($cat_name =false)

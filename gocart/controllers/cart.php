@@ -47,15 +47,28 @@ class Cart extends Front_Controller {
        $parent                      = 0;
        $position                    = 'grid-page';
        $data['special_pages']       = $this->Page_model->get_page('1'); 
-       $data['menu_categories']     = $this->Category_model->get_categories_tierd($parent);
-       
+       $random_array                = $this->Category_model->get_categories_tierd($parent);
+       $test                        =  $this->shuffle_assoc($random_array);
+       $data['menu_categories']     = $test;
        $data['grid_pages']          = $this->Page_model->get_pages_by_position($position);
  
-      //$this->show->pe($data['menu_categories'] );
+      //$this->show->pe($test);
 
        $this->load->view('index', $data);
 
     }
+    function shuffle_assoc($list) 
+    { 
+      if (!is_array($list)) return $list; 
+
+      $keys = array_keys($list); 
+      shuffle($keys); 
+      $random = array(); 
+      foreach ($keys as $key) 
+        $random[$key] = $list[$key]; 
+
+      return $random; 
+      }
 
     function   allcourses($page=0,$row=12)
     {
@@ -1218,8 +1231,8 @@ class Cart extends Front_Controller {
 		$this->form_validation->set_rules('question', 'Question', 'trim|required');
 		if($this->form_validation->run() == false)
 		{
-			$open = array('open'=>'1');
-			$this->session->set_userdata($open);
+			//$open = array('open'=>'1');
+			//$this->session->set_userdata($open);
 			redirect($this->input->post('slug'));
 		}
 		else
@@ -1228,8 +1241,8 @@ class Cart extends Front_Controller {
 			$save['question']			= $this->input->post('question');
 			$this->Product_model->save_question($save);
 			
-			$open = array('open'=>'1');
-			$this->session->set_userdata($open);
+			//$open = array('open'=>'1');
+			//$this->session->set_userdata($open);
 			redirect($this->input->post('slug'));
 			
 		}

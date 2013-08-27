@@ -45,21 +45,21 @@
                         
                         
                         <div class="col3">
-                        <h2 class="dull">1. Personal Details</h2>
+                        <h2  class="dull">1. Personal Details</h2>
                         </div>
                         
                         <div class="col3">
-                        <h2 class="dull">2. Address Details</h2>
+                        <h2 align="right" class="dull">2. Address Details</h2>
                         </div>
                         
                         <div class="col3">
-                        <h2 class="dull">3. Confirm</h2>
+                        <h2 align="right" class="dull">3. Confirm</h2>
                         </div>
                         
                         <div class="col3">
-                        <h2>4. Payment</h2>
+                        <h2 align="right">4. Payment</h2>
                         </div>
-                         <h3>Payment Options</h3>   
+                         <h3 >Payment Options</h3>   
                         <div class="col6">
                         
                               
@@ -100,7 +100,19 @@
                         
                         
                         <div class="col6">
-                        
+                                                  <div class="col12">
+                                      <span style="color:#666; font-size:11px; margin-left: 245px;" > We accept the following Sage Pay, PayPal, All Debit and Credit Cards. </span>
+                                    <div class = "payment_options">
+                                      
+                                           <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/maestro.png')?>" alt="">
+                                        <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/mc.png')?>" alt="">
+                                        <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/PayPal_mark.gif')?>" alt="">
+                                        <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/solo.png')?>" alt="">
+                                        <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/visa.png')?>" alt="">
+                                         <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/visa_debit.png')?>" alt="">
+                                          <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/visa_electron.png')?>" alt="">
+                                    </div>
+                           </div>
                             <h3>Credit/Debit Card Information</h3> 
                             
                             <form action="<?=base_url()?>checkout/place_order_paypal_pro" method="POST" autocomplete="on" class="padding-left-right">

@@ -135,20 +135,20 @@ $b_phone        = array('id'=>'b_phone', 'class'=>'input-text', 'name'=>'b_phone
                      <div class="col12">
                         
                         
-                        <div class="col3">
-                        <h2 class="dull">1. Personal Details</h2>
+                        <div class="col3" >
+                        <h2 class="dull" onMouseOver="change_text_color();">1. Personal Details</h2>
                         </div>
                         
                         <div class="col3">
-                        <h2>2. Address Details</h2>
+                        <h2 align="right" onMouseOver="change_text_color();">2. Address Details</h2>
                         </div>
                         
                         <div class="col3">
-                        <h2 class="dull">3. Confirm</h2>
+                        <h2 align="right" class="dull" onMouseOver="change_text_color();">3. Confirm</h2>
                         </div>
                         
                         <div class="col3">
-                        <h2 class="dull">4. Payment</h2>
+                        <h2 align="right" class="dull" onMouseOver="change_text_color();">4. Payment</h2>
                         </div>
                         
                         <div class="col6">
@@ -386,6 +386,21 @@ $b_phone        = array('id'=>'b_phone', 'class'=>'input-text', 'name'=>'b_phone
                            
                            
                         </div> <!-- end col6 -->
+                          <div class="col6">
+                        <div class="col12">
+                                      <span style="color:#666; font-size:11px; margin-left: 245px;" > We accept the following Sage Pay, PayPal, All Debit and Credit Cards. </span>
+                                    <div class = "payment_options">
+                                      
+                                           <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/maestro.png')?>" alt="">
+                                        <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/mc.png')?>" alt="">
+                                        <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/PayPal_mark.gif')?>" alt="">
+                                        <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/solo.png')?>" alt="">
+                                        <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/visa.png')?>" alt="">
+                                         <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/visa_debit.png')?>" alt="">
+                                          <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/visa_electron.png')?>" alt="">
+                                    </div>
+                           </div><!-- end col12 -->
+                        </div>
                         
                         
                     </div><!-- end col12 -->

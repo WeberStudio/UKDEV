@@ -13,6 +13,24 @@
             <!-- header -->
             <?php include('header.php')?> 
             <!-- /header -->
+<!--Socil Icon Share Button Files-->
+<script type="text/javascript">var switchTo5x=false;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "39c7f6c5-ccfb-494c-b58a-2fd80efbe0c2", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+<!--Socil Icon Share Button Files--> 
+<script type="text/javascript">
+    jQuery =    jQuery.noConflict();
+    jQuery(document).ready(function() {
+        /*
+        *  Simple image gallery. Uses default settings
+        */
+
+        jQuery('.fancybox').fancybox();
+
+
+
+    });
+</script>
             
             <section>
                 <div class="onerow"> 
@@ -43,7 +61,7 @@
                         
                             <img src="<?php echo base_url('uploads/images/medium/'.$product->images);?>" alt="<?=$product->img_alt?>" title="<?=$product->img_title?>" />
                             
-                        </div>
+                        </div> 
                         
                         
                          <?php echo form_open('cart/add_to_cart', 'class=""');?>
@@ -55,7 +73,19 @@
                     
                         </div>-->
                                 
-                        <div class="col12 ">
+                        <div class="col12">
+                          <span class='st_sharethis_large' displayText='ShareThis'></span>
+                        <span class='st_facebook_large' displayText='Facebook'></span>
+                        <span class='st_googleplus_large' displayText='Google +'></span>
+                        <span class='st_twitter_large' displayText='Tweet'></span>
+                        <span class='st_linkedin_large' displayText='LinkedIn'></span>
+                        <span class='st_pinterest_large' displayText='Pinterest'></span>
+                        <span class='st_email_large' displayText='Email'></span>
+                        
+                        
+                        </div>         
+                        <div class="col12">
+                            
                               <h2><?=$product->name?></h2> 
                              <div id="price_select_error" style="display:none; color:#FF0000; font-weight:bold;">Please select a price option before you enrol</div> 
                             <?php if(!empty($product->price_options)){ ?>
@@ -73,9 +103,270 @@
                                 <?php }?>
                                 <input type="hidden" name="id" value="<?php echo $product->id?>"/>
                                 
-                                <input style="float: right;margin-right: 28px;" type="submit" value="Book Now" class="button" onclick=" return check_payment_price()" /> 
+                                <input style="float: right;margin-right: 28px;" type="submit" value=" Enrol Now" class="button" onclick=" return check_payment_price()" /> 
                         </div>
-                        </form> 
+                        </form>
+                        
+                       
+                        
+                      <div class="col12">    
+                       <ul class='tabs'>
+                                 <li><a href='#question'>Question</a></li>
+                                 <li><a href='#update'>Updates</a></li>
+                                <li><a href='#tab2'>Reviews</a></li>
+                                
+                              </ul>
+                              <div id='question'> 
+                                <div class="details">
+                                    <div class="reviews"><h2>Question</h2>
+                                        <ul>
+                                            <form method="post" action="<?php echo site_url();?>cart/question">
+                                            <label>Your Question</label>
+                                            <input type="text" name="question" >
+                                            <input type="hidden" id="" name="product_id" value="<?php echo $product->id;?>">
+                                            <input type="hidden" name="slug" value="<?php if($this->uri->segment(2)==""){echo $this->uri->segment(1);}
+                                                            if($this->uri->segment(2)!=""){echo $this->uri->segment(1)."/".$this->uri->segment(2);}?>"/>
+                                            <br/>
+                                            <input style="float: right;margin-right: 31px;margin-top: 10px;" type="submit" value="Submit" class="button" /> 
+                                            </form>
+
+                                        </ul>
+                                        <ul>
+                                                                                    <?php $questions = $this->Product_model->get_question($product->id);
+                                                //echo $this->show->pe($questions); exit;
+                                                if(empty($questions)){echo "<i> There is No Question Yet</i>";}
+                                                if(!empty($questions)){
+                                                    foreach($questions as $question){
+                                            ?>
+                                            
+                                                                        <p><h4><?php echo ucwords(strtolower($question->name));?></h4></p>
+                                                                        <p><?php echo ucwords(strtolower($question->question));?></p>
+                                                                        <div  align="right">
+                                                                            <p class="button"><a class="button" href="javascript:void(0);"> Reply</a></p>
+                                                                            <div class="clear"  style="margin-bottom: 10px;"></div>
+
+                                                                        </div>
+                                            
+                                            <?php }}?>
+                                        </ul>
+                                     </div>
+                                </div>
+                                
+                              </div>
+                              <div id='update'> 
+                                <div class="details">
+                                    <div class="reviews"><h2>Updates</h2>
+                                        <ul>
+                                            <form><input type="text" >
+                                            </form>
+                                        </ul>
+                                     </div>
+                                </div>
+                                
+                              </div>
+                              <div id='tab2'>
+                                
+                                <div class="details">
+                                
+                                    <div class="reviews"><h2>Reviews</h2>
+                                         <p class="button"> <a  class="fancybox" href="#inline<?php if($this->go_cart->customer() != ""){echo "1";}if($this->go_cart->customer() == ""){echo"2";}?>"> Review</a></p>
+                                        <ul>
+                                            <li><p>this is comment feed this is comment feed this is comment feed comment feed this is comment feed ...</p>
+                                    <a href="#" class="t_link">Name of Person</a></li>
+                                    
+                                               
+                                        </ul>
+                                     </div>
+                                
+                                </div>
+                                
+                              </div>
+                              
+
+                    </div>
+                        <div id="inline1" style="width:400px;display: none;">
+                        <div id="review_form">
+                            <div id="respond">
+                                <h3 id="reply-title">Add a review</h3>
+                                <form action="<?=base_url()?>cart/review" method="post" id="commentform" name="review_form">
+                                    <p class="comment-form-author">
+                                        <label for="author">Name</label> <span class="required">*</span>
+                                        <input id="author" name="name" type="text" value="" size="30" aria-required="true">
+                                    </p>
+                                    <p class="comment-form-email">
+                                        <label for="email">Email</label> <span class="required">*</span>
+                                        <input id="email" name="email" type="text" value="" size="30" aria-required="true">
+                                    </p>
+                                    <p class="comment-form-rating">
+                                    <label for="rating">Rating</label>
+                                    <script>
+                                        function review1()
+                                        {
+                                            document.getElementById('rating').value = 1;
+                                            return false;
+                                        }
+                                        function review2()
+                                        {
+                                            document.getElementById('rating').value = 2;
+                                            return false;
+                                        }
+                                        function review3()
+                                        {
+                                            document.getElementById('rating').value = 3;
+                                            return false;
+                                        }
+                                        function review4()
+                                        {
+                                            document.getElementById('rating').value = 4;
+                                            return false;
+                                        }
+                                        function review5()
+                                        {
+                                            document.getElementById('rating').value = 5;
+                                            return false;
+                                        }
+                                    </script>
+
+                                    <p class="stars">
+                                        <span>
+                                            <a class="star-1" href="javascript:void(0)" onclick="return review1();">1</a>
+                                            <a class="star-2" href="javascript:void(0)" onclick="return review2();">2</a>
+                                            <a class="star-3" href="javascript:void(0)" onclick=" return review3();">3</a>
+                                            <a class="star-4" href="javascript:void(0)" onclick="return review4();">4</a>
+                                            <a class="star-5" href="javascript:void(0)" onclick=" return review5();">5</a>
+                                        </span>
+                                    </p>
+                                    <input type="hidden" class="" id="rating" name="rating" value=""/>
+                                    </p>
+                                    <p class="comment-form-comment">
+                                        <label for="comment">Your Review  </label>
+                                        <textarea id="comment" name="review" cols="45" rows="8" aria-required="true"></textarea>
+                                    </p>
+
+                                    <input type="hidden" id="" name="product_id" value="<?php echo $product->id;?>">
+                                    <input type="hidden" name="slug" value="<?php if($this->uri->segment(2)==""){echo $this->uri->segment(1);}
+                                            if($this->uri->segment(2)!=""){echo $this->uri->segment(1)."/".$this->uri->segment(2);}?>"/>
+                                    <p class="form-submit">
+
+                                        <input name="submit" type="submit" id="submit" value="Submit Review" >
+
+
+                                        <input type="hidden" name="comment_post_ID" value="850" id="comment_post_ID">
+                                        <input type="hidden" name="comment_parent" id="comment_parent" value="0">
+                                    </p>
+                                </form>
+                            </div><!-- #respond -->
+                        </div>
+                        </div>
+                        <div id="inline2" style=" width:337px; display: none;">
+
+                        <div class="simpleTabs" style="padding-left: 0px;">
+                            <ul class="simpleTabsNavigation">
+                                <li class="description_tab active"><a href="#question">Customer Login</a></li>
+                                <li class="description_tab active"><a href="#updates">Tutor Login</a></li>
+
+
+                            </ul>
+                            <div  class="simpleTabsContent" id="question">
+
+
+                                <div class="widget-inner">
+
+                                    <h3>Customer Login</h3>
+
+                                    <form method="post" action="<?=base_url()?>secure/login" name="customer_form">
+
+                                        <p>
+
+                                            <label for="user_login">Username or email</label>
+
+                                            <input name="email" class="input-text" id="user_login" type="text">
+
+                                        </p>
+
+                                        <p>
+
+                                            <label for="user_pass">Password</label>
+
+                                            <input name="password" class="input-text" id="user_pass" type="password">
+
+                                        </p>
+
+                                        <p>
+                                            <input type="hidden" name="review_login" value="customer_review"/>
+                                            <input type="hidden" id="" name="product_id" value="<?php echo $product->id;?>">
+                                            <input type="hidden" name="slug" value="<?php if($this->uri->segment(2)==""){echo $this->uri->segment(1);}
+                                                    if($this->uri->segment(2)!=""){echo $this->uri->segment(1)."/".$this->uri->segment(2);}?>"/>
+                                            <input class="submitbutton" name="submitted" id="wp-submit" value="Login →" type="submit" />
+                                            <a class="button" href="<?php echo site_url('secure/register')?>"> Register</a>
+                                            <a href="<?php echo site_url('secure/forgot_password')?>">Lost password?</a></p>
+
+                                        <div>
+
+                                            <!--<input name="redirect_to" class="redirect_to" value="" type="hidden">-->
+
+                                            <input name="testcookie" value="1" type="hidden">
+
+                                            <input name="woocommerce_login" value="1" type="hidden">
+
+                                            <input name="rememberme" value="forever" type="hidden">
+
+                                        </div>
+
+                                    </form>
+
+                                    <ul class="pagenav">
+
+                                    </ul>
+
+                                </div>
+
+                            </div>
+
+                            <div  class="simpleTabsContent" id="updates">
+
+                                <div class="widget-inner">
+                                    <h3>Tutor Login</h3>
+                                    <form class="bs-docs-example form-horizontal" accept-charset="utf-8" method="post" action="<?=base_url()?>tutor_login/login">
+                                        <p style="width: 325px;">
+                                            <label for="user_login">Username or email</label>
+                                            <input name="email" class="input-text" id="user_login" type="text">
+                                        </p>
+                                        <p style="width: 325px;">
+                                            <label for="user_pass">Password</label>
+                                            <input name="password" class="input-text" id="user_pass" type="password">
+                                        </p>
+                                        <p style="width: 325px;">
+                                            <input type="hidden" id="" name="product_id" value="<?php echo $product->id;?>">
+                                            <input type="hidden" name="slug" value="<?php if($this->uri->segment(2)==""){echo $this->uri->segment(1);}
+                                                    if($this->uri->segment(2)!=""){echo $this->uri->segment(1)."/".$this->uri->segment(2);}?>"/>
+                                            <input type="hidden" name="review_login" value="tutor_review"/>
+                                            <input class="submitbutton" name="submitted" id="wp-submit" value="Login →" type="submit">
+                                            <a class="button" href="<?php echo site_url('tutor_login/register')?>"> Register</a>
+
+                                            <a href="<?php echo site_url('tutor_login/forgot_password')?>">Lost password?</a></p>
+                                        <div>
+                                            <input name="redirect_to" class="redirect_to" value="" type="hidden">
+                                            <input name="testcookie" value="1" type="hidden">
+                                            <input name="woocommerce_login" value="1" type="hidden">
+                                            <input name="rememberme" value="forever" type="hidden">
+                                            <input type="hidden" value="<?php //echo $redirect; ?>" name="redirect"/>
+                                            <input type="hidden" value="submitted" name="submitted"/>
+                                        </div>
+                                    </form>
+                                    <ul class="pagenav">
+                                    </ul>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                        
+                         
                         
                         <div class="col12" style="margin-right: 0 !importent;">
                             
@@ -91,7 +382,7 @@
                                  }}
                                 ?> 
                                  
-                                <li><a href='#tab2'>Reviews</a></li>
+                               
                                 
                               </ul>
                               <?php
@@ -107,25 +398,7 @@
                               </div>
                               <?php }}?>
                               
-                              <div id='tab2'>
-                                
-                                <div class="details">
-                                
-                                    <div class="reviews"><h2>Reviews</h2>
-                                        
-                                        <ul>
-                                            <li><p>this is comment feed this is comment feed this is comment feed comment feed this is comment feed ...</p>
-                                    <a href="#" class="t_link">Name of Person</a></li>
-                                    
-                                               <li><p>this is comment feed this is comment feed this is comment feed comment feed this is comment feed ...</p>
-                                    <a href="#" class="t_link">Name of Person</a></li>
-                                        </ul>
-                                     </div>
-                                
-                                </div>
-                                
-                              </div>
-                              
+                                                             
 
                             
                         </div><!-- end col12 -->
