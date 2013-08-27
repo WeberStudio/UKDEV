@@ -35,17 +35,21 @@
                     <div class="col12 remove-padding">
                         <div class="col6 remove-padding">
                             <div class="bread">
-                                <p>Home  /  Courses </p>
+                                <p>Home  /  Courses
+                                
+                                 <?= 
+                                   $r_slash = str_replace("/","",$this->uri->slash_segment(3));
+                                 $pagination = $r_slash;?> </p>
                             </div>
                         </div>
                         
                         <div class="col6 align-right remove-padding">
                             <div id="views">
-                                <div id="list-view">
+                                <div id="list-view" <?php if($pagination!=""){echo 'class="view-active"';}?>>
                                     <img src="<?=theme_assets('img/grid-view.png')?>" alt="list" />
                                 </div>
                                 
-                                <div id="grid-view" class="view-active">
+                                <div id="grid-view" <?php if($pagination!=""){echo 'class=""';} else{echo 'class="view-active"';}?>>
                                     <img src="<?=theme_assets('img/list-view.png')?>" alt="list" />
                                 </div>
                             </div>
@@ -53,18 +57,18 @@
                     </div>
                     
                     
-                    <div id="courses">
+                    <div id="courses" <?php if($pagination != ""){echo 'style="display: none;"';}?> >
                      <?php include_once('course_catogery.php'); ?> 
                    </div>
                    
                    
                    
-                    <div id="courses-list">
+                    <div id="courses-list" <?php if($pagination != ""){echo 'style="display: block;"';}?> >
                                                  <?php foreach($categories as $category){?>
                                  <div class="col4">
                                     <a href="<?php echo base_url().$category['slug'];?>">
                                     <?php 
-                                    $file_path =   realpath('.')."\uploads\images\small\\".$category['image'];
+                                    $file_path =   realpath('.')."/uploads/images/small/".$category['image'];
                                     if(file_exists($file_path))
                                                     {
                                     ?>

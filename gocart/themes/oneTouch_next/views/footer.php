@@ -81,7 +81,7 @@
                         
                         <div class="col9 copyright-menu">
                             <ul>
-                            <li><a href="#">Tutor_login</a></li>
+                            <li><a href="<?php echo base_url().'secure/tutor_login'?>">Tutor_login</a></li>
                            <?php
                           $footer_pages = $this->Page_model->get_pages_by_position('footer_page');
                           foreach($footer_pages as $footer_page)

@@ -27,6 +27,10 @@
         <?php echo theme_css('fancy_dropdown.css', true); ?> 
         <?php echo theme_css('onepcssgrid.css', true); ?>
         <?php echo theme_css('global.css', true); ?>
+        <?php //echo theme_css('base.css', true); ?> 
+        <?php //echo theme_css('elfinder.min.css', true); ?> 
+        <?php //echo theme_css('jquery-ui.css', true); ?> 
+        <?php //echo theme_css('theme.css', true); ?> 
         
         
         
