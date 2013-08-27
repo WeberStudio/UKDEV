@@ -23,23 +23,21 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
                 <div class="btn-group ">
                       <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
                       <ul class="dropdown-menu" style="text-align:left;">
-                        <li><a target="_blank"  rel="tooltip" data-placement="left" data-original-title="<?php echo lang('pdf');?>" href="<?=base_url().'admin/invoices/pdf_view/'.$invoice['invoice_id'].'/'.$invoice['template_id']?>" ><i class="icon-print"></i> Open PDF </a></li>
+                        <li><a target="_blank"  rel="tooltip" data-placement="left" data-original-title="<?php echo lang('pdf');?>" href="<?=base_url().'admin/customer_invoice/pdf_view/'.$invoice['invoice_id'].'/'.$invoice['template_id']?>" ><i class="icon-print"></i> Open PDF </a></li>
                         
-                        <li><a  rel="tooltip" data-placement="left" data-original-title="<?php echo lang('email');?>" href="<?=base_url().'admin/invoices/invoice_detail/'.$invoice['invoice_id']?>" ><i class="icon-envelope"></i> Send Email </a></li>                        
+                        <li><a  rel="tooltip" data-placement="left" data-original-title="<?php echo lang('email');?>" href="<?=base_url().'admin/customer_invoice/invoice_detail/'.$invoice['invoice_id']?>" ><i class="icon-envelope"></i> Send Email </a></li>                        
                       </ul>
                     </div>	
                     <div class="btn-group inline">
                       <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">Status <span class="caret"></span></button>
                       <ul class="dropdown-menu" style="text-align:left;">
-                        <li><a href="<?=base_url().'admin/invoices/invoice_paid_status/open/'.$invoice['invoice_id']?>">Open</a></li>
-                        <li><a href="<?=base_url().'admin/invoices/invoice_paid_status/close/'.$invoice['invoice_id']?>">Close</a></li>
-                        <li><a href="<?=base_url().'admin/invoices/invoice_paid_status/overdue/'.$invoice['invoice_id']?>">Overdue</a></li>                        
+                        <li><a href="<?=base_url().'admin/customer_invoice/invoice_paid_status/open/'.$invoice['invoice_id']?>">Open</a></li>
+                        <li><a href="<?=base_url().'admin/customer_invoice/invoice_paid_status/close/'.$invoice['invoice_id']?>">Close</a></li>
+                        <li><a href="<?=base_url().'admin/customer_invoice/invoice_paid_status/overdue/'.$invoice['invoice_id']?>">Overdue</a></li>                        
                       </ul>
                     </div>				
-					<a class="btn btn-small"  rel="tooltip" data-placement="left" data-original-title="<?php echo lang('edit');?>" href="<?=base_url().'admin/invoices/invoice_detail/'.$invoice['invoice_id']?>" ><i class="icon-pencil"></i> Edit </a> 
-					<!--<a target="_blank" class="btn btn-small"  rel="tooltip" data-placement="left" data-original-title="<?php echo lang('pdf');?>" href="<?=base_url().'admin/invoices/pdf_view/'.$invoice['invoice_id'].'/'.$invoice['template_id']?>" ><i class="icon-print"></i> Open PDF </a>-->
-					<!--<a class="btn btn-small"  rel="tooltip" data-placement="left" data-original-title="<?php echo lang('email');?>" href="<?=base_url().'admin/invoices/invoice_detail/'.$invoice['invoice_id']?>" ><i class="icon-envelope"></i> Send Email </a>-->
-					<a class="btn btn-small"  rel="tooltip" data-placement="left" data-original-title="<?php echo lang('delete');?>" href="<?=base_url().'admin/invoices/delete/'.$invoice['invoice_id']?>" onclick="return confirm('If you delete this invoice you will not be able to recover it later. Are you sure you want to permanently delete this invoice?');">  Delete </a>
+					<a class="btn btn-small"  rel="tooltip" data-placement="left" data-original-title="<?php echo lang('edit');?>" href="<?=base_url().'admin/customer_invoice/invoice_detail/'.$invoice['invoice_id']?>" ><i class="icon-pencil"></i> Edit </a>				
+					<a class="btn btn-small"  rel="tooltip" data-placement="left" data-original-title="<?php echo lang('delete');?>" href="<?=base_url().'admin/customer_invoice/delete/'.$invoice['invoice_id']?>" onclick="return confirm('If you delete this invoice you will not be able to recover it later. Are you sure you want to permanently delete this invoice?');"> Delete </a>
 					
                                          
 				   </div>				   
@@ -63,7 +61,7 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
       <div class="title">
       
       
-      <?php echo form_open($this->config->item('admin_folder').'/invoices/index', 'class="form-horizontal row-fluid" ');?>
+      <?php echo form_open($this->config->item('admin_folder').'/customer_invoice/index', 'class="form-horizontal row-fluid" ');?>
         <h4> <i class="icon-book"></i><span>Search  Invoice
         <input type="submit"  class="btn" name="csv_call" value="Invoice Report (CSV)" >
         <input type="submit" class="btn" name="print_call" value="Courses Report (Print)"> 
@@ -107,7 +105,7 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
               </div>
               <div class="controls span2">
                 <button class="btn" rel="tooltip" data-placement="top" data-original-title="Search" name="submit" value="search"><?php echo lang('search')?></button>
-                <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/invoices/index');?>">Reset</a>       </div>
+                <a class="btn" rel="tooltip" data-placement="top" data-original-title="Reset" href="<?php echo site_url($this->config->item('admin_folder').'/customer_invoice/index');?>">Reset</a>       </div>
           </div>
           </form>
           <?php
@@ -121,7 +119,7 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
       <div class="span12">
         <div class="box paint color_18">
           <div class="title">
-            <h4> <i class=" icon-bar-chart"></i><span>Invoices <a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/invoices/form'); ?>"><i class="icon-plus-sign"></i> <?php echo 'NEW';?></a></span> </h4>
+            <h4> <i class=" icon-bar-chart"></i><span>Invoices <a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/customer_invoice/form'); ?>"><i class="icon-plus-sign"></i> <?php echo 'NEW';?></a></span> </h4>
           </div>
           <!-- End .title -->
           <div class="content top">

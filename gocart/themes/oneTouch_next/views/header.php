@@ -178,8 +178,8 @@ function category_search(name)
                             
                           </div>
                           
-                          <div class="call-us">
-                          <h3 class="dark-blue">Call us on <span class="light-blue">0121 288 0181</span><br /> to talk to a course advisor</h3>
+                          <div class="call-us" >
+                          <h3 style="color: red;" class="">Call us on <span style="color: red;" class="light-blue">0121 288 0181</span><br /> to talk to a course advisor</h3>
                           </div>
                           
                       </article>

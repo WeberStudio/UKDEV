@@ -60,8 +60,16 @@ function showStuff() {
               <div class="controls">
                 <input type="text" class="span8" name="tax_rate_percent" id="tax_rate_percent" value="<?php echo set_value('tax_rate_percent', $tax_rate_percent); ?>">
               </div>
-            </div>
+            </div>			
 			
+			<?php /*?><div class="form-row control-group row-fluid">
+                  <label class="control-label">Tax For</label>
+                  <div class="controls span7">
+                    <label class="inline radio"><input type="radio" name="tax_for" value="customer" checked="checked"  /> Students </label>                    
+                    <label class="inline radio"><input type="radio" name="tax_for" value="cprovider" />Course Providers </label>
+                  </div>
+            </div><?php */?>
+						
 			<div class="control-group">
               <label for="date"><?php echo lang('tax_level'); ?>: </label>              
 			  <div class="controls">

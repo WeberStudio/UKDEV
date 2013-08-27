@@ -42,11 +42,11 @@
                         <div class="col6 align-right remove-padding">
                             <div id="views">
                                 <div id="list-view">
-                                    <img src="<?=theme_assets('img/list-view.png')?>" alt="list" />
+                                    <img src="<?=theme_assets('img/grid-view.png')?>" alt="list" />
                                 </div>
                                 
                                 <div id="grid-view" class="view-active">
-                                    <img src="<?=theme_assets('img/grid-view.png')?>" alt="list" />
+                                    <img src="<?=theme_assets('img/list-view.png')?>" alt="list" />
                                 </div>
                             </div>
                         </div>
@@ -54,7 +54,13 @@
                     
                     
                     <div id="courses">
-                             <?php foreach($categories as $category){?>
+                     <?php include_once('course_catogery.php'); ?> 
+                   </div>
+                   
+                   
+                   
+                    <div id="courses-list">
+                                                 <?php foreach($categories as $category){?>
                                  <div class="col4">
                                     <a href="<?php echo base_url().$category['slug'];?>">
                                     <?php 
@@ -98,37 +104,8 @@
                                 
                             </div>
                          </div>
-                   
-                   
-                   </div>
-                   
-                   
-                   
-                    <div id="courses-list">
-                    <!--   <div class="col4 c-name">
-                               <p><a href="#">Course Name</a></p>
-                       </div>
+
                        
-                       <div class="col4 c-name">
-                               <p><a href="#">Course Name</a></p>
-                       </div>
-                       
-                       <div class="col4 c-name">
-                               <p><a href="#">Course Name</a></p>
-                       </div>
-                       
-                       <div class="col4 c-name">
-                               <p><a href="#">Course Name</a></p>
-                       </div>
-                       
-                       <div class="col4 c-name">
-                               <p><a href="#">Course Name</a></p>
-                       </div>
-                       
-                       <div class="col4 c-name">
-                               <p><a href="#">Course Name</a></p>
-                       </div>-->
-                       <?php include_once('course_catogery.php'); ?>
                    </div>
                    
                     

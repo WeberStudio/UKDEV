@@ -14,33 +14,37 @@
         <div class="box paint color_5">
           <div class="title">
             <div class="row-fluid">
-              <h4><?php echo lang('title');?></h4>
+              <h4>Create New Email</h4>
             </div>
           </div>
-          <div class="content"> <?php echo form_open_multipart($this->config->item('admin_folder').'/system_templates/form/'.$id); ?>
+          <div class="content"> <?php echo form_open_multipart($this->config->item('admin_folder').'/default_emails/form/'.$id); ?>
             <div class="tab-content">
+			
               <div class="tab-pane active" id="description_tab">
                 <fieldset>
-               <label for="name"><?php echo lang('template_title');?></label>
+               <label for="name">Email Title</label>
 				<?php 
 				$data    = array('name'=>'email_type', 'id'=>'email_type', 'value'=>set_value('email_type', $email_type), 'class'=>'span12');
 				echo form_input($data);
 				?>
-				<label for="description"><?php echo lang('header_html');?></label>
+				<div class="control-group row-fluid">
+				<label class="control-label span2">Select Email Template<?php echo lang('group');?><span class="help-block"></span></label>
+				<div class="controls span7">
+				  <select data-placeholder="Choose Multiple Categories" class="chzn-select span12" name="email_template" id="levels"   >
+					<? foreach($all_email_temp as $email_temp){ ?>
+					
+					<option <?=($email_temp->email_id == $email_template ? 'selected' : '');?> value="<?=$email_temp->email_id?>"><?=$email_temp->email_type?></option>				
+					<? } ?>
+				  </select>
+				</div>
+			  </div>			
+				
+				<label for="description"><?php echo lang('middle_content');?></label>
 				<?php
-					$data    = array('name'=>'email_header', 	'id'=>'email_header', 	'class'=>'redactor', 'value'=>set_value('email_header', stripslashes($email_header)));
+					$data    = array('name'=>'middle_content', 	'id'=>'middle_content', 	'class'=>'redactor', 'value'=>set_value('middle_content', stripslashes($middle_content)));
 					echo form_textarea($data);
 				?>
-				<!--<label for="description"><?php //echo lang('middle_content');?></label>-->
-				<?php
-					//$data    = array('name'=>'middle_content', 	'id'=>'middle_content',  'style' => 'width:100%','value'=>set_value('middle_content', $middle_content));
-					//echo form_textarea($data);
-				?>
-				<label for="description"><?php echo lang('footer_html');?></label>
-				<?php
-					$data    = array('name'=>'email_footer',   'class'=>'redactor', 'value'=>set_value('invoice_template_footer', stripslashes($email_footer)));
-					echo form_textarea($data);
-				?>				
+			
 				</fieldset>
               </div>
             </div>

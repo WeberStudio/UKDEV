@@ -80,4 +80,13 @@ Class Settings_model extends CI_Model
 		$result	= $this->db->get('system_emails');
 		return $result->result_array();
 	}
+    function join_email_table($email_id)
+    {
+        $this->db->select('*');
+        $this->db->join('system_emails','system_emails.email_id=default_emails.email_id','left');
+        $this->db->where('d_email_id',$email_id);
+        $result = $this->db->get('default_emails');
+        //$this->show->pe($this->db->last_query());
+        return $result->result_array();
+    }
 }

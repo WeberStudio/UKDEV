@@ -21,7 +21,7 @@ class forums extends Admin_Controller {
         /*** Get User Info***/
 		
 		/*** Left Menu Selection ***/
-		$this->session->set_userdata('active_module', 'sales');
+		$this->session->set_userdata('active_module', 'tutors');
 		/*** Left Menu Selection ***/
 		
 		$this->auth->check_access($this->admin_access, true);  

@@ -18,15 +18,18 @@
         
         <link rel="stylesheet" href="css/fractionslider.css">-->
         
-        <?php echo theme_css('normalize', true); ?>
-        <?php echo theme_css('main', true); ?>
-        <?php echo theme_css('font/stylesheet', true); ?>
-        <?php echo theme_css('style', true); ?>
+        <?php echo theme_css('normalize.css', true); ?>
+        <?php echo theme_css('main.css', true); ?>
+        <?php echo theme_css('font/stylesheet.css', true); ?>
+        <?php echo theme_css('style.css', true); ?>
         <?php //echo theme_css('fractionslider', true); ?>
-        <?php echo theme_css('jquery.jscrollpane', true); ?>
-        <?php echo theme_css('fancy_dropdown', true); ?> 
+        <?php echo theme_css('jquery.jscrollpane.css', true); ?>
+        <?php echo theme_css('fancy_dropdown.css', true); ?> 
         <?php echo theme_css('onepcssgrid.css', true); ?>
         <?php echo theme_css('global.css', true); ?>
+        
+        
+        
         
       
         <!--<script src="js/vendor/modernizr-2.6.2.min.js"></script> -->
@@ -36,5 +39,22 @@
         
         <!--<link rel="stylesheet" href="css/onepcssgrid.css" />
         <link rel="stylesheet" href="css/global.css" />-->
+        
+                <script type="text/javascript">
+            function change_text_color()
+            {
+                $("h2.dull").hover(function() {
+            
+                    $(this).removeClass('dull');    
+            }, function() {
+            
+                $(this).addClass('dull');    
+            });
+            return false;
+            }                
+        </script>
+        
+        
+      
         
     </head>

@@ -1,5 +1,5 @@
 <?php
-class System_Templates extends Admin_Controller {
+class Default_Emails extends Admin_Controller {
 
 
 	//this is used when editing or adding a customer
@@ -34,7 +34,7 @@ class System_Templates extends Admin_Controller {
 		
 		
 		/*** Left Menu Selection ***/
-		$this->session->set_userdata('active_module', 'system_templates');
+		$this->session->set_userdata('active_module', 'emails');
 		/*** Left Menu Selection ***/
 		
 		
@@ -44,14 +44,14 @@ class System_Templates extends Admin_Controller {
 		
 	}
 	
-	function index($field='email_id', $by='ASC', $page=0, $rows = 5)
+	function index($field='d_email_id', $by='ASC', $page=0, $rows = 25)
 	{
 		
-		$data['templates']	= $this->System_Template_model->get_templates($rows, $page, $field, $by);
-		$data['count']		= $this->System_Template_model->get_templates_count();
+		$data['templates']	= $this->System_Template_model->get_default_emails($rows, $page, $field, $by);
+		$data['count']		= $this->System_Template_model->get_default_emails();
 		 //echo "<pre>";print_r($data['templates']);exit;
 		$this->load->library('pagination');
-		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/system_templates/index/'.$field.'/'.$by.'/';
+		$config['base_url']			= base_url().'/'.$this->config->item('admin_folder').'/default_emails/index/'.$field.'/'.$by.'/';
 		$config['total_rows']		= $data['count'];
 		$config['per_page']			= $rows;
 		$config['uri_segment']		= 6;
@@ -84,7 +84,7 @@ class System_Templates extends Admin_Controller {
 		
 		$this->load->view($this->config->item('admin_folder').'/includes/header');
         $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
-		$this->load->view($this->config->item('admin_folder').'/system_templates_listing', $data);
+		$this->load->view($this->config->item('admin_folder').'/default_emails_listing', $data);
         $this->load->view($this->config->item('admin_folder').'/includes/inner_footer'); 
 	}
 	
@@ -98,38 +98,35 @@ class System_Templates extends Admin_Controller {
 		
 		//default values are empty if the customer is new
 		$data['id']					= '';
-		$data['admin_id']			= '';
+		$data['email_template']		= '';
 		$data['email_type']			= '';
-		$data['email_header']		= '';		
-		$data['middle_content']		= '';		
-		$data['email_footer']		= '0';
-		
-						
+		$data['email_template']		= '';		
+		$data['middle_content']		= '';	
+		$data['all_email_temp']		=  $this->System_Template_model->get_templates();
+		//echo "<pre>";print_r($data['all_email_temp']);exit;			
 		if ($id)
 		{	
 			$this->email			= $id;
-			$templates				= $this->System_Template_model->get_templates_by_id($id);
+			$templates				= $this->System_Template_model->get_default_email_by_id($id);
 			//if the templates does not exist, redirect them to the templates list with an error
 			if (!$templates)
 			{
 				$this->session->set_flashdata('error', lang('error_not_found'));
-				redirect($this->config->item('admin_folder').'/system_templates/form');
+				redirect($this->config->item('admin_folder').'/default_emails/form');
 			}
 			//echo "<pre>";print_r($templates);exit;
 			//set values to db values
-			$data['id']							= $templates->email_id;			
-			$data['email_type']					= $templates->email_type;
-			$data['email_header']				= $templates->email_header;			
-			//$data['middle_content']				= $templates->middle_content;
-			$data['email_footer']				= $templates->email_footer;
-			
+			$data['id']							= $templates->d_email_id;			
+			$data['email_type']					= $templates->d_email_title;
+			$data['email_template']				= $templates->email_id;			
+			$data['middle_content']				= $templates->middle_content;
+						
 		}
 		
-		$this->form_validation->set_rules('email_type',  'Template Titile', 'trim|required');
-		$this->form_validation->set_rules('email_header', 'Header html', 'trim|required');
-		//$this->form_validation->set_rules('middle_content', 'Middle html', 'trim|required');
-		$this->form_validation->set_rules('email_footer', 'Footer html', 'trim|required');
+		$this->form_validation->set_rules('email_type',  'Template Titile', 'trim|required');		
+		$this->form_validation->set_rules('middle_content', 'Middle html', 'trim|required');
 		
+		//echo "<pre>";print_r($data['middle_content']);exit;
 		
 		 //echo "<pre>";print_r($_POST);exit;
 		// echo validation_errors();exit;
@@ -139,23 +136,22 @@ class System_Templates extends Admin_Controller {
 			
 			$this->load->view($this->config->item('admin_folder').'/includes/header');
             $this->load->view($this->config->item('admin_folder').'/includes/leftbar');  
-			$this->load->view($this->config->item('admin_folder').'/system_template_form', $data);
+			$this->load->view($this->config->item('admin_folder').'/default_emails_form', $data);
             $this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
 		}
 		else
 		{
-			$save['email_id']					= $id;
-			$save['email_type']					= $this->input->post('email_type');
-			$save['email_header']				= addslashes($this->input->post('email_header'));
-			//$save['middle_content']				= addslashes($this->input->post('middle_content'));
-			$save['email_footer']				= addslashes($this->input->post('email_footer'));
+			$save['d_email_id']					= $id;
+			$save['d_email_title']				= $this->input->post('email_type');	
+			$save['email_id']					= $this->input->post('email_template');		
+			$save['middle_content']				= addslashes($this->input->post('middle_content'));
 			
-			$id = $this->System_Template_model->save($save);
 			
-			$this->session->set_flashdata('message', lang('message_saved_system_template'));
+			$id = $this->System_Template_model->save_default_email($save);			
+			$this->session->set_flashdata('message', 'Email Saved Successfully!');
 			
 			//go back to the customer list
-			redirect($this->config->item('admin_folder').'/system_templates/form/'.$id);
+			redirect($this->config->item('admin_folder').'/default_emails/form/'.$id);
 		}
 	}
 	
@@ -172,7 +168,7 @@ class System_Templates extends Admin_Controller {
 			{
 				
 				$this->session->set_flashdata('error', lang('error_not_found'));
-				redirect($this->config->item('admin_folder').'/system_templates');
+				redirect($this->config->item('admin_folder').'/default_emails');
 			}
 			else
 			{
@@ -181,14 +177,14 @@ class System_Templates extends Admin_Controller {
 				$delete	= $this->System_Template_model->delete($id);
 				
 				$this->session->set_flashdata('message', lang('message_deleted'));
-				redirect($this->config->item('admin_folder').'/system_templates');
+				redirect($this->config->item('admin_folder').'/default_emails');
 			}
 		}
 		else
 		{
 			//if they do not provide an id send them to the customer list page with an error
 			$this->session->set_flashdata('error', lang('error_not_found'));
-			redirect($this->config->item('admin_folder').'/system_templates');
+			redirect($this->config->item('admin_folder').'/default_emails');
 		}
 	}
 	

@@ -46,9 +46,38 @@
                         
                         
                         <h2>Cart</h2>
+                        <?php 
+    if($this->session->flashdata('message'))
+    {
+        $message    = $this->session->flashdata('message');
+    }
+    
+    if($this->session->flashdata('error'))
+    {
+        $error    = $this->session->flashdata('error');
+    }
+    if(validation_errors() != '')
+    {
+        $error    = validation_errors();
+    }
+    ?>
+    
+   
+   
+    <?php if (!empty($error)): ?>
+          <div class="alert alert-error" id="closee"> <a href="javascript:void(0)"  class="close" data-dismiss="alert" onClick="showStuff(); return false;">x</a> <?php echo"<div style='margin-left: 70px;'>". $error. "</div>"; ?> </div>
+          <?php endif; ?>
+          
+      
+          <?php if (!empty($message)): ?>
+        <div class="alert alert-success">
+            <a class="close" data-dismiss="alert">×</a>
+            <?php echo $message; ?>
+        </div>
+    <?php endif; ?>
                         
                         <div class="cart-wrapper">
-                            
+                             <?php echo form_open('cart/update_cart', array('id'=>'update_cart_form'));?> 
                             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="border-full">
                               <tr class="border-below">
                                 <td><h3>Items</h3></td>
@@ -72,28 +101,28 @@
                                 <td><?php echo format_currency($this->go_cart->total()); ?></td>
                               </tr>
                               <tr>
-                                <td><a href="<?= base_url().'cart/allcourses/'?>"> Return to Courses</a></td>
-                                <td>&nbsp;</td>
+                                <td><input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" style=""> </td>
+                                <td style="width: 223px;"><input style="padding: 5px;" type="submit" class="button" name="apply_coupon" value="Apply Coupon"></td>
                                 <td align="right">
                                 <?php if($this->Customer_model->is_logged_in(false, false))
                                 {
                                 ?>
-                                
-                                  <a href="<?=base_url().'checkout';?>">Proceed to Checkout</a>    
+                                  <a style=" padding: 5px;" class="contact-btn"  href="<?= base_url().'cart/allcourses/'?>"> Return to Courses</a>
+                                  <a style=" padding: 5px;" class="contact-btn" href="<?=base_url().'checkout';?>">Proceed to Checkout</a>    
                                 <?php    
                                 }
                                 else
                                 {
                                 ?>
-                                
-                                <a href="<?=base_url().'checkout/unregister';?>">Proceed to Checkout</a>
+                                 <a style=" padding: 5px;" class="contact-btn"  href="<?= base_url().'cart/allcourses/'?>"> Return to Courses</a>
+                                <a style="padding: 5px;" class="contact-btn" href="<?=base_url().'checkout/unregister';?>">Proceed to Checkout</a>
                                 
                                <?php }?>
                                 
                                 </td>
                               </tr>
                             </table>
-                            
+                             </form>
                          
                             
                             <div class="col6">
@@ -112,7 +141,16 @@
                             </table>
                             </div>
                         </div>
-                        
+                          <span style="color:#666; font-size:11px; margin-left: 451px;"> We accept the following Sage Pay, PayPal, All Debit and Credit Cards. </span>
+                         <div class = "payment_options">
+                                        <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/maestro.png')?>" alt="">
+                                        <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/mc.png')?>" alt="">
+                                        <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/PayPal_mark.gif')?>" alt="">
+                                        <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/solo.png')?>" alt="">
+                                        <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/visa.png')?>" alt="">
+                                         <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/visa_debit.png')?>" alt="">
+                                          <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/visa_electron.png')?>" alt="">
+                                    </div>
                         
                     </div><!-- end col8 -->
                     

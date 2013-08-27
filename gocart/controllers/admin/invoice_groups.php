@@ -73,6 +73,8 @@ class Invoice_Groups extends Admin_Controller {
 		$data['invoice_group_left_pad']		= '0';
 		$data['invoice_group_prefix_year']	= '';
 		$data['invoice_group_prefix_month']	= '';
+		$data['invoice_group_for']			= '';
+		
 		
 						
 		if ($id)
@@ -95,6 +97,7 @@ class Invoice_Groups extends Admin_Controller {
 			$data['invoice_group_left_pad']		= $groups->invoice_group_left_pad;
 			$data['invoice_group_prefix_year']	= $groups->invoice_group_prefix_year;
 			$data['invoice_group_prefix_month']	= $groups->invoice_group_prefix_month;
+			$data['invoice_group_for']			= $groups->invoice_group_for;
 			
 		}
 		
@@ -122,6 +125,7 @@ class Invoice_Groups extends Admin_Controller {
 			$save['invoice_group_left_pad']		= $this->input->post('invoice_group_left_pad');
 			$save['invoice_group_prefix_year']	= $this->input->post('invoice_group_prefix_year');
 			$save['invoice_group_prefix_month']	= $this->input->post('invoice_group_prefix_month');
+			$save['invoice_group_for']			= $this->input->post('invoice_group_for');
 			
 			$id = $this->Invoice_Groups_Model->save($save);
 			

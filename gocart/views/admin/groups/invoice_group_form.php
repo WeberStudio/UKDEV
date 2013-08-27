@@ -92,6 +92,15 @@ function showStuff() {
                 </select>
               </div>
             </div>
+			
+			<div class="form-row control-group row-fluid">
+                  <label class="control-label">Group For</label>
+                  <div class="controls span7">
+                    <label class="inline radio"><input type="radio" name="invoice_group_for" value="customer" checked="checked"  /> Students </label>                    
+                    <label class="inline radio"><input type="radio" name="invoice_group_for" value="cprovider" />Course Providers </label>
+                  </div>
+            </div>
+			
 			 <button type="submit" class="btn btn-inverse btn-block btn-large"><?php echo lang('form_save');?></button>
 			</fieldset>
 			</form>

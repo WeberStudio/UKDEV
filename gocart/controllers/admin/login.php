@@ -121,7 +121,7 @@ class Login extends CI_Controller {
 			$save['firstname']	= $this->input->post('firstname');
 			$save['lastname']	= $this->input->post('lastname');
 			$save['email']		= $this->input->post('email');
-			$save['access']		= 'Admin';
+			$save['access']		= 'Course Provider';
 			$save['phone']		= $this->input->post('phone');
 			$save['company']	= $this->input->post('company');
 			$save['password']	= $this->input->post('password');

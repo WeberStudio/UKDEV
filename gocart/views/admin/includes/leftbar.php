@@ -23,7 +23,11 @@
 	$active_template_link			= '';
 	$active_assignment_management	= '';
 	$assignment_management_links	= '';
-	
+	$student_invoices				= '';
+	$active_student_invoices_link	= '';
+	$course_provider_invoices 		= '';
+	$active_cprovider_invoices_link	= '';
+	$active_emails					= '';
 	
 	$active = $this->session->userdata('active_module');
 	//print_r($active);
@@ -87,6 +91,21 @@
 	{
 		 $active_assignment_management	= 'opened';
 		 $assignment_management_links	= 'in collapse';
+	}	
+	
+	else if($active == 'student_invoices')
+	{
+		 $student_invoices						= 'opened';
+		 $active_student_invoices_link			= 'in collapse';
+	}
+	else if($active == 'course_provider_invoices')
+	{
+		 $course_provider_invoices			= 'opened';
+		 $active_cprovider_invoices_link	= 'in collapse';
+	}
+	else if($active == 'emails')
+	{
+		 $active_emails		= 'active';
 	}	
 	
 ?>
@@ -176,14 +195,14 @@
                         <li><a href="<?=base_url().ADMIN_PATH?>products/product_delivery_form">Delivery Charges</a></li>
                     </ul>
                 </li>
-                
+                <small style="white-space:nowrap; color:#999999"></small>
                 <li class="accordion-group color_25 <?php echo $active_report ; ?>" onclick="set_module('report')" >
                     <a class="accordion-toggle widgets collapsed " data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse11">
                         <img src="<?=base_url().ASSETS_PATH?>img/menu_icons/forms.png"><span>General Reports</span></a>
                     <ul id="collapse11" class="accordion-body collapse <?php echo $report_link; ?>">
                         <li><a href="<?=base_url().ADMIN_PATH?>reports/stats_product_viewed">Courses Viewed</a></li>
                         <li><a href="<?=base_url().ADMIN_PATH?>reports/product_purchased">Purchased Courses</a></li>                        
-						<li><a href="<?=base_url().ADMIN_PATH?>reports/">Sales Report</a></li>
+						<li><a href="<?=base_url().ADMIN_PATH?>reports/">General Sales Report</a></li>
                         <li><a href="<?=base_url().ADMIN_PATH?>reports/stats_customer">Customer Orders-Total</a></li>
                     </ul>
                 </li>
@@ -191,17 +210,17 @@
 				<li class="accordion-group color_3 <?php echo $active_sales; ?>"> <a class="accordion-toggle widgets collapsed" data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse2" onclick="set_module('sales')">
 					<img src="<?=base_url().ASSETS_PATH?>img/menu_icons/widgets.png"><span>Sales Management</span></a>
 					<ul id="collapse2" class="accordion-body collapse <?php echo $sales_links; ?>">
-						<li><a href="<?=base_url().ADMIN_PATH?>customers">Customers</a></li>
-						<li><a href="<?=base_url().ADMIN_PATH?>order">Orders</a></li>							
-						<li><a href="<?=base_url().ADMIN_PATH?>forums">Forums</a></li>                            
+						<li><a href="<?=base_url().ADMIN_PATH?>customers">View Customers</a></li>
+						<li><a href="<?=base_url().ADMIN_PATH?>order">Orders</a></li>
 					</ul>
 				</li>
 				
-				<li class="accordion-group color_3 <?php echo $active_assignment_management; ?>"> <a class="accordion-toggle widgets collapsed" data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse9" onclick="set_module('assignment_management')">
+				<li class="accordion-group color_12 <?php echo $active_assignment_management; ?>"> <a class="accordion-toggle widgets collapsed" data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse9" onclick="set_module('assignment_management')">
 					<img src="<?=base_url().ASSETS_PATH?>img/menu_icons/widgets.png"><span>Assignment Management</span></a>
 					<ul id="collapse9" class="accordion-body collapse <?php echo $assignment_management_links; ?>">						             
 						<li><a href="<?=base_url().ADMIN_PATH?>tutor">Tutors</a></li>
-						<li><a href="<?=base_url().ADMIN_PATH?>tutor/requested_tutor">Students Request for Tutors</a></li>						                           
+						<li><a href="<?=base_url().ADMIN_PATH?>tutor/requested_tutor">Students Request for Tutors</a></li>
+						<li><a href="<?=base_url().ADMIN_PATH?>forums">Forums</a></li> 						                           
 					</ul>
 				</li>
 				
@@ -223,17 +242,39 @@
 					</ul>
 				</li>
 			
+			
+			
+			
 				<li class="accordion-group color_4 <?php echo $active_invoice; ?> " onclick="set_module('invoice')" >
 					<a class="accordion-toggle widgets collapsed " data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse4"> 
-						<img src="<?=base_url().ASSETS_PATH?>img/menu_icons/forms.png"><span>Invoice Management</span></a>
+						<img src="<?=base_url().ASSETS_PATH?>img/menu_icons/forms.png"><span>Invoice Settings</span></a>
 					<ul id="collapse4" class="accordion-body collapse  <?=$invoice_links?>">						
-						<li><a href="<?php echo site_url($this->config->item('admin_folder').'/invoice_groups'); ?>">Invoice Groups</a></li>
-						<li><a href="<?php echo site_url($this->config->item('admin_folder').'/tax'); ?>">Tax Rate</a></li>
-						<li><a href="<?php echo site_url($this->config->item('admin_folder').'/invoices/form'); ?>">Create Invoice</a></li>
-						<li><a href="<?php echo site_url($this->config->item('admin_folder').'/invoices/'); ?>">View Invoices</a></li>
-						<li><a href="<?php echo site_url($this->config->item('admin_folder').'/invoices/view_recurring_invoices'); ?>">View Recuring Invoices</a></li> 						
+						<li><a href="<?php echo site_url($this->config->item('admin_folder').'/invoice_groups'); ?>">Basic Invoice Settings</a></li>
+						<li><a href="<?php echo site_url($this->config->item('admin_folder').'/tax'); ?>">Tax Rate</a></li>					
 					</ul>
 				</li>
+				<li class="accordion-group color_25 <?php echo $student_invoices ; ?>" onclick="set_module('student_invoices')" >
+					<a class="accordion-toggle widgets collapsed " data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse10" >
+					<img src="<?=base_url().ASSETS_PATH?>img/menu_icons/forms.png"><span>Student Invoices</span></a>
+					<ul id="collapse10" class="accordion-body collapse <?php echo $active_student_invoices_link; ?>">						
+						<li><a href="<?php echo site_url($this->config->item('admin_folder').'/customer_invoice/form'); ?>">Create Invoice</a></li>
+						<li><a href="<?php echo site_url($this->config->item('admin_folder').'/customer_invoice/'); ?>">View Invoices</a></li>
+						<?php /*?><li><a href="<?php echo site_url($this->config->item('admin_folder').'/customer_invoice/view_recurring_invoices'); ?>">View Recuring Invoices</a></li> 	<?php */?>						
+					</ul>
+				</li>
+				
+				<li class="accordion-group color_20 <?php echo $course_provider_invoices ; ?>" onclick="set_module('student_invoices')" >
+					<a class="accordion-toggle widgets collapsed " data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse13" >
+					<img src="<?=base_url().ASSETS_PATH?>img/menu_icons/forms.png"><span>Course Provider Invoices</span></a>
+					<ul id="collapse13" class="accordion-body collapse <?php echo $active_cprovider_invoices_link; ?>">						
+						<li><a href="<?php echo site_url($this->config->item('admin_folder').'/invoices/form'); ?>">Create Invoice</a></li>
+						<li><a href="<?php echo site_url($this->config->item('admin_folder').'/invoices/'); ?>">View Invoices</a></li>												
+					</ul>
+				</li>
+				
+				
+				
+				
 				
 				<li class="accordion-group color_14 <?php echo $active_commisions; ?>"> <a class="accordion-toggle widgets collapsed" data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse5" onclick="set_module('commisions')">
 						<img src="<?=base_url().ASSETS_PATH?>img/menu_icons/widgets.png"><span>Commission Structures</span></a>
@@ -242,7 +283,7 @@
 					</ul>
 				</li>
 				
-				<li class="accordion-group color_25 <?php echo $active_template ; ?>" onclick="set_module('email_template')" >
+				<li class="accordion-group color_17 <?php echo $active_template ; ?>" onclick="set_module('email_template')" >
 					<a class="accordion-toggle widgets collapsed " data-toggle="collapse" data-parent="#sidebar_menu" href="#collapse12" >
 					<img src="<?=base_url().ASSETS_PATH?>img/menu_icons/forms.png"><span>Templates</span></a>
 					<ul id="collapse12" class="accordion-body collapse <?php echo $active_template_link; ?>">
@@ -250,6 +291,11 @@
 						<li><a href="<?php echo site_url($this->config->item('admin_folder').'/invoice_templates'); ?>">Invoice Templates</a></li>							
 					</ul>
 				</li>
+				
+				<li class="accordion-group color_18 <?=$active_emails?>" onclick="set_module('active_emails')">
+                    <a href="<?=base_url().ADMIN_PATH?>default_emails">
+                        <img src="<?=base_url().ASSETS_PATH?>img/menu_icons/others.png"><span>Emails</span></a>						 
+                </li>			
 					
                     <? } ?>
                     <?php if(isset($this->admin_access) && $this->admin_access=='Course Provider'){ ?>
