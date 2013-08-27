@@ -45,19 +45,19 @@
                         
                         
                         <div class="col3">
-                        <h2  class="dull">1. Personal Details</h2>
+                        <h2  class="dull" onMouseOver="change_text_color();">1. Personal Details</h2>
                         </div>
                         
                         <div class="col3">
-                        <h2 align="right" class="dull">2. Address Details</h2>
+                        <h2 align="right" class="dull" onMouseOver="change_text_color();">2. Address Details</h2>
                         </div>
                         
                         <div class="col3">
-                        <h2 align="right" class="dull">3. Confirm</h2>
+                        <h2 align="right" class="dull" onMouseOver="change_text_color();">3. Confirm</h2>
                         </div>
                         
                         <div class="col3">
-                        <h2 align="right">4. Payment</h2>
+                        <h2 align="right" onMouseOver="change_text_color();">4. Payment</h2>
                         </div>
                          <h3 >Payment Options</h3>   
                         <div class="col6">
