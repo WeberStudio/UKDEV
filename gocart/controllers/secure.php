@@ -146,10 +146,8 @@ function login($ajax = false)
 		}
 		$this->load->view('login', $data);
 	}
-	}
-    
-    
-    function tutor_login($ajax = false)
+	} 
+	 function tutor_login($ajax = false)
     {
         $redirect    = $this->Customer_model->is_logged_in(false, false);     
         
@@ -199,7 +197,6 @@ function login($ajax = false)
         $this->load->view('tutor_login', $data);
     }
     }  
-	
 	function logout()
 	{
 		$this->Customer_model->logout();
@@ -338,48 +335,32 @@ function login($ajax = false)
 			$row['content'] = str_replace('{site_name}', $this->config->item('company_name'), $row['content']);*/
 			
 			//$email_attributes = $this->Settings_model->get_system_email($this->config->item('email_template'));
-            $email_attributes = $this->Settings_model->join_email_table(2);
-            
 			
 			//print_r($email_attributes);exit;
+			$email_attributes = $this->Settings_model->join_email_table(1);
 			$message  = '';
 			$message .= stripslashes($email_attributes[0]['email_header']);
             
-            $message .= '<div>
-                        Dear '.$this->input->post('firstname').' '. $this->input->post('lastname').'!
-                        </div>';
-                            
-             $message .=  stripslashes($email_attributes[0]['middle_content']);
-             
-             $message .=  '<div>Username: '.$this->input->post('email').' <br>Password: '.$password.' </div>';              
+            $message .= '<tr><td>Dear '.$this->input->post('firstname').' '. $this->input->post('lastname').'!<br>'.stripslashes($email_attributes[0]['middle_content']).'<br><br>Username: '.$this->input->post('email').' <br>Password: '.$password.'</td></tr>';
 			
-	 		$message .= stripslashes($email_attributes[0]['email_footer']);
+			// $message .=  stripslashes($email_attributes[0]['middle_content']);             
+           // echo $message .=  '<div>Username: '.$this->input->post('email').' <br>Password: '.$password.' </div>';     exit;         
 			
+			$message .= stripslashes($email_attributes[0]['email_footer']);
 			 
-			$this->load->library('email');
-			
-			$config['mailtype'] = 'html';
-			
-			$this->email->initialize($config);
-	
-			$this->email->from($this->config->item('email'), $this->config->item('company_name'));
-			//$this->email->from('Uk Open College');
+			$this->load->library('email');			
+			$config['mailtype'] = 'html';			
+			$this->email->initialize($config);	
+			$this->email->from($this->config->item('email'), $this->config->item('company_name'));			
 			$this->email->to($save['email']);
-			$this->email->bcc($this->config->item('bcc_email'));
-			//$this->email->subject($row['subject']);
-			$this->email->subject('Student Registration');
-			$this->email->message(html_entity_decode($message));
-			
+			$this->email->bcc($this->config->item('bcc_email'));			
+			$this->email->subject($email_attributes[0]['d_email_title']);
+			$this->email->message(html_entity_decode($message));			
 			$this->email->send();
 			//echo $this->email->print_debugger();exit;
-			$this->session->set_flashdata('message', sprintf( lang('registration_thanks'), $this->input->post('firstname') ) );
-			
+			$this->session->set_flashdata('message', sprintf( lang('registration_thanks'), $this->input->post('firstname') ) );			
 			//lets automatically log them in
-			$this->Customer_model->login($save['email'], $this->input->post('confirm'));
-			
-			//we're just going to make this secure regardless, because we don't know if they are
-			//wanting to redirect to an insecure location, if it needs to be secured then we can use the secure redirect in the controller
-			//to redirect them, if there is no redirect, the it should redirect to the homepage.
+			$this->Customer_model->login($save['email'], $this->input->post('confirm'));			
 			redirect($redirect);
 		}
 	}
@@ -421,25 +402,25 @@ function login($ajax = false)
 			{						
 				$this->session->set_flashdata('message', lang('message_new_password'));
 				$email_attributes = $this->Settings_model->get_system_email($this->config->item('email_template'));
+				$email_attributes = $this->Settings_model->join_email_table(2);
 				$message  = '';
-				$message .= $email_attributes[0]['email_header'];				
-				$message .= '<tr><td style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><br><b>Password has been generated successfully!</b><br>In order to set a new password, you need to provide your user name by clicking on the following link to rest your password. We will send you a new user name and password. please  get in touch via e-mail: <a href="mailto:support@ukopencollege.co.uk"> support@ukopencollege.co.uk</a>.</td></tr><tr><td ><div align="left" class="article-content"><b>New Password:</b>'.$reset.'</div> <br/>Or<br/><br/>Call us<br/></td></tr></tbody></table></td></tr>';
+				$message .= stripslashes($email_attributes[0]['email_header']);				
+				$message .= '<tr  style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><td>'.stripslashes($email_attributes[0]['middle_content']).'<br><br><b>New Password:<b> '.$reset.'</td></tr>';
 				
-				$message .= $email_attributes[0]['email_footer'];
 				
-				//echo $message;exit;
-							
-				$this->load->library('email');				
-				$config['mailtype'] = 'html';				
-				$this->email->initialize($config);		
-				//$this->email->from($this->config->item('email'), $this->config->item('company_name'));
-				$this->email->from('UkOpenCollege');
-				$this->email->to($this->config->item('email'));
-				//$this->email->bcc($this->config->item('bcc_email'));
-				$this->email->bcc('khalil.junaid@gmail.com');
-				//$this->email->subject($row['subject']);
-				$this->email->subject('Student Forgot Password');
-				$this->email->message(html_entity_decode($message));				
+				// $message .=  stripslashes($email_attributes[0]['middle_content']);             
+				// echo $message .=  '<div>Username: '.$this->input->post('email').' <br>Password: '.$password.' </div>';     exit;         
+				
+				$message .= stripslashes($email_attributes[0]['email_footer']);
+				
+				$this->load->library('email');			
+				$config['mailtype'] = 'html';			
+				$this->email->initialize($config);	
+				$this->email->from($this->config->item('email'), $this->config->item('company_name'));			
+				$this->email->to($this->input->post('email'));
+				$this->email->bcc($this->config->item('bcc_email'));			
+				$this->email->subject($email_attributes[0]['d_email_title']);
+				$this->email->message(html_entity_decode($message));			
 				$this->email->send();
 				//echo $this->email->print_debugger();exit;
 			}
@@ -472,18 +453,15 @@ function login($ajax = false)
 		if($code!==false)
 		{
 			$data['downloads'] = $this->Digital_Product_model->get_downloads_by_code($code);
-		} else {
-			$this->Customer_model->is_logged_in();
-			
-			$customer = $this->go_cart->customer();
-			
+		} 
+		else 
+		{
+			$this->Customer_model->is_logged_in();			
+			$customer = $this->go_cart->customer();			
 			$data['downloads'] = $this->Digital_Product_model->get_user_downloads($customer['id']);
 		}
-		
-		$data['gift_cards_enabled']	= $this->gift_cards_enabled;
-		
-		$data['page_title'] = lang('my_downloads');
-		
+						
+		$data['page_title'] = lang('my_downloads');		
 		$this->load->view('my_downloads', $data);
 	}
 	

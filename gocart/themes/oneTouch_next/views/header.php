@@ -187,6 +187,11 @@ function category_search(name)
                      
                       
                   
+ <p class="button checkout-btn" style="margin-left:284px !important">
+             <a href="http://87.106.234.213/livechat/client.php?locale=en&amp;style=simplicity" target="_blank" onClick="if(navigator.userAgent.toLowerCase().indexOf('opera') != -1 &amp;&amp; window.event.preventDefault) window.event.preventDefault();this.newWindow = window.open('http://87.106.234.213/livechat/client.php?locale=en&amp;style=simplicity&amp;url='+escape(document.location.href.replace('http://','').replace('https://',''))+'&amp;referrer='+escape(document.referrer.replace('http://','').replace('https://','')), 'webim', 'toolbar=0,scrollbars=0,location=0,status=1,menubar=0,width=640,height=480,resizable=1');this.newWindow.focus();this.newWindow.opener=window;return false;">
+                   Live Chat
+                    </a>
+          </p>
                   </section>
                   <!-- /section -->
                    

@@ -57,7 +57,7 @@ class Cart extends Front_Controller {
        $this->load->view('index', $data);
 
     }
-    function shuffle_assoc($list) 
+      function shuffle_assoc($list) 
     { 
       if (!is_array($list)) return $list; 
 
@@ -1120,7 +1120,6 @@ class Cart extends Front_Controller {
 			$data['gift_cards_enabled']	= $this->gift_cards_enabled;
 
 			$this->load->view('giftcards', $data);
-            
 
 		}
 
@@ -1231,8 +1230,8 @@ class Cart extends Front_Controller {
 		$this->form_validation->set_rules('question', 'Question', 'trim|required');
 		if($this->form_validation->run() == false)
 		{
-			//$open = array('open'=>'1');
-			//$this->session->set_userdata($open);
+			$open = array('open'=>'1');
+			$this->session->set_userdata($open);
 			redirect($this->input->post('slug'));
 		}
 		else
@@ -1241,8 +1240,8 @@ class Cart extends Front_Controller {
 			$save['question']			= $this->input->post('question');
 			$this->Product_model->save_question($save);
 			
-			//$open = array('open'=>'1');
-			//$this->session->set_userdata($open);
+			$open = array('open'=>'1');
+			$this->session->set_userdata($open);
 			redirect($this->input->post('slug'));
 			
 		}
