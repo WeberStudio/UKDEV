@@ -35,13 +35,8 @@
                      
                    </div>
                  </div><!-- end seperator row -->
-                 
-                 
-                 
                  <div class="onerow">
                      <div class="col12">
-                        
-                        
                         <h2>Thank You for choosing UK Open College!</h2>
                         <p>Please choose one of the following checkout methods</p>
                         <div class="col6" style="padding:10px; margin-left: 1px; height: 360px;" id="customer_login">
@@ -79,19 +74,8 @@
                             <h2 class="without">Customer Signup</h2>
                             <p class="button center-btn" style="margin-left:208px;"><a href="<?=base_url().'secure/register';?>"> Sign Up here!</a></p>
                         </div>
-                        
-                        
-                        
-                        
                     </div><!-- end col12 -->
-                   
                  </div><!-- end one row -->
-                 
-                 
-                                   
-                 
-                 
-                 
           </section>         
             <div class="clear"></div>
             

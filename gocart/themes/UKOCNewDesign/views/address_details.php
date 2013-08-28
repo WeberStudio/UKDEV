@@ -126,20 +126,20 @@ $b_phone        = array('id'=>'b_phone', 'class'=>'input-text', 'name'=>'b_phone
                  <div class="onerow">
                      <div class="col12">
                         
-                        <div class="col3" >
-                        <h2 class="dull" onMouseOver="change_text_color();">1. Personal Details</h2>
+                         <div class="col3"  >
+                        <h2><a onMouseOver="change_text_color();" class="option_links" href="<?php echo base_url().'checkout/' ?>">1. Personal Details </a></h2>
                         </div>
                         
-                        <div class="col3">
-                        <h2 align="right" onMouseOver="change_text_color();">2. Address Details</h2>
+                        <div class="col3"  onMouseOver="change_text_color();">
+                        <h2 align="right" class="dull"><a href="<?php echo base_url().'checkout/step2' ?>">2. Address Details </a></h2>
                         </div>
                         
-                        <div class="col3">
-                        <h2 align="right" class="dull" onMouseOver="change_text_color();">3. Confirm</h2>
+                        <div class="col3"  onMouseOver="change_text_color();">
+                        <h2 align="right" class="dull"><a class="option_links" href="<?php echo base_url().'checkout/step3' ?>">3. Confirm </a></h2>
                         </div>
                         
-                        <div class="col3">
-                        <h2 align="right" class="dull" onMouseOver="change_text_color();">4. Payment</h2>
+                        <div class="col3"  onMouseOver="change_text_color();">
+                        <h2 align="right" class="dull"><a class="option_links" href="<?php echo base_url().'checkout/step4' ?>">4. Payment </a></h2>
                         </div>
                         
                         <div class="col6">
