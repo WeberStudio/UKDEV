@@ -37,11 +37,17 @@
 
         <div class="col2 font-sizing">
             <?php 
-                if($this->Customer_model->is_logged_in(false, false)){                   
+                if($this->Customer_model->is_logged_in(false, false) || $this->Tutor_model->is_logged_in(false, false)){                   
                 ?>
                 <a style="padding:5px;" class="contact-btn" href="<?php echo site_url('dashboard');?>">Dashboard</a>/
-                <a style="padding:5px;" class="contact-btn" href="<?php echo site_url('secure/logout');?>">logout</a> 
-                <?php }else{?>
+                <?php if($this->Tutor_model->is_logged_in(false, false)){?>
+                <a style="padding:5px;" class="contact-btn" href="<?php echo site_url('tutor_login/logout');?>">logout</a>
+                <?php }else{ ?>
+                  <a style="padding:5px;" class="contact-btn" href="<?php echo site_url('secure/logout');?>">logout</a> 
+                <?php }?>
+                <?php }
+                
+                else{?>
                 <a style="padding:5px;" class="contact-btn" href="<?php echo site_url('secure/login');?>">login</a> 
                 / <a style="padding:5px;"  class="contact-btn" href="<?php echo site_url('secure/register'); ?>">Registration</a> 
                 <?php }?> 
@@ -114,8 +120,8 @@
             <a href="<?= base_url();?>cart"><img src="<?php echo theme_assets('img/logo-ukoc.png');?>" width="244" alt="Uk Open College" /></a>
         </article>
 
-        <article class="col4 checkout-res">
-            <div class="cart">
+        <article class="col3 checkout-res">
+            <div class="cart" style="margin-left: 41px;">
                 <a href="<?= base_url().'cart/view_cart';?>">
                     <p class="cart_text">
                         <span class="cart_img">
@@ -155,12 +161,13 @@
 
 
         </script>   
-        <article class="col4 filters-res">
+        <article class="col5 filters-res">
 
-            <form method="post" name="search_form" id="search-form" action="<?=base_url().'search'?>">
+            <form style="width: 415px;"  method="post" name="search_form" id="search-form" action="<?=base_url().'search'?>">
                 <input name="search_field" type="text" id="search" value="" />
                 <input type="hidden" value="" name="search_by" class="" id="search_by">
-                <input type="submit"  class="button search-btn" value="filters" />
+                <input type="submit" name="sear"  class="button" value="Search" />
+                <input type="submit"  class="button search-btn" value=" Advance search" />
 
                 <div class="arrow_down">
                 </div>

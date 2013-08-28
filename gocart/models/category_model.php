@@ -332,6 +332,13 @@ Class Category_model extends CI_Model
         $result = $this->db->get('products');
         return $result->result(); 
     }
+    function fornt_ent_search($cat_name=false)
+    {   
+        $this->db->select('*'); 
+        $this->db->like('name', $cat_name);       
+        $result = $this->db->get('categories');
+        return $result->result(); 
+    }
 
     
 	
