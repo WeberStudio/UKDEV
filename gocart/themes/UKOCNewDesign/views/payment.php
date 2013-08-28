@@ -150,7 +150,7 @@
                             echo form_dropdown('select_year',$option, '', 'class="select-country-state"');
                         ?>
                     </div>
-                    <p class="username">C.V.V Number</p>
+                    <p class="username">C.V.V Number <a href="javascript:void(0);" onClick="popup();"><img style="height: 18px; float:right; margin-left: 10px;" src="<?php echo base_url()."gocart/themes/UKOCNewDesign/assets/img/info_marl.png" ?>" /> </a></p>
                     <input type="text" name="cardnumber" id="cardnumber"  placeholder="" autocomplete="off" required />
                     <!--<label for="email">Email</label>-->
                     <div class="col6">

@@ -36,7 +36,7 @@
                 <div class="onerow"> 
                  <div class="seperator">
                      <div class="col6">
-                        <h1 class="sep">Open the doors of Opportunity</h1>
+                        <h1 class="sep">Open the Door of Opportunity</h1>
                         <p class="sep"><a href="<?php echo base_url().'cart/allcourses/';?>">view all of our courses</a></p>
                     </div>
                     
@@ -103,7 +103,7 @@
                                 <?php }?>
                                 <input type="hidden" name="id" value="<?php echo $product->id?>"/>
                                 
-                                <input style="float: right;margin-right: 28px;" type="submit" value=" Enrol Now" class="button" onclick=" return check_payment_price()" /> 
+                                <input style="float: right;margin-right: 28px;" type="submit" value=" Enrol Now" class="button" onClick=" return check_payment_price()" /> 
                         </div>
                         </form>
                         
@@ -229,11 +229,11 @@
 
                                     <p class="stars">
                                         <span>
-                                            <a class="star-1" href="javascript:void(0)" onclick="return review1();">1</a>
-                                            <a class="star-2" href="javascript:void(0)" onclick="return review2();">2</a>
-                                            <a class="star-3" href="javascript:void(0)" onclick=" return review3();">3</a>
-                                            <a class="star-4" href="javascript:void(0)" onclick="return review4();">4</a>
-                                            <a class="star-5" href="javascript:void(0)" onclick=" return review5();">5</a>
+                                            <a class="star-1" href="javascript:void(0)" onClick="return review1();">1</a>
+                                            <a class="star-2" href="javascript:void(0)" onClick="return review2();">2</a>
+                                            <a class="star-3" href="javascript:void(0)" onClick=" return review3();">3</a>
+                                            <a class="star-4" href="javascript:void(0)" onClick="return review4();">4</a>
+                                            <a class="star-5" href="javascript:void(0)" onClick=" return review5();">5</a>
                                         </span>
                                     </p>
                                     <input type="hidden" class="" id="rating" name="rating" value=""/>

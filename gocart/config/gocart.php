@@ -4,7 +4,7 @@
 
 //$config['theme']            = 'default';
 
-$config['theme']			= 'oneTouch_next';
+$config['theme']			= 'UKOCNewDesign';
 
 
 

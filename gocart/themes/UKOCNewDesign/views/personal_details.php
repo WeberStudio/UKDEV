@@ -55,7 +55,7 @@ $phone        = array('id'=>'phone', 'class'=>'input-text', 'name'=>'phone', 'va
                  
                  <div class="seperator">
                      <div class="col6">
-                        <h1 class="sep">Open the doors of Opportunity</h1>
+                        <h1 class="sep">Open the Door of Opportunity</h1>
                         <p class="sep"><a href="<?=base_url().'cart/allcourses/'?>">view all of our courses</a></p>
                     </div>
                     

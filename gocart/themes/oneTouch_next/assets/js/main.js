@@ -1,5 +1,4 @@
-
-/*$('#all-courses').click(function(e){
+$('#all-courses').click(function(e){
 	
 	e.preventDefault();
 	
@@ -10,7 +9,8 @@
 	{
 		submenushow();
 	}
-});  */
+});
+
 function submenushow(){
 	$("#sub-menu").stop().animate({
 		height: "195px",

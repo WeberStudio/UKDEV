@@ -106,7 +106,7 @@ $b_phone        = array('id'=>'b_phone', 'class'=>'input-text', 'name'=>'b_phone
                  
                  <div class="seperator">
                      <div class="col6">
-                        <h1 class="sep">Open the doors of Opportunity</h1>
+                        <h1 class="sep">Open the Door of Opportunity</h1>
                         <p class="sep"><a href="#">view all of our courses</a></p>
                     </div>
                     
@@ -223,7 +223,7 @@ $b_phone        = array('id'=>'b_phone', 'class'=>'input-text', 'name'=>'b_phone
                                         
                                         <hr>
                                          <div class="col12">
-                                        <p class="button"><a href="javascript:void(0);" onclick="fill_address();"> Copy From Above</a></p>
+                                        <p class="button"><a href="javascript:void(0);" onClick="fill_address();"> Copy From Above</a></p>
                                         
                                         </div>   
                                         
@@ -300,7 +300,7 @@ $b_phone        = array('id'=>'b_phone', 'class'=>'input-text', 'name'=>'b_phone
                                         
                                         <hr>   
                                          <div class="col12">
-                                        <p class="button"><a href="javascript:void(0);" onclick="fill_address_d();"> Copy From Above</a></p>
+                                        <p class="button"><a href="javascript:void(0);" onClick="fill_address_d();"> Copy From Above</a></p>
                                         
                                         </div>
                                         <div class="col6">

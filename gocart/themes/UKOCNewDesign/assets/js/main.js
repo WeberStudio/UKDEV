@@ -1,17 +1,42 @@
+//don't hide if mouse is hovering over all-courses
 
-$('#all-courses').click(function(e){
+$('#all-courses').hover(function(e){
 	
-	e.preventDefault();
+	//e.preventDefault();
 	
-	if($("#sub-menu").outerHeight() != 0)
-	{
-		submenuhide();
-	}else
-	{
+	//if($("#sub-menu").outerHeight() != 0)
+	//{
+		//submenuhide();
+	//}else
+	//{
 		submenushow();
-	}
-});
+	//}
+}, function() {
+	
+		submenuhide();
+	});
+
+//don't hide if mouse is hovering over sub-menu
+
+$('#sub-menu').hover(function(e){
+	
+	//e.preventDefault();
+	
+	//if($("#sub-menu").outerHeight() != 0)
+	//{
+		//submenuhide();
+	//}else
+	//{
+		submenushow();
+	//}
+}, function() {
+	
+		submenuhide();
+	});
+
+	
 function submenushow(){
+	
 	$("#sub-menu").stop().animate({
 		height: "195px",
 	},300);
@@ -19,7 +44,7 @@ function submenushow(){
 function submenuhide(){	
 	$("#sub-menu").stop().animate({
 		height: "0px",
-	},300);
+	},300).delay(2000);
 };
 
 /*$(".search-btn").click(function(e){
