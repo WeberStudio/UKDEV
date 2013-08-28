@@ -132,16 +132,20 @@
 
                                         </ul>
                                         <ul>
-                                                                                    <?php $questions = $this->Product_model->get_question($product->id);
+                                                  <?php $questions = $this->Product_model->get_question($product->id);
                                                 //echo $this->show->pe($questions); exit;
                                                 if(empty($questions)){echo "<i> There is No Question Yet</i>";}
                                                 if(!empty($questions)){
                                                     foreach($questions as $question){
                                             ?>
-                                            
-                                                                        <p><h4><?php echo ucwords(strtolower($question->name));?></h4></p>
-                                                                        <p><?php echo ucwords(strtolower($question->question));?></p>
-                                                                        <div  align="right">
+                                                                       <br/>
+                                                                       <br/>
+                                                                       <br/>
+                                                                       
+                                                                         <hr/>
+                                                                        <h4><?php echo 'User Name'.ucwords(strtolower($question->name));?></h4>
+                                                                        <?php echo trim(ucwords(strtolower($question->question)));?>
+                                                                        <div style="float: right;">
                                                                             <p class="button"><a class="button" href="javascript:void(0);"> Reply</a></p>
                                                                             <div class="clear"  style="margin-bottom: 10px;"></div>
 

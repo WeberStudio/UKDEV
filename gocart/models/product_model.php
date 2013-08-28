@@ -652,6 +652,7 @@ Class Product_model extends CI_Model
 	function get_question($product_id)
 	{
 		$this->db->where('product_id',$product_id);
+        $this->db->order_by('id', 'desc');
 		
 		$result		= $this->db->get('course_question');
 		

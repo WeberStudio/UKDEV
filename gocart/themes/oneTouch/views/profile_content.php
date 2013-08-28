@@ -30,7 +30,7 @@ $address_form_prefix ="";
 		<div id="content" class="fifteen columns">
 		
 		
-		<div class="col-1">
+		<div class="">
 				<h3>My Account</h3>
 			
 					<p class="form-row form-row-first" id="billing_first_name_field">
