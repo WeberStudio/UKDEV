@@ -92,13 +92,13 @@ class Checkout extends Front_Controller {
 		$this->form_validation->set_rules('firstname', 'First Name', 'trim|required|max_length[32]');
 		$this->form_validation->set_rules('lastname', 'Last Name', 'trim|required|max_length[32]');
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[128]');
-		$this->form_validation->set_rules('phone', 'Phone', 'trim|required |numeric|max_length[32]');
+		$this->form_validation->set_rules('phone', 'Phone', 'trim|required|max_length[32]');
 		$this->form_validation->set_rules('company', 'Company', 'trim|max_length[128]');
 		$this->form_validation->set_rules('address1', 'Address 1', 'trim|required|max_length[128]');
 		$this->form_validation->set_rules('address2', 'Address 2', 'trim|max_length[128]');
 		$this->form_validation->set_rules('city', 'City', 'trim|required|max_length[128]');
 		$this->form_validation->set_rules('country_id', 'Country', 'trim|required|numeric');
-		$this->form_validation->set_rules('zone_id', 'State', 'trim|required');
+		$this->form_validation->set_rules('zone_id', 'State', 'trim|required|numeric');
 		
 		/*if there is post data, get the country info and see if the zip code is required*/
 		if($this->input->post('country_id'))
@@ -188,7 +188,6 @@ class Checkout extends Front_Controller {
     
     function step2()
      {
-         
          $data['d_first']                               =  '';
          $data['d_last']                                =  '';
          $data['d_company']                             =  '';
@@ -228,55 +227,34 @@ class Checkout extends Front_Controller {
         {
             $data['zones_menu']                 = $this->Location_model->get_zones_menu(222);  
         }
-       
         
-          
+        
         
         // Form validation
-        $this->form_validation->set_rules('firstname', 'Personal Address First Name', 'trim|required|max_length[32]');
-        $this->form_validation->set_rules('lastname', 'Personal Address Last Name', 'trim|required|max_length[32]');
-        $this->form_validation->set_rules('email', 'Personal Address Email', 'trim|required|valid_email|max_length[128]');
-        $this->form_validation->set_rules('phone', 'Personal Address Phone', 'trim|required|numeric|max_length[32]');
-        $this->form_validation->set_rules('company', 'Personal Address Company', 'trim|max_length[128]');
-        $this->form_validation->set_rules('address1', 'Personal Address Address 1', 'trim|required|max_length[128]');
-        $this->form_validation->set_rules('address2', 'Personal Address Address 2', 'trim|max_length[128]');
-        $this->form_validation->set_rules('city', 'Personal Address City', 'trim|required|max_length[128]');
-        $this->form_validation->set_rules('country_id', 'Personal Address Country', 'trim|required|numeric');
-        $this->form_validation->set_rules('zone_id', 'Personal Address State', 'trim|required|numeric');
-        
-        
-        $this->form_validation->set_rules('b_firstname', 'Card Billing Address First Name', 'trim|required|max_length[32]');
-        $this->form_validation->set_rules('b_lastname', 'Card Billing Address Last Name', 'trim|required|max_length[32]');
-        $this->form_validation->set_rules('b_email', 'Card Billing Address Email', 'trim|required|valid_email|max_length[128]');
-        $this->form_validation->set_rules('b_phone', 'Card Billing Address Phone', 'trim|required|numeric|max_length[32]');
-        $this->form_validation->set_rules('b_company', 'Card Billing Address Company', 'trim|max_length[128]');
-        $this->form_validation->set_rules('b_address1', 'Card Billing Address Address 1', 'trim|required|max_length[128]');
-        $this->form_validation->set_rules('b_address2', 'Card Billing Address Address 2', 'trim|max_length[128]');
-        $this->form_validation->set_rules('b_city', 'Card Billing Address City', 'trim|required|max_length[128]');
-        $this->form_validation->set_rules('b_country_id', 'Card Billing Address Country', 'trim|required|numeric');
-        $this->form_validation->set_rules('b_zone_id', 'Card Billing Address State', 'trim|required|numeric');
-        
-        $this->form_validation->set_rules('d_first', 'Delivery Address First Name', 'trim|required|max_length[32]');
-        $this->form_validation->set_rules('d_last', 'Delivery Address Last Name', 'trim|required|max_length[32]');
-        $this->form_validation->set_rules('d_email', 'Delivery Address Email', 'trim|required|valid_email|max_length[128]');
-        $this->form_validation->set_rules('d_phone', 'Delivery Address Phone', 'trim|required|numeric|max_length[32]');
-        $this->form_validation->set_rules('d_company', 'Delivery Address Company', 'trim|max_length[128]');
-        $this->form_validation->set_rules('d_address', 'Delivery Address Address 1', 'trim|required|max_length[128]');
-        $this->form_validation->set_rules('d_address_op', 'Delivery Address Address 2', 'trim|max_length[128]');
-        $this->form_validation->set_rules('d_post_code', 'Delivery Address State', 'trim|required'); 
-        $this->form_validation->set_rules('d_city', 'Delivery Address City', 'trim|required|max_length[128]');
-        $this->form_validation->set_rules('d_country_id', 'Delivery Address Country', 'trim|required|numeric');
-        $this->form_validation->set_rules('d_zone_id', 'Delivery Address State', 'trim|required|numeric');
-        
-          //$this->show->pe($this->input->post(null,false));
+        $this->form_validation->set_rules('firstname', 'First Name', 'trim|required|max_length[32]');
+        $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required|max_length[32]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[128]');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim|required|max_length[32]');
+        $this->form_validation->set_rules('company', 'Company', 'trim|max_length[128]');
+        $this->form_validation->set_rules('address1', 'Address 1', 'trim|required|max_length[128]');
+        $this->form_validation->set_rules('address2', 'Address 2', 'trim|max_length[128]');
+        $this->form_validation->set_rules('city', 'City', 'trim|required|max_length[128]');
+        $this->form_validation->set_rules('country_id', 'Country', 'trim|required|numeric');
+        $this->form_validation->set_rules('zone_id', 'State', 'trim|required|numeric');
         
         if ($this->form_validation->run() == false)
         {
-            
             $this->load->view('address_details', $data);
         }
         else
         {
+            
+        
+        
+        
+        
+        
+           
         if($this->input->post('confirm')!='')
         {
              $address                           =   $this->input->post(null,false);
@@ -372,29 +350,12 @@ class Checkout extends Front_Controller {
          $data['d_email']                               =  $data['complite_address']['d_email'];
          }
         
-
-        
          $this->load->view('confirm',$data);
         
      }
      function step4()
      {
-         $data['customer']                              = $this->go_cart->customer();
-          $data['customer']['bill_address']             = array();
-          $data['customer']['ship_address']             = array();
-          $data['customer']['company']                  = '';
-          $data['customer']['firstname']                = '';
-          $data['customer']['lastname']                 = '';
-          $data['customer']['phone']                    = '';
-          $data['customer']['city']                     = '';
-          $data['customer']['post_code']                = '';
-         $data['customer']['address_street']            = '';
-          $data['customer']['address_line']             = '';
-          $data['customer']['email']                    = '';
-          $data['customer']['group_id']                 = '';
-          $this->session->unset_userdata('complite_address'); 
-        
-         //$this->session->unset_userdata('complite_address');
+         $this->session->unset_userdata('complite_address');
          
        $this->load->view('payment');  
      }

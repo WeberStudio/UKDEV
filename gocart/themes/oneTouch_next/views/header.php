@@ -26,7 +26,7 @@
                     <div class="col10" id="top-menu">
                         <ul>
                             <li <?php if(isset($menu_blue) && $menu_blue == 'home'){echo 'class="current-menu-item"';}?> ><a href="<?= base_url();?>cart">Home</a></li>
-                            <li <?php if(isset($menu_blue) && $menu_blue == 'allcourses'){echo 'class="current-menu-item"';}?> id="all-courses"><a href="#">All Courses</a></li>
+                            <li <?php if(isset($menu_blue) && $menu_blue == 'allcourses'){echo 'class="current-menu-item"';}?> id="all-courses" onmousemove="submenushow();" onmouseover="submenuhide();"><a href="#">All Courses</a></li>
                             <li><a href="<?=base_url()?>blog">Blog</a></li>
                             <li <?php if(isset($menu_blue) && $menu_blue == 'tutors'){ echo 'class="current-menu-item"';}?> ><a href="<?=base_url()?>tutors">Tutors</a></li>
                             <li <?php if(isset($menu_blue) && $menu_blue == 'faq'){echo 'class="current-menu-item"';}?> ><a href="<?=base_url()?>faq">FAQs</a></li>
@@ -72,10 +72,10 @@
                                         <div class="ca-item">
                                         <a href="<?php echo base_url().$menu_category['category']->slug?>">
                                         <?php
-                                        $file_path =   realpath('.')."\uploads\images\small\\".$menu_category['category']->image;
+                                        $file_path =   realpath('.')."/uploads/images/small/".$menu_category['category']->image;
                                         if(file_exists($file_path))
                                         {?>
-                                            <img src="<?php echo catogery_img('images/small/'.$menu_category['category']->image); ?>"  alt="" />
+                                            <img style="height:90px" src="<?php echo catogery_img('images/small/'.$menu_category['category']->image); ?>"  alt="" />
                                             <?php  }
                                             else
                                            {?>
@@ -150,7 +150,7 @@ function category_search(name)
 
 
 </script>                      
-                       <article class="col4 filters-res">
+                      <article class="col4 filters-res">
                           <form method="post" name="search_form" id="search-form" action="<?=base_url().'Search'?>">
                               <input name="search_field" type="text" id="search" value="" />
                               <input type="hidden" value="" name="search_by" class="" id="search_by">
@@ -187,8 +187,15 @@ function category_search(name)
                      
                       
                   
+ <p class="button checkout-btn" style="margin-left:284px !important">
+             <a href="http://87.106.234.213/livechat/client.php?locale=en&amp;style=simplicity" target="_blank" onClick="if(navigator.userAgent.toLowerCase().indexOf('opera') != -1 &amp;&amp; window.event.preventDefault) window.event.preventDefault();this.newWindow = window.open('http://87.106.234.213/livechat/client.php?locale=en&amp;style=simplicity&amp;url='+escape(document.location.href.replace('http://','').replace('https://',''))+'&amp;referrer='+escape(document.referrer.replace('http://','').replace('https://','')), 'webim', 'toolbar=0,scrollbars=0,location=0,status=1,menubar=0,width=640,height=480,resizable=1');this.newWindow.focus();this.newWindow.opener=window;return false;">
+                   Live Chat
+                    </a>
+          </p>
                   </section>
                   <!-- /section -->
                    
                     
             </header>
+
+            

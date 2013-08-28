@@ -134,7 +134,12 @@
                 
             });
         });
-        
+           function showsubmenue() {
+             $('#sub-menu').show();
+         }
+          function hidesubmenue() {
+             $('#sub-menu').hide();
+         }
         function cycleImages(){
           var $active = $('#cycler .active');
           var $next = ($active.next().length > 0) ? $active.next() : $('#cycler img:first');
@@ -149,7 +154,7 @@
         // run every 7s
         setInterval('cycleImages()', 7000);
         })
-        
+       
         </script>
     
     

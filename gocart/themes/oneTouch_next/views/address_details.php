@@ -386,7 +386,7 @@ $b_phone        = array('id'=>'b_phone', 'class'=>'input-text', 'name'=>'b_phone
                            
                            
                         </div> <!-- end col6 -->
-                          <div class="col6">
+                        <div class="col6">
                         <div class="col12">
                                       <span style="color:#666; font-size:11px; margin-left: 245px;" > We accept the following Sage Pay, PayPal, All Debit and Credit Cards. </span>
                                     <div class = "payment_options">
