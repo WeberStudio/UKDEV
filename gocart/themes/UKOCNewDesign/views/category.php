@@ -20,7 +20,7 @@
                  
                  <div class="seperator">
                      <div class="col6">
-                        <h1 class="sep">Open the Door of oppurtunity</h1>
+                        <h1 class="sep">Open the Door of Oppurtunity</h1>
                         <p class="sep"><a href="<?php echo base_url().'cart/allcourses/';?>">view all of our courses</a></p>
                     </div>
                     

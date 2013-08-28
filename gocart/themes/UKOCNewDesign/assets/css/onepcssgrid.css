@@ -138,3 +138,62 @@
 	}
 	
 }
+
+/* newly added css */
+
+div#customer_login {
+	
+	background-color:#2E3092;
+	color:#FFF;
+	border-radius:20px;
+	border: #999 double 3px;	
+}
+
+div#customer_login a {
+	
+	color:#999;	
+}
+
+div#customer_login input {
+	
+	border-radius: 5px;
+	text-align:center;
+}
+
+div#customer_login h2#heading {
+	
+	color:#999;	
+	text-align:center;
+}
+
+
+
+div#checkout_account {
+	
+	background-color:#2E3092;
+	color:#FFF;
+	border-radius:20px;
+	border: #999 double 3px;
+}
+
+
+div#checkout_account h2.without { 
+	
+	color:#999;	
+	text-align:center;
+}
+
+div#customer_signup {
+	
+	background-color:#2E3092;
+	color:#FFF;
+	border-radius:20px;
+	border: #999 double 3px;
+}
+
+div#customer_signup h2 {
+	
+	color:#999;	
+	text-align:center;
+}
+

@@ -49,5 +49,13 @@
             });
             return false;
             }                
-        </script> 
+        </script>
+        
+		<script type="text/javascript">
+        
+        function popup() {
+        	window.open('http://www.ukopencollege.co.uk/popup_cvv_help.html?zenid=s5747igmgae6s7o546qsb5jgk5','1377677282521','width=700,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=0,left=0,top=0');	
+			return false;
+        }
+        </script>
     </head>
