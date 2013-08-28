@@ -171,8 +171,7 @@
                                     <div class="reviews"><h2>Reviews</h2>
                                          <p class="button"> <a  class="fancybox" href="#inline<?php if($this->go_cart->customer() != ""){echo "1";}if($this->go_cart->customer() == ""){echo"2";}?>"> Review</a></p>
                                         <ul>
-                                            <li><p>this is comment feed this is comment feed this is comment feed comment feed this is comment feed ...</p>
-                                    <a href="#" class="t_link">Name of Person</a></li>
+                                            
                                     
                                                
                                         </ul>

@@ -23,10 +23,10 @@ class Tutor_login extends Front_Controller {
 	function index()
 	{
 		if($this->Tutor_model->is_logged_in(false, false)):
-		redirect('cart/');
+		redirect('dashboard/');
 		
 		else:
-		$this->load->view('tutor_login');
+		redirect('tutor_login/login');
 		endif;
 	}
 	function logout()
@@ -37,7 +37,10 @@ class Tutor_login extends Front_Controller {
 	
 	function login()
 	{
-		
+        if($this->Tutor_model->is_logged_in(false, false)){
+        redirect('dashboard');
+        }
+		 
 		//$data['seo_title']		= "Tutor Login";
 		$this->load->library('form_validation');
 		
@@ -46,39 +49,42 @@ class Tutor_login extends Front_Controller {
 		$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
 		if ($this->form_validation->run() == FALSE)
 		{
+            
 		$this->load->view('tutor_login');
 		}
 		else{
-		
-		$submitted 		= $this->input->post('submitted');
-		if ($submitted)
-		{
+		     
+		//$submitted 		= $this->input->post('submitted');
+		//if ($submitted)
+		//{
 			$email		= $this->input->post('email');
 			$password	= $this->input->post('password');
 			//$remember   = $this->input->post('remember');
 			//$redirect	= $this->input->post('redirect');
-			$review 	= $this->input->post('review_login');
+			//$review 	= $this->input->post('review_login');
 			$login		= $this->tutor_model->login($email, $password);
+                
 			//echo print_r($login); exit;
 			if ($login)
 			{
-				if($review)
-				{
-					$open = array('open'=>'1');
-					$this->session->set_userdata($open);
+                
+				//if($review)
+				//{
+					//$open = array('open'=>'1');
+					//$this->session->set_userdata($open);
 					
-					redirect($this->input->post('slug'));
-				}
+					//redirect($this->input->post('slug'));
+				//}
 				redirect('dashboard');	
 			}
 			else
 			{
 				$this->session->set_flashdata('error', lang('login_failed'));
-				redirect('tutor_login');
+				redirect('tutor_login/login');
 			}
-			$this->session->set_flashdata('error', 'You Are Not Registered');
-		}
-		$this->session->set_flashdata('error', 'You Are Not Registered');
+			//$this->session->set_flashdata('error', 'You Are Not Registered');
+		//}
+		//$this->session->set_flashdata('error', 'You Are Not Registered');
 		}
 	}
 	
