@@ -93,7 +93,7 @@ if(validation_errors() != '')
                                     <input type="submit" name="submitted" value="Submit" class="button" />  
                                   </p>
                                   
-                                  <a class="align-left" href="#">forget password?</a>
+                                  <a class="align-left" href="<?=base_url().'secure/forgot_password'?>">forget password?</a>
                                 </form>
                            </div><!-- end col12 -->
                               

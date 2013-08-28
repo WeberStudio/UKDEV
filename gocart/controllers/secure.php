@@ -272,7 +272,7 @@ function login($ajax = false)
 			$this->load->helper('directory');
 		
 			$data['categories']	= $this->Category_model->get_categories_tierd(0);
-			$data['zones_menu']	= $this->Location_model->get_zones_menu('223');
+			$data['zones_menu']	= $this->Location_model->get_zones_menu('222');
 			$data['countries_menu']	= $this->Location_model->get_countries_menu();
 			$data['error'] = validation_errors();
 			
