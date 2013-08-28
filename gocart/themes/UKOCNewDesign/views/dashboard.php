@@ -39,7 +39,8 @@
                                 ". $get_address[0]->city." <b>,</b> ". $get_address[0]->state_code."  ". $get_address[0]->country_name ."<br>
                                 <abbr title='Phone'>P:</abbr> ". $get_address[0]->phone;}
                                 
-                                 if(!empty($get_address_cus)){ echo $get_address_cus[0]->address_street." <b>,</b> ".$get_address_cus[0]->address_line."<br>
+                                 if(!empty($get_address_cus))
+                                 { echo $get_address_cus[0]->address_street." <b>,</b> ".$get_address_cus[0]->address_line."<br>
                                 ". $get_address_cus[0]->city." <b>,</b> ". $get_address_cus[0]->state_code."  ". $get_address_cus[0]->country_name ."<br>
                                 <abbr title='Phone'>P:</abbr> ". $get_address_cus[0]->phone;}
                                 

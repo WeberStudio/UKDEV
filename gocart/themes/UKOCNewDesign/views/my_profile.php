@@ -83,31 +83,19 @@
                                             <p class=""><?php echo lang('account_lastname');?></p>
                                             <?php echo form_input($last);?>
                                           </div>
-                                          
-
-                                        <div class="clear"></div>
-                                        <!--<p class="form-row " id="billing_company_field">
-                                            <label for="billing_company" class=""><?php echo lang('account_company');?></label>
-                                            <?php echo form_input($company);?>
-                                        </p>-->
-                                        
-                                        
-                                        
-                                        
-                                    
-
-                                   
                                         <h3>About You</h3>
-                                        <p class="form-row " id="billing_company_field">
-                                              <label for="billing_postcode" class="">File upload</label>
-                                               <input type="file" class="spa1n6 fileinput" id="search-input" name="image">
+                                        <div class="col6">
+                                        <p class="" id="">File upload</p>
+                                        <input type="file" class="spa1n6 fileinput" id="search-input" name="image">
+                                        </div>
+                                        <div class="col12">
+                                        <p class="" id="">About
+                                           
+                                            <textarea rows="6" cols="150" name="about" > <?php echo  $tutor['about'];?></textarea>
                                         </p>
-                                        <p class="form-row " id="billing_company_field">
-                                            <label for="billing_company" class="">About</label>
-                                            <textarea name="about" > <?php echo  $tutor['about'];?></textarea>
-                                        </p>
+                                        </div>
                                         <div class="clear"></div>
-                                        <input type="submit" value="<?php echo lang('form_submit');?>" class="button"  style="height: 34px; width: 74px;" />
+                                        <input style="float: right;" type="submit" value="<?php echo lang('form_submit');?>" class="button" />
                                     </div>
                             </form> 
                         </div>
@@ -115,5 +103,16 @@
                 </div> 
             </section>        
             <div class="clear"></div>
-        
+  <script type="text/javascript">
+  var j = jQuery.noConflict();
+    j(function(){
+        j('#country_id').change(function(){
+                j.post('<?php echo site_url('locations/get_zone_menu');?>',{id:j('#country_id').val()}, function(data) {
+                  j('#f_zone_id').html(data);
+                });
+                
+            });
+            
+    });
+</script>      
    <?php include('footer.php')?> 

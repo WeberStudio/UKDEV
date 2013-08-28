@@ -273,7 +273,7 @@ class dashboard extends Front_Controller {
             {
                 $customer['password']            = $this->input->post('password');
             }*/
-                        
+                       
             $this->go_cart->save_customer($this->customer);
             $this->Customer_model->save($customer);            
             $this->session->set_flashdata('message', lang('message_account_updated'));    
