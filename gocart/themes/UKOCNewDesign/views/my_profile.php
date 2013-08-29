@@ -79,10 +79,7 @@
                                             <p class=""><?php echo lang('account_email');?></p>
                                             <?php echo form_input($email);?>
                                           </div>
-                                          <div class="col6"> 
-                                            <p class=""><?php echo lang('account_lastname');?></p>
-                                            <?php echo form_input($last);?>
-                                          </div>
+
                                         <h3>About You</h3>
                                         <div class="col6">
                                         <p class="" id="">File upload</p>

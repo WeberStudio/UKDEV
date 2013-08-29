@@ -92,7 +92,10 @@ if(validation_errors() != '')
                                   <p class="submit" style="margin-right:25px;">
                                     <input type="submit" name="submitted" value="Submit" class="button" />  
                                   </p>
-                                  
+                                  <p class="button" style="float: right;margin-top: 19px;">
+                                    <a href="<?=base_url().'tutor_login/register';?>">Register Tutor</a>
+                                  </p>
+                                       
                                   <a class="align-left" href="<?=base_url().'secure/forgot_password'?>">forget password?</a>
                                 </form>
                            </div><!-- end col12 -->

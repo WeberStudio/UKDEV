@@ -93,49 +93,54 @@ class Tutor_login extends Front_Controller {
 	function register($id = false)
 	{
 		//$data['seo_title']		= "Register";
-		$data['id']			= '';
-		$data['company']	= '';
-		$data['firstname']	= '';
-		$data['lastname']	= '';
-		$data['email']		= '';
-		$data['phone']		= '';
-		$data['address1']	= '';
-		$data['address2']	= '';
-		$data['city']		= '';
-		$data['state']		= '';
-		$data['zip']		= '';
-		$data['country_id']	= '';
-		$data['zone_id']	= '';
-		$password			= '';
-		$password 			= $this->input->post('password');
+		$data['id']			            = '';
+		$data['company']	            = '';
+		$data['firstname']	            = '';
+		$data['lastname']	            = '';
+		$data['email']		            = '';
+		$data['phone']		            = '';
+		$data['street_address']	        = '';
+		$data['address_line_op']	    = '';
+		$data['city']		            = '';
+		$data['state']		            = '';
+		$data['zip_code']		        = '';
+		$data['country_id']	            = '';
+		$data['zone_id']	            = '';
+		$password			            = '';
+		$password 			            = $this->input->post('password');
 		
-		$data['categories']			= array();
-		$data['courses']			= array();	
-		$data['all_categories']		= $this->Category_model->get_categories_dropdown();
-		$data['all_courses']		= $this->Product_model->get_all_products_array();
-		$data['countries_menu']		= $this->Location_model->get_countries_menu();
-		$data['zones_menu']			= $this->Location_model->get_zones_menu('223');
-		$data['country_id']			= "";
-		$data['zone_id']			= "";
+		$data['categories']			    = array();
+		$data['courses']			    = array();	
+		$data['all_categories']		    = $this->Category_model->get_categories_dropdown();
+		$data['all_courses']		    = $this->Product_model->get_all_products_array();
+		$data['countries_menu']		    = $this->Location_model->get_countries_menu();
+		$data['zones_menu']			    = $this->Location_model->get_zones_menu('223');
+		$data['country_id']			    = "";
+		$data['zone_id']			    = "";
 		//print_r($this->Product_model->get_all_products_array());exit;
-		$config['upload_path']		= 'uploads/images/full';
-		$config['allowed_types']	= 'gif|jpg|png';
-		$config['max_size']			= $this->config->item('size_limit');
-		$config['max_width']		= '1024';
-		$config['max_height']		= '768';
+		$config['upload_path']		    = 'uploads/images/full';
+		$config['allowed_types']	    = 'gif|jpg|png';
+		$config['max_size']			    = $this->config->item('size_limit');
+		$config['max_width']		    = '1024';
+		$config['max_height']		    = '768';
 		//$config['file_name'] 		= "thumb_";
-		$config['overwrite']		= true;
-		$config['remove_spaces']	= true;
-		$config['encrypt_name']		= true;
+		$config['overwrite']		    = true;
+		$config['remove_spaces']	    = true;
+		$config['encrypt_name']		    = true;
 		$this->load->library('upload', $config);
+        
+         
+        
 		
 			
 		$this->load->library('form_validation');	
 		$this->form_validation->set_rules('firstname', 'lang:firstname', 'trim|required|max_length[32]');
 		$this->form_validation->set_rules('lastname', 'lang:lastname', 'trim|required|max_length[32]');
+        $this->form_validation->set_rules('company', 'Company', 'trim');
 		$this->form_validation->set_rules('street_address', 'Address', 'trim|required');
+        $this->form_validation->set_rules('address_line_op', 'Address', 'trim');
 		$this->form_validation->set_rules('city', 'City', 'trim|required');
-		$this->form_validation->set_rules('zip_code', 'zip_code', 'trim|required|numeric|max_length[6]');
+		$this->form_validation->set_rules('zip_code', 'zip_code', 'trim|required|max_length[15]');
 		$this->form_validation->set_rules('phone', 'Phone', 'trim|required|max_length[32]|numeric');
 		$this->form_validation->set_rules('email', 'lang:email', 'trim|required|valid_email|max_length[128]|callback_check_email');
 		if($id == "")
@@ -219,6 +224,7 @@ class Tutor_login extends Front_Controller {
 			}
 			}
 			 $save_tutor = $this->tutor_model->save($save);
+             if($id==""){
 			 if($save_tutor!="")
 			 {
 				 
@@ -251,6 +257,7 @@ class Tutor_login extends Front_Controller {
 				 //echo "found it"; exit;
 				// redirect('tutor_login/login');
 			 }
+             }
 			 redirect('tutor_login');
 			
 		}

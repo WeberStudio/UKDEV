@@ -188,6 +188,13 @@ class Checkout extends Front_Controller {
     
     function step2()
      {
+         $test = $this->go_cart->customer();
+         
+         if(empty($test)|| !isset($test['bill_address']))
+         {
+           redirect('checkout'); 
+         }
+         
          $data['d_first']                               =  '';
          $data['d_last']                                =  '';
          $data['d_company']                             =  '';
@@ -199,6 +206,23 @@ class Checkout extends Front_Controller {
          $data['d_zone_id']                             =  '';
          $data['d_phone']                               =  '';
          $data['d_email']                               =  '';
+         
+         
+         $data['d_first']                               =  $this->input->post('d_first');
+         $data['d_last']                                =  $this->input->post('d_last');
+         $data['d_company']                             =  $this->input->post('d_company');
+         $data['d_address']                             =  $this->input->post('d_address');
+         $data['d_address_op']                          =  $this->input->post('d_address_op');
+         $data['d_city']                                =  $this->input->post('d_city');
+         $data['d_post_code']                           =  $this->input->post('d_post_code');
+         $data['d_country_id']                          =  $this->input->post('d_country_id');
+         $data['d_zone_id']                             =  $this->input->post('d_zone_id');
+         $data['d_phone']                               =  $this->input->post('d_phone');
+         $data['d_email']                               =  $this->input->post('d_email');
+         
+         
+         
+         
          $data['complite_address'] =  $this->session->userdata('complite_address');
          //$this->show->pe($data['complite_address']['d_first']);
          if(!empty($data['complite_address']))
@@ -213,7 +237,8 @@ class Checkout extends Front_Controller {
          $data['d_country_id']                          =  $data['complite_address']['d_country_id'];
          $data['d_zone_id']                             =  $data['complite_address']['d_zone_id'];
          $data['d_phone']                               =  $data['complite_address']['d_phone'];
-         $data['d_email']                               =  $data['complite_address']['d_email'];  
+         $data['d_email']                               =  $data['complite_address']['d_email'];
+           
          }
          
          $data['customer']                       = $this->go_cart->customer();
@@ -267,6 +292,12 @@ class Checkout extends Front_Controller {
      }
      function step3() 
      {
+         $get_delevry = $this->session->userdata('complite_address');
+         if(empty($get_delevry['confirm']))
+         {
+           redirect('checkout/step2');   
+         }
+         //$this->show->pe();
          $data['firstname']                             =  '';
          $data['lastname']                              =  '';
          $data['company']                               =  '';
@@ -355,9 +386,61 @@ class Checkout extends Front_Controller {
      }
      function step4()
      {
-         $this->session->unset_userdata('complite_address');
+         $get_delevry = $this->session->userdata('complite_address');
+         if(empty($get_delevry['confirm']))
+         {
+           redirect('checkout/step3');   
+         }
          
-       $this->load->view('payment');  
+         $register= $this->go_cart->customer();
+         if(empty($register))
+         {
+           redirect('checkout/step3');   
+         }
+         
+              /*    if(isset($register['id']))
+         {
+             $this->session->unset_userdata('complite_address');
+         }
+         else
+         {
+            $this->Customer_model->logout();
+            $this->session->unset_userdata('complite_address');  
+         }  */
+         
+         
+         
+        $this->form_validation->set_rules('name_oncard', 'Name', 'trim|required');
+        $this->form_validation->set_rules('select_card', 'Select Card', 'trim|required');
+        $this->form_validation->set_rules('card_number', 'Card Number', 'trim|required');
+        $this->form_validation->set_rules('select_month', 'Phone', 'trim|required|max_length[32]');
+        $this->form_validation->set_rules('select_year', 'Company', 'trim|max_length[128]');
+        $this->form_validation->set_rules('cvv_number', 'Address 1', 'trim|required|max_length[128]');
+
+        
+        if ($this->form_validation->run() == false)
+        {
+            $this->load->view('payment');
+        }
+        else
+        {
+         
+         
+         
+         
+         /*if(isset($register['id']))
+         {
+             $this->session->unset_userdata('complite_address');
+         }
+         else
+         {
+            $this->Customer_model->logout();
+            $this->session->unset_userdata('complite_address');  
+         }*/
+         //$this->show->pe($this->go_cart->customer());
+        }
+         
+         
      }
 
 	function shipping_address()
@@ -824,10 +907,10 @@ class Checkout extends Front_Controller {
 	function place_order()
 	{
 		
-			$this->session->unset_userdata('unregister_user'); 
-			$this->session->unset_userdata('instructions');
-			$this->session->unset_userdata('deliveryadd');
-			$this->session->unset_userdata('delivrey_info');
+			//$this->session->unset_userdata('unregister_user'); 
+			//$this->session->unset_userdata('instructions');
+			//$this->session->unset_userdata('deliveryadd');
+			//$this->session->unset_userdata('delivrey_info');
 			//$this->show->pe($this->session->all_userdata());		
             
 		// retrieve the payment method
@@ -838,7 +921,7 @@ class Checkout extends Front_Controller {
         $paypal_express['form']             = "<table width=\"100%\" border=\"0\" cellpadding=\"5\">\n  <tr>\n    <td><img  src=\"https://www.paypal.com/en_US/i/logo/PayPal_mark_180x113.gif\" border=\"0\" alt=\"Acceptance Mark\"></td>\n  </tr>\n  <tr>\n    <td>You will be directed to the Paypal website to verify your payment. Once your payment is authorized, you will be directed back to our website and your order will be complete.</td>\n  </tr>\n</table>\n";
         $payment_methods['paypal_express']  = $paypal_express ;
 		
-		
+		   
 		//make sure they're logged in if the config file requires it
 		/*if($this->config->item('require_login'))
 		{
@@ -856,9 +939,9 @@ class Checkout extends Front_Controller {
 			//$this->session->unset_userdata($get_user_info); 
 			redirect('cart/view_cart');
 		}
-        
+         
 		  // save the order
-       
+         //$this->show->pe($this->go_cart->_cart_contents['payment']['confirmed']);
         
        if(!$this->go_cart->_cart_contents['payment']['confirmed'])
        {
@@ -883,7 +966,7 @@ class Checkout extends Front_Controller {
             }             
        }
       
-		
+		echo  "sdjflsjdlf"; exit; 
 			                 
 	   $order_id = $this->go_cart->save_order();
 	   $this->session->set_flashdata('message', "<div  class='woocommerce_message'>Your Order Have Been Submitted Successfully!</div>");

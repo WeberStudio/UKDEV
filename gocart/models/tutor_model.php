@@ -192,7 +192,7 @@ Class Tutor_model extends CI_Model
       $this->db->select('*');
       $this->db->where('email', $email);
       $this->db->where('status', 1);
-      $this->db->where('password', $password);
+      $this->db->where('password', sha1($password));
       $this->db->limit(1);
       $result = $this->db->get('tutors');
       $customer = $result->row_array();

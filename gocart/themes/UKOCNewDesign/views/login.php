@@ -1,25 +1,30 @@
 <?php include('main_header.php')?>   
     <body>
-    <?php if ($this->session->flashdata('message')):?>
-            <div class="alert alert-info">
-                <a class="close" data-dismiss="alert">×</a>
-                <?php //echo $this->session->flashdata('message');?>
-            </div>
-        <?php endif;?>
+ <style>
+   .alert-error
+   {
+             background-color:#F88C8C;
+             color:#FFFFFF;
+   }      
+</style>
+<?php
+   if($this->session->flashdata('message'))
+    {
+        $message    = $this->session->flashdata('message');
+    }
+    
+if($this->session->flashdata('error'))
+    {
+        $error    = $this->session->flashdata('error');
+    }
+if(validation_errors() != '')
+    {
+        $error    = validation_errors();
+    } 
+ 
+ ?>
         
-        <?php if ($this->session->flashdata('error')):?>
-            <div class="alert alert-error">
-                <a class="close" data-dismiss="alert">×</a>
-                <?php //echo $this->session->flashdata('error');?>
-            </div>
-        <?php endif;?>
         
-        <?php if (!empty($error)):?>
-            <div class="alert alert-error">
-                <a class="close" data-dismiss="alert">×</a>
-                <?php //echo $error;?>
-            </div>
-        <?php endif;?>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
@@ -63,6 +68,16 @@
                         <div class="col6">
                         
                           <div class="col12">
+
+<?php if (!empty($error)): ?>
+<div class="alert alert-error" id="closee"> <a href="javascript:void(0)"  class="close" data-dismiss="alert" onClick="hide_error(); return false;">x</a> <?php echo"<div style='margin-left: 70px;'>". $error. "</div>"; ?> </div>
+<?php endif; ?>
+<?php if (!empty($message)): ?>
+<div class="alert alert-success">
+    <a class="close" data-dismiss="alert">×</a>
+    <?php echo $message; ?>
+</div>
+ <?php endif; ?>  
                             <h2>Customer Login</h2>
                                 <form class="bs-docs-example form-horizontal" accept-charset="utf-8" method="post" action="<?=base_url()?>secure/login">   
                                   <p class="username">

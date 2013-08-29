@@ -249,6 +249,7 @@ function login($ajax = false)
 		$this->form_validation->set_rules('firstname', 'First Name', 'trim|required|max_length[32]');
 		$this->form_validation->set_rules('lastname', 'Last Name', 'trim|required|max_length[32]');
 		$this->form_validation->set_rules('address1', 'Address', 'trim|required');
+        $this->form_validation->set_rules('address2', 'Address', 'trim');
 		$this->form_validation->set_rules('city', 'City', 'trim|required');
 		$this->form_validation->set_rules('zip', 'Post Code', 'trim|required|max_length[12]');
 		$this->form_validation->set_rules('country_id', 'Country', 'trim|required|numeric');

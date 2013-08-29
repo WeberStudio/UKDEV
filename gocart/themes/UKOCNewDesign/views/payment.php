@@ -1,6 +1,28 @@
 <?php include('main_header.php')?>
 <body>
-
+ <style>
+   .alert-error
+   {
+             background-color:#F88C8C;
+             color:#FFFFFF;
+   }      
+</style>
+<?php
+   if($this->session->flashdata('message'))
+    {
+        $message    = $this->session->flashdata('message');
+    }
+    
+if($this->session->flashdata('error'))
+    {
+        $error    = $this->session->flashdata('error');
+    }
+if(validation_errors() != '')
+    {
+        $error    = validation_errors();
+    } 
+ 
+ ?>
 
 <!--[if lt IE 7]>
 <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
@@ -100,6 +122,15 @@
 
 
             <div class="col6">
+<?php if (!empty($error)): ?>
+<div class="alert alert-error" id="closee"> <a href="javascript:void(0)"  class="close" data-dismiss="alert" onClick="hide_error(); return false;">x</a> <?php echo"<div style='margin-left: 70px;'>". $error. "</div>"; ?> </div>
+<?php endif; ?>
+<?php if (!empty($message)): ?>
+<div class="alert alert-success">
+    <a class="close" data-dismiss="alert">×</a>
+    <?php echo $message; ?>
+</div>
+ <?php endif; ?>             
                 <div class="col12">
                     <span style="color:#666; font-size:11px; margin-left: 245px;" > We accept the following Sage Pay, PayPal, All Debit and Credit Cards. </span>
                     <div class = "payment_options">
@@ -119,8 +150,8 @@
                     <p class="username">
                         Name as on Card
                     </p>
-                    <input type="text" name="cardowner" id="cardowner" placeholder="" required />
-                    <!--<label for="name">Name</label>-->
+                    <input type="text" name="name_oncard" id="cardowner" placeholder="" required />
+                    
 
 
                     <p class="username">
@@ -129,11 +160,11 @@
                         $option    = array(''=>'Select Card Type','VISA'=>'Visa','MC'=>'MasterCard' ,'DELTA'=>'Visa Debit' ,'SOLO'=>'Solo' ,'MAESTRO'=>'Maestro' ,'UKE'=>'Visa Electron (UKE)' );
                         echo form_dropdown('select_card',$option ,'','class="select-country-state"');    
                     ?>
-                    <!--<label for="email">Email</label>-->
+                    
                     <p class="username">
                         Card Number</p>
-                    <input type="text" name="cardnumber" id="cardnumber"  placeholder="" autocomplete="off" required />
-                    <!--<label for="email">Email</label>-->
+                    <input type="text" name="card_number" id="cardnumber"  placeholder="" autocomplete="off" required />
+                    
                     <div class="col6">
                         <p class="username"> Card Expiry Month</p>
                         <?php 
@@ -145,14 +176,16 @@
 
                     <div class="col6">
                         <p class="username"> Card Expiry Year</p>
+                        
                         <?php
                             $option    = array(''=>'Select Year','2013'=>'2013','2014'=>'2014' ,'2015'=>' 2015' ,'2016'=>'2016' ,'2017'=>'2017' ,'2018'=>' 2018','2019'=>'2019' ,'2020'=>'2020' ,'2021'=>'2021' ,'2022'=>'2022');
                             echo form_dropdown('select_year',$option, '', 'class="select-country-state"');
                         ?>
                     </div>
+                    
                     <p class="username">C.V.V Number <a href="javascript:void(0);" onClick="popup();"><img style="height: 18px; float:right; margin-left: 10px;" src="<?php echo base_url()."gocart/themes/UKOCNewDesign/assets/img/info_marl.png" ?>" /> </a></p>
-                    <input type="text" name="cardnumber" id="cardnumber"  placeholder="" autocomplete="off" required />
-                    <!--<label for="email">Email</label>-->
+                    <input type="text" name="cvv_number" id="cardnumber"  placeholder="" autocomplete="off" required />
+
                     <div class="col6">
                         <p class="username"> Card Start Date(If On Card)</p>
                         <?php 
@@ -170,8 +203,8 @@
                         ?>
                     </div>
                     <p class="username">Card Issue No (If On Card)</p>
-                    <input type="text" name="cardnumber" id="cardnumber"  placeholder="" autocomplete="off" required />
-                    <!--<label for="email">Email</label>-->
+                    <input type="text" name="cardnumber" id="cardnumber"  placeholder="" autocomplete="off" />
+
 
                     <p class="submit" style="margin-right:25px;">
                         <input type="submit" value="Checkout" class="button" />
