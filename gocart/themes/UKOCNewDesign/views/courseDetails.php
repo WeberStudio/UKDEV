@@ -31,7 +31,20 @@
 
     });
 </script>
-            
+<style>
+div#buttonSet input
+{
+   color:#808080;  
+}
+form#informationRequest h4
+{
+       color:#808080;
+}
+form#informationRequest p
+{
+       color:#808080;
+}
+</style>            
             <section>
                 <div class="onerow"> 
                  <div class="seperator">

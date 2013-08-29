@@ -63,7 +63,8 @@ else
                                 </div>
                                 <? } else{ ?>
 
-                                   <h3>Currently There is no any file shared with you.</h3>
+                                   <h3>Currently there are no file(s) shared under your file manager by Tutor / Admin .
+                                   <br/>If you think there is a mistake, Kindly inform our support team at support@ukopencollege.co.uk</h3>
                                 <? } ?>
                         </div>
                     

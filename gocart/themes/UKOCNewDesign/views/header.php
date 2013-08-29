@@ -35,21 +35,23 @@
             </ul>
         </div>
 
-        <div class="col2 font-sizing">
+        <div class="col3" style="width: 200px;">
             <?php 
                 if($this->Customer_model->is_logged_in(false, false) || $this->Tutor_model->is_logged_in(false, false)){                   
                 ?>
-                <a style="padding:5px;" class="contact-btn" href="<?php echo site_url('dashboard');?>">Dashboard</a>/
+                
                 <?php if($this->Tutor_model->is_logged_in(false, false)){?>
-                <a style="padding:5px;" class="contact-btn" href="<?php echo site_url('tutor_login/logout');?>">logout</a>
+                <p class="button"><a class="" href="<?php echo site_url('tutor_login/logout');?>">logout</a></p>
                 <?php }else{ ?>
-                  <a style="padding:5px;" class="contact-btn" href="<?php echo site_url('secure/logout');?>">logout</a> 
+                  <p class="button"><a class="" href="<?php echo site_url('secure/logout');?>">logout</a></p> 
                 <?php }?>
+                <p class="button" style="margin-left: 10px;"><a  class="" href="<?php echo site_url('dashboard');?>">Dashboard</a></p>
                 <?php }
                 
                 else{?>
-                <a style="padding:5px;" class="contact-btn" href="<?php echo site_url('secure/login');?>">login</a> 
-                / <a style="padding:5px;"  class="contact-btn" href="<?php echo site_url('secure/register'); ?>">Registration</a> 
+                
+               <p class="button"> <a  class="" href="<?php echo site_url('secure/login');?>">login</a> </p>
+                <p class="button" style="margin-left: 10px;"> <a   class="" href="<?php echo site_url('secure/register'); ?>">Registration</a> </p>
                 <?php }?> 
 
         </div>
@@ -162,7 +164,10 @@
 
         </script>   
         <article class="col5 filters-res">
-
+             <div class="call-us" >
+                <h3 style="color: red;margin-bottom: 0px;" class="">Call us on <span style="color: red;" class="light-blue">0121 288 0181</span><br /> to talk to a course advisor</h3>
+               
+            </div>
             <form style="width: 415px;"  method="post" name="search_form" id="search-form" action="<?=base_url().'search'?>">
                 <input name="search_field" type="text" id="search" value="" />
                 <input type="hidden" value="" name="search_by" class="" id="search_by">
@@ -190,11 +195,8 @@
                 </ul>
 
             </div>
-
-            <div class="call-us" >
-                <h3 style="color: red;" class="">Call us on <span style="color: red;" class="light-blue">0121 288 0181</span><br /> to talk to a course advisor</h3>
-               
-            </div>
+           
+             
             
         </article>
         

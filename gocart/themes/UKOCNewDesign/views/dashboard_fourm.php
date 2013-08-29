@@ -20,7 +20,7 @@
                   <?php include('dashboard_leftpanal.php')?>      
                         <div class="col8">
                             <div class="">
-     <h3>My Fourms</h3>
+     <h3>My Forum</h3>
 
 <table border="2" width="100%">
     <thead>

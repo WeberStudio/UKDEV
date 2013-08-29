@@ -942,7 +942,7 @@ class Checkout extends Front_Controller {
          
 		  // save the order
          //$this->show->pe($this->go_cart->_cart_contents['payment']['confirmed']);
-        
+           print_r($this->go_cart->_cart_contents['payment']['confirmed']); exit;
        if(!$this->go_cart->_cart_contents['payment']['confirmed'])
        {
            if(!empty($payment) && (bool)$payment_methods == true)
@@ -966,7 +966,7 @@ class Checkout extends Front_Controller {
             }             
        }
       
-		echo  "sdjflsjdlf"; exit; 
+		//echo  "sdjflsjdlf"; exit; 
 			                 
 	   $order_id = $this->go_cart->save_order();
 	   $this->session->set_flashdata('message', "<div  class='woocommerce_message'>Your Order Have Been Submitted Successfully!</div>");

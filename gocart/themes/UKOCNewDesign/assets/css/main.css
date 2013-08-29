@@ -319,7 +319,7 @@ p.sub-caption
 	height:13px;
 	position: absolute;
     right: 65px;
-    top: 38%;
+    top: 75%;
 }
 
 #search-form input[type="text"]
@@ -542,7 +542,8 @@ h1.sep
 	margin-bottom:10px;
 	
 	position: absolute;
-	top: 52%;
+	/*top: 52%;*/
+    top: 85%;
 	right: -2%;
 	
 }
