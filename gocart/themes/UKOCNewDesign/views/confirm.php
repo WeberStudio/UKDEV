@@ -60,7 +60,20 @@
                         <div class="col6">
                         
                           <div class="col12">
+                          <h3>Course Detail</h3>
+                          <?php foreach ($this->go_cart->contents() as $cartkey=>$product):?>
+                           <div class="col12">
+                             <div class="col5"><?php echo $product['name']; ?> </div>
+                             <div class="col5"><?php echo format_currency($product['price']);?> </div> 
+                            </div>
+                          <?php endforeach;?>
+                              <div class="col12">
+                              <div class="col5"><h2>Total Price</h2></div> 
+                             <div class="col5"><h2><?php echo format_currency($this->go_cart->total()); ?></h2></div>
+                             
+                            </div>
                          <div class="col12">
+                         
                             <div class="col5">
                               <h3>Personal Address</h3>
                             
