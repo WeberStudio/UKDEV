@@ -1,5 +1,12 @@
 <?php include('main_header.php')?>   
     <body>
+    <?php echo theme_css('base.css', true); ?>
+    <style>
+    .elfinder-button
+    {
+        width: 13px;
+    }
+    </style>
   <link rel="stylesheet" type="text/css" media="screen" href="<?php echo theme_css('jquery-ui.css');?>">
         <script type="text/javascript" src="<?php echo theme_js('js/jquery.min.js');?>"></script>
         <script type="text/javascript" src="<?php echo theme_js('js/jquery-ui.min.js');?>"></script>
@@ -12,7 +19,8 @@
         <script type="text/javascript" src="<?php echo theme_js('js/elfinder.min.js');?>"></script>
 
         <!-- elFinder translation (OPTIONAL) -->
-        <script type="text/javascript" src="<?php echo theme_js('js/elfinder.ru.js');?>"></script>   
+        <script type="text/javascript" src="<?php echo theme_js('js/i18n/elfinder.ru.js');?>"></script> 
+ 
 <?  
 $customer_details             = $this->go_cart->customer();
 $role = '';
@@ -28,15 +36,18 @@ else
 }
 //echo '<pre>';print_r($customer_details);
 ?>
+        <script type="text/javascript" charset="utf-8">
+        var j = jQuery.noConflict();
+            j(document).ready(function() {
+                var elf = j('#elfinder').elfinder({
+                    url : '<?=base_url('php')."/connector.php?id=".$id.'&role='.$role;?>'  // connector URL (REQUIRED)
+                    // lang: 'ru',             // language (OPTIONAL)
+                    
+                }).elfinder('instance');
+            });
+        </script> 
 
-<script type="text/javascript" charset="utf-8">
-    $().ready(function() {
-        var elf = $('#elfinder').elfinder({
-            url : '<?=base_url('php')."/connector.php?id=".$id.'&role='.$role;?>'  // connector URL (REQUIRED)                    
-            // lang: 'ru',             // language (OPTIONAL)
-        }).elfinder('instance');
-    });
-</script>
+
  
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>

@@ -52,7 +52,7 @@ background-color: #2D3291;
                                                   $get_address_cus  = $this->Customer_model->get_address_pro($user_info['customer']['id']);
                                                    //$this->show->pe($get_address_cus); 
                                                   $get_address = "";
-                                                  echo  $user_info['customer']['firstname']." ". $user_info['customer']['lastname'];
+                                                  echo  $user_info['customer']['firstname']." ". $user_info['customer']['lastname'].$this->customer['id'];
                                               }
                   
                   

@@ -30,7 +30,7 @@
                 <li><a href="<?=base_url()?>blog">Blog</a></li>
                 <li <?php if(isset($menu_blue) && $menu_blue == 'tutors'){ echo 'class="current-menu-item"';}?> ><a href="<?=base_url()?>tutors">Tutors</a></li>
                 <li <?php if(isset($menu_blue) && $menu_blue == 'faq'){echo 'class="current-menu-item"';}?> ><a href="<?=base_url()?>faq">FAQs</a></li>
-                <li><a class="contact-btn" href="<?=base_url()?>contact-us1">contact us</a></li> 
+                <li <?php if(end($this->uri->segments) == 'file_manager'){echo 'style="width: 162px;"';}?>><a <?php if(end($this->uri->segments) == 'file_manager'){echo 'style="width: 133px;padding-left: 30px;padding-right: 30px;"';}?> class="contact-btn" href="<?=base_url()?>contact-us1">contact us</a></li> 
 
             </ul>
         </div>

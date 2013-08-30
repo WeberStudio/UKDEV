@@ -13,6 +13,7 @@ if($this->Tutor_model->is_logged_in(false, false)!=1 && $this->Customer_model->i
         $this->load->model(array('Customer_model', 'Product_model', 'Tutor_model', 'Forum_model', 'Topic_model', 'Message_Forum_model'));
         $this->load->library('email');
         $customer_details           = $this->go_cart->customer();
+        $this->customer = $this->go_cart->customer();
        // echo "<pre>";print_r($customer_details);  exit;
 	   if($this->Tutor_model->is_logged_in(false, false))
 	   {
@@ -126,8 +127,8 @@ if($this->Tutor_model->is_logged_in(false, false)!=1 && $this->Customer_model->i
             
     function topic_view($forum_id)
     {
-        $data['form_id']     = $forum_id;    
-        $data['topics']        = $this->Topic_model->get_topics();    
+        $data['form_id']        = $forum_id;    
+        $data['topics']         = $this->Topic_model->get_topics();    
         //echo "<pre>"; print_r($data['topics']);exit;
         $this->load->view($this->config->item('admin_folder').'/includes/header');
         $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
