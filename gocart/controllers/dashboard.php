@@ -94,7 +94,7 @@ class dashboard extends Front_Controller {
           // echo "i am in the student check";exit;
             $data['forums']       = $this->Forum_model->get_forum_customer($this->customer['id']);
             
-            $this->show->pe($this->db->last_query());
+            //$this->show->pe($this->db->last_query());
                    
             //$this->show->pe($data['forums']);       
             $this->load->view('dashboard_fourm',$data);
