@@ -55,6 +55,7 @@ class dashboard extends Front_Controller {
         if(!empty($this->customer['id']))
 		{		
 		    $data['orderss']	= $this->Order_model->get_customer_orders($this->customer['id']);
+            //$this->show->pe($data['orderss']);
 		    $this->load->view('dashboard_course',$data);
 		//print_r($data['orderss']);exit;
 		} 
@@ -91,8 +92,10 @@ class dashboard extends Front_Controller {
         else if($this->Customer_model->is_logged_in(false, false))
         {              
           // echo "i am in the student check";exit;
-            $data['forums']       = $this->Forum_model->get_forum_customer($this->customer['id']); 
-            //$this->show->pe($data['forums']);       
+            $data['forums']       = $this->Forum_model->get_forum_customer($this->customer['id']);
+            
+            $this->show->pe($this->db->last_query());
+                   
             //$this->show->pe($data['forums']);       
             $this->load->view('dashboard_fourm',$data);
         }
@@ -307,12 +310,12 @@ class dashboard extends Front_Controller {
 		endif;
 	}
 	
-	function request_for_tutor($customer_id, $product_id)
+	function request_for_tutor($customer_id, $product_id, $order_id)
     {
         //echo $customer_id.'---------'.$course_id; exit;
         if(!empty($customer_id) && !empty($product_id))
         {
-            $data 			= array('customer_id' => $customer_id, 'subject_id' => $product_id, 'request_status' => 'Requested');
+            $data 			= array('customer_id' => $customer_id, 'subject_id' => $product_id, 'request_status' => 'Requested','order_id'=>$order_id);
             $result 		= $this->Order_model->request_for_tutor($data);
 			$customer_data 	= $this->Customer_model->get_customer($customer_id);
 			//print_r($customer_data);

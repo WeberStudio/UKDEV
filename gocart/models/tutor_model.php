@@ -363,7 +363,8 @@ Class Tutor_model extends CI_Model
         
         //$result    = $this->db->get_where('for_tutor_request', array($field => $id));
           $this->db->where($field1, $id1);
-          if($field2!="" && $id2!=""){
+          if($field2!="" && $id2!="")
+          {
           $this->db->where($field2, $id2);
           }
           $result = $this->db->get('for_tutor_request');

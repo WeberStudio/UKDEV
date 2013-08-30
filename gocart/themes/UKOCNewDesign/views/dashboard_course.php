@@ -47,8 +47,10 @@
         <td style="white-space:nowrap"><?php echo $order->order_number;?></td>
         <td style="white-space:nowrap"><?php echo $order->total;?></td>
         <?php
-          $get_request =  $this->Tutor_model->get_tutor_requests_by_id('customer_id', $order->customer_id,'subject_id', $order->product_id);
-             //$this->show->pe($get_request); 
+          $get_request =  $this->Tutor_model->get_tutor_requests_by_id('customer_id', $order->customer_id,'order_id', $order->id);
+          
+             //$this->show->pe($get_request);
+             //exit; 
          ?>
           
              
@@ -69,7 +71,14 @@
                   
                </td>
         <td style="white-space:nowrap" >
-        <a class="button"<?php 
+        <?php if(empty($get_request))
+        {?>
+          <p class="button"> <a href="<?=base_url().'dashboard/request_for_tutor/'.$order->customer_id.'/'.$order->product_id.'/'.$order->id;?>"> Request Tutor</a></p>
+          
+        <?php }
+        else
+        {?>
+         <p class="button"><a class=""<?php 
          if($get_request[0]['request_status']==""){echo ' href="'. base_url().'dashboard/request_for_tutor/'.$order->customer_id.'/'.$order->product_id.'"'; }
          else{echo 'href="javascript:void(0);"';}
          ?>>
@@ -82,7 +91,34 @@
          else{echo 'Request Tutor';}
         ?>
          
-        </a>
+        </a></p>
+        <?php }?> 
+        
+        <?php /*if(!empty($get_request)){?>
+              <?php if($get_request[0]['request_status']=="Requested"){?>
+               <p class="button"> <a href="javascript:void(0);"> Wait for Approval</a></p> 
+              <?php }?>
+              
+              <?php if($get_request[0]['request_status']=='Tutor Assigned'){?>
+             <p class="button"> <a href="javascript:void(0);"> Tutor Assigned</a></p>
+             <?php }?> 
+         <?php }*/?>
+        
+       <!-- <p> <a href="<?=base_url().'dashboard/request_for_tutor/'.$order->customer_id.'/'.$order->product_id;?>"> request</a></p> -->
+        <!--<p class="button"><a class=""<?php /* 
+         if($get_request[0]['request_status']==""){echo ' href="'. base_url().'dashboard/request_for_tutor/'.$order->customer_id.'/'.$order->product_id.'"'; }
+         else{echo 'href="javascript:void(0);"';}
+         ?>>
+        <?php
+        if(isset($get_request[0]['request_status'])){ 
+        if($get_request[0]['request_status']==""){echo 'Request Tutor';}
+        elseif($get_request[0]['request_status']=='Tutor Assigned'){echo 'Tutor Assigned';}
+         else{echo 'Wait for Approval';}
+         }
+         else{echo 'Request Tutor';}*/
+        ?>
+         
+        </a></p>-->
         </td>
         
         

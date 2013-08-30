@@ -942,7 +942,7 @@ class Checkout extends Front_Controller {
          
 		  // save the order
          //$this->show->pe($this->go_cart->_cart_contents['payment']['confirmed']);
-           print_r($this->go_cart->_cart_contents['payment']['confirmed']); exit;
+           //print_r($this->go_cart->_cart_contents['payment']['confirmed']); exit;
        if(!$this->go_cart->_cart_contents['payment']['confirmed'])
        {
            if(!empty($payment) && (bool)$payment_methods == true)

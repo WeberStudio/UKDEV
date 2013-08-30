@@ -2,15 +2,15 @@
 
 $('#all-courses').hover(function(e){
 	
-	//e.preventDefault();
+	e.preventDefault();
 	
-	//if($("#sub-menu").outerHeight() != 0)
-	//{
-		//submenuhide();
-	//}else
-	//{
+	if($("#sub-menu").outerHeight() != 0)
+	{
+		submenuhide();
+	}else
+	{
 		submenushow();
-	//}
+	}
 }, function() {
 	
 		submenuhide();
@@ -20,15 +20,15 @@ $('#all-courses').hover(function(e){
 
 $('#sub-menu').hover(function(e){
 	
-	//e.preventDefault();
+	e.preventDefault();
 	
-	//if($("#sub-menu").outerHeight() != 0)
-	//{
-		//submenuhide();
-	//}else
-	//{
+	if($("#sub-menu").outerHeight() >0)
+	{
 		submenushow();
-	//}
+	}else
+	{
+		submenuhide();
+	}
 }, function() {
 	
 		submenuhide();
@@ -44,7 +44,7 @@ function submenushow(){
 function submenuhide(){	
 	$("#sub-menu").stop().animate({
 		height: "0px",
-	},300).delay(2000);
+	},300);
 };
 
 /*$(".search-btn").click(function(e){
