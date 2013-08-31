@@ -42,9 +42,9 @@
                                 {
                                 if($i<=6){  
                                 ?>
-                                <a href="<?php echo base_url().$menu_category['category']->slug?>"> 
+                                <a href="<?php echo base_url().$menu_category->slug?>"> 
                                 <div class="featured-course blue-featured-<?php echo $i;?>">
-                                 <p style="padding-top: 165px;text-align: center;font-size: 22px;"><b><?php echo $menu_category['category']->name;?></b></p>
+                                 <p style="padding-top: 165px;text-align: center;font-size: 22px;"><b><?php echo $menu_category->name;?></b></p>
                                 </div>
 </a>
                                 
@@ -208,7 +208,7 @@
                        if(!empty($grid_pages)){
                           // echo '<pre>';print_r($grid_pages);echo '</pre>';exit;
                      foreach($grid_pages as $grid_page){
-                         if( $grid_page->id!='1' && $grid_page->id!='12'){
+                         if( $grid_page->id!='1' && $grid_page->id!='12'&& $grid_page->id!='9'&& $grid_page->id!='11'&& $grid_page->id!='13'){
                          ?>
                          
                       <div class="col4 nus-res">

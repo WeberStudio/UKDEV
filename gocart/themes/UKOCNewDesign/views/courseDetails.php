@@ -69,6 +69,9 @@ form#informationRequest p
                         <div class="bread">
                             <p>Home  /  Courses  / <?=$product->name?></p>
                         </div>
+                        <div class="col12">
+                            <h2><?=$product->name?></h2> 
+                        </div>
                         
                         <div class="single-course-details">
                         
@@ -98,8 +101,6 @@ form#informationRequest p
                         
                         </div>         
                         <div class="col12">
-                            
-                              <h2><?=$product->name?></h2> 
                              <div id="price_select_error" style="display:none; color:#FF0000; font-weight:bold;">Please select a price option before you enrol</div> 
                             <?php if(!empty($product->price_options)){ ?>
                             <span class="custom-dropdown custom-dropdown--white">                                

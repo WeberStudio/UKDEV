@@ -166,6 +166,13 @@ Class Category_model extends CI_Model
 	{
 		return $this->db->get_where('categories', array('id'=>$id))->row();
 	}
+    
+    function get_main_category($id)
+    {
+        $this->db->where_in('id', $id);
+        $result = $this->db->get('categories');
+        return $result->result();
+    }
 	
 	function get_category_products_admin($id)
 	{

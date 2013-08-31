@@ -37,19 +37,15 @@ class Cart extends Front_Controller {
     function index()
 
     {
-
-        //$this->load->helper('directory');
-        //$data['homepage']            = true;
-        //$data['allProduct']         = $this->Product_model->get_products_catogery_wise();
-        //$data['pages']                = $this->Page_model->get_pages_by_position('grid-page');
-       // echo '<pre>';print_r($data['allProduct']);
        $data['menu_blue'] = 'home';
-       $parent                      = 0;
+       //$parent                      = 0;
        $position                    = 'grid-page';
        $data['special_pages']       = $this->Page_model->get_page('1'); 
-       $random_array                = $this->Category_model->get_categories_tierd($parent);
-       $test                        =  $this->shuffle_assoc($random_array);
-       $data['menu_categories']     = $test;
+       //$random_array                = $this->Category_model->get_categories_tierd($parent);
+       //$test                        =  $this->shuffle_assoc($random_array);
+       $ids = array(2,5,6,60,11,4);
+       $data['menu_categories']     = $this->Category_model->get_main_category($ids);
+       //$this->show->pe($data['menu_categories']); 
        $data['grid_pages']          = $this->Page_model->get_pages_by_position($position);
  
       //$this->show->pe($test);
