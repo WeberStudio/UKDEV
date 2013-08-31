@@ -1,5 +1,12 @@
 <?php include('main_header.php')?>
     <body>
+ <style>
+   .alert-error
+   {
+             background-color:#F88C8C;
+             color:#FFFFFF;
+   }      
+</style>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
@@ -93,6 +100,7 @@
                                 </td>
                                 <td><a href="<?php echo $product['slug']; ?>"><?php echo $product['name']; ?></a></td>
                                 <td><?php echo format_currency($product['price']);?></td>
+                                <input type="hidden" name="cartkey[<?php echo $cartkey;?>]"   value="<?php echo $product['quantity'] ?>" >
                               </tr>
                                <?php endforeach;?> 
                               <tr class="border-below">
@@ -122,6 +130,7 @@
                                 </td>
                               </tr>
                             </table>
+                            
                              </form>
                          
                             
@@ -133,9 +142,15 @@
                             <h2>Cart totals</h2>
                             
                             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="border-full bg-grey">
+                            <?php if($this->go_cart->coupon_discount() > 0) {?>
+                            <tr>
+                                <td style="font-size: 12px;"><?php echo lang('coupon_discount');?></td>
+                                <td align="left"><?php echo format_currency($this->go_cart->coupon_discount());?></td>
+                            </tr>
+                            <?php }?>
                               <tr>
-                                <td><h3>Total Price</h3></td>
-                                <td align="right"><h2 class="dark-blue"><?php echo format_currency($this->go_cart->total()); ?></h2></td>
+                                <td style="font-size: 21px;"><h3>Total Price</h3></td>
+                                <td align="left"><h2 class="dark-blue"><?php echo format_currency($this->go_cart->total()); ?></h2></td>
                               </tr>
                               
                             </table>
