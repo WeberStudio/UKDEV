@@ -107,7 +107,7 @@ form#informationRequest p
                                 <select class="custom-dropdown__select custom-dropdown__select--white" name="price_option" id="price_option">
                                     <option value="0">Price Options</option>
                                      <?php foreach($product->price_options as $price){?>
-                                <option value="<?php echo $price->p_option_price?>"><?php echo $price->p_option_title?></option>
+                                <option value="<?php if($product->discount != ""){$pricee = $price->p_option_price-($price->p_option_price*$product->discount); echo $pricee;}else{echo $price->p_option_price;}?>"><?php echo $price->p_option_title;?></option>
                                 <?php }?>
                                 </select>
                                 </span>
