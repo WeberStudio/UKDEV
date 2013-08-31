@@ -78,21 +78,24 @@
                 <div class="onerow">
                     <div class="col12 footer">
                         
-                        <div class="col9 copyright-menu">
+                        <div class="col11 copyright-menu" style="padding: 0px;">
                             <ul>
                             <li><a href="<?php echo base_url().'tutor_login/login'?>">Tutor_login</a></li>
                            <?php
                           $footer_pages = $this->Page_model->get_pages_by_position('footer_page');
                           foreach($footer_pages as $footer_page)
                           { ?>
-                                <li><a href="<?php echo $footer_page->slug; ?>"><?php echo $footer_page->title;?></a></li>    
+                                <li><a href="<?php echo base_url().$footer_page->slug; ?>"><?php echo $footer_page->title;?></a></li>    
                           <?php
                           } 
                           ?>
+                          <li><a href="<?php echo base_url().'payment'?>">Payment</a></li>
+                          <li><a href="<?php echo base_url().'complaints'?>">Complaints</a></li>
+                          <li><a href="<?php echo base_url().'special-considerations'?>">Special Considerations</a></li>
                             </ul>
                         </div>
                         
-                        <div class="col3 copyright">
+                        <div class="col3 copyright" style="float: right; padding: 0px;">
                             Copyrights &copy; - All Rights Reserved
                         </div>
                         

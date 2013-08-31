@@ -25,8 +25,8 @@ body {
     line-height: 1.4;
 	font-weight:300;
 	font-family:Tahoma, Geneva, sans-serif;
-	
-	color:rgba(1,1,1,0.45);
+	 color:#000; 
+	/*color:rgba(1,1,1,0.45);*/
 	
 }
 
@@ -149,7 +149,8 @@ a:hover{
 {
 	padding:10px 45px;
 	border:1px solid #efefef;
-	color:rgba(1,1,1,0.5);
+	/*color:rgba(1,1,1,0.5);*/
+     color:#000;
 	float:left;
 	margin:0 20px 5px 0;
 }
@@ -388,7 +389,8 @@ p.sep
 
 p.sep a
 {
-	color:rgba(1,1,1,0.4);
+    color:#000;
+	/*color:rgba(1,1,1,0.4);*/
 }
 
 p.sep a:hover

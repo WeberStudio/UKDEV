@@ -125,7 +125,7 @@ if(validation_errors() != '')
                                         
                                         <div class="col12 padding-left">
                                         <p class="username"> Company </p>
-                                        <input type="text" name="company" id="Company" value="<?php echo set_value('company'); ?>" required />
+                                        <input type="text" name="company" id="Company" value="<?php echo set_value('company'); ?>"  />
                                         </div>
                                         
                                         
