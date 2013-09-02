@@ -35,7 +35,7 @@
                     <div class="col12 remove-padding">
                         <div class="col6 remove-padding">
                             <div class="bread">
-                                <p>Home  /  Courses </p>
+                                <p><a style="color:#000;" href="<?=base_url();?>">Home</a>  /  <a style="color:#000;" href="<?=base_url().'cart/allcourses/';?>">Courses</a> </p>
                             </div>
                         </div>
                         
@@ -47,28 +47,38 @@
                             if(isset($product)){
                               
                              ?>
-                                   
-                                <?php foreach($search_results as $search_result){?>
+                                  
+                                <?php
+                                  if(!empty($search_results)){ 
+                                 foreach($search_results as $search_result){?>
                                 <div class="col4">
                                 <a href="<?=base_url().$search_result->slug;?>" class="c-hover">
                                 <img style="height: 231px;" alt="<?=$search_result->img_alt?>"  src="<?=base_url().'uploads/images/small/'.$search_result->images;?>" alt="" />
                                 <p class="course-name"><?=$search_result->name;?></p>
                                  </a>
                                  </div>
+                                 <?php }}else{?>
+                                        <div align="center" class="col12"><h2>Error - No such Record Found Please Try again</h2></div>
                                  <?php }?>  
                                 
                            <?php }else{
                                 
                                ?>
                     
-                            <?php foreach($search_results as $search_result){?>
+                            <?php 
+                            
+                             if(!empty($search_results)){ 
+                            foreach($search_results as $search_result){?>
                              <div class="col4">
                             <a href="<?=base_url().$search_result->slug;?>" class="c-hover">
                               <img style="height: 231px;" alt="<?=$search_result->img_alt?>"  src="<?=base_url().'uploads/images/small/'.$search_result->image;?>" alt="" />
                               <p class="course-name"><?=$search_result->name;?></p>
                             </a>
                         </div>
-                        <?php }?>
+                        <?php }}else{?> 
+                        
+                                        <div align="center" class="col12"><h2>Error - No such Record Found Please Try again</h2></div>
+                                 <?php }?> 
                         <?php }?>
                         
                    
