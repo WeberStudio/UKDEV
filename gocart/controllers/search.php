@@ -17,9 +17,8 @@ class Search extends Front_Controller {
     
     function index()
     {
-        
-        $data['search_results']                     = $this->Category_model->fornt_ent_search_cat();
-        
+        //$data['search_results']                     = $this->Category_model->fornt_ent_search_cat();
+       // echo  $this->db->last_query(); exit;
         
         if($this->input->post('sear')!="")
         {
@@ -65,6 +64,10 @@ class Search extends Front_Controller {
                
                //$this->show->pe($data['search_results']); 
             }
+        }
+        if($this->input->post('search_field')=='')
+        {
+         $data['search_results']                     = $this->Category_model->fornt_ent_search_cat('');  
         }
         
      $this->load->view('search_result' , $data);     

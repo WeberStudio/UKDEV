@@ -465,6 +465,8 @@ class Cart extends Front_Controller {
 		//set up pagination
         $row = 9;
         $data['products']    = $this->Product_model->get_products($data['category']->id, $row, $page, $sort_by['by'], $sort_by['sort']);
+        //$this->show->pe($data['products']);
+        //$this->show->pe($this->db->last_query());
 		$this->load->library('pagination');
 
 		$config['base_url']		= site_url($base_url);

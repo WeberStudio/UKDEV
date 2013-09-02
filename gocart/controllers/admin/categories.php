@@ -51,7 +51,8 @@ class Categories extends Admin_Controller {
 	
 	function index($order_by="name", $sort_order="ASC", $code=0, $page=0)
 	{
-		
+       // echo $pdf_img = base_url().'assets/img/inovicewater_mark.png';exit;
+		 //$pdf_img = base_url().'assets/img/inovicewater_mark.png';
 		//Store the sort term
         $rows                                = 25;
         $csv                                 = '';
@@ -120,7 +121,7 @@ class Categories extends Admin_Controller {
             $html_output         = '';    
             $this->mpdf->SetHeader('{DATE d-m-Y}|{PAGENO}|Categories Record');             
             $output_array        = $data['categories'];            
-            $output_html        .= '<table width="0" border="0" cellspacing="10" cellpadding="10">
+            $output_html        .= '<table  width="0" border="0" cellspacing="10" cellpadding="10">
               <tr>
                 <th>Id</th>
                 <th>Name</th>
@@ -145,9 +146,15 @@ class Categories extends Admin_Controller {
               }
                         
             $output_html .= '</table>';
+             //$image1 = base_url().'uploads/images/full/Letterhead.jpg';
+            //$this->mpdf->SetWatermarkImage($image1,'1','600','800');
+            //$this->mpdf->showWatermarkImage = true;
             $this->mpdf->SetWatermarkText('UKOPENCOLLEGE', 0.1);
             $this->mpdf->showWatermarkText = true;
             $this->mpdf->WriteHTML($output_html);
+            
+            //$this->mpdf->SetWatermarkImage($image1,'0.8','p');
+            //$this->mpdf->showWatermarkImage = true;
             $this->mpdf->Output('sales_report.pdf', 'I');            
         
         exit;

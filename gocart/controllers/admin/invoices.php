@@ -460,10 +460,145 @@ class Invoices extends Admin_Controller {
 		redirect($this->config->item('admin_folder').'/invoices');   
     }
 	
-	
-	function pdf_view($invoice_id, $template_id)
+function pdf_view($invoice_id, $template_id)
+    {
+        //DebugBreak();    
+        prep_pdf();
+        $invoice_footer     = '';
+        $invoice_header     = '';
+        $html_output         = '';    
+        
+        //$image1 = base_url().'uploads/images/full/logo.png';
+        $mpdf =  new mPDF('utf-8', array(150,210));
+        
+        $mpdf->SetHeader('{DATE d-m-Y}|{PAGENO}|Customer Invoice');
+//        $this->mpdf->Image($image1);   
+        //echo $template_id; exit;
+        $selected_template      = $this->Invoice_Template_model->get_templates_by_for_invoice($template_id);
+        //$this->show->pe($selected_template);
+        $invoice_items          = $this->Invoice_model->get_invoice_items_by_invoice_id($invoice_id);
+        $invoice_totals         = $this->Invoice_model->get_invoice_totals($invoice_id);
+        $customer_details     = $this->Invoice_model->get_invoice_customer($invoice_id);
+        
+        //$this->show->pe($invoice_total);
+        //$logo = base_url().'uploads/images/full/logo.png';
+          //$html_output .= '<div> <img src="'.$logo.'"/></div>';
+          
+          
+         $html_output .= '<div align="right"  style="font-size:12px;">Company Registered in England & Wales: 06130321<br/>
+         VAT Registration No: GB 934 3067 30<br/>
+         UK Registered Learning Provider Number: 10021848 </div>';            
+        $r_tag_one = htmlspecialchars_decode($selected_template->invoice_template_header);
+        
+       $html_output         .= $r_tag_one;
+           //$mpdf->SetWatermarkImage($image1,0.2,'190','215');
+                //$this->mpdf->SetWatermarkText('UKOPENCOLLEGE', 0.1);
+               //$mpdf->showWatermarkImage = true  ;
+         
+        $html_output         .='
+                 
+                <div class="" style="opacity:1.0;">
+                <div class="" id="">
+                  <div class="">
+                    <div class=""><b>Recipient Details</b></div>
+                    <div id="collapseOne2" class="" >
+                      <div class="">
+                        <div class="">
+                          <span>'.$customer_details->firstname .' '.$customer_details->lastname . '<br/>' . lang('admin_name').' '.$customer_details->company.'<br />
+                          <span><strong>'.lang('invoice_phone').':</strong>'.$customer_details->phone.'</span><br>
+                          <span><strong>'.lang('invoice_email').':</strong>'.$customer_details->phone.'</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>';
+        $html_output         .= '<br><br>';
+        
+        $html_output         .= '<table id="item_table" class="items table table-striped table-bordered" style="width:100%; text-align: center;">
+                                <thead>
+                                  <tr>
+                                    <th>'.lang('item').'</th>
+                                    <th style="min-width: 300px;">'.lang('description').'</th>
+                                    <th style="width: 100px;">'.lang('quantity').'</th>
+                                    <th style="width: 100px;">'.lang('price').'</th>
+                                    <th>'.lang('tax_rate').'</th>
+                                    <th>'.lang('subtotal').'</th>
+                                    <th>'.lang('tax').'</th>
+                                    <th>'.lang('comm').'</th>
+                                    <th>'.lang('total').'</th>
+                                    <th>'.$invoice_data->invoice_id.'</th>                        
+                                  </tr>
+                                </thead>
+                                <tbody>';
+                                
+                                if(!empty($invoice_items)){
+                                    foreach ($invoice_items as $invoice_item){
+                                     $html_output         .=  '
+                                      <tr id="new_item" >
+                                        <td style="vertical-align: top;">'.$invoice_item['item_name'].'</td>
+                                        <td>'.$invoice_item['item_description'].'</td>
+                                        <td style="vertical-align: top;">'.$invoice_item['item_quantity'].'</td>
+                                        <td style="vertical-align: top;">'.format_currency($invoice_item['item_price']).'</td>
+                                        <td style="vertical-align: top;">'.format_currency($invoice_item['tax_rate']).'</td>
+                                        <td style="vertical-align: top;">'.format_currency($invoice_item['item_subtotal']).'</td>
+                                        <td style="vertical-align: top;">'.format_currency($invoice_item['item_tax_total']).'</td>
+                                        <td style="vertical-align: top;">'.format_currency($invoice_item['comm_rate_value']).'</td>
+                                        <td style="vertical-align: top;">'.format_currency($invoice_item['item_total']).'</td>
+                                        <td></td>
+                                      </tr>';
+                                    } 
+                                }
+                                    
+        $html_output         .=     '</tbody>
+                              </table><br><br>';
+        
+        
+         if(!empty($invoice_totals)){
+            $html_output         .= '<table class="table table-striped table-bordered" style="width:100%; text-align: center;">
+                                <thead>
+                                    <tr>
+                                        <th>'.lang('subtotal').'</th>
+                                        <th>'.lang('item_tax').'</th>
+                                        <th>'.lang('comm_total').'</th>                            
+                                        <th>'.lang('total').'</th>                            
+                                    </tr>
+                                </thead>
+                                <tbody>                    
+                                    <tr>
+                                        <td>'.format_currency($invoice_totals[0]['invoice_item_subtotal']).'</td>
+                                        <td>'.format_currency($invoice_totals[0]['invoice_item_tax_total']).'</td>
+                                        <td>'.format_currency($invoice_totals[0]['invoice_commission_total']).'</td>                            
+                                        <td>'.format_currency($invoice_totals[0]['invoice_total']).'</td>                            
+                                    </tr>
+                                </tbody>
+                            </table>';
+                }
+                 
+        $html_output         .= '<p>'.lang('invoice_terms').'</p><p>'.$invoice_data->invoice_terms.'</p>';
+        $r_tag_two             = htmlspecialchars_decode($selected_template->invoice_template_footer); 
+       $html_output         .= $r_tag_two;
+        $html_output         .= '<div align="right" style="font-size:12px;">
+                                <b>UK Open College Limited</b>
+                                <br>
+                                The Meridian, 4 Copthall HouseStation Square<br/>
+                                Coventry, West Midlands, Cv1 2FL, United Kingdom<br/>
+                                el: 0121 288 0181<br/> 
+                                 e-mail: info@ukopencollege.co.uk<br/> 
+                                 web: www.ukopencollege.co.uk<br/>
+                                </div>';
+        
+        //echo $html_output;exit;
+             
+
+        $mpdf->WriteHTML($html_output);
+        $mpdf->Output();
+        exit;
+    }	
+	/*function pdf_view($invoice_id, $template_id)
 	{
-			
+        //echo $image1 = base_url().'uploads/images/full/Letterhead.jpg'; exit;
+		//DebugBreak() ;	
 		prep_pdf();
 		$invoice_footer 	= '';
 		$invoice_header 	= '';
@@ -564,10 +699,13 @@ class Invoices extends Admin_Controller {
         $html_output 		.= '<p><strong>'.lang('invoice_terms').'</strong></p><p>'.$invoice_data->invoice_terms.'</p>';
 		$r_tag_two			 = htmlspecialchars_decode($selected_template->invoice_template_footer); 
 		$html_output 		.= $r_tag_two;
-		
+		  
 		//echo $html_output;exit;
+        echo $image1 = base_url().'uploads/images/full/Letterhead.jpg'; exit;
+        $this->mpdf->SetWatermarkImage($image1,'1','p');
+        $this->mpdf->showWatermarkImage = true;
 		$this->mpdf->WriteHTML($html_output);
 		$this->mpdf->Output();
 		exit;
-	}
+	} */
 } 

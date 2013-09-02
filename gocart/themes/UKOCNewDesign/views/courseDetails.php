@@ -67,7 +67,7 @@ form#informationRequest p
                      <div class="col8">
                         
                         <div class="bread">
-                            <p>Home  /  Courses  / <?=$product->name?></p>
+                            <p><a style="color:#000;" href="<?=base_url();?>">Home</a>  /  <a style="color:#000;" href="<?=base_url().'cart/allcourses/';?>">Courses</a>  / <a style="color: #000;" href="<?=$product->slug?>"><?=$product->name?></a></p>
                         </div>
                         <div class="col12">
                             <h2><?=$product->name?></h2> 

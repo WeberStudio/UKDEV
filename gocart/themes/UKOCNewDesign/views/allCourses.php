@@ -1,6 +1,7 @@
 <?php include('main_header.php')?>
 <?php echo theme_css('stylesheet', true); ?>  
     <body>
+    <?= $r_slash = str_replace("/","",$this->uri->slash_segment(3));$pagination = $r_slash;?>
     <style>
 		div.subcat a:hover { color: #CCC;}
 	</style>
@@ -38,9 +39,7 @@
                     <div class="col12 remove-padding">
                         <div class="col6 remove-padding">
                             <div class="bread">
-                                <p>Home  /  Courses <?= 
-                                   $r_slash = str_replace("/","",$this->uri->slash_segment(3));
-                                 $pagination = $r_slash;?> </p>
+                                <p><a style="color:#000;" href="<?=base_url();?>">Home</a>  /  <a style="color:#000;" href="<?=base_url().'cart/allcourses/';?>">Courses</a>  </p>
                             </div>
                         </div>
                         
