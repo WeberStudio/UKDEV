@@ -329,7 +329,7 @@ if(validation_errors() != '')
                                         
                                         <div class="col12 padding-left">
                                         <p class="username"> Company</p>
-                                        <input type="text" value="<?=$d_company?>" name="d_company" id="Company3" value="" required />
+                                        <input type="text" value="<?=$d_company?>" name="d_company" id="Company3" value=""/>
                                         </div>
                                         
                                         

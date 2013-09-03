@@ -582,4 +582,18 @@ Class order_model extends CI_Model
 		return $result;
 	}
 	
+	function get_partial_customer_orders()
+	{
+		$query = $this->db->query("SELECT * FROM (`oc_orders`) JOIN `oc_customers` ON `oc_orders`.`customer_id` = `oc_customers`.`id` WHERE `is_partial` = '1'");		
+		//echo '<pre>'; print_r($query->result_array());exit;
+		return $query->result_array();
+	}
+	
+	function order_paid_status($data)
+	{
+	
+		$this->db->where('id', $data['id']);
+		$this->db->update('oc_orders', $data);
+		return true;
+	}
 }

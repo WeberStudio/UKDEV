@@ -14,8 +14,7 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
 			  <td><?php echo  $invoice['invoice_id']; ?></td>
 			  <td><?php echo  $invoice['invoice_date_created']; ?></td>
 			  <td><?php echo  $invoice['invoice_date_due']; ?></td>
-			  <td><?php echo  format_currency($invoice['invoice_item_subtotal']); ?></td>
-			  <td><?php echo  format_currency($invoice['invoice_item_tax_total']); ?></td>
+			  <td><?php echo  format_currency($invoice['invoice_item_subtotal']); ?></td>			  
 			  <td><?php echo  format_currency($invoice['invoice_total']); ?></td>
 			  
 			  <td class="ms" style="white-space:nowrap;">
@@ -131,7 +130,7 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
                   <th class="ue no_sort">Created</th>
                   <th>Due Date</th>
                   <th>Amount</th>
-                  <th class="ue no_sort">Tax</th>
+                 
                   <th class="ue no_sort ">Total</th>
                   <th class="ue no_sort">Options</th>
                  

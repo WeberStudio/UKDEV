@@ -259,6 +259,7 @@
 					<ul id="collapse10" class="accordion-body collapse <?php echo $active_student_invoices_link; ?>">						
 						<li><a href="<?php echo site_url($this->config->item('admin_folder').'/customer_invoice/form'); ?>">Create Invoice</a></li>
 						<li><a href="<?php echo site_url($this->config->item('admin_folder').'/customer_invoice/'); ?>">View Invoices</a></li>
+						<li><a href="<?php echo site_url($this->config->item('admin_folder').'/customer_invoice/view_student_recurring_invoices/'); ?>">View Recuring Invoices</a></li>
 						<?php /*?><li><a href="<?php echo site_url($this->config->item('admin_folder').'/customer_invoice/view_recurring_invoices'); ?>">View Recuring Invoices</a></li> 	<?php */?>						
 					</ul>
 				</li>

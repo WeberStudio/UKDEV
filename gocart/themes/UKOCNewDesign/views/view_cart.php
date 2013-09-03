@@ -1,5 +1,4 @@
 <?php include('main_header.php')?>
-    <body>
  <style>
    .alert-error
    {
@@ -7,6 +6,7 @@
              color:#FFFFFF;
    }      
 </style>
+    <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
@@ -83,7 +83,7 @@
         </div>
     <?php endif; ?>
                         
-                        <div class="cart-wrapper">
+                        <div class="cart-wrapper col12">
                              <?php echo form_open('cart/update_cart', array('id'=>'update_cart_form'));?> 
                             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="border-full">
                               <tr class="border-below">
@@ -95,12 +95,13 @@
                                 foreach ($this->go_cart->contents() as $cartkey=>$product):?>
                               <tr class="border-below">
                                 <td>
-                                <a href="#" onclick="if(confirm('<?php echo lang('remove_item');?>')){window.location='<?php echo site_url('cart/remove_item/'.$cartkey);?>';}"><div id="cancel"></div></a>
+                                <a href="#" onClick="if(confirm('<?php echo lang('remove_item');?>')){window.location='<?php echo site_url('cart/remove_item/'.$cartkey);?>';}"><div id="cancel"></div></a>
                                 <div class="cart-thumb"><img src="<?=base_url('uploads/images/thumbnails/'.$product['images'])?>" alt="" style="height: 45px; width: 45px;"/></div>
                                 </td>
                                 <td><a href="<?php echo $product['slug']; ?>"><?php echo $product['name']; ?></a></td>
                                 <td><?php echo format_currency($product['price']);?></td>
                                 <input type="hidden" name="cartkey[<?php echo $cartkey;?>]"   value="<?php echo $product['quantity'] ?>" >
+
                               </tr>
                                <?php endforeach;?> 
                               <tr class="border-below">
@@ -109,28 +110,41 @@
                                 <td><?php echo format_currency($this->go_cart->total()); ?></td>
                               </tr>
                               <tr>
-                                <td><input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" style=""> </td>
-                                <td style="width: 223px;"><input style="padding: 5px;" type="submit" class="button" name="apply_coupon" value="Apply Coupon"></td>
+                                <td><input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" style=""></td>
+                                <td><input type="submit" class="button" name="apply_coupon" value="Apply Coupon"></td>
+                                
                                 <td align="right">
                                 <?php if($this->Customer_model->is_logged_in(false, false))
                                 {
                                 ?>
-                                  <a style=" padding: 5px;" class="contact-btn"  href="<?= base_url().'cart/allcourses/'?>"> Return to Courses</a>
-                                  <a style=" padding: 5px;" class="contact-btn" href="<?=base_url().'checkout';?>">Proceed to Checkout</a>    
-                                <?php    
+                                
+                                	<p class="button chk">
+                                    <a href="<?=base_url().'checkout';?>">Proceed to Checkout</a>    
+                                	</p>
+                                    
+                                	<p class="button chk">
+                                    <a href="<?= base_url().'cart/allcourses/'?>"> Return to Courses</a>
+                                    </p>
+                                    
+								<?php    
                                 }
                                 else
                                 {
                                 ?>
-                                 <a style=" padding: 5px;" class="contact-btn"  href="<?= base_url().'cart/allcourses/'?>"> Return to Courses</a>
-                                <a style="padding: 5px;" class="contact-btn" href="<?=base_url().'checkout/unregister';?>">Proceed to Checkout</a>
-                                
+                                	
+                                    <p class="button chk">
+                                    <a href="<?=base_url().'checkout/unregister';?>">Proceed to Checkout</a>
+                                	</p>
+                                    
+                                    <p class="button chk">
+                                 	<a href="<?= base_url().'cart/allcourses/'?>"> Return to Courses</a>
+                                	</p>
+                                    
                                <?php }?>
                                 
                                 </td>
                               </tr>
                             </table>
-                            
                              </form>
                          
                             
@@ -141,7 +155,7 @@
                             
                             <h2>Cart totals</h2>
                             
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="border-full bg-grey">
+                               <table width="100%" border="0" cellspacing="0" cellpadding="0" class="border-full bg-grey">
                             <?php if($this->go_cart->coupon_discount() > 0) {?>
                             <tr>
                                 <td style="font-size: 12px;"><?php echo lang('coupon_discount');?></td>
@@ -154,9 +168,10 @@
                               </tr>
                               
                             </table>
-                            </div>
-                        </div>
-                          <span style="color:#666; font-size:11px; margin-left: 451px;"> We accept the following Sage Pay, PayPal, All Debit and Credit Cards. </span>
+                            
+                            
+                            <div class="col12">
+                            	<span style="color:#666; font-size:11px; margin-left: 451px;"> We accept the following Sage Pay, PayPal, All Debit and Credit Cards. </span>
                          <div class = "payment_options">
                                         <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/maestro.png')?>" alt="">
                                         <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/mc.png')?>" alt="">
@@ -166,6 +181,16 @@
                                          <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/visa_debit.png')?>" alt="">
                                           <img align="right" style="margin-left: 10px; margin-top: 5px" src="<?=theme_assets('images/pay_cards/visa_electron.png')?>" alt="">
                                     </div>
+                            </div>
+                            
+                            
+                            </div>
+                            
+                            
+                            
+                            
+                        </div>
+                          
                         
                     </div><!-- end col8 -->
                     

@@ -32,8 +32,7 @@ Class Report_model extends CI_Model
 			
 			}
 		}
-		/*echo "<pre>";print_r($resutl_send);
-		exit;*/
+		
 		return $resutl_send;
 	}
 	

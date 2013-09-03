@@ -40,7 +40,8 @@
 	<thead>
 		<tr>
 			<th>ID</th>
-			<th>Title</th>			
+			<th>Title</th>
+			<th>Template Name</th>			
 			<th style="float:right;">Actions</th>			
 		</tr>
 	</thead>
@@ -51,10 +52,12 @@
 		<tr>
 			<td style="width:16px;"><?php  echo  $template->d_email_id; ?></td>			
 			<td class="gc_cell_left"><?php echo  $template->d_email_title; ?></td>
-			<?php /*?><td><?php echo  $template->invoice_template_level; ?></td><?php */?>
+			 <?php $temp_type = $this->System_Template_model->get_templates_by_id($template->email_id); ?>
+            <td class="gc_cell_left"><?php echo ucwords(strtolower($temp_type->email_type));  ?></td>
 			
 			<td>
 				<div class="btn-group" style="float:right">
+				<a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/default_emails/view_email_template/'.$template->d_email_id); ?>"><i class="icon-eye-open"></i> <?php echo "View"; ?></a>
 					<a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/default_emails/form/'.$template->d_email_id); ?>"><i class="icon-pencil"></i> <?php echo lang('edit');?></a>
 					<a class="btn btn-danger" href="<?php echo site_url($this->config->item('admin_folder').'/default_emails/delete/'.$template->d_email_id); ?>" onclick="return areyousure();"><i class="icon-trash"></i> <?php echo lang('delete');?></a>
 				</div>

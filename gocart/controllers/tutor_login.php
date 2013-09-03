@@ -114,7 +114,7 @@ class Tutor_login extends Front_Controller {
 		$data['all_categories']		    = $this->Category_model->get_categories_dropdown();
 		$data['all_courses']		    = $this->Product_model->get_all_products_array();
 		$data['countries_menu']		    = $this->Location_model->get_countries_menu();
-		$data['zones_menu']			    = $this->Location_model->get_zones_menu('223');
+		$data['zones_menu']			    = $this->Location_model->get_zones_menu('222');
 		$data['country_id']			    = "";
 		$data['zone_id']			    = "";
 		//print_r($this->Product_model->get_all_products_array());exit;
@@ -228,30 +228,39 @@ class Tutor_login extends Front_Controller {
 			 if($save_tutor!="")
 			 {
 				 
-				 	$email_attributes = $this->Settings_model->get_system_email($this->config->item('email_template'));
+				 	
+					$email_attributes = $this->Settings_model->join_email_table(7);
+					$message  = '';
+					$message .= stripslashes($email_attributes[0]['email_header']);
+					
+					$message .= '<tr><td>Dear '.$this->input->post('firstname').' '. $this->input->post('lastname').'!<br>'.stripslashes($email_attributes[0]['middle_content']).'<br><br>Username: '.$this->input->post('email').' <br>Password: '.$password.'</td></tr>';
+					$message .= stripslashes($email_attributes[0]['email_footer']);
+					$this->load->library('email');			
+					$config['mailtype'] = 'html';			
+					$this->email->initialize($config);	
+					$this->email->from($this->config->item('email'), $this->config->item('company_name'));			
+					$this->email->to($save['email']);
+					$this->email->bcc($this->config->item('bcc_email'));			
+					$this->email->subject($email_attributes[0]['d_email_title']);
+					$this->email->message(html_entity_decode($message));			
+					$this->email->send();					
+					
+					/*$email_attributes = $this->Settings_model->get_system_email($this->config->item('email_template'));
 					$message = '';
-					$message .= $email_attributes[0]['email_header'];
-					
-					$message .= '<tr><td style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><br><p align="left" class="article-title"><singleline label="Title"> Dear '.$this->input->post('firstname').' '. $this->input->post('lastname').'!</singleline></p><div align="left" ><multiline label="Description"></multiline>Thank you for registering with UK Open College. This email is to certify that your account has been registered with us. Please save the login information.<br><br>Username: '.$this->input->post('email').' <br>Password: '.$password.' <br><br>as you would require that for future coordination.</div></td></tr><tr><td ><div align="left" >Tutor Support can be accessed via e-mail: <a href="mailto:support@ukopencollege.co.uk"> support@ukopencollege.co.uk</a>.</div></td></tr></tbody></table></td></tr>';
-					
-					$message .= $email_attributes[0]['email_footer'];
-					
-					 
-					$this->load->library('email');
-					
-					$config['mailtype'] = 'html';
-					
-					$this->email->initialize($config);
-			
+					$message .= $email_attributes[0]['email_header'];					
+					$message .= '<tr><td style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><br><p align="left" class="article-title"><singleline label="Title"> Dear '.$this->input->post('firstname').' '. $this->input->post('lastname').'!</singleline></p><div align="left" ><multiline label="Description"></multiline>Thank you for registering with UK Open College. This email is to certify that your account has been registered with us. Please save the login information.<br><br>Username: '.$this->input->post('email').' <br>Password: '.$password.' <br><br>as you would require that for future coordination.</div></td></tr><tr><td ><div align="left" >Tutor Support can be accessed via e-mail: <a href="mailto:support@ukopencollege.co.uk"> support@ukopencollege.co.uk</a>.</div></td></tr></tbody></table></td></tr>';					
+					$message .= $email_attributes[0]['email_footer'];				 
+					$this->load->library('email');					
+					$config['mailtype'] = 'html';					
+					$this->email->initialize($config);			
 					$this->email->from($this->config->item('email'), $this->config->item('company_name'));
 					//$this->email->from('info@ukopencollege.co.uk');
 					$this->email->to($save['email']);
 					$this->email->bcc($this->config->item('bcc_email'));
 					//$this->email->subject($row['subject']);
 					$this->email->subject('Tutor Registration');
-					$this->email->message(html_entity_decode($message));
-					
-					$this->email->send();
+					$this->email->message(html_entity_decode($message));					
+					$this->email->send();*/
 					
 				 redirect('dashboard');
 				 //echo "found it"; exit;
@@ -278,14 +287,26 @@ class Tutor_login extends Front_Controller {
 			if ($reset)
 			{						
 				$this->session->set_flashdata('message', lang('message_new_password'));
-				$email_attributes = $this->Settings_model->get_system_email($this->config->item('email_template'));
-			
-				//print_r($email_attributes);exit;
+				$email_attributes = $this->Settings_model->join_email_table(8);
+				$message  = '';
+				$message .= stripslashes($email_attributes[0]['email_header']);				
+				$message .= '<tr  style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><td>'.stripslashes($email_attributes[0]['middle_content']).'<br><br><b>New Password:<b> '.$reset.'</td></tr>';
+				$message .= stripslashes($email_attributes[0]['email_footer']);
+				$this->load->library('email');			
+				$config['mailtype'] = 'html';			
+				$this->email->initialize($config);	
+				$this->email->from($this->config->item('email'), $this->config->item('company_name'));			
+				$this->email->to($this->input->post('email'));
+				$this->email->bcc($this->config->item('bcc_email'));			
+				$this->email->subject($email_attributes[0]['d_email_title']);
+				$this->email->message(html_entity_decode($message));			
+				$this->email->send();
+				
+				
+				/*$email_attributes = $this->Settings_model->get_system_email($this->config->item('email_template'));
 				$message  = '';
 				$message .= $email_attributes[0]['email_header'];			
-				
-				$message .= '<tr><td style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><br><b>Password has been generated successfully!</b><br>In order to set a new password, you need to provide your user name by clicking on the following link to rest your password. We will send you a new user name and password. If you have difficulty in resetting your password, Tutor Support can be accessed via e-mail: <a href="mailto:support@ukopencollege.co.uk"> support@ukopencollege.co.uk</a>.</td></tr><tr><td ><div align="left" class="article-content"><b>New Password:</b>'.$reset.'</div></td></tr></tbody></table></td></tr>';
-				
+				$message .= '<tr><td style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><br><b>Password has been generated successfully!</b><br>In order to set a new password, you need to provide your user name by clicking on the following link to rest your password. We will send you a new user name and password. If you have difficulty in resetting your password, Tutor Support can be accessed via e-mail: <a href="mailto:support@ukopencollege.co.uk"> support@ukopencollege.co.uk</a>.</td></tr><tr><td ><div align="left" class="article-content"><b>New Password:</b>'.$reset.'</div></td></tr></tbody></table></td></tr>';				
 				$message .= $email_attributes[0]['email_footer'];
 				$this->load->library('email');				
 				$config['mailtype'] = 'html';				
@@ -296,9 +317,8 @@ class Tutor_login extends Front_Controller {
 				$this->email->bcc($this->config->item('bcc_email'));
 				//$this->email->subject($row['subject']);
 				$this->email->subject('Tutor Forgot Password');
-				$this->email->message(html_entity_decode($message));
-				
-				$this->email->send();
+				$this->email->message(html_entity_decode($message));				
+				$this->email->send();*/
 			}
 			else
 			{

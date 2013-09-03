@@ -75,6 +75,8 @@ function areyousure()
 			</td>
 			<td>
 				<div class="btn-group" style="float:right">
+				
+				<a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/tutor/tutor_view/'.$tutor->tutor_id);  ?>"><i class="icon-eye-open"></i><?php echo " View"; ?></a>
 					<a class="btn" href="<?php //echo site_url('/tutor/edit');  ?>"><i class="icon-pencil"></i> Edit <?php //echo lang('edit');?></a>
 					
 					

@@ -203,6 +203,16 @@ Class Customer_Invoices_model extends CI_Model
 		
 	}
 	
+    function get_invoice_customerss($invoice_id)
+    {
+        $invoice_items = $this->db->query("SELECT customer_id FROM oc_customer_invoices  WHERE invoice_id = ".$invoice_id);
+        $result        = $invoice_items->row();
+        //$this->show->pe($result);
+        $result_admin    = $this->db->get_where('customers', array('id'=>$result->customer_id));
+        
+        return $result_admin->row();
+        
+    }
 	function save_recurring_invoice($data)
 	{
 			$this->db->query("DELETE FROM oc_customer_invoices_recurring WHERE invoice_id =".$data['invoice_id']);

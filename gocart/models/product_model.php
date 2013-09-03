@@ -225,8 +225,7 @@ Class Product_model extends CI_Model
 		{
 			$this->db->select('category_products.*, LEAST(IFNULL(NULLIF(saleprice, 0), price), price) as sort_price', false)->from('category_products')->join('products', 'category_products.product_id=products.id')->where(array('category_id'=>$category_id, 'enabled'=>1));
 			//$this->db->order_by($by, $sort);
-			   //$this->db->select('*, LEAST(IFNULL(NULLIF(saleprice, 0), price), price) as sort_price', false)->from('products')->join('category_products', 'category_products.product_id=products.id')->where(array('category_id'=>$category_id, 'enabled'=>1)); 
-              //$this->db->where('delete',0);
+			
 			//$result	= $this->db->limit($limit)->offset($offset)->get()->result();
              $result    = $this->db->get()->result(); 
 			$contents	= array();
@@ -238,11 +237,10 @@ Class Product_model extends CI_Model
 				$count++;
 			}
               //echo $this->db->last_query(); exit; 
-              
 			return $contents;
 		}
 		else
-		{ 
+		{
 			//sort by alphabetically by default
 			$this->db->order_by('name', 'ASC');
 			$result	= $this->db->get('products');
@@ -274,8 +272,6 @@ Class Product_model extends CI_Model
 	function get_product($id, $related=true)
 	{
 		$result	= $this->db->get_where('products', array('id'=>$id))->row();
-        
-        
 		//echo"<pre>" ;print_r($result);
 		if(!$result)
 		{
@@ -510,7 +506,7 @@ Class Product_model extends CI_Model
 		return $id;
 	}
 	
-	function delete_product($id)
+	function delete_product($id, $routes=false)
 	{
 		// delete product 
 		$this->db->where('id', $id);
@@ -523,6 +519,10 @@ Class Product_model extends CI_Model
 		// delete coupon reference
 		$this->db->where('product_id', $id);
 		$this->db->delete('coupons_products');
+        
+         // delete  product routes
+        $this->db->where('id', $routes);
+        $this->db->delete('routes');
 
 	}
 	
@@ -656,8 +656,7 @@ Class Product_model extends CI_Model
 	function get_question($product_id)
 	{
 		$this->db->where('product_id',$product_id);
-        $this->db->order_by('id', 'desc');
-		
+        $this->db->order_by('id', 'desc'); 		
 		$result		= $this->db->get('course_question');
 		
 		return $result->result();

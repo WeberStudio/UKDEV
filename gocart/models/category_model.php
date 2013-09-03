@@ -14,7 +14,7 @@ Class Category_model extends CI_Model
         {
         $this->db->limit($row,$page);
         }
-		$result	    = $this->db->get('categories');
+        $result    = $this->db->get('categories'); 
 		if(count($result)>0)
 		{
 			return $result->result_array();
@@ -178,8 +178,7 @@ Class Category_model extends CI_Model
 	{
 		$this->db->order_by('sequence', 'ASC');
 		$result	= $this->db->get_where('category_products', array('category_id'=>$id));
-		$result	= $result->result();
-		
+		$result	= $result->result();		
 		$contents	= array();
 		foreach ($result as $product)
 		{
@@ -191,6 +190,7 @@ Class Category_model extends CI_Model
 		
 		return $contents;
 	}
+	
 	
 	function get_category_products($id, $limit, $offset)
 	{
@@ -291,12 +291,12 @@ Class Category_model extends CI_Model
         $this->db->select('*'); 
         $this->db->like('name', $cat_name);
         if($cat_name==false)
-        { 
+        {
             $this->db->limit(6); 
         }
         
         if($cat_name!=false)
-        { 
+        {
             $this->db->where('parent_id', '0');    
         }
         
@@ -346,8 +346,6 @@ Class Category_model extends CI_Model
         $result = $this->db->get('categories');
         return $result->result(); 
     }
-
-    
 	
 	/*function course_count($id)
 	{

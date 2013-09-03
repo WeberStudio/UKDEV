@@ -25,7 +25,7 @@
   <?php endif; ?>
   <?php if (!empty($error)): ?>
   <div class="alert alert-error"> <a class="close" data-dismiss="alert">*</a> <?php echo $error; ?> </div>
-  <?php endif; ?>
+  <?php endif;    ?>
   
   
   
@@ -39,16 +39,21 @@
               <h4>Invoice form</h4>
             </div>
           </div>
+		  
           <div class="content"> <?php echo form_open_multipart($this->config->item('admin_folder').'/invoices/form/'); ?>
             <div class="tab-content">
               <div class="tab-pane active" id="description_tab">
                 <fieldset>
+				<? //echo '<pre>';print_r($users);exit;  ?>
                 <select data-placeholder="Choose client and search for invoice" class="chzn-select" name="users"  tabindex="5">
                   <option value="">Choose client and search for invoice</option>
-                  <? if(isset($users)){  ?>
-                  <?php  foreach ($users as $user){?>
+                  <? if(!empty($users)){  ?>
+                  <?php  foreach ($users as $user){
+				  			
+				  ?>
                   	<option  value="<?=$user['id']?>"><?=$user['company']?></option>
                   <?
+				  		
 					}
 				} 
 				 ?>

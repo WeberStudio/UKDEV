@@ -121,7 +121,7 @@ class Login extends CI_Controller {
 			$save['firstname']	= $this->input->post('firstname');
 			$save['lastname']	= $this->input->post('lastname');
 			$save['email']		= $this->input->post('email');
-			$save['access']		= 'Course Provider';
+			$save['access']		= 'Admin';
 			$save['phone']		= $this->input->post('phone');
 			$save['company']	= $this->input->post('company');
 			$save['password']	= $this->input->post('password');
@@ -137,7 +137,23 @@ class Login extends CI_Controller {
 			$insert_id = $this->auth->save($save);
 			if(!empty($insert_id))
 			{
-					$admin_data = $this->auth->get_admin($insert_id);			
+					
+					$admin_data 		= $this->auth->get_admin($insert_id);	
+					$email_attributes 	= $this->Settings_model->join_email_table(12);
+					$message  = '';
+					$message .= stripslashes($email_attributes[0]['email_header']);
+					$message .= '<tr><td>'.$admin_data->firstname.' '.$admin_data->lastname.'!<br>'.stripslashes($email_attributes[0]['middle_content']).'<br><br>Username: '.$admin_data->email.' <br>Password: '.$password.' </td></tr>';					     
+					$message .= stripslashes($email_attributes[0]['email_footer']);
+					$this->load->library('email');			
+					$config['mailtype'] = 'html';			
+					$this->email->initialize($config);	
+					$this->email->from($this->config->item('email'), $this->config->item('company_name'));			
+					$this->email->to($save['email']);
+					$this->email->bcc($this->config->item('bcc_email'));			
+					$this->email->subject($email_attributes[0]['d_email_title']);
+					$this->email->message(html_entity_decode($message));			
+					$this->email->send();
+					 /*?>$admin_data = $this->auth->get_admin($insert_id);			
 					$email_attributes = $this->Settings_model->get_system_email($this->config->item('email_template'));
 					$message = '';
 					$message .= $email_attributes[0]['email_header'];
@@ -154,7 +170,7 @@ class Login extends CI_Controller {
 					//$this->email->subject($row['subject']);
 					$this->email->subject('Admin Registration');
 					$this->email->message(html_entity_decode($message));					
-					$this->email->send();
+					$this->email->send();<?php */
 			}
 			
 			$this->session->set_flashdata('message', 'You have Signup Successfully.');
@@ -195,7 +211,25 @@ class Login extends CI_Controller {
 			$reset = $this->auth->reset_password($email);
 			if (isset($reset))
 			{						
-				$email_attributes = $this->Settings_model->get_system_email('login');				
+				
+				
+				$this->session->set_flashdata('message', lang('message_new_password'));			
+				$email_attributes = $this->Settings_model->join_email_table(13);
+				$message  = '';
+				$message .= stripslashes($email_attributes[0]['email_header']);			
+				$message .= '<tr  style="font:12px Normal Arial, Helvetica, sans-serif; color:#3e3f40; line-height:18px;padding-bottom:16px;"><td>'.stripslashes($email_attributes[0]['middle_content']).'<br><br><b>New Password:<b> '.$reset.'</td></tr>';			
+				$message .= stripslashes($email_attributes[0]['email_footer']);				
+				$this->load->library('email');			
+				$config['mailtype'] = 'html';			
+				$this->email->initialize($config);	
+				$this->email->from($this->config->item('email'), $this->config->item('company_name'));			
+				$this->email->to($this->input->post('email'));
+				$this->email->bcc($this->config->item('bcc_email'));			
+				$this->email->subject($email_attributes[0]['d_email_title']);
+				$this->email->message(html_entity_decode($message));			
+				$this->email->send();
+				
+				/*$email_attributes = $this->Settings_model->get_system_email('login');				
 				$message  = '';
 				$message .= $email_attributes[0]['email_header'];		
 				
@@ -212,7 +246,7 @@ class Login extends CI_Controller {
 				$this->email->bcc($this->config->item('bcc_email'));				
 				$this->email->subject('Admin Forgot Password');
 				$this->email->message(html_entity_decode($message));				
-				$this->email->send();
+				$this->email->send();*/
 								
 				$this->session->set_flashdata('message', lang('message_new_password'));
 				redirect($this->config->item('admin_folder').'/login');

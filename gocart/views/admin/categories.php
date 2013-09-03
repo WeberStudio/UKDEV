@@ -98,6 +98,8 @@ define('ADMIN_FOLDER', $this->config->item('admin_folder'));
                 <td>
 					<div class="btn-group" style="float:right">
 
+						<a class="btn" href="<?php echo site_url(ADMIN_FOLDER.'/categories/category_view/'.$cat['category']->id); ?>" rel="tooltip" data-placement="top" data-original-title="View Admin Details"><i class="icon-eye-open"></i>View</a>
+						
 						<a class="btn" href="<?php echo  site_url(ADMIN_FOLDER.'/categories/form/'.$cat['category']->id);?>"><i class="icon-pencil"></i> <?php echo lang('edit');?></a>
 
 						<?php /*?><a class="btn" href="<?php echo  site_url(ADMIN_FOLDER.'/categories/organize/'.$cat['category']->id);?>"><i class="icon-move"></i> <?php echo lang('organize');?></a><?php */?>

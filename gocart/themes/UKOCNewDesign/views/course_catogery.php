@@ -1,4 +1,50 @@
-<div class="row">
+
+
+<?
+					$counter = 0;
+					 foreach($this->categories as $key => $cat_info)
+					   {
+					   	
+						if(count($cat_info['children'])>0)
+						{
+							$counter = $counter + 1;
+					   ?>
+							<div class="col4">
+							<h2 class="h-name">
+                            <a href="<?=base_url().$cat_info['category']->slug?>"><?=$cat_info['category']->name?></a></h2>
+							
+							<?
+							
+								if(count($cat_info['children'])>0)
+								{?>
+								
+									
+								<?	foreach($cat_info['children'] as  $children)
+									{?>
+										<div class="col12 c-name">
+										<a href="<?=base_url().$children['category']->slug?>"><?=$children['category']->name?></a>
+										</div>
+								<? 	}
+																
+								}								
+								
+							?>
+							</div>						
+					<?	
+						}
+							if($counter%3==0)
+							{
+								
+								echo '<br class="clearBoth" />';
+							
+							}
+					}							
+					?>
+
+
+
+
+<?php /*?><div class="row">
 
 <div id="">
 
@@ -59,7 +105,7 @@
 			</table>
 		</div>
 		
-</div>		
+</div>	<?php */?>	
 		
 		
 		

@@ -44,7 +44,7 @@
                                 ?>
                                 <a href="<?php echo base_url().$menu_category->slug?>"> 
                                 <div class="featured-course blue-featured-<?php echo $i;?>">
-                                 <p style="padding-top: 165px;text-align: center;font-size: 22px;"><b><?php echo $menu_category->name;?></b></p>
+                                 <p style="padding-top: 165px;text-align: center;font-size: 22px;"><b style="color: white;"><?php echo $menu_category->name;?></b></p>
                                 </div>
 </a>
                                 
@@ -75,10 +75,10 @@
                     
                     
                      <div class="col6 social-icons">
-                        <a href="https://twitter.com/UKOpen" target="_blank"> <img align="right" alt="" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/img/twiter-logo.png" style="margin-left: 10px; margin-top: 5px"></img> </a>
-                        <a href="http://www.linkedin.com/company/uk-open-college/products?trk=tabs_biz_product" target="_blank"> <img align="right" alt="" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/img/link-in.png" style="margin-left: 10px; margin-top: 5px"></img> </a>
-                        <a href="http://www.youtube.com/watch?v=4dabsHc8yNE&feature=youtube" target="_blank"> <img align="right" alt="" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/img/youtube.png" style="margin-left: 10px; margin-top: 5px"></img> </a>
-                        <a href="https://www.facebook.com/pages/UK-Open-College/411574175557181" target="_blank"><img align="right" alt="" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/img/face-book.png" style="margin-left: 10px; margin-top: 5px"></img></a>
+                        <a href="https://twitter.com/UKOpen" target="_blank"> <img align="right" alt="" src="<?=base_url()?>gocart/themes/oneTouch/assets/images/img/twiter-logo.png" style="margin-left: 10px; margin-top: 5px"></img> </a>
+                        <a href="http://www.linkedin.com/company/uk-open-college/products?trk=tabs_biz_product" target="_blank"> <img align="right" alt="" src="<?=base_url()?>gocart/themes/oneTouch/assets/images/img/link-in.png" style="margin-left: 10px; margin-top: 5px"></img> </a>
+                        <a href="http://www.youtube.com/watch?v=4dabsHc8yNE&feature=youtube" target="_blank"> <img align="right" alt="" src="<?=base_url()?>gocart/themes/oneTouch/assets/images/img/youtube.png" style="margin-left: 10px; margin-top: 5px"></img> </a>
+                        <a href="https://www.facebook.com/pages/UK-Open-College/411574175557181" target="_blank"><img align="right" alt="" src="<?=base_url()?>gocart/themes/oneTouch/assets/images/img/face-book.png" style="margin-left: 10px; margin-top: 5px"></img></a>
                      </div>
                      
                    </div>
@@ -88,15 +88,23 @@
 				 
                     <div class="col4 nus-res">
                         <!--<img src="<?php echo theme_assets('img/image_nus.png');?>" alt="NUS Extra Card" />-->
-						 <img style="width:380px; height:190px;" src="<?php echo 'http://87.106.234.213/uploads/images/full/'.$special_pages->image //theme_assets('img/image_nus.png');?>"  />
+						 <a href="<?php echo base_url().$special_pages->slug?>"><img style="width:380px; height:190px;" src="<?php echo base_url().'uploads/images/full/'.$special_pages->image //theme_assets('img/image_nus.png');?>"  /> </a>
                         <h2><?php echo $special_pages->title?></h2>
                         <p><?php echo $special_pages->fornt_content;?></p>
                         <p class="button nus-btn"><a href="<?php echo base_url().$special_pages->slug?>">Details</a></p>
                     </div>
-                    
-                    <div class="col4 video-res">
-                        <iframe src="http://player.vimeo.com/video/72632269" width="350" height="225" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/72632269">BEYOND, sci fi short film</a> from <a href="http://vimeo.com/lightworker">Raphael Rogers</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+					
+					<div class="col4 nus-res">
+                      
+						 <a href="<?php echo base_url().$page_on_video->slug?>"><img style="width:380px; height:190px;" src="<?php echo base_url().'uploads/images/full/'.$page_on_video->image ;?>"  /> </a>
+                        <h2><?php echo $page_on_video->title?></h2>
+                        <p><?php echo $page_on_video->fornt_content;?></p>
+                        <p class="button nus-btn"><a href="<?php echo base_url().$page_on_video->slug?>">Details</a></p>
                     </div>
+                    
+                    <!--<div class="col4 video-res">
+                        <iframe src="http://player.vimeo.com/video/72632269" width="350" height="225" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/72632269">BEYOND, sci fi short film</a> from <a href="http://vimeo.com/lightworker">Raphael Rogers</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+                    </div>-->
                     
                     <div class="col4 twitter-res">
                         <img src="<?php echo theme_assets('img/twitter_icon.png')?>" alt="" />
@@ -203,7 +211,7 @@
                 
                  <!-- six new sections -->
                  <div class="onerow">
-                      <div class="onerow">
+                      
                     <?php
                        if(!empty($grid_pages)){
                           // echo '<pre>';print_r($grid_pages);echo '</pre>';exit;
@@ -212,7 +220,7 @@
                          ?>
                          
                       <div class="col4 nus-res">
-                            <img style="width:380px; height:190px;" src="<?php echo 'http://87.106.234.213/uploads/images/full/'.$grid_page->image //theme_assets('img/image_nus.png');?>"  />
+                           <a href="<?php echo $grid_page->slug;?>"> <img style="width:380px; height:190px;" src="<?php echo base_url().'uploads/images/full/'.$grid_page->image //theme_assets('img/image_nus.png');?>"  />  </a>
                             <h2><?php echo $grid_page->title;?></h2>
                             <p><?php echo $grid_page->fornt_content;?></p>
                             <p class="button nus-btn"><a href="<?php echo $grid_page->slug;?>">Details</a></p>
@@ -220,7 +228,7 @@
                       <?php }}}?>
 
                      
-                     </div>
+                     
                      
                      
                      </div>

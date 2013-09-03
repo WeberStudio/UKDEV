@@ -41,6 +41,9 @@ class Order extends Admin_Controller {
 		$this->load->model('Notifications_model');
 		$this->lang->load('order');
 		$this->load->helper('form');
+		$this->load->library('mpdf/mpdf');
+		$this->load->library('cezpdf');
+		$this->load->helper('pdf');
 		
 
     }
@@ -324,6 +327,14 @@ class Order extends Admin_Controller {
 		redirect($this->config->item('admin_folder').'/orders');	
     }
 	
+	function delete($id)
+	{
+		$this->Order_model->delete($id);		
+		$this->session->set_flashdata('message', lang('message_orders_deleted'));
+		redirect($this->config->item('admin_folder').'/order');
+	}
+	
+	
 	/*function order_search($id = false , $rows=5, $page=0)
 	{
 		$sort_by='order_number';
@@ -418,5 +429,158 @@ class Order extends Admin_Controller {
 
 	}
 */
+
+	function order_paid_status($status = '', $id)
+	{
+		
+		if(empty($status))
+		{
+			
+			$this->session->set_flashdata('error', 'The order status can not save please contact admin.');
+		}
+		else
+		{
+			$data = array('id'=>$id, 'status' => $status);
+			//print_r($data);exit;
+			$this->Order_model->order_paid_status($data);
+			$this->session->set_flashdata('message', lang('message_order_updated'));
+		}
+		
+		redirect($this->config->item('admin_folder').'/order');	
+	}
+	
+	function pdf_view($order_id)
+    {
+            
+        prep_pdf();
+        $invoice_footer     = '';
+        $invoice_header     = '';
+        $html_output         = '';
+        //150,210    
+        $mpdf =  new mPDF('utf-8', array(150,210)); 
+        $mpdf->SetHeader('{DATE d-m-Y}|{PAGENO}|Order Invoice');
+        $image1 = base_url().'uploads/images/full/inovicewatermark.png';
+        $logo = base_url().'uploads/images/full/thumb_1.png'; 
+        $order = $this->Order_model->get_order($order_id);
+  
+        $html_output .= '<div style=""><div style="width:40%; float:left; margin-top:-20px"><img height="100" width="100" src="'.$logo.'"/></div><div  style="font-size:9px;width:60% ; float:right ;text-align:right; margin-top:20px">Company Registered in England & Wales: 06130321<br/>VAT Registration No: GB 934 3067 30<br/>
+         UK Registered Learning Provider Number: 10021848 </div></div>';
+        $mpdf->SetWatermarkImage($image1,0.3,'190','215'); 
+        $mpdf->showWatermarkImage = true  ;   
+        $html_output         .='<div style="float: right; width:100%"><b>Payment Method</b><br><span>'.$order->payment_info.'</span></div>';  
+        $html_output         .= '<br/>
+        <table id="item_table" class="" style="width:100%; font-size:12px; border: 1px solid black; border-collapse: collapse;" border="1">
+                                <thead>
+                                  <tr>
+                                    <th>Order Number</th>
+                                    <th>Bill To Address</th>
+                                    <th>Status</th> 
+                                  </tr>
+                                </thead>
+                                <tbody>';
+                                
+                                
+                                     $html_output         .=  '
+                                      <tr id="new_item">
+                                         <td style="text-align: center;">'.$order->order_number.'</td>  
+                                       	 <td style="text-align: center; padding: 10px;">'.$order->bill_company.'<br/>'.$order->bill_firstname.' '.$order->bill_lastname.' <br>'.$order->bill_address1.', '.$order->bill_address2.'<br>'.$order->bill_city.', '.$order->bill_zone.', '.$order->bill_zip.'<br>'.$order->bill_country.'<br>'.$order->bill_email.'<br>'.$order->bill_phone.'</td>                    
+                                         <td style="text-align: center;">'.$order->status.'</td>
+                                      </tr>';
+                                     
+                                    
+        $html_output         .=     '</tbody></table><br>';
+                              
+       
+
+        $html_output         .= '<table id="item_table" class="" cellspacing="20" style="width:100%; font-size:12px; border: 1px solid black; border-collapse: collapse;" border="1">
+                                <thead>
+                                  <tr>
+                                    <td style="text-align: center;"><b>Qty</b></td>
+                                    
+                                    <td style="text-align: center;"><b>Name</b></td>
+                                    
+                                  </tr>
+                                </thead>
+                                <tbody>';
+                                
+                                if(!empty($order->contents)){
+                                    foreach ($order->contents as $content){
+                                     $html_output         .=  '<br/>
+                                      <tr id="new_item" >
+                                        <td style="text-align: center;">'.$content['quantity'].'</td>
+                                         
+                                         <td style="text-align: center;">'.$content['name'].'</td>
+                                         
+                                      </tr>';
+                                    } 
+                                };
+                                    
+        $html_output         .=     '</tbody>
+                              </table><br><br>';
+                              
+        $html_output         .= '<table  id="" class="" cellspacing="10" style="width:200%; text-align: left; font-size:12px;">
+                                <thead>
+                                  <tr>
+                                    <td><b>Name</b></td>
+                                    <td ><b>Price</b></td>
+                                    <td ></td> 
+                                    <td><b>Quantity</b></td>
+                                    <td ><b>Total</b></td>
+                                     
+                                  </tr>
+                                </thead>
+                                <tbody>';
+                                
+                                if(!empty($order->contents)){
+                                    foreach ($order->contents as $content){
+                                     $html_output         .=  '<br/>
+                                      <tr  >
+                                         <td >'.$content['name'].'</td>
+                                         <td >'.format_currency($content['price']).'</td>
+                                         <td ></td>  
+                                         <td >'.$content['quantity'].'</td>
+                                         <td >'.format_currency($content['subtotal']).'</td> 
+                                         
+                                        
+                                      </tr>';
+                                    } 
+                                };
+        $html_output         .= '<tr>
+                                  <td><b>Subtotal</b></td>
+                                  <td></td>
+                                  <td ></td>  
+                                  <td></td> 
+                                  <td>'.format_currency($order->subtotal).'</td> 
+                                </tr>';                        
+        $html_output         .= '<tr>
+                                  <td><b>total</b></td>
+                                  <td></td>
+                                  <td ></td>  
+                                  <td></td> 
+                                  <td>'.format_currency($order->total).'</td> 
+                                </tr>';                        
+                                    
+        $html_output         .=     '</tbody>
+                              </table><br><br>';
+        
+        
+          
+
+       $html_output         .= '<div align="right" style="font-size:12px; border-bottom: 10px solid #EE1D25;">
+                                <b>UK Open College Limited</b>
+                                <br>
+                                The Meridian, 4 Copthall HouseStation Square<br/>
+                                Coventry, West Midlands, Cv1 2FL, United Kingdom<br/>
+                                Tel: 0121 288 0181<br/> 
+                                 e-mail: info@ukopencollege.co.uk<br/> 
+                                 web: www.ukopencollege.co.uk<br/>
+                                </div>';
+        
+
+        $mpdf->WriteHTML($html_output);
+        $mpdf->Output();
+        exit;
+    }
+	
 }
 ?>

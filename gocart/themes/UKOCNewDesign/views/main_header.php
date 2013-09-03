@@ -6,10 +6,11 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Uk Open College</title>
-        <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
-
+        <title><?php echo (!empty($seo_title)) ? $seo_title .' - ' : ''; echo $this->config->item('company_name'); ?></title>
+        <meta name="keywords" content="<?php echo (!empty($meta_key)) ? $meta_key .'' : ''; echo ""; ?>">
+        <meta name="description" content="<?php echo (!empty($meta)) ? $meta .'' : ''; echo ""; ?>">
+        
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <!--<link rel="stylesheet" href="css/normalize.css">

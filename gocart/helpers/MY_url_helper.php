@@ -56,18 +56,6 @@ function theme_img($uri, $tag=false)
     }
     
 }
-function theme_assets($uri, $tag=false)
-{
-    if($tag)
-    {
-        return '<img src="'.theme_url('assets/'.$uri).'" alt="'.$tag.'">';
-    }
-    else
-    {
-        return theme_url('assets/'.$uri);
-    }
-    
-}
 
 function catogery_img($uri, $tag=false)
 {
@@ -94,7 +82,19 @@ function theme_js($uri, $tag=false)
         return theme_url('assets/'.$uri);
     }
 }
- 
+ function theme_assets($uri, $tag=false)
+{
+    if($tag)
+    {
+        return '<img src="'.theme_url('assets/'.$uri).'" alt="'.$tag.'">';
+    }
+    else
+    {
+        return theme_url('assets/'.$uri);
+    }
+    
+}
+
 //you can fill the tag field in to spit out a link tag, setting tag to a string will fill in the media attribute
 function theme_css($uri, $tag=false)
 {

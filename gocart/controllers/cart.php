@@ -8,9 +8,7 @@ class Cart extends Front_Controller {
 
 	{
 
-		parent::__construct();
-
-		
+		parent::__construct();	
 
 		//make sure we're not always behind ssl
 
@@ -37,10 +35,13 @@ class Cart extends Front_Controller {
     function index()
 
     {
-       $data['menu_blue'] = 'home';
-       //$parent                      = 0;
-       $position                    = 'grid-page';
-       $data['special_pages']       = $this->Page_model->get_page('1'); 
+            
+			
+		$data['menu_blue'] = 'home';
+       //$parent                      	= 0;
+       $position                    	= 'grid-page';
+       $data['special_pages']       	= $this->Page_model->get_page('12'); 
+	   $data['page_on_video']       	= $this->Page_model->get_page('13'); 
        //$random_array                = $this->Category_model->get_categories_tierd($parent);
        //$test                        =  $this->shuffle_assoc($random_array);
        $ids = array(2,5,6,60,11,4);
@@ -53,7 +54,9 @@ class Cart extends Front_Controller {
        $this->load->view('index', $data);
 
     }
-      function shuffle_assoc($list) 
+    
+	
+	function shuffle_assoc($list) 
     { 
       if (!is_array($list)) return $list; 
 
@@ -465,8 +468,6 @@ class Cart extends Front_Controller {
 		//set up pagination
         $row = 9;
         $data['products']    = $this->Product_model->get_products($data['category']->id, $row, $page, $sort_by['by'], $sort_by['sort']);
-        //$this->show->pe($data['products']);
-        //$this->show->pe($this->db->last_query());
 		$this->load->library('pagination');
 
 		$config['base_url']		= site_url($base_url);
@@ -670,7 +671,16 @@ class Cart extends Front_Controller {
 		$post_options 	= $this->input->post('option');
 		$slug 			= $this->input->post('slug');
 		$option_prices 	= $this->input->post('price_option');
-		
+		$option_prices_text	= $this->input->post('price_text');
+		$position 			= strpos(strtolower($option_prices_text), 'full');
+		if ($position === false)
+		{			
+			$is_partial = 1;
+			
+		} else {
+			
+			$is_partial = 0;
+		}
 		/*$ip = $_SERVER["REMOTE_ADDR"]; 
    		$country_code = getCountryFromIP($ip);
   
@@ -689,7 +699,8 @@ class Cart extends Front_Controller {
 		if($product['price_options']!="" && !empty($product['price_options'])){
 		//$this->show->pe($product['price_options']);
 		unset($product['price']);
-		$product['price'] = $option_prices;
+		$product['price'] 	= $option_prices;
+		$product['on0'] 	= $is_partial;
 		
 		}
 		
@@ -1246,6 +1257,30 @@ class Cart extends Front_Controller {
 		
 	}
 	
-	
+	function send_request_mail() {
+		
+		
+		//echo '<pre>';print_r($_REQUEST);exit;
+		if(!empty($_REQUEST['Name']) && !empty($_REQUEST['Email']) && !empty($_REQUEST['Telephone'])) 
+		{
+		
+			$message .= '<tr><td>Dear Admin! There is a Query regarding Course information for '.str_replace("%20", " ", $_REQUEST['course']).' from:  <br><br>Name: '.$_REQUEST['Name'].'<br>Email: '.$_REQUEST['Email'].'<br>Tel: '.$_REQUEST['Telephone'].'</td></tr>';
+			$this->load->library('email');			
+			$config['mailtype'] = 'html';			
+			$this->email->initialize($config);	
+			$this->email->from($_REQUEST['Email'].': UK-OPEN-COLLEGE');			
+			$this->email->to('info@ukopencollege.co.uk');
+			$this->email->bcc($this->config->item('bcc_email'));			
+			$this->email->subject('Course Info Inquiry');
+			$this->email->message(html_entity_decode($message));			
+			$this->email->send();
+			//$hh = $this->email->print_debugger();
+			//echo '<pre>'; print_r($hh);exit;
+			$this->session->set_flashdata('message', sprintf( lang('registration_thanks'), $this->input->post('firstname') ) );				
+		}
+		
+		
+		 redirect($_SERVER['HTTP_REFERER']);	
+	}
 
 }

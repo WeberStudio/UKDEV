@@ -18,7 +18,7 @@
                  
                  <div class="seperator">
                      <div class="col6">
-                        <h1 class="sep">Open the Door of oppurtunity</h1>
+                        <h1 class="sep">Open the Door of Opportunity</h1>
                         <p class="sep"><a href="<?php echo base_url().'cart/allcourses/';?>">view all of our courses</a></p>
                     </div>
                     
@@ -44,20 +44,23 @@
                     
                     <div id="courses">
                             <?php 
+                            //  echo '<pre>';count($search_results);echo '</pre>';
                             if(isset($product)){
                               
                              ?>
-                                  
-                                <?php
-                                  if(!empty($search_results)){ 
-                                 foreach($search_results as $search_result){?>
+                                   
+                                <?php 
+                                
+                                  if(!empty($search_results)){    
+                                foreach($search_results as $search_result){?>
                                 <div class="col4">
                                 <a href="<?=base_url().$search_result->slug;?>" class="c-hover">
                                 <img style="height: 231px;" alt="<?=$search_result->img_alt?>"  src="<?=base_url().'uploads/images/small/'.$search_result->images;?>" alt="" />
                                 <p class="course-name"><?=$search_result->name;?></p>
                                  </a>
                                  </div>
-                                 <?php }}else{?>
+                                 <?php }
+                                  }else{?>
                                         <div align="center" class="col12"><h2>Error - No such Record Found Please Try again</h2></div>
                                  <?php }?>  
                                 
@@ -66,8 +69,7 @@
                                ?>
                     
                             <?php 
-                            
-                             if(!empty($search_results)){ 
+                              if(!empty($search_results)){
                             foreach($search_results as $search_result){?>
                              <div class="col4">
                             <a href="<?=base_url().$search_result->slug;?>" class="c-hover">
@@ -75,9 +77,8 @@
                               <p class="course-name"><?=$search_result->name;?></p>
                             </a>
                         </div>
-                        <?php }}else{?> 
-                        
-                                        <div align="center" class="col12"><h2>Error - No such Record Found Please Try again</h2></div>
+                                <?php }}else{?> 
+                                        <div align="center" class="col12" style="text-align: center;"><h2>We are Sorry </br><h3 style="color: #13B9E6;">We were unable to find suitable results for your request.</br>Kindly give us a call on 0121 288 0181 where one of our student course advisor will be happy to assist you with your enquiry</h3></h2></div>
                                  <?php }?> 
                         <?php }?>
                         

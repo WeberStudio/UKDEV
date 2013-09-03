@@ -11,7 +11,6 @@
    ========================================================================== */
 
 
-
 html,
 button,
 input,
@@ -25,6 +24,7 @@ body {
     line-height: 1.4;
 	font-weight:300;
 	font-family:Tahoma, Geneva, sans-serif;
+	
 	 color:#000; 
 	/*color:rgba(1,1,1,0.45);*/
 	
@@ -263,7 +263,7 @@ p.sub-caption
 	float:left;
 	margin-bottom:10px;
 	
-	margin:0 0 0 80px;
+	margin:0 0 0 55px;
 }
 
 .cart_text
@@ -289,12 +289,26 @@ p.sub-caption
 	display:block;
 	float:left;
 	
-	margin-left:45px;
+	margin-left:60px;
+}
+
+.register-area{
+	width:190px !important;
+	float:right !important;
+}
+
+
+.livechat-btn
+{
+	float:right;
+	clear:both;
+	display:block;
+	margin:0 22px 10px 0;
 }
 
 .search-btn
 {
-	padding:10px 32px;
+	padding:12px 10px !important;
 	float:right;
 	color:#FFF;
 	
@@ -310,7 +324,7 @@ p.sub-caption
 {
 	float:right;
 	margin-top:10px;
-	width:255px;
+	width:380px;
 }
 
 .arrow_down
@@ -320,7 +334,7 @@ p.sub-caption
 	height:13px;
 	position: absolute;
     right: 65px;
-    top: 75%;
+   top: 75%;  
 }
 
 #search-form input[type="text"]
@@ -328,7 +342,7 @@ p.sub-caption
 	border:1px solid #efefef;
 	padding: 10px 0 10px 40px;
 	background:url(../img/images/search_icon.png) no-repeat left;
-	margin:0 2px 10px 0;
+	margin:3px 10px 10px 0;
 	float:left;
 	
 	width:110px;
@@ -389,7 +403,7 @@ p.sep
 
 p.sep a
 {
-    color:#000;
+	 color:#000;
 	/*color:rgba(1,1,1,0.4);*/
 }
 
@@ -544,12 +558,10 @@ h1.sep
 	margin-bottom:10px;
 	
 	position: absolute;
-	/*top: 52%;*/
-    top: 85%;
+	top: 85%;
 	right: -2%;
 	
 }
-
 .filters-menu ul
 {
 	margin: 0;
@@ -784,6 +796,13 @@ select.res-menu option
 	border-bottom:1px solid #efefef;
 }
 
+h2.h-name a
+{
+	font-size:1.25em;
+	padding:10px 0;
+	color:rgba(200,0,0,1);
+}
+
 #grid-view
 {
 	float:right;
@@ -849,7 +868,7 @@ select.res-menu option
 	float:left;
 	clear:both;
 	
-	width:85%;
+	width:84%;
 	
 	margin-top:10px;
 }
@@ -1000,7 +1019,7 @@ select.res-menu option
 {
 	border:3px solid #FFF;
 	margin:20px 10px;
-	width:90% !important;
+	width:95% !important;
 		
 	-webkit-box-shadow:0 0 5px rgba(0,0,0,0.25);
 	-moz-box-shadow:0 0 5px rgba(0,0,0,0.25);
@@ -1059,8 +1078,17 @@ select.res-menu option
 
 .pages ul li a
 {
-	padding:0 35px;
+	padding:10px 27px;
 	display:block;
+}
+
+.chk
+{
+	float:right;
+	margin:10px 3px;
+	
+	width: 155px;
+	text-align: center;
 }
 
 .single-course-details img
@@ -1119,7 +1147,7 @@ ul.tabs li a
 	clear:both;
 	margin-top:9px;
 	padding:20px;
-	width:92%;
+	width:91%;
 	border:1px solid #efefef;
 	min-height:200px;
 }
@@ -1247,8 +1275,14 @@ p.submit
 
 .cart-wrapper td
 {
-	padding:10px 20px;
+	padding:10px;
 	position:relative;
+}
+
+#coupon_code
+{
+	float: left;
+	margin: 2px 10px 0 0;
 }
 
 .cart-thumb
@@ -1298,6 +1332,26 @@ p.submit
 p.cc
 {
 	width:200px;
+}
+
+.course-single-section
+{
+}
+
+
+.enrol-btn
+{
+	float: right;
+}
+
+.checkout-buttons
+{
+	width:48%;
+}
+
+.coupon-code
+{
+	width:48%;
 }
 
 /* ==========================================================================
@@ -1456,6 +1510,19 @@ p.cc
 		height:300px;
 	}
 	
+	.register-area{
+		float:none !important;
+		margin:0 auto !important;
+		width:190px !important;
+	}
+	
+	
+	.course-single-section
+	{
+		clear:both;
+		float:left;
+	}
+	
 	.call-us
 	{
 		text-align:center;
@@ -1493,6 +1560,13 @@ p.cc
 	{
 		float: none;
 		margin: 0 auto;
+		
+		width:215px;
+	}
+	
+	#search
+	{
+		width:175px !important;
 	}
 	
 	.logo
@@ -1500,6 +1574,13 @@ p.cc
 		width:245px !important;
 		margin:0 auto !important;
 	}
+	
+	.nus-res img
+	{
+		width:97% !important;
+		height:auto !important;
+	}
+	
 	
 	.checkout-res
 	{
@@ -1521,13 +1602,15 @@ p.cc
 	
 	.filters-menu
 	{
-		top:55%;
+		top:155px;
 		right:0;
 	}
 	
-	.checkout-btn
+	.livechat-btn
 	{
-		
+		float:none !important;
+		width:92px !important;
+		margin:0 auto !important;
 	}
 	
 	.cart
@@ -1556,13 +1639,64 @@ p.cc
 	}
 	
 	
-}
+	#all-c img 
+	{
+		width:97% !important;
+		height:auto !important;
+	}
+	
+	#courses
+	{
+		font-size:0.9em !important;
+	}
+	
+	.enrol-btn
+	{
+		float: right;
+		margin-right:0px;
+		
+	}
+	
 
 @media all and (max-width: 540px) {
 	
 	.col6 h1
 	{
 		font-size:1.3em;
+	}
+	
+	.enrol-btn
+	{
+		float: left;
+		clear:both;
+		margin-right:0px;
+		
+	}
+	
+	.chk
+	{
+		
+	}
+	
+	.nus-res img
+	{
+		width:95% !important;
+		height:auto !important;
+	}
+	
+	.price-op
+	{
+		width:85% !important;
+	}
+	
+	.details
+	{
+		width:90%;	
+	}
+	
+	#courses
+	{
+		font-size:0.7em !important;
 	}
 	
 	.twitter-res ul li
@@ -1574,6 +1708,16 @@ p.cc
 	{
 		width:90% !important;
 	}
+	
+	#all-c img 
+	{
+		width:94% !important;
+		height:auto !important;
+	}
+	
+	.pages ul li a {
+		padding:0px 24px !important;
+	}
 }
 
 @media all and (max-width: 320px) {
@@ -1581,6 +1725,33 @@ p.cc
 	.col6 h1
 	{
 		font-size:1em;
+	}
+	
+	.nus-res img
+	{
+		width:90% !important;
+		height:auto !important;
+	}
+	
+	.single-course-details img
+	{
+		width:90% !important;
+	}
+	
+	.details
+	{
+		width:84%;	
+	}
+
+	
+	.pages ul li a {
+		padding:0px 7px !important;
+	}
+	
+	#all-c img 
+	{
+		width:91% !important;
+		height:auto !important;
 	}
 	
 	.twitter-res ul li

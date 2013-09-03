@@ -330,8 +330,8 @@ class Products extends Admin_Controller {
 		$remove_products	= $this->input->post('remove_products');
 		$courses = $this->input->post('courses');
 		
-		/*if($remove_products)
-		{*/
+		if($remove_products)
+		{
 			if(!empty($courses) && count($courses)>0)
 			{
 				
@@ -353,13 +353,13 @@ class Products extends Admin_Controller {
 					}
 				}
 				redirect($this->config->item('admin_folder').'/products');
-			}/*
+			}
 			else
 			{
 				$this->session->set_flashdata('remove_product_err',  'Please select atleast one product to remove.');
 				redirect($this->config->item('admin_folder').'/products');
-			}*/
-		//}
+			}
+		}
 		
 		if(!$products)
 		{
@@ -595,7 +595,7 @@ class Products extends Admin_Controller {
 		$this->form_validation->set_rules('slug', 'lang:slug', 'trim');
 		$this->form_validation->set_rules('description', 'lang:description', 'trim');
 		$this->form_validation->set_rules('excerpt', 'lang:excerpt', 'trim');
-		$this->form_validation->set_rules('price_options', 'lang:price', 'required');
+		//$this->form_validation->set_rules('price_options', 'lang:price', 'required');
 		$this->form_validation->set_rules('enabled', 'lang:enabled', 'trim');
 		$this->form_validation->set_rules('meta_key', 'meta_key', 'trim');
 		$this->form_validation->set_rules('img_title', 'Image Title', 'trim');
@@ -842,6 +842,25 @@ class Products extends Admin_Controller {
 		$data['error']	= false;
 		$this->load->view($this->config->item('admin_folder').'/iframe/product_image_uploader', $data);
 	}
+	
+	 function product_view($id) {
+		
+		$data['products'] 			= $this->Product_model->get_product($id, $related=true);
+		$data['price_option'] 		= $this->Product_model->get_price_option($id);
+		$data['product_tabs'] 		= $this->Product_model->get_all_products_tabs($id);
+		$data['all_price_options']	= $this->Product_model->get_price_options();
+		$data['related_products']	= $data['products']->related_products;
+		$data['price_options']		= $data['products']->json_price;
+		//$this->show->pe();
+		//$data['product_tabs_detail'] = $this->Product_model->get_product_tab_detail($tab_id);
+		
+		//$this->show->pe($data['product_tabs']);
+		
+		$this->load->view($this->config->item('admin_folder').'/includes/header');
+        $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
+        $this->load->view($this->config->item('admin_folder').'/product_view', $data);
+        $this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
+	} 
 	
 	function product_image_upload($path_image, $image_name)
 	{
@@ -1112,6 +1131,14 @@ class Products extends Admin_Controller {
 			return true;
 	
 	}
+	
+	// HARD DELETE PRODUCT
+	function permanent_delete($id)
+    {
+        $product    = $this->Product_model->get_product($id);
+        $product    = $this->Product_model->delete_product($id , $product->route_id);
+        redirect($this->config->item('admin_folder').'/products');
+    }
 	
 	// SOFT DELETE PRODUCT
 	function delete($id = false)

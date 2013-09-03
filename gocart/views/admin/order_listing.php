@@ -217,11 +217,10 @@ $code=0;
 							<div class="btn-group inline">
 							  <button class="btn btn-warning dropdown-toggle" data-toggle="dropdown"><?php echo $order->status;?><span class="caret"></span></button>
 							  <ul class="dropdown-menu" style="text-align:left;">
-								<li><a href="<?=base_url().$this->config->item('admin_folder').'/order/order_paid_status/pending/'?>">Pending</a></li>
-								<li><a href="<?=base_url().$this->config->item('admin_folder').'/order/order_paid_status/processing/'?>">Processing</a></li>
-								<li><a href="<?=base_url().$this->config->item('admin_folder').'/order/order_paid_status/cencelled/'?>">Cancelled</a></li> 
-								<li><a href="<?=base_url().$this->config->item('admin_folder').'/order/order_paid_status/delivered/'?>">Delivered</a></li>                       
-							  </ul>
+								<li><a href="<?=base_url().$this->config->item('admin_folder').'/order/order_paid_status/Pending/'.$order->id?>">Pending</a></li>
+								<li><a href="<?=base_url().$this->config->item('admin_folder').'/order/order_paid_status/Processing/'.$order->id?>">Processing</a></li>
+								<li><a href="<?=base_url().$this->config->item('admin_folder').'/order/order_paid_status/Cencelled/'.$order->id?>">Cancelled</a></li> 
+								<li><a href="<?=base_url().$this->config->item('admin_folder').'/order/order_paid_status/Delivered/'.$order->id?>">Delivered</a></li>                     		</ul>
 							</div>				   
 							</td>
 							<td><?php echo format_currency($order->total); ?></td>

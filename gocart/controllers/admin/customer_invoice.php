@@ -449,7 +449,7 @@ class Customer_Invoice extends Admin_Controller {
     }
 	
 	
-	function pdf_view($invoice_id, $template_id)
+	/*function pdf_view($invoice_id, $template_id)
 	{
 			
 		prep_pdf();
@@ -547,5 +547,151 @@ class Customer_Invoice extends Admin_Controller {
 		$this->mpdf->WriteHTML($html_output);
 		$this->mpdf->Output();
 		exit;
+	}                                   */
+	
+function pdf_view($invoice_id, $template_id)
+    {
+            
+        prep_pdf();
+        $invoice_footer     = '';
+        $invoice_header     = '';
+        $html_output         = '';   
+        $mpdf =  new mPDF('utf-8', array(150,210)); 
+        $mpdf->SetHeader('{DATE d-m-Y}|{PAGENO}|Customer Invoice');
+        //echo $template_id; 
+        $selected_template      = $this->Invoice_Template_model->get_templates_by_for_invoice($template_id);
+        
+        $invoice_items          = $this->Customer_Invoices_model->get_invoice_items_by_invoice_id($invoice_id);
+        $invoice_totals         = $this->Customer_Invoices_model->get_invoice_totals($invoice_id);
+        $customer_details     = $this->Customer_Invoices_model->get_invoice_customerss($invoice_id);
+       // 
+      // $this->show->pe($invoice_items);  
+        $billing_country = $this->Location_model->get_country($customer_details->country);
+        $billin_state = $this->Location_model->get_zone($customer_details->state); 
+      
+        $image1 = base_url().'uploads/images/full/inovicewatermark.png';
+
+        $logo = base_url().'uploads/images/full/thumb_1.png';   
+        $html_output .= '<div style="width:100%;"><div style="width:40%; float:left; margin-top:-20px"><img height="100" width="100" src="'.$logo.'"/></div><div  style="font-size:9px;width:60% ; float:right ;text-align:right; margin-top:20px">Company Registered in England & Wales: 06130321<br/>VAT Registration No: GB 934 3067 30<br/>
+         UK Registered Learning Provider Number: 10021848 </div></div>'; 
+        $r_tag_one = htmlspecialchars_decode($selected_template->invoice_template_header);
+        
+        $html_output         .= $r_tag_one;
+           $mpdf->SetWatermarkImage($image1,0.3,'190','215');
+                //$this->mpdf->SetWatermarkText('UKOPENCOLLEGE', 0.1);
+               $mpdf->showWatermarkImage = true  ;
+        $html_output         .='                  
+                <div class="box paint color_24" style="opacity:1.0; font-size:12px;" >
+                <div class="accordion" id="accordion4">
+                  <div class="accordion-group">
+                    <div class="accordion-heading"><b>Billing Address</b></div>
+                    <div id="collapseOne2" class="accordion-body collapse in" >
+                      <div class="accordion-inner">
+                        <div class="pull-left">
+                          <span>'.$customer_details->firstname .' '.$customer_details->lastname . '<br/>
+                          '.$customer_details->city . ' '. $customer_details->post_code . ' '. $billin_state->name . ' '. $billing_country->name . '<br/> 
+                          <span><strong>'.lang('invoice_phone').':</strong>'.$customer_details->phone.' </span><br>
+                          <span><strong>'.lang('invoice_email').':</strong> '.$customer_details->email.'</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>';
+        $html_output         .= '<br><br>';
+        $html_output         .='                  
+                <div class="box paint color_24" style="opacity:1.0; font-size:12px;" >
+                <div class="accordion" id="accordion4">
+                  <div class="accordion-group">
+                    <div class="accordion-heading"><b>Personal Address</b></div>
+                    <div id="collapseOne2" class="accordion-body collapse in" >
+                      <div class="accordion-inner">
+                        <div class="pull-left">
+     <span>'.$customer_details->firstname .' '.$customer_details->lastname . '<br/>
+                          '.$customer_details->city . ' '.$customer_details->post_code . ' '.$billin_state->name . ' '.$billing_country->name . '<br/> 
+                          <span><strong>'.lang('invoice_phone').':</strong>'.$customer_details->phone.' </span><br>
+                          <span><strong>'.lang('invoice_email').':</strong> '.$customer_details->email.'</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>';
+        
+        $html_output         .= '<table id="item_table" class="items table table-striped table-bordered" style="width:100%;font-size:12px; "  cellpadding="10" cellspacing="10" >
+                                <thead>
+                                  <tr>
+                                    <th>'.lang('item').'</th>
+                                    <th >'.lang('description').'</th>
+                                    <th >'.lang('quantity').'</th>
+                                    <th >'.lang('price').'</th>                                    
+                                    <th>'.lang('subtotal').'</th>                                    
+                                    <th>'.lang('total').'</th>
+                                    <th>'.$invoice_data->invoice_id.'</th>                        
+                                  </tr>
+                                </thead>
+                                <tbody>';
+                                
+                                if(!empty($invoice_items)){
+                                    foreach ($invoice_items as $invoice_item){
+                                     $html_output         .=  '
+                                      <tr id="new_item" >
+                                        <td style="vertical-align: top;">'.$invoice_item['item_name'].'</td>
+                                        <td>'.$invoice_item['item_description'].'</td>
+                                        <td style="vertical-align: top;">'.$invoice_item['item_quantity'].'</td>
+                                        <td style="vertical-align: top;">'.format_currency($invoice_item['item_price']).'</td>                    
+                                        <td style="vertical-align: top;">'.format_currency($invoice_item['item_subtotal']).'</td>                                        
+                                        <td style="vertical-align: top;">'.format_currency($invoice_item['item_total']).'</td>
+                                        <td></td>
+                                      </tr>';
+                                    } 
+                                }
+                                    
+        $html_output         .=     '</tbody>
+                              </table><br>';
+        
+        
+         if(!empty($invoice_totals)){
+            $html_output         .= '<table class="table table-striped table-bordered"  cellpadding="10" cellspacing="10" style="font-size:12px; margin-top: -33px;">
+                                <thead>
+                                    <tr>
+                                        <th>'.lang('subtotal').'</th>                                                                
+                                        <th>'.lang('total').'</th>                            
+                                    </tr>
+                                </thead>
+                                <tbody>                    
+                                    <tr>
+                                        <td>'.format_currency($invoice_totals[0]['invoice_item_subtotal']).'</td>                                                                
+                                        <td>'.format_currency($invoice_totals[0]['invoice_total']).'</td>                            
+                                    </tr>
+                                </tbody>
+                            </table>';
+                }
+                 
+        $html_output         .= '<p><strong>'.lang('invoice_terms').'</strong></p><p>'.$invoice_data->invoice_terms.'</p>';
+        $r_tag_two             = htmlspecialchars_decode(stripcslashes($selected_template->invoice_template_footer)); 
+        $html_output         .= $r_tag_two;
+        
+       // echo $html_output;exit;
+        $mpdf->WriteHTML($html_output);
+        $mpdf->Output();
+        exit;
+    }
+	function view_student_recurring_invoices() {
+	
+	    
+        $data['rec_invoices']    		= $this->Customer_Invoices_model->get_recurring_invoices();
+		$data["partial_customer_order"] = $this->order_model->get_partial_customer_orders();
+		
+		if(empty($data["partial_customer_order"]))
+		{
+			$this->session->set_flashdata('message', 'Currently there is no recurring invoice record');
+		}
+		//$this->show->pe($data["partial_customer_order"]); exit;
+		//echo "<pre>"; print_r($data['rec_invoices']);exit;
+        $this->load->view($this->config->item('admin_folder').'/includes/header');
+        $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
+        $this->load->view($this->config->item('admin_folder').'/customer_invoice/student_recurring_invoice', $data);
+        $this->load->view($this->config->item('admin_folder').'/includes/inner_footer');
 	}
 } 

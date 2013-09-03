@@ -16,24 +16,23 @@ $config['ssl_support']		= false;
 
 // Business information
 
-$config['company_name']		= 'UKOpenCollege';
+$config['company_name']		= 'UK OPEN COLLEGE';
 
-$config['address1']			= 'lahore';
+$config['address1']			= 'UK OPEN COLLEGE, 4, Copthall House The Meridian, Station Square, Coventry CV1 2FL United Kingdom Tel: 01827 283735';
 
-$config['address2']			= 'lahore';
+$config['address2']			= 'UK OPEN COLLEGE, 4, Copthall House The Meridian, Station Square, Coventry CV1 2FL United Kingdom Tel: 01827 283735';
 
-$config['country']			= 'Pakistan'; // use proper country codes only
+$config['country']			= 'United Kingdom'; // use proper country codes only
 
-$config['city']				= 'lahore'; 
+$config['city']				= 'Coventry'; 
 
-$config['state']			= 'Alberta';
+$config['state']			= 'Station Square';
 
-$config['zip']				= '54000';
+$config['zip']				= 'CV1 2FL';
 
-$config['email']			= 'weprosol@gmail.com';
-$config['bcc_email']		= 'khalil.junaid@gmail.com';
+$config['email']			= 'info@ukopencollege.co.uk';
+$config['bcc_email']		= 'khalil.junaid@gmail.com,a.ali@weprosolutions.co.uk,info@ukopencollege.co.uk';
 $config['email_template']	= 'default';
-
 
 // Store currency
 

@@ -33,7 +33,7 @@
 				?>
 				<label for="description"><?php echo lang('footer_html');?></label>
 				<?php
-					$data    = array('name'=>'invoice_template_footer', 'id'=>'invoice_template_footer',  'class'=>'redactor', 'value'=>set_value('invoice_template_footer', $invoice_template_footer));
+					$data    = array('name'=>'invoice_template_footer', 'id'=>'invoice_template_footer',  'class'=>'redactor', 'value'=>set_value('invoice_template_footer', stripslashes($invoice_template_footer)));
 					echo form_textarea($data);
 				?>
 				<?php /*?><h2><?php echo lang('level');?></h2><?php */?>

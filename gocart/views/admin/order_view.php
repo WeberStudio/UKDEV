@@ -9,6 +9,7 @@
             <h4> <i class=" icon-bar-chart"></i><span>Order View 
 			<a class="btn" title="<?php echo lang('send_email_notification');?>" onclick="$('#notification_form').slideToggle();"><i class="icon-envelope"></i> <?php echo lang('send_email_notification');?></a>
 			<a class="btn" href="<?php echo site_url('admin/order/packing_slip/'.$order->id);?>" target="_blank"><i class="icon-file"></i><?php echo lang('packing_slip');?></a>
+			<a class="btn" href="<?php echo site_url('admin/order/pdf_view/'.$order->id);?>" target="_blank"><i class="icon-file"></i><?php echo 'Student Invoice';?></a> 
 			
 			</span></h4>
             <div class="content top">
@@ -113,8 +114,7 @@
 						?>
 					
 					</td>
-					<td>
-						
+					<td>						
 					</td>
                     <td><?php echo $order->tax.'%';?></td>
 					<td>

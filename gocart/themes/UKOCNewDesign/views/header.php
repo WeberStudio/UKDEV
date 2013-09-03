@@ -9,12 +9,12 @@
 
         <div class="col12 menu-responsive">
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">All Courses</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Tutors</a></li>
-                <li><a href="#">FAQs</a></li>
-                <li><a href="#">contact us</a></li>  
+                <li><a href="<?= base_url();?>cart">Home</a></li>
+                <li><a href="<?=base_url()?>cart/allcourses">All Courses</a></li>
+                <li><a href="<?=base_url()?>blog">Blog</a></li>
+                <li><a href="<?=base_url()?>tutors">Tutors</a></li>
+                <li><a href="<?=base_url()?>faq">FAQs</a></li>
+                <li><a href="<?=base_url()?>contact-us1">contact us</a></li>  
             </ul>
 
         </div>
@@ -23,10 +23,10 @@
 
     <!-- main site nav -->
     <nav class="onerow" id="nav-menu">
-        <div class="col10" id="top-menu">
+        <div class="col9" id="top-menu">
             <ul>
                 <li <?php if(isset($menu_blue) && $menu_blue == 'home'){echo 'class="current-menu-item"';}?> ><a href="<?= base_url();?>cart">Home</a></li>
-                <li <?php if(isset($menu_blue) && $menu_blue == 'allcourses'){echo 'class="current-menu-item"';}?> id="all-courses"><a href="#">All Courses</a></li>
+                <li <?php if(isset($menu_blue) && $menu_blue == 'allcourses'){echo 'class="current-menu-item"';}?> id="all-courses"><a href="<?=base_url()?>cart/allcourses">All Courses</a></li>
                 <li><a href="<?=base_url()?>blog">Blog</a></li>
                 <li <?php if(isset($menu_blue) && $menu_blue == 'tutors'){ echo 'class="current-menu-item"';}?> ><a href="<?=base_url()?>tutors">Tutors</a></li>
                 <li <?php if(isset($menu_blue) && $menu_blue == 'faq'){echo 'class="current-menu-item"';}?> ><a href="<?=base_url()?>faq">FAQs</a></li>
@@ -35,22 +35,22 @@
             </ul>
         </div>
 
-        <div class="col3" style="width: 200px;">
+        <div class="col3 register-area">
             <?php 
                 if($this->Customer_model->is_logged_in(false, false) || $this->Tutor_model->is_logged_in(false, false)){                   
                 ?>
-                
+
                 <?php if($this->Tutor_model->is_logged_in(false, false)){?>
-                <p class="button"><a class="" href="<?php echo site_url('tutor_login/logout');?>">logout</a></p>
-                <?php }else{ ?>
-                  <p class="button"><a class="" href="<?php echo site_url('secure/logout');?>">logout</a></p> 
-                <?php }?>
+                    <p class="button"><a class="" href="<?php echo site_url('tutor_login/logout');?>">logout</a></p>
+                    <?php }else{ ?>
+                    <p class="button"><a class="" href="<?php echo site_url('secure/logout');?>">logout</a></p> 
+                    <?php }?>
                 <p class="button" style="margin-left: 10px;"><a  class="" href="<?php echo site_url('dashboard');?>">Dashboard</a></p>
                 <?php }
-                
+
                 else{?>
-                
-               <p class="button"> <a  class="" href="<?php echo site_url('secure/login');?>">login</a> </p>
+
+                <p class="button"> <a  class="" href="<?php echo site_url('secure/login');?>">login</a> </p>
                 <p class="button" style="margin-left: 10px;"> <a   class="" href="<?php echo site_url('secure/register'); ?>">Registration</a> </p>
                 <?php }?> 
 
@@ -65,7 +65,7 @@
         </div>
 
 
-        <div class="sub-menu-slider">
+       <div class="sub-menu-slider">
 
             <div id="ca-container" class="ca-container">
                 <div class="ca-wrapper">
@@ -110,33 +110,27 @@
 
     </div><!-- /sub menu -->
 
-
-
-
-
-
-
     <!-- section -->
     <section class="onerow">
         <article class="col4 logo">
-            <a href="<?= base_url();?>cart"><img src="<?php echo theme_assets('img/logo-ukoc.png');?>" width="244" alt="Uk Open College" /></a>
+            <a href="<?=base_url()?>cart"><img src="<?php echo theme_assets('img/logo-ukoc.png');?>" width="244" alt="Uk Open College" /></a>
         </article>
 
         <article class="col3 checkout-res">
-            <div class="cart" style="margin-left: 41px;">
-                <a href="<?= base_url().'cart/view_cart';?>">
+            <div class="cart">
+                <a href="<?=base_url().'cart/view_cart'?>">
                     <p class="cart_text">
                         <span class="cart_img">
-                            <img src="<?=theme_assets('images/cart.png');?>" alt="" />
+                            <img src="<?=theme_assets('images/cart.png')?>" alt="" />
                         </span>
-                        There are (<?=$this->go_cart->total_items();?>) item in your cart
+                        There are (<?=$this->go_cart->total_items()?>) item in your cart
                     </p>
                 </a>
 
                 <p class="button checkout-btn"><a href="<?=base_url().'cart/view_cart';?>">checkout</a></p>
             </div>
-          
-        
+
+
         </article>
 
         <script type="text/javascript">
@@ -164,11 +158,11 @@
 
         </script>   
         <article class="col5 filters-res">
-             <div class="call-us" >
-                <h3 style="color: red;margin-bottom: 0px;" class="">Call us on <span style="color: red;" class="light-blue">0121 288 0181</span><br /> to talk to a course advisor</h3>
-               
+            <div class="call-us" >
+                <h2 style="color: red;margin-bottom: 0px;margin-bottom: -35px;" class="">Call us on <span style="color: red;" class="light-blue">0121 288 0181</span></h2><br /><h3 style="color: red;margin-right: 14px;margin-bottom: -35px;" class=""> Mon - Fri 10am  - 7.30pm</h3><br /><h3 style="color: red;margin-right: 35px;" class=""> Weekends - Closed</h3>
+
             </div>
-            <form style="width: 415px;"  method="post" name="search_form" id="search-form" action="<?=base_url().'search'?>">
+            <form method="post" name="search_form" id="search-form" action="<?=base_url().'search'?>">
                 <input name="search_field" type="text" id="search" value="" />
                 <input type="hidden" value="" name="search_by" class="" id="search_by">
                 <input type="submit" name="sear"  class="button" value="Search" />
@@ -195,20 +189,19 @@
                 </ul>
 
             </div>
-           
-             
-            
-        </article>
-        
+
+
+
+        </article>  
 
     </section>
-    
- <p class="button checkout-btn" style=" margin-right: 22px !important; float: right; margin-bottom: 10px;">
-             <a href="http://87.106.234.213/livechat/client.php?locale=en&amp;style=simplicity" target="_blank" onClick="if(navigator.userAgent.toLowerCase().indexOf('opera') != -1 &amp;&amp; window.event.preventDefault) window.event.preventDefault();this.newWindow = window.open('http://87.106.234.213/livechat/client.php?locale=en&amp;style=simplicity&amp;url='+escape(document.location.href.replace('http://','').replace('https://',''))+'&amp;referrer='+escape(document.referrer.replace('http://','').replace('https://','')), 'webim', 'toolbar=0,scrollbars=0,location=0,status=1,menubar=0,width=640,height=480,resizable=1');this.newWindow.focus();this.newWindow.opener=window;return false;">
-                   Live Chat
-                    </a>
-          </p>
-    
+
+    <p class="button livechat-btn">
+        <a href="http://www.ukopencollege.co.uk/livechat/client.php?locale=en&amp;style=simplicity" target="_blank" onClick="if(navigator.userAgent.toLowerCase().indexOf('opera') != -1 &amp;&amp; window.event.preventDefault) window.event.preventDefault();this.newWindow = window.open('http://www.ukopencollege.co.uk/livechat/client.php?locale=en&amp;style=simplicity&amp;url='+escape(document.location.href.replace('http://','').replace('https://',''))+'&amp;referrer='+escape(document.referrer.replace('http://','').replace('https://','')), 'webim', 'toolbar=0,scrollbars=0,location=0,status=1,menubar=0,width=640,height=480,resizable=1');this.newWindow.focus();this.newWindow.opener=window;return false;">
+            Live Chat
+        </a>
+    </p>
+
     <!-- /section -->
 
 </header>

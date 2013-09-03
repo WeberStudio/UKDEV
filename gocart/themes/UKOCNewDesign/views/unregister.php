@@ -35,14 +35,19 @@
                      
                    </div>
                  </div><!-- end seperator row -->
+                 
+                 
+                 
                  <div class="onerow">
                      <div class="col12">
+                        
+                        
                         <h2>Thank You for choosing UK Open College!</h2>
                         <p>Please choose one of the following checkout methods</p>
                         <div class="col6" style="padding:10px; margin-left: 1px; height: 360px;" id="customer_login">
                         
                           <div class="col12" >
-                            <h2 id="heading">Customer Login</h2>
+                            <h2 id="heading" style="color:#FFFFFF !important">Customer Login</h2>
                                 <form class="bs-docs-example form-horizontal" accept-charset="utf-8" method="post" action="<?=base_url()?>secure/login">   
                                   <p class="username">
                                   User Email Address
@@ -58,7 +63,7 @@
                                     <input type="submit" name="submitted" value="Submit" class="button" />  
                                   </p>
                                   
-                                  <a class="align-left" href="#">Forget password?</a>
+                                  <a class="align-left" href="#" style="color:#FFFFFF !important">Forget password?</a>
                                 </form>
                            </div><!-- end col12 -->
                               
@@ -66,16 +71,27 @@
                         
                         
                         <div class="col6" style="padding:10px; width: 500px; height:160px;" id="checkout_account">
-                            <h2 class="without">Checkout without Account</h2>
+                            <h2 class="without" style="color:#FFFFFF !important">Checkout without Account</h2>
                             
                             <p class="button center-btn" style="margin-left:208px;"><a href="<?=base_url().'checkout';?>">Checkout</a></p>
                         </div>
                         <div class="col6" style="padding:10px; width: 500px; margin-top:15px; height:160px;" id="customer_signup">
-                            <h2 class="without">Customer Signup</h2>
+                            <h2 class="without" style="color:#FFFFFF !important">Customer Signup</h2>
                             <p class="button center-btn" style="margin-left:208px;"><a href="<?=base_url().'secure/register';?>"> Sign Up here!</a></p>
                         </div>
+                        
+                        
+                        
+                        
                     </div><!-- end col12 -->
+                   
                  </div><!-- end one row -->
+                 
+                 
+                                   
+                 
+                 
+                 
           </section>         
             <div class="clear"></div>
             

@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database', 'session', 'auth', 'go_cart', 'show', 'Dropdown_Menu');
+$autoload['libraries'] = array('database', 'session', 'auth', 'go_cart', 'show', 'Dropdown_Menu','sagepay_direct','Curl');
 
 
 /*

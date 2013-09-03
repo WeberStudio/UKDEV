@@ -57,7 +57,7 @@ Class Customer_model extends CI_Model
 				}
 			}
 		
-		
+
 		$result	= $this->db->get('customers');
 		if($cvs !="")
 		{
@@ -458,7 +458,7 @@ Class Customer_model extends CI_Model
 	    JOIN oc_country_zones 
 	    ON oc_customers.state = oc_country_zones.id 
 	    WHERE oc_customers.id = '".$id."'");
-	    //echo $this->db->last_query(); exit;
+	    // echo $this->db->last_query();
 	    return $result->result();
 	}                  
     

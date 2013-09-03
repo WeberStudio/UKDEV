@@ -146,7 +146,7 @@ if(validation_errors() != '')
                 </div>
                 <h3>Credit/Debit Card Information</h3> 
 
-                <form action="<?=base_url()?>checkout/place_order_paypal_pro" method="POST" autocomplete="on" class="padding-left-right">
+                <form action="https://www.ukopencollege.co.uk/checkout/place_order_paypal_pro" method="POST" autocomplete="on" class="padding-left-right">
                     <p class="username">
                         Name as on Card
                     </p>
@@ -169,7 +169,7 @@ if(validation_errors() != '')
                         <p class="username"> Card Expiry Month</p>
                         <?php 
                             $option    = array(''=>'Select Month','01'=>'January','02'=>'February' ,'03'=>' March' ,'04'=>'April' ,'05'=>'May' ,'06'=>'  June','07'=>'July' ,'08'=>'August' ,'09'=>'September' ,'10'=>'October' ,'11'=>'November' ,'12'=>'December');
-                            echo form_dropdown('select_month',$option,'', 'class="select-country-state"');    
+                            echo form_dropdown('select_month_exp',$option,'', 'class="select-country-state"');    
 
                         ?>
                     </div>
@@ -178,8 +178,8 @@ if(validation_errors() != '')
                         <p class="username"> Card Expiry Year</p>
                         
                         <?php
-                            $option    = array(''=>'Select Year','2013'=>'2013','2014'=>'2014' ,'2015'=>' 2015' ,'2016'=>'2016' ,'2017'=>'2017' ,'2018'=>' 2018','2019'=>'2019' ,'2020'=>'2020' ,'2021'=>'2021' ,'2022'=>'2022');
-                            echo form_dropdown('select_year',$option, '', 'class="select-country-state"');
+                            $option    = array(''=>'Select Year','13'=>'2013','14'=>'2014' ,'15'=>' 2015' ,'16'=>'2016' ,'17'=>'2017' ,'18'=>' 2018','19'=>'2019' ,'20'=>'2020' ,'21'=>'2021' ,'22'=>'2022');
+                            echo form_dropdown('select_year_exp',$option, '', 'class="select-country-state"');
                         ?>
                     </div>
                     
@@ -207,7 +207,7 @@ if(validation_errors() != '')
 
 
                     <p class="submit" style="margin-right:25px;">
-                        <input type="submit" value="Checkout" class="button" />
+                        <input type="submit" value="Purchase" class="button" />
                     </p>
 
 

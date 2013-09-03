@@ -1,51 +1,51 @@
 //don't hide if mouse is hovering over all-courses
-
-$('#all-courses').hover(function(e){
-	
-	e.preventDefault();
-	
-	if($("#sub-menu").outerHeight() != 0)
-	{
-		submenuhide();
-	}else
-	{
-		submenushow();
-	}
+                                            $('#all-courses').hover(function(e){
+    
+    e.preventDefault();
+    
+    if($("#sub-menu").outerHeight() != 0)
+    {
+        submenuhide();
+    }else
+    {
+        submenushow();
+    }
 }, function() {
-	
-		submenuhide();
-	});
+    
+        submenuhide();
+    });
 
 //don't hide if mouse is hovering over sub-menu
 
 $('#sub-menu').hover(function(e){
-	
-	e.preventDefault();
-	
-	if($("#sub-menu").outerHeight() >0)
-	{
-		submenushow();
-	}else
-	{
-		submenuhide();
-	}
+    
+    e.preventDefault();
+    
+    if($("#sub-menu").outerHeight() >0)
+    {
+        submenushow();
+    }else
+    {
+        submenuhide();
+    }
 }, function() {
-	
-		submenuhide();
-	});
+    
+        submenuhide();
+    });
 
-	
+    
 function submenushow(){
-	
-	$("#sub-menu").stop().animate({
-		height: "195px",
-	},300);
+    
+    $("#sub-menu").stop().animate({
+        height: "195px",
+    },300);
 };
-function submenuhide(){	
-	$("#sub-menu").stop().animate({
-		height: "0px",
-	},300);
+function submenuhide(){    
+    $("#sub-menu").stop().animate({
+        height: "0px",
+    },300);
 };
+
 
 /*$(".search-btn").click(function(e){
 	e.preventDefault();
@@ -123,6 +123,7 @@ $('ul.tabs').each(function(){
 
 
 // views
+
 
 $("#list-view").click(function()
 {

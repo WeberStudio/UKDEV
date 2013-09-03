@@ -203,5 +203,20 @@ class Default_Emails extends Admin_Controller {
 		}
 	}
 	
+	function view_email_template($id) {
+	        
+			$email_attributes = $this->Settings_model->join_email_table($id);
+			$message  = '';
+            //
+            $button = "<br /><a style='border: #ed1b24 1px solid; color: white; background-color: #ed1b24; padding: 18px 5px 0px 5px;' href = '".base_url()."admin/default_emails'> <b>Back to Email Templates </b></a>";
+			$message .= $button;
+            $message .= stripslashes($email_attributes[0]['email_header']);
+			$message .= '<tr><td>Dear John Smith!'.'<br>'.stripslashes($email_attributes[0]['middle_content']).'<br><br>Username: example@example.co.uk <br>Password: example';  
+			$message .= stripslashes($email_attributes[0]['email_footer']);
+            
+			
+			echo $message;
+		
+	}
 	
 }

@@ -1,4 +1,4 @@
-/* *********************************************************************************************************************
+﻿/* *********************************************************************************************************************
 	One% CSS Grid - 12 Columns Fluid CSS Grid System
 
 	Why One% ? Let’s count ...
@@ -98,7 +98,7 @@
 	/*width: 100%;*/
     
 	height: auto;
-	display: block;
+	/*display: block;*/
 }
 
 
@@ -157,7 +157,7 @@ div#customer_login a {
 div#customer_login input {
 	
 	border-radius: 5px;
-	text-align:center;
+	/*text-align:center;*/
 }
 
 div#customer_login h2#heading {

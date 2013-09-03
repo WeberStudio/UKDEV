@@ -183,6 +183,23 @@ class tutor extends Admin_Controller {
 
     }
 	
+	function tutor_view($id) {
+		
+		$data["tutor"] 		= $this->Tutor_model->get_tutor($id);
+		$data["tutor_q"] 	= $this->Tutor_model->get_tutor_attributes('oc_tutor_qualification', $id);
+		$data["tutor_d"] 	= $this->Tutor_model->get_tutor_attributes('oc_tutor_designation', $id);
+		$data["tutor_a"] 	= $this->Tutor_model->get_tutor_attributes('oc_tutor_achievement', $id);
+		$data['all_categories']		= $this->Category_model->get_categories_dropdown();
+		$data['all_courses']		= $this->Product_model->get_all_products_array();
+		$data['categories']	= $data["tutor"]->categories;
+		$data['courses']	= $data["tutor"]->courses;
+		
+		$this->load->view($this->config->item('admin_folder').'/includes/header');
+        $this->load->view($this->config->item('admin_folder').'/includes/leftbar');
+        $this->load->view($this->config->item('admin_folder').'/tutor/tutor_view', $data);
+        $this->load->view($this->config->item('admin_folder').'/includes/inner_footer');		
+	}
+	
 	function form($id = false)
 	{
 		
