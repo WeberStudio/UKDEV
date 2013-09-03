@@ -1,0 +1,149 @@
+#main{padding:0 0 0 0;width:100%;float:left;clear:right}
+*{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+.container:before,.container:after{display:table;content:"";line-height:0}
+
+.container:after{clear:both}
+#main .container{overflow:hidden;-webkit-border-radius:0px;-moz-border-radius:0px;border-radius:0px;-webkit-box-shadow:0px 0px 0px 0px #afafaf;-moz-box-shadow:0px 0px 0px 0px #afafaf;box-shadow:0px 0px 0px 0px #afafaf}
+#main>.container{float:left;width:100%}
+.container{width:100%;padding:0px;background:#fff}
+ .container,.navbar-static-top .container,.navbar-fixed-top .container,.navbar-fixed-bottom .container{width:720px}
+ .container{margin-right:auto;margin-left:auto;*zoom:1}
+ .row-fluid:not(.fluid):before,.row-fluid:not(.fluid):after{display:table;content:"";line-height:0}
+
+.row-fluid:not(.fluid):after{clear:both}
+.row-fluid:not(.fluid){width:100%;*zoom:1}
+.row-fluid:before,.row-fluid:after{display:table;content:"";line-height:0}
+.row-fluid:after{clear:both}
+.row-fluid{*zoom:1}
+#main .top_right ul>li ul.messages .heading .link{float:right}
+.row-fluid:not(.fluid)>[class*="span"]:first-child{margin-left:0;padding-left:0}
+.row-fluid:not(.fluid)>[class*="span"]{display:block;width:100%;min-height:30px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;float:left;margin-left:0%;*margin-left:-0.06944%;padding-left:20px}
+.span3{width:180px}
+.row-fluid>[class*="span"]:first-child{margin-left:0;padding-left:0}
+.row-fluid:not(.fluid) .span3{width:25.0%;*width:24.93056%}
+.row-fluid .span3{width:25.0%;*width:24.93056%}
+[class*="span"]{float:left;min-height:1px;padding-left:20px}
+.legend:before,fieldset legend:before,.legend:after,fieldset legend:after{display:table;content:"";line-height:0}
+.legend:after,fieldset legend:after{clear:both}
+.legend,fieldset legend{*zoom:1;display:block;clear:both;margin:0 0 13px;padding:0 22px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border:0;border-top:1px solid #e5e5e5;background:#f5f5f5;color:#7e838b;font-size:13px;font-size:1.3rem;font-weight:bold;line-height:4em;vertical-align:middle}
+
+hr{margin:20px 0;border:0;border-top:1px solid #eee;border-bottom:1px solid #fff}
+
+ul.unstyled,ol.unstyled{margin-left:0;list-style:none}
+ul,ol{padding:0;margin:0 0 10px 25px}
+li{line-height:20px}
+li [class^="icon-"],li [class*=" icon-"]{display:inline-block;width:1.25em;text-align:center}
+.pull-right{float:right}
+.right_offset{padding-right:15px}
+.pull-left{float:left}
+.muted{color:#999}
+.icon-map-marker:before{content:"\f041"}
+[class^="icon-"]:before,[class*=" icon-"]:before,.fontawesome:before,.fontawesome:after{font-family:FontAwesome;font-weight:normal;font-style:normal;display:inline-block;text-decoration:inherit}
+
+p{margin:0 0 10px}
+
+.span9{width:540px}
+.row-fluid .span9{width:75.0%;*width:74.93056%}
+.row-fluid:not(.fluid) .span9{width:75.0%;*width:74.93056%}
+.row-fluid>[class*="span"]{display:block;width:100%;min-height:30px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;float:left;margin-left:0%;*margin-left:-0.06944%}
+
+
+.span6{width:360px}
+.row-fluid:not(.fluid) .span6{width:50.0%;*width:49.93056%}
+.row-fluid .span6{width:50.0%;*width:49.93056%}
+.spacer{margin-top:20px}
+
+strong{font-weight:bold}
+address{display:block;margin-bottom:20px;font-style:normal;line-height:20px}
+abbr[title],abbr[data-original-title]{cursor:help;border-bottom:1px dotted #999}
+
+a,.selector select:focus,.radio input:focus,.checker input:focus,.uploader input:focus{outline:0}
+
+a,.selector select:focus,.radio input:focus,.checker input:focus,.uploader input:focus{outline:0}
+
+.nav-tabs.nav-stacked>li>a{border:1px solid #ddd;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0}
+.nav-stacked>li>a{margin-right:0}
+.nav-tabs>li>a{padding-top:8px;padding-bottom:8px;line-height:20px;border:1px solid transparent;-webkit-border-radius:4px 4px 0 0;-moz-border-radius:4px 4px 0 0;border-radius:4px 4px 0 0}
+.nav-tabs>li>a,.nav-pills>li>a{padding-right:12px;padding-left:12px;margin-right:2px;line-height:14px}
+.nav1>li>a{display:block}
+.nav-tabs>li>a{padding-top:0.8em;padding-bottom:0.8em;padding-left:1.5em;padding-right:1.5em;color:#fff;font-weight:bold}
+.dark,.dark a{color:#434343 !important}
+.nav1{margin-left:0;margin-bottom:20px;list-style:none}
+
+.gicon-user{background-position:-168px 0}
+.gicon-profile{background-position:-168px 0}
+.gicon-dashboard{background-position:0px -24px}
+.gicon-course{background-position:-50px -50px}
+.gicon-fourm{background-position:-73px 0}
+.gicon-logout{background-position:-385px 0}
+.gicon-filemanager{background-position:-193px 0}
+
+.nav-tabs > li > a > i{ margin:0 5px 0 0; display: inline-block; float:left;}
+.icon-white,.nav1>.active>a>[class^="icon-"],.nav1>.active>a>[class*=" icon-"],.dropdown-menu>li>a:hover>[class^="icon-"],.dropdown-menu>li>a:hover>[class*=" icon-"],.dropdown-menu>.active>a>[class^="icon-"],.dropdown-menu>.active>a>[class*=" icon-"]{background-image:url("http://localhost/UKOpenColleges/gocart/themes/oneTouch/assets/images/glyphicons-halflings-white.png")}
+[class^="gicon-"],[class*=" gicon-"]{display:inline-block;width:14px;height:14px;*margin-right:.3em;line-height:14px;vertical-align:text-top;background-image:url("http://localhost/UKOpenColleges/gocart/themes/oneTouch/assets/images/glyphicons-halflings.png");margin-top:2px}
+
+.header {
+    margin: 15px 0;
+}
+.icon-map-marker:before{content:"\f041"}
+.nav-tabs.nav-stacked>li:first-child>a{-webkit-border-top-right-radius:4px;-moz-border-radius-topright:4px;border-top-right-radius:4px;-webkit-border-top-left-radius:4px;-moz-border-radius-topleft:4px;border-top-left-radius:4px}
+.nav-tabs .open .dropdown-toggle{background-color:transparent !important;border-color:rgba(0,0,0,0.1)}
+.nav-tabs.nav-stacked>li>a:hover{border-color:#ddd;z-index:2}
+.nav-tabs>li>a:hover{border-color:#eee #eee #ddd}
+.nav1>li>a:hover{text-decoration:none;background-color:#eee}
+.b15,.pagination>ul a,.pagination>.dataTables_paginate a,.nav-tabs>li>a:hover,.nav-tabs .open .dropdown-toggle,.color_light .title,.btn,.container .elfinder .elfinder-navbar{background-image:url("http://localhost/UKOpenColleges/gocart/themes/oneTouch/assets/images/b15.png")}
+.nav-tabs>li>a:hover{border-bottom-width:1;background-color:transparent;border-top-color:rgba(0,0,0,0.1);border-right-color:rgba(0,0,0,0.1);border-left-color:rgba(0,0,0,0.1)}
+
+ a:hover{color:rgba(0,0,0,0.8);text-decoration:underline}
+ a:hover,a:active{outline:0}
+
+
+
+
+
+
+.well {
+    background-color: transparent;
+    border: 0 none;
+    border-radius: 0 0 0 0;
+}
+.b10, #main ul.dropdown-menu li > a, .accordion .accordion-group .accordion-heading a, #sidebar_menu .color_0.active ul li.active, #sidebar_menu .color_1.active ul li.active, #sidebar_menu .color_2.active ul li.active, #sidebar_menu .color_3.active ul li.active, #sidebar_menu .color_4.active ul li.active, #sidebar_menu .color_5.active ul li.active, #sidebar_menu .color_6.active ul li.active, #sidebar_menu .color_7.active ul li.active, #sidebar_menu .color_8.active ul li.active, #sidebar_menu .color_9.active ul li.active, #sidebar_menu .color_10.active ul li.active, #sidebar_menu .color_11.active ul li.active, #sidebar_menu .color_12.active ul li.active, #sidebar_menu .color_13.active ul li.active, #sidebar_menu .color_14.active ul li.active, #sidebar_menu .color_15.active ul li.active, #sidebar_menu .color_16.active ul li.active, #sidebar_menu .color_17.active ul li.active, #sidebar_menu .color_18.active ul li.active, #sidebar_menu .color_19.active ul li.active, #sidebar_menu .color_20.active ul li.active, #sidebar_menu .color_21.active ul li.active, #sidebar_menu .color_22.active ul li.active, #sidebar_menu .color_23.active ul li.active, #sidebar_menu .color_24.active ul li.active, #sidebar_menu .color_25.active ul li.active, #sidebar_menu .color_26.active ul li.active, #sidebar_menu .color_27.active ul li.active, #sidebar_menu .color_light.active ul li.active, .change_color_outside:hover, .btn.btn-secondary, .btn.btn-inverse:hover, .well, .options_arrow a.dropdown-toggle, ul.messages_layout li .message_wrap, .bar_stats .content .result, #todo-list li .todo-text:hover, #todo-list li .done .todo-text {
+    background-image: url("../images/b10.png");
+}
+.well-small {
+    border-radius: 0 0 0 0;
+    padding: 9px;
+}
+.well {
+    background-color: #F5F5F5;
+    border: 1px solid #E3E3E3;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+    margin-bottom: 20px;
+    min-height: 20px;
+    padding: 19px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
