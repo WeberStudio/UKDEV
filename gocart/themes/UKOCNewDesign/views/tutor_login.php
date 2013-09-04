@@ -16,13 +16,7 @@ if(validation_errors() != '')
     } 
  
  ?>
- <style>
-   .alert-error
-   {
-             background-color:#F88C8C;
-             color:#FFFFFF;
-   }      
-</style>
+ 
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
@@ -62,17 +56,13 @@ if(validation_errors() != '')
                  
                  
                  <div class="onerow">
-                 <?php if (!empty($error)): ?>
-          <div class="alert alert-error" id="closee"> <a href="javascript:void(0)"  class="close" data-dismiss="alert" onClick="hide_error(); return false;">x</a> <?php echo"<div style='margin-left: 70px;'>". $error. "</div>"; ?> </div>
-          <?php endif; ?>
-          
-      
-<?php if (!empty($message)): ?>
-        <div class="alert alert-success">
-            <a class="close" data-dismiss="alert">×</a>
-            <?php echo $message; ?>
-        </div>
- <?php endif; ?>
+				<?php if (!empty($error)): ?>
+				<div class="alert-box error alert" onClick="hide_alert(); return false;"><span>error: </span><?php echo $error; ?> </div>
+				<?php endif; ?>
+							   
+				<?php if (!empty($message)): ?>
+				<div class="alert-box success alert" onClick="hide_alert(); return false;"><span>success: </span><?php echo $message; ?> </div>
+				<?php endif; ?>
                      <div class="col12">
                         <div class="col6">
 

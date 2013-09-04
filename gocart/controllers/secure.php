@@ -99,52 +99,95 @@ class Secure extends Front_Controller {
 	// login 2 content end
 function login($ajax = false)
 	{
-		$redirect    = $this->Customer_model->is_logged_in(false, false);     
-		
+       // echo $this->input->post('product_id');
+        $this->load->library('form_validation');
+        $this->load->helper('form');
+        $data['page_title']                         = 'Login'; 
+        
+		$redirect                                   = $this->Customer_model->is_logged_in(false, false);
 		//if they are logged in, we send them back to the my_account by default, if they are not logging in
-		$this->load->library('form_validation');
 		if ($redirect)
 		{
 			redirect('dashboard');
 		}
-		$data['page_title']	= 'Login';
-		$this->load->helper('form');
 		
 		
+		$redirect                                   = $this->input->post('redirect');
+        $courses_detail                             = $this->input->post('product_id'); 
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[128]');
 		$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
 		
 		if ($this->form_validation->run() == FALSE)
 		{
-		$this->load->view('login', $data);
+            if($courses_detail)
+            {
+                $this->session->set_flashdata('error', lang('login_failed'));
+                redirect('cart/product/'.$courses_detail); 
+            }
+            if($redirect=='view_cart')
+            {
+                $this->session->set_flashdata('error', lang('login_failed'));
+                redirect('cart/view_cart'); 
+            }
+            if($redirect=='unregister')
+            {
+                $this->session->set_flashdata('error', lang('login_failed'));
+                redirect('checkout/unregister'); 
+            }   
+		    $this->load->view('login', $data);
 		}
-		
 		else
 		{
-		$submitted 		= $this->input->post('submitted');
-		if ($submitted)
-		{
-			$email		= $this->input->post('email');
-			$password	= $this->input->post('password');
-			$remember   = $this->input->post('remember');
-			$redirect	= $this->input->post('redirect');
-			
-			$login		= $this->Customer_model->login($email, $password);
-			if ($login)
-			{
-                
-              redirect('secure/login');  
-            }
-            else
+		    $submitted 		                        = $this->input->post('submitted');
+		    if ($submitted)
+		    {
+			    $email		                        = $this->input->post('email');
+			    $password	                        = $this->input->post('password');
+			    $remember                           = $this->input->post('remember');
+			    $login		                        = $this->Customer_model->login($email, $password);
+			    if ($login)
+			    {
+                    if($courses_detail)
+                    {
+                        $this->session->set_flashdata('message', 'Success'); 
+                        redirect('cart/product/'.$courses_detail); 
+                    }            
+                    if($redirect=='view_cart')
+                    {
+                        $this->session->set_flashdata('message', 'Success');
+                        redirect('cart/view_cart'); 
+                    }
+                    if($redirect=='unregister')
+                    {
+                        $this->session->set_flashdata('message', 'Success');
+                        redirect('checkout/unregister'); 
+                    }
+                    $this->session->set_flashdata('message', 'Success');
+                    redirect('secure/login');  
+                }
+                else
 				{
-					$this->session->set_flashdata('redirect', $redirect);
+                    if($courses_detail)
+                    {
+                        $this->session->set_flashdata('error', lang('login_failed'));
+                        redirect('cart/product/'.$courses_detail); 
+                    }
+                    if($redirect=='view_cart')
+                    {
+                        $this->session->set_flashdata('error', lang('login_failed'));
+                        redirect('cart/view_cart'); 
+                    }
+                    if($redirect=='unregister')
+                    {
+                        $this->session->set_flashdata('error', lang('login_failed'));
+                        redirect('checkout/unregister'); 
+                    }
 					$this->session->set_flashdata('error', lang('login_failed'));
-					
 					redirect('secure/login');
-				}
-			
-		}
-		$this->load->view('login', $data);
+			    }
+			    
+		    }
+		    $this->load->view('login', $data);
 	}
 	} 
 	 function tutor_login($ajax = false)

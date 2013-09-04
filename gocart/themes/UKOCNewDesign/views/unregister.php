@@ -8,6 +8,21 @@
         
         
         <!-- mail grid -->
+		<?php 
+		if($this->session->flashdata('message'))
+		{
+			$message    = $this->session->flashdata('message');
+		}
+		
+		if($this->session->flashdata('error'))
+		{
+			$error    = $this->session->flashdata('error');
+		}
+		if(validation_errors() != '')
+		{
+			$error    = validation_errors();
+		}
+		?>
         <div class="onepcssgrid-1200">
         
             <!-- header -->
@@ -15,16 +30,12 @@
              <!-- /header -->
             
             <section>
-                
-                 
-                 <div class="onerow">
-                 
+                 <div class="onerow">                 
                  <div class="seperator">
                      <div class="col6">
                         <h1 class="sep">Open the Door of Opportunity</h1>
                         <p class="sep"><a href="#">view all of our courses</a></p>
-                    </div>
-                    
+                    </div>         
                     
                      <div class="col6 social-icons">
                         <a href="https://twitter.com/UKOpen" target="_blank"> <img align="right" alt="" src="http://87.106.234.213/gocart/themes/oneTouch/assets/images/img/twiter-logo.png" style="margin-left: 10px; margin-top: 5px"></img> </a>
@@ -47,12 +58,19 @@
                         <div class="col6" style="padding:10px; margin-left: 1px; height: 360px;" id="customer_login">
                         
                           <div class="col12" >
+							<?php if (!empty($error)): ?>
+							<div class="alert-box error alert" onClick="hide_alert(); return false;"><span>error: </span><?php echo $error; ?> </div>
+							<?php endif; ?>
+							
+							<?php if (!empty($message)): ?>
+							<div class="alert-box success alert" onClick="hide_alert(); return false;"><span>success: </span><?php echo $message; ?> </div>
+							<?php endif; ?>
                             <h2 id="heading" style="color:#FFFFFF !important">Customer Login</h2>
                                 <form class="bs-docs-example form-horizontal" accept-charset="utf-8" method="post" action="<?=base_url()?>secure/login">   
                                   <p class="username">
                                   User Email Address
                                   </p>
-                                    <input type="text" name="email" id="name" placeholder="" required /> 
+                                    <input type="text" name="email" id="email" placeholder="" required /> 
                                     <!--<label for="name">Name</label>-->
                                   
                                   <p class="password">
@@ -60,10 +78,11 @@
                                     <input type="password" name="password" id="password"  placeholder="" autocomplete="off" required /> 
                                     <!--<label for="email">Email</label>-->
                                   <p class="submit" style="margin-right:25px;">
+                                    <input type="hidden" name="redirect" value="<?php echo end($this->uri->segment_array());?>" class="button" />
                                     <input type="submit" name="submitted" value="Submit" class="button" />  
                                   </p>
                                   
-                                  <a class="align-left" href="#" style="color:#FFFFFF !important">Forget password?</a>
+                                  <a class="align-left" href="#">Forget password?</a>
                                 </form>
                            </div><!-- end col12 -->
                               

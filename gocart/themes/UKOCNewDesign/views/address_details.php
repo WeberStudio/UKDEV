@@ -158,8 +158,12 @@ if(validation_errors() != '')
                         
                           <div class="col12">
                                   <?php if (!empty($error)): ?>
-                                  <div class="alert alert-error" id="closee"> <a href="javascript:void(0)"  class="close" data-dismiss="alert" onClick="hide_error(); return false;">x</a> <?php echo"<div style='margin-left: 70px;'>". $error. "</div>"; ?> </div>
-                                  <?php endif; ?>
+<div class="alert-box error alert" onClick="hide_alert(); return false;"><span>error: </span><?php echo $error; ?> </div>
+<?php endif; ?>
+               
+<?php if (!empty($message)): ?>
+<div class="alert-box success alert" onClick="hide_alert(); return false;"><span>success: </span><?php echo $message; ?> </div>
+<?php endif; ?>
                                 <form action="<?=base_url().'checkout/step2'?>" method="post" class="personal-form-1" id="personal-form" name="personalDetails">
                                     <fieldset>
                                         <legend><h3>Personal Address</h3></legend>

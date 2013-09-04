@@ -1282,5 +1282,10 @@ class Cart extends Front_Controller {
 		
 		 redirect($_SERVER['HTTP_REFERER']);	
 	}
+	
+	function cvv_page()
+	{
+		$this->load->view('cvv_info');
+	}
 
 }

@@ -59,9 +59,15 @@ class Checkout extends Front_Controller {
         /*show address first*/
         $this->step_1();
     }
+	
     function unregister()
     {
-        $this->load->view('unregister'); 
+        $redirect    = $this->Customer_model->is_logged_in(false, false);
+        if($redirect)
+        {
+         redirect('checkout');   
+        }
+         $this->load->view('unregister'); 
     }
 
 
