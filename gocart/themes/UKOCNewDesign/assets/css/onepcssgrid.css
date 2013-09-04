@@ -1,4 +1,4 @@
-﻿/* *********************************************************************************************************************
+/* *********************************************************************************************************************
 	One% CSS Grid - 12 Columns Fluid CSS Grid System
 
 	Why One% ? Let’s count ...
@@ -98,7 +98,7 @@
 	/*width: 100%;*/
     
 	height: auto;
-	/*display: block;*/
+	display: block;
 }
 
 
@@ -195,5 +195,34 @@ div#customer_signup h2 {
 	
 	color:#999;	
 	text-align:center;
+}
+.alert-box {
+    color:#555;
+    border-radius:10px;
+    font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+    padding:10px 10px 10px 36px;
+    margin:10px;
+}
+
+.alert-box span {
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+.error {
+    background:#ffecec url('../img/error.png') no-repeat 10px 50%;
+    border:1px solid #f5aca6;
+}
+.success {
+    background:#e9ffd9 url('../img/success.png') no-repeat 10px 50%;
+    border:1px solid #a6ca8a;
+}
+.warning {
+    background:#fff8c4 url('../img/warning.png') no-repeat 10px 50%;
+    border:1px solid #f2c779;
+}
+.notice {
+    background:#e3f7fc url('../img/notice.png') no-repeat 10px 50%;
+    border:1px solid #8ed9f6;
 }
 

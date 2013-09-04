@@ -1,11 +1,5 @@
 <?php include('main_header.php')?>
- <style>
-   .alert-error
-   {
-             background-color:#F88C8C;
-             color:#FFFFFF;
-   }      
-</style>
+
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
@@ -13,7 +7,21 @@
 
         <!-- Add your site or application content here -->
         
-        
+        <?php 
+		if($this->session->flashdata('message'))
+		{
+			$message    = $this->session->flashdata('message');
+		}
+		
+		if($this->session->flashdata('error'))
+		{
+			$error    = $this->session->flashdata('error');
+		}
+		if(validation_errors() != '')
+		{
+			$error    = validation_errors();
+		}
+		?>
         <!-- mail grid -->
         <div class="onepcssgrid-1200">
         
@@ -199,29 +207,29 @@
                     <div class="col4">
                         
                         <div class="col12 user-login" style="margin-top:20px;">
-                        
+						<?php if (!empty($error)): ?>
+						<div class="alert-box error alert" onClick="hide_alert(); return false;"><span>error: </span><?php echo $error; ?> </div>
+						<?php endif; ?>
+						
+						<?php if (!empty($message)): ?>
+						<div class="alert-box success alert" onClick="hide_alert(); return false;"><span>success: </span><?php echo $message; ?> </div>
+						<?php endif; ?>
                         <h2>User Login</h2>
-                            <form action="mail.php" method="POST" autocomplete="on">
+                            <form action="<?php echo base_url().'secure/login';?>" method="POST" autocomplete="on">
                               <p class="username">
                               User Name
                               </p>
-                                <input type="text" name="name" id="name" placeholder="" required />
-                                <!--<label for="name">Name</label>-->
-                              
+                                <input type="text" name="email" id="email" placeholder="" required />
                               <p class="password">
                               Password</p>
-                                <input type="password" name="password" id="password"  placeholder="" autocomplete="off" required />
-                                <!--<label for="email">Email</label>-->
-                              <p class="submit">
-                                <input type="submit" value="Submit" class="button" />
-                              </p>
-                              
+                                <input type="password" name="password" id="password"  placeholder="" autocomplete="off" required />                                
+                              <p class="submit">                                
+                                <input type="hidden" name="redirect" value="<?php echo end($this->uri->segment_array());?>" class="button" />
+                                <input type="submit" name="submitted" value="Submit" class="button" /> 
+                              </p>                              
                               <a class="align-left" href="#">forget password?</a>
                             </form>
                         </div>
-                        
-                        
-                        
                         <div class="col12 twitter-res">
                             <img src="<?php echo theme_assets('img/twitter_icon.png')?>" alt="" />  
                                 <h2>twitter</h2>

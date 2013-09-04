@@ -46,6 +46,21 @@ div#homeFormCenter p label {
 					  color:#000; 
 					 }
 </style>  
+<?php 
+if($this->session->flashdata('message'))
+{
+    $message    = $this->session->flashdata('message');
+}
+
+if($this->session->flashdata('error'))
+{
+    $error    = $this->session->flashdata('error');
+}
+if(validation_errors() != '')
+{
+    $error    = validation_errors();
+}
+?>           
 <section>
     <div class="onerow"> 
         <div class="seperator">
@@ -304,25 +319,32 @@ div#homeFormCenter p label {
             </div>
 
             <div class="col12 user-login">
-
+				<?php if (!empty($error)): ?>
+				<div class="alert-box error alert" onClick="hide_alert(); return false;"><span>error: </span><?php echo $error; ?> </div>
+				<?php endif; ?>							   
+				<?php if (!empty($message)): ?>
+				<div class="alert-box success alert" onClick="hide_alert(); return false;"><span>success: </span><?php echo $message; ?> </div>
+				<?php endif; ?>
                 <h2>User Login</h2>
                 <form accept-charset="utf-8" method="post" action="<?=base_url()?>secure/login" autocomplete="on">
-                    <p class="username">
-                        User Name
-                    </p>
-                    <input type="text" name="email" id="name" placeholder="" required />
-                    <!--<label for="name">Name</label>-->
-
-                    <p class="password">
-                        Password</p>
-                    <input type="password" name="password" id="password"  placeholder="" autocomplete="off" required />
-                    <!--<label for="email">Email</label>-->
-                    <p class="submit">
-                        <input type="submit" value="Submit" class="button" />
-                    </p>
-
-                    <a class="align-left" href="#">forget password?</a>
-                </form>
+				  <p class="username">
+				  User Name
+				  </p>
+					<input type="text" name="email" id="name" placeholder="" required />
+					<!--<label for="name">Name</label>-->
+				  
+				  <p class="password">
+				  Password</p>
+					<input type="password" name="password" id="password"  placeholder="" autocomplete="off" required />
+					<!--<label for="email">Email</label>-->
+				  <p class="submit">
+				  <input type="hidden" name="product_id" value="<?=$product->id;?>">
+				  <!--<input type="hidden" name="redirect" value="<?php echo end($this->uri->segment_array());?>" class="button" />-->
+					<input type="submit" name="submitted" value="Submit" class="button" />
+				  </p>
+				  
+				  <a class="align-left" href="#">forget password?</a>
+				</form>
             </div>
 
 

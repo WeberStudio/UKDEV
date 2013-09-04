@@ -64,14 +64,12 @@ if(validation_errors() != '')
     }
 ?>
 <?php if (!empty($error)): ?>
-<div class="alert alert-error" id="closee"> <a href="javascript:void(0)"  class="close" data-dismiss="alert" onClick="hide_error(); return false;">x</a> <?php echo"<div style='margin-left: 70px;'>". $error. "</div>"; ?> </div>
+<div class="alert-box error alert" onClick="hide_alert(); return false;"><span>error: </span><?php echo $error; ?> </div>
 <?php endif; ?>
+               
 <?php if (!empty($message)): ?>
-        <div class="alert alert-success">
-            <a class="close" data-dismiss="alert">×</a>
-            <?php echo $message; ?>
-        </div>
- <?php endif; ?>           <h2>Register Tutor</h2> 
+<div class="alert-box success alert" onClick="hide_alert(); return false;"><span>success: </span><?php echo $message; ?> </div>
+<?php endif; ?>           <h2>Register Tutor</h2> 
                            <?php echo form_open('tutor_login/register'); ?> 
                                     <fieldset>
                                         
